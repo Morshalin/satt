@@ -1,0 +1,6 @@
+RewriteEngine On
+ErrorDocument 404 /satt/admin/error/404.php
+ErrorDocument 500 /satt/admin/error/500.php
+ErrorDocument 503 /satt/admin/error/503.php
+ErrorDocument 403 /satt/admin/error/403.php
+ErrorDocument 405 /satt/admin/error/405.php
