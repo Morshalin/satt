@@ -50,12 +50,25 @@
     </ul>
   </li>
 
+
+
   <?php $nav_items_section_4 = ['message']; ?>
-  <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_3, $data['page_index']) ?>">
+  <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_4, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Messages</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_4, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/message" class="nav-link<?php active_page($data, 'customer-details'); ?>">Message manager</a></li>
+
+ </ul>
+</li>
+
+
+    <?php $nav_items_section_5 = ['developer']; ?>
+  <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_5, $data['page_index']) ?>">
+    <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Developer Setup</span></a>
+
+    <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_2, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/developer" class="nav-link<?php active_page($data, 'developer'); ?>">Developer Manage</a></li>
     </ul>
   </li>
 
