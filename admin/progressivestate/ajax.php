@@ -18,12 +18,12 @@ if (isset($_GET['customertype_id'])) {
 ===================================================================*/
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['action'] == 'update') {
-	$customertype_id = $_GET['progress_id'];
-	if ($customertype_id) {
+	$progress_id = $_GET['progress_id'];
+	if ($progress_id) {
 		$error = array();
-		$type = $fm->validation($_POST['type']);
+		$type = $fm->validation($_POST['progress_state']);
 
-		$typecheck = $fm->dublicateCheck('satt_customer_progres', 'type', $type);
+		$progress_state_check = $fm->dublicateCheck('satt_customer_progres', 'progress_state', $progress_state);
 
 		if (isset($_POST['status'])) {
 			$status = 1;
@@ -31,16 +31,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			$status = 0;
 		}
 
-		if (!$type) {
-			$error['type'] = 'Customer Reference Name Field required';
-		} elseif ($typecheck) {
-			$course_row = $typecheck->fetch_assoc();
+		if (!$progress_state) {
+			$error['progress_state'] = 'Customer Reference Name Field required';
+		} elseif ($progress_state_check) {
+			$course_row = $progress_state_check->fetch_assoc();
 			if ($course_row['id'] != $course_id) {
-				$error['type'] = 'Course Already Exists';
+				$error['progress_state'] = 'Course Already Exists';
 			}
 
-		} elseif (strlen($type) > 255) {
-			$error['type'] = 'Customer Reference Can Not Be More Than 255 Charecters';
+		} elseif (strlen($progress_state) > 255) {
+			$error['progress_state'] = 'Customer Reference Can Not Be More Than 255 Charecters';
 		}
 
 		
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 		} else {
-			$query = "UPDATE satt_customer_progres SET type = '$type', status = '$status' WHERE id='$customertype_id'";
+			$query = "UPDATE satt_customer_progres SET progress_state = '$progress_state', status = '$status' WHERE id='$customerprogress_state_id'";
 			$result = $db->update($query);
 			if ($result != false) {
 				die(json_encode(['message' => 'Customer Reference Updated Successfull']));
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ===================================================================*/
 // $error['progress_state'] = 'Course Name Required';
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET['action'] == 'delete') {
-	$customerprogresstype_id = $_GET['customertype_id'];
+	$customerprogressprogress_state_id = $_GET['customertype_id'];
 	if ($customertype_id) {
 		$query = "DELETE FROM satt_customer_progres WHERE id = '$customertype_id'";
 		$result = $db->delete($query);
