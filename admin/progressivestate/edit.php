@@ -1,16 +1,16 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/customertype', 'customertype');
-if (isset($_GET['customertype_id'])) {
-	$customertype_id = $_GET['customertype_id'];
-	$query = "SELECT * FROM satt_customer_type WHERE id='$customertype_id'";
+Session::checkSession('admin', ADMIN_URL . '/progressivestate', 'progressivestate');
+if (isset($_GET['progress_id'])) {
+	$progress_id = $_GET['progress_id'];
+	$query = "SELECT * FROM satt_customer_progres WHERE id='$progress_id'";
 	$result = $db->select($query);
 	if ($result) {
 		$row = $result->fetch_assoc();
 	} else {
 		http_response_code(500);
-		die(json_encode(['message' => 'Customer Type Not Found']));
+		die(json_encode(['message' => 'Course Not Found']));
 	}
 
 } else {
@@ -21,25 +21,25 @@ if (isset($_GET['customertype_id'])) {
 ?>
 
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/customertype/ajax.php?customertype_id=<?php echo $customertype_id; ?>&action=update" id="content_form" method="post">
+<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/progressivestate/ajax.php?progress_id=<?php echo $progress_id; ?>&action=update" id="content_form" method="post">
   <fieldset class="mb-3">
-    <legend class="text-uppercase font-size-sm font-weight-bold">Update Customer Reference <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
+    <legend class="text-uppercase font-size-sm font-weight-bold">Update progressivestate <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <div class="form-group">
-                <label for="course_name" class="col-form-label">Customer Reference <span class="text-danger">*</span></label>
-                <input type="text" name="type" id="type" class="form-control" placeholder="New Course Name" required autofocus value="<?php echo $row['type'] ?>">
+                <label for="progress_state" class="col-form-label">Progressive State<span class="text-danger">*</span></label>
+                <input type="text" name="progress_state" id="progress_state" class="form-control" placeholder="Progress State" required autofocus value="<?php echo $row['progress_state'] ?>">
 
             </div>
         </div>
+        
     </div>
     
     <div class="row">
         <div class="col-lg-12">
             <div class="form-check form-check-switchery form-check-inline form-check-right">
-                <label for="course_description" class="form-check-label">Status</label>
+                <label for="status" class="form-check-label">Status</label>
                   <input type="checkbox" name="status" id="status" value="1" class="form-check-input-switchery mt-3" data-fouc <?php echo $row['status'] == 1 ? 'checked' : ''; ?>>
-
             </div>
         </div>
     </div>
