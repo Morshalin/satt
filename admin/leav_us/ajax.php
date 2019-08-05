@@ -1,11 +1,11 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/progressivestate', 'progressivestate');
-if (isset($_GET['progress_id'])) {
-	$progress_id = $_GET['progress_id'];
-	if ($progress_id) {
-		$query = "SELECT * FROM satt_customer_progres WHERE id = '$progress_id'";
+Session::checkSession('admin', ADMIN_URL . '/leav_us', 'leav_us');
+if (isset($_GET['reason_id'])) {
+	$reason_id = $_GET['reason_id'];
+	if ($reason_id) {
+		$query = "SELECT * FROM satt_customer_notes WHERE id = '$reason_id'";
 		$result = $db->select($query);
 		if (!$result) {
 			http_response_code(500);
@@ -18,12 +18,12 @@ if (isset($_GET['progress_id'])) {
 ===================================================================*/
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['action'] == 'update') {
-	$progress_id = $_GET['progress_id'];
-	if ($progress_id) {
+	$reason_id = $_GET['reason_id'];
+	if ($reason_id) {
 		$error = array();
-		$progress_state = $fm->validation($_POST['progress_state']);
+		$reason = $fm->validation($_POST['reason']);
 
-		$progress_state_check = $fm->dublicateCheck('satt_customer_progres', 'progress_state', $progress_state);
+		$reason_check = $fm->dublicateCheck('satt_customer_notes', 'reason', $reason);
 
 		if (isset($_POST['status'])) {
 			$status = 1;
@@ -31,16 +31,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			$status = 0;
 		}
 
-		if (!$progress_state) {
-			$error['progress_state'] = 'progress state Field required';
-		} elseif ($progress_state_check) {
-			$progress_state_row = $progress_state_check->fetch_assoc();
-			if ($progress_state_row['id'] != $progress_id) {
-				$error['progress_state'] = 'Course Already Exists';
+		if (!$reason) {
+			$error['reason'] = 'Field required';
+		} elseif ($reason_check) {
+			$reason_row = $reason_check->fetch_assoc();
+			if ($reason_row['id'] != $reason_id) {
+				$error['reason'] = 'Already Exists';
 			}
 
-		} elseif (strlen($progress_state) > 255) {
-			$error['progress_state'] = 'Progress State Can Not Be More Than 255 Charecters';
+		} elseif (strlen($reason) > 255) {
+			$error['reason'] = 'Can Not Be More Than 255 Charecters';
 		}
 
 		
@@ -48,10 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 		} else {
-			$query = "UPDATE satt_customer_progres SET progress_state = '$progress_state', status = '$status' WHERE id='$progress_id'";
+			$query = "UPDATE satt_customer_notes SET reason = '$reason', status = '$status' WHERE id='$reason_id'";
 			$result = $db->update($query);
 			if ($result != false) {
-				die(json_encode(['message' => 'Progress State Updated Successfull']));
+				die(json_encode(['message' => 'I Updated Successfull']));
 			} else {
 				http_response_code(500);
 				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
@@ -66,10 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 ===================================================================*/
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$error = array();
-	$progress_state = $fm->validation($_POST['progress_state']);
+	$reason = $fm->validation($_POST['reason']);
 	
 
-	$check_progress_state = $fm->dublicateCheck('satt_customer_progres', 'progress_state', $progress_state);
+	$check_reason = $fm->dublicateCheck('satt_customer_notes', 'reason', $reason);
 
 	if (isset($_POST['status'])) {
 		$status = 1;
@@ -77,12 +77,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$status = 0;
 	}
 
-	if (!$progress_state) {
-		$error['progress_state'] = 'progress state Field required';
-	} elseif ($check_progress_state) {
-		$error['check_progress_state'] = 'progress state  Already Exits';
-	} elseif (strlen($progress_state) > 255) {
-		$error['progress_state'] = 'progress state Can Not Be More Than 255 Charecters';
+	if (!$reason) {
+		$error['reason'] = 'Field required';
+	} elseif ($check_reason) {
+		$error['check_reason'] = 'Already Exits';
+	} elseif (strlen($reason) > 255) {
+		$error['reason'] = 'Can Not Be More Than 255 Charecters';
 	}
 
 
@@ -91,10 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		http_response_code(500);
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
-		$query = "INSERT INTO satt_customer_progres (progress_state, status) VALUES ('$progress_state','$status')";
+		$query = "INSERT INTO satt_customer_notes (reason, status) VALUES ('$reason','$status')";
 		$result = $db->insert($query);
 		if ($result != false) {
-			die(json_encode(['message' => 'Customer Reference Added Successfull']));
+			die(json_encode(['message' => 'Added Successfull']));
 		} else {
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
@@ -105,11 +105,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 /*================================================================
 		Delete  Data into Database
 ===================================================================*/
-// $error['progress_state'] = 'Course Name Required';
+// $error['reason'] = 'Course Name Required';
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET['action'] == 'delete') {
-	$progress_id = $_GET['progress_id'];
-	if ($progress_id) {
-		$query = "DELETE FROM satt_customer_progres WHERE id = '$progress_id'";
+	$reason_id = $_GET['reason_id'];
+	if ($reason_id) {
+		$query = "DELETE FROM satt_customer_notes WHERE id = '$reason_id'";
 		$result = $db->delete($query);
 		if ($result) {
 			die(json_encode(['message' => 'Deleted Successfull']));
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT' AND isset($_GET['action']) AND $_GET['ac
 	$status = $status ? 0 : 1;
 
 	if ($status_id) {
-		$query = "UPDATE satt_customer_progres SET status = '$status' WHERE id = '$status_id'";
+		$query = "UPDATE satt_customer_notes SET status = '$status' WHERE id = '$status_id'";
 		$result = $db->delete($query);
 		if ($result) {
 			die(json_encode(['message' => 'Status Changed Successfull']));

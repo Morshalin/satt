@@ -1,11 +1,11 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/progressivestate', 'progressivestate');
-if (isset($_GET['progress_id'])) {
-	$progress_id = $_GET['progress_id'];
-	if ($progress_id) {
-		$query = "SELECT * FROM satt_customer_progres WHERE id = '$progress_id'";
+Session::checkSession('admin', ADMIN_URL . '/business-type', 'business-type');
+if (isset($_GET['software_id'])) {
+	$software_id = $_GET['software_id'];
+	if ($software_id) {
+		$query = "SELECT * FROM satt_customer_business_type WHERE id = '$software_id'";
 		$result = $db->select($query);
 		if (!$result) {
 			http_response_code(500);
@@ -18,12 +18,12 @@ if (isset($_GET['progress_id'])) {
 ===================================================================*/
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['action'] == 'update') {
-	$progress_id = $_GET['progress_id'];
-	if ($progress_id) {
+	$software_id = $_GET['software_id'];
+	if ($software_id) {
 		$error = array();
-		$progress_state = $fm->validation($_POST['progress_state']);
+		$software_type = $fm->validation($_POST['software_type']);
 
-		$progress_state_check = $fm->dublicateCheck('satt_customer_progres', 'progress_state', $progress_state);
+		$software_type_check = $fm->dublicateCheck('satt_customer_business_type', 'software_type', $software_type);
 
 		if (isset($_POST['status'])) {
 			$status = 1;
@@ -31,16 +31,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			$status = 0;
 		}
 
-		if (!$progress_state) {
-			$error['progress_state'] = 'progress state Field required';
-		} elseif ($progress_state_check) {
-			$progress_state_row = $progress_state_check->fetch_assoc();
-			if ($progress_state_row['id'] != $progress_id) {
-				$error['progress_state'] = 'Course Already Exists';
+		if (!$software_type) {
+			$error['software_type'] = 'Business Category Field required';
+		} elseif ($software_type_check) {
+			$software_type_row = $software_type_check->fetch_assoc();
+			if ($software_type_row['id'] != $software_id) {
+				$error['software_type'] = 'Business Category Already Exists';
 			}
 
-		} elseif (strlen($progress_state) > 255) {
-			$error['progress_state'] = 'Progress State Can Not Be More Than 255 Charecters';
+		} elseif (strlen($software_type) > 255) {
+			$error['software_type'] = 'Business Category Can Not Be More Than 255 Charecters';
 		}
 
 		
@@ -48,10 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 		} else {
-			$query = "UPDATE satt_customer_progres SET progress_state = '$progress_state', status = '$status' WHERE id='$progress_id'";
+			$query = "UPDATE satt_customer_business_type SET software_type = '$software_type', status = '$status' WHERE id='$software_id'";
 			$result = $db->update($query);
 			if ($result != false) {
-				die(json_encode(['message' => 'Progress State Updated Successfull']));
+				die(json_encode(['message' => 'Business Category Updated Successfull']));
 			} else {
 				http_response_code(500);
 				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
@@ -66,10 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 ===================================================================*/
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$error = array();
-	$progress_state = $fm->validation($_POST['progress_state']);
+	$software_type = $fm->validation($_POST['software_type']);
 	
 
-	$check_progress_state = $fm->dublicateCheck('satt_customer_progres', 'progress_state', $progress_state);
+	$check_software_type = $fm->dublicateCheck('satt_customer_business_type', 'software_type', $software_type);
 
 	if (isset($_POST['status'])) {
 		$status = 1;
@@ -77,12 +77,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$status = 0;
 	}
 
-	if (!$progress_state) {
-		$error['progress_state'] = 'progress state Field required';
-	} elseif ($check_progress_state) {
-		$error['check_progress_state'] = 'progress state  Already Exits';
-	} elseif (strlen($progress_state) > 255) {
-		$error['progress_state'] = 'progress state Can Not Be More Than 255 Charecters';
+	if (!$software_type) {
+		$error['software_type'] = 'Business Category Field required';
+	} elseif ($check_software_type) {
+		$error['check_software_type'] = 'Business Category  Already Exits';
+	} elseif (strlen($software_type) > 255) {
+		$error['software_type'] = 'Business Category Can Not Be More Than 255 Charecters';
 	}
 
 
@@ -91,10 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		http_response_code(500);
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
-		$query = "INSERT INTO satt_customer_progres (progress_state, status) VALUES ('$progress_state','$status')";
+		$query = "INSERT INTO satt_customer_business_type (software_type, status) VALUES ('$software_type','$status')";
 		$result = $db->insert($query);
 		if ($result != false) {
-			die(json_encode(['message' => 'Customer Reference Added Successfull']));
+			die(json_encode(['message' => 'Business Category Added Successfull']));
 		} else {
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
@@ -105,11 +105,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 /*================================================================
 		Delete  Data into Database
 ===================================================================*/
-// $error['progress_state'] = 'Course Name Required';
+// $error['software_type'] = 'Course Name Required';
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET['action'] == 'delete') {
-	$progress_id = $_GET['progress_id'];
-	if ($progress_id) {
-		$query = "DELETE FROM satt_customer_progres WHERE id = '$progress_id'";
+	$software_id = $_GET['software_id'];
+	if ($software_id) {
+		$query = "DELETE FROM satt_customer_business_type WHERE id = '$software_id'";
 		$result = $db->delete($query);
 		if ($result) {
 			die(json_encode(['message' => 'Deleted Successfull']));
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT' AND isset($_GET['action']) AND $_GET['ac
 	$status = $status ? 0 : 1;
 
 	if ($status_id) {
-		$query = "UPDATE satt_customer_progres SET status = '$status' WHERE id = '$status_id'";
+		$query = "UPDATE satt_customer_business_type SET status = '$status' WHERE id = '$status_id'";
 		$result = $db->delete($query);
 		if ($result) {
 			die(json_encode(['message' => 'Status Changed Successfull']));
