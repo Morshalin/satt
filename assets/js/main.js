@@ -703,3 +703,26 @@ function lock_user(type){
       }
   });
 }
+
+
+
+var _componentDatePicker = function() {
+    var locatDate = moment.utc().format('YYYY-MM-DD');
+    var stillUtc = moment.utc(locatDate).toDate();
+    var year = parseInt(moment(stillUtc).local().format('YYYY')) + 2;
+    $('.date').attr('readonly', true);
+    // console.log(local);
+    $('.date').daterangepicker({
+        "applyClass": 'bg-slate-600',
+        "cancelClass": 'btn-light',
+        "singleDatePicker": true,
+        "locale": {
+            "format": 'YYYY-MM-DD'
+        },
+        "showDropdowns": true,
+        "minYear": 1900,
+        "maxYear": year,
+        "timePicker": false,
+        "alwaysShowCalendars": true,
+    });
+};
