@@ -1,0 +1,290 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;padding: 0;
+    overflow-x: hidden;
+    background-color: rgba(215, 210, 210, 0.54);
+    font-size: 15px;
+
+}
+
+* {
+margin: 0;
+padding: 0;
+}
+
+
+/*
+.container {
+    width:70%;
+}
+*/
+
+#agent_form {
+    background: url("../media/photos/background image.png") no-repeat center;
+}
+
+.agent {
+background: linear-gradient(90deg, rgba(9,84,0,1) 0%, rgba(27,212,79,25) 45%);
+}
+
+p{
+    font-size: 18px;
+}
+
+#agent_form .from_area {
+    width: 100%;
+    padding: 0px 5px;
+    border: 0px;
+    border-bottom: 1px dashed #000;
+
+}
+#agent_form label{
+  font-size: 18px;
+    margin-top: 10px;
+
+
+}
+
+#agent_form .from_area:focus{
+  box-shadow: none;
+    outline: none;
+
+
+}
+
+
+
+#agent_form .from_area::placeholder{
+    color: #a3a3a3!important;
+    font-size: 18px !important;
+
+}
+
+/*  checkbnox area  */
+/*  checkbnox area  */
+
+
+
+/* .custom-control-label::before {
+    position: absolute;
+    top: .25rem;
+    left: 0;
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    pointer-events: none;
+    content: "";
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+background-color: green;
+    border-radius: 0px!important;
+    border: 3px solid green;
+}
+
+.custom-control-label::after {
+    position: absolute;
+    top: .25rem;
+    left: 0;
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    content: "";
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+    border-radius: 0px;
+} */
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.upload-btn-wrapper .btn {
+    width: 120px;
+    padding: 8px 10px;
+    background-color: green;
+}
+
+.document {
+    font-size: 18px;
+}
+
+.treand {
+    margin-top: 10px;
+}
+
+#select_another {
+    width: 100%;
+    padding: 3px 0px;
+}
+
+.media a{
+    font-size: 15px;
+}
+
+.picture {
+    float: right;
+}
+
+.protgisthan {
+    padding: 3px 5px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.pic {
+    width: 150px;height: 140px;
+}
+
+.picture {
+    width: 200px;height: 200px;
+    border: 3px solid green;
+}
+
+ #address_area input[type=text]{
+    padding: 3px 8px;
+    width: 100%;
+     margin-top: 5px;
+     border: none;
+     border-bottom: 1px dashed #000;
+}
+#address_area input[type=text]:focus{
+  box-shadow: none;
+    outline: none;
+}
+#address_area label{
+    margin: 0;
+}
+
+input.parsley-success,
+select.parsley-success,
+textarea.parsley-success {
+  color: #468847;
+  background-color: #DFF0D8;
+  border: 1px solid #D6E9C6;
+}
+
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+  color: #B94A48;
+  background-color: #F2DEDE;
+  border: 1px solid #EED3D7;
+}
+
+.parsley-errors-list {
+  margin: 2px 0 3px;
+  padding: 0;
+  list-style-type: none;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  opacity: 0;
+  color: #B94A48;
+
+  transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+  opacity: 1;
+}
+
+@media screen and (min-width:576px) and (max-width:768px) {
+   .picture {
+    width: 100px;height: 100px;
+    float: left;
+}
+
+    #presend {
+        margin-top: 20px;
+    }
+
+    .agent p {
+        font-size: 16px;
+    }
+
+
+
+    #choosefile {
+        margin-top: 10px;
+    }
+
+    .document {
+        font-size: 15px;
+    }
+
+    .prothisthan_name {
+        margin-top: 30px;
+    }
+
+    .treand {
+        margin-top: 30px;
+    }
+}
+
+@media screen and (min-width:360px) and (max-width:480px) {
+   .picture {
+    width: 100px;height: 100px;
+    float: left;
+}
+     #presend {
+        margin-top: 30px;
+    }
+
+    .agent p {
+        font-size: 16px;
+    }
+
+    #choosefile {
+        margin-top: 10px;
+    }
+
+    .document {
+        font-size: 15px;
+    }
+
+    .prothisthan_name {
+        margin-top: 30px;
+    }
+
+    .treand {
+        margin-top: 30px;
+    }
+}
+
+
+@media screen and (max-width:480px) {
+
+  .col-sm-3.col-xs-12.mt-3 label{
+    display: none;
+  }
+
+.container.py-5.bg-white{
+  padding: 12px 14px !important;
+}
+
+}
