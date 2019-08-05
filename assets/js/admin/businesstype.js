@@ -70,28 +70,28 @@ var DatatableButtonsHtml5 = function() {
                 className: 'btn btn-danger',
                 text: 'Delete',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/progressivestate/action.php', action = 'delete', msg = 'Once deleted, it will deleted all related Data!');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/business-type/action.php', action = 'delete', msg = 'Once deleted, it will deleted all related Data!');
                 }
             },{
                 extend: 'selected',
                 className: 'btn bg-success',
                 text: 'Online',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/progressivestate/action.php', action = 'active', msg = 'Change Status To Online');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/business-type/action.php', action = 'active', msg = 'Change Status To Online');
                 }
             }, {
                 extend: 'selected',
                 className: 'btn bg-secondary',
                 text: 'Offline',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/progressivestate/action.php', action = 'inactive', msg = 'Change Status To Offline');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/business-type/action.php', action = 'inactive', msg = 'Change Status To Offline');
                 }
             }, {
                 extend: 'selected',
                 className: 'btn bg-warning',
                 text: 'Toggle Status',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/progressivestate/action.php', action = 'toggle', msg = 'Toggle Status');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/business-type/action.php', action = 'toggle', msg = 'Toggle Status');
                 }
             }],
             select: true,
@@ -111,7 +111,7 @@ var DatatableButtonsHtml5 = function() {
                 {
                     data: 'DT_RowIndex'
                 }, {
-                    data: 'progress_state'
+                    data: 'software_type'
                 }, {
                     data: 'create_date'
                 }, {
