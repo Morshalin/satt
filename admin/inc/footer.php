@@ -49,6 +49,8 @@
 	<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/notifications/pnotify.min.js"></script>
 	<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/notifications/sweet_alert.min.js"></script>
 	<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/forms/styling/switchery.min.js"></script>
+	<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/pickers/moment.min.js"></script>
+	<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/pickers/daterangepicker.js"></script>
 	<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/notifications/noty.min.js"></script>
 
 	<script src="<?php echo BASE_URL; ?>/assets/js/parsley.js"></script>
