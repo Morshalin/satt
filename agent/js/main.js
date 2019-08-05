@@ -93,11 +93,12 @@ $(document).ready(function() {
                         text: data.message,
                         type: data.title
                     });
-                    console.log(data.message);
+                    // console.log(data.message);
                     $('#submit').show();
                     $('#submiting').hide();
                     if (data.title == 'success') {
                          $('#agent_form')[0].reset();
+                       
                     }
                    
                     

@@ -20,9 +20,9 @@ $db = new Database();
         <meta name="csrf-token" content="eH5l3sXFjaNy3gRWnxsyRV2DS08xpw64uFLFK18K">
 
         <!-- Icons -->
-        <link rel="shortcut icon" href="https://agent.sattit.com/media/favicons/favicon.png">
-        <link rel="icon" sizes="192x192" type="image/png" href="https://agent.sattit.com/media/favicons/favicon-192x192.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="https://agent.sattit.com/media/favicons/apple-touch-icon-180x180.png">
+        <link rel="shortcut icon" href="media/photos/favicon.png">
+        <link rel="icon" sizes="192x192" type="image/png" href="media/photos/favicon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="media/photos/apple-touch-icon-180x180.png">
 
         <!-- Fonts and Styles -->
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700">
@@ -62,9 +62,10 @@ $db = new Database();
                 </div>
                 <div class="col-lg-3 col-md-3 col-12">
                     <div class="upload-btn-wrapper">
-                        <img class="pic" src="https://agent.sattit.com/media/photos/upload.png" alt="" id="photo_preview"><br>
-                        <span>Upload Image</span>
+                        <img class="pic" src="media/photos/upload.png" alt="" id="photo_preview"><br>
+                        <span>Upload Image <small class="text-danger"><br>(Max Size: 1 MB)</small></span>
                         <input type="file" name="photo" id="photo" required="" />
+                        <input type="hidden" id="photo_size" name="photo_size">
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -234,13 +235,15 @@ $db = new Database();
             <div class="" id="front_end" style="display: none">
                 <br>
                 <input class="form-control-file" type="file" name="document_front" id="document_front" required="">
-                <span class="text-muted" id="document_front_end_help">Upload Your Nid's Frontend Image</span>
+                <span class="text-muted" id="document_front_end_help">Upload Your Nid's Frontend Image</span><span><small class="text-danger"><br>(max size 1 Mb)</small></span>
+                <input type="hidden" id="document_front_size" name="document_front_size">
             </div>
             <div  id="backend" style="display: none;">
                 <div class="col-9 px-0">
                     <br>
                     <input type="file" class="form-control-file"  name="document_back" id="document_back">
-                    <span class="text-muted" id="document_back_end_help">Upload Your Nid's Backend Image</span>
+                    <span class="text-muted" id="document_back_end_help">Upload Your Nid's Backend Image</span><span><small class="text-danger"><br>(max size 1 Mb)</small></span>
+                    <input type="hidden" id="document_back_size" name="document_back_size">
                 </div>
             </div>
         </div>
@@ -256,6 +259,7 @@ $db = new Database();
             </div>
             <div class="col-lg-4" style="margin-top: 10px">
                 <input type="file" class="form-control-file" id="tread_license" name="tread_license">
+                <input type="hidden" id="tread_license_size" name="tread_license_size">
             </div>
         </div>
         <div class="row">
@@ -293,7 +297,66 @@ $db = new Database();
 <script src="js/main.js"></script>
 
 
+<script>
 
+ $(document).ready(function() {       
+    $('#photo').bind('change', function() {
+        var a=(this.files[0].size);
+        // alert(a)
+        $("#photo_size").val(a);
+        if ( a > 1048576) {
+             $('#photo').val("");
+             $('#photo_preview').attr("src","media/photos/upload.png");
+
+            Swal.fire({
+                        title: "error",
+                        text: "Please Make Sure The Image Size Is Less Than 1 MB" ,
+                        type: "error"
+                    });
+        }
+        
+    });      
+    $('#document_front').bind('change', function() {
+        var a=(this.files[0].size);
+        $("#document_front_size").val(a);
+        if ( a > 1048576) {
+             $('#document_front').val("");
+            Swal.fire({
+                        title: "error",
+                        text: "Please Make Sure The Image Size Is Less Than 1 MB" ,
+                        type: "error"
+                    });
+        }
+        
+    });      
+    $('#document_back').bind('change', function() {
+        var a=(this.files[0].size);
+        $("#document_back_size").val(a);
+        if ( a > 1048576) {
+             $('#document_back').val("");
+            Swal.fire({
+                        title: "error",
+                        text: "Please Make Sure The Backend Image Size Of NID Is Less Than 1 MB" ,
+                        type: "error"
+                    });
+        }
+        
+    });    
+    $('#tread_license').bind('change', function() {
+        var a=(this.files[0].size);
+        $("#tread_license_size").val(a);
+        if ( a > 1048576) {
+             $('#tread_license').val("");
+            Swal.fire({
+                        title: "error",
+                        text: "Please Make Sure The Image Size Of Trade License Is Less Than 1 MB" ,
+                        type: "error"
+                    });
+        }
+        
+    });
+});
+</script>
 
 
     </body>

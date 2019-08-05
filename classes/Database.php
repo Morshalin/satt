@@ -48,6 +48,18 @@
             } //end of else
         } //end of insert
 
+        //custome  Insert data here last inseted id will be returned
+        public function custom_insert($query){
+             $insert_row = $this->link->query($query) or die($this->link->error.__LINE__);
+            $last_id =$this->link->insert_id;
+                 if($insert_row){
+                     return $last_id;
+                 } else {
+                     return false;
+                 }
+        }
+
+
         //update data
         public function update($query){
             $update = $this->link->query($query) or die ($this->link->error.__LINE__);
