@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 03, 2019 at 06:57 AM
+-- Generation Time: Aug 05, 2019 at 04:59 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -102,6 +102,173 @@ INSERT INTO `satt_courses` (`id`, `course_name`, `course_code`, `course_descript
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `satt_customer_business_type`
+--
+
+DROP TABLE IF EXISTS `satt_customer_business_type`;
+CREATE TABLE IF NOT EXISTS `satt_customer_business_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `software_type` varchar(255) DEFAULT NULL,
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `satt_customer_business_type`
+--
+
+INSERT INTO `satt_customer_business_type` (`id`, `software_type`, `create_date`, `status`) VALUES
+(3, 'Schools Management', '2019-08-04 08:23:53', 1),
+(2, 'College Management', '2019-08-04 08:07:09', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `satt_customer_informations`
+--
+
+DROP TABLE IF EXISTS `satt_customer_informations`;
+CREATE TABLE IF NOT EXISTS `satt_customer_informations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `facebook_name` varchar(255) DEFAULT NULL,
+  `number` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `introduction_date` varchar(255) DEFAULT NULL,
+  `customer_reference` varchar(255) DEFAULT NULL,
+  `progressive_state` varchar(255) DEFAULT NULL,
+  `interested_services` varchar(255) DEFAULT NULL,
+  `institute_type` varchar(255) DEFAULT NULL,
+  `institute_name` varchar(255) DEFAULT NULL,
+  `institute_address` varchar(255) DEFAULT NULL,
+  `institute_district` varchar(255) DEFAULT NULL,
+  `official_notes` mediumtext,
+  `last_contacted_date` varchar(255) DEFAULT NULL,
+  `customer_leave_us` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `satt_customer_informations`
+--
+
+INSERT INTO `satt_customer_informations` (`id`, `name`, `facebook_name`, `number`, `email`, `introduction_date`, `customer_reference`, `progressive_state`, `interested_services`, `institute_type`, `institute_name`, `institute_address`, `institute_district`, `official_notes`, `last_contacted_date`, `customer_leave_us`, `status`) VALUES
+(1, 'Morshalin', 'Md Morshalin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `satt_customer_interestedservice`
+--
+
+DROP TABLE IF EXISTS `satt_customer_interestedservice`;
+CREATE TABLE IF NOT EXISTS `satt_customer_interestedservice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `services` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `satt_customer_interestedservice`
+--
+
+INSERT INTO `satt_customer_interestedservice` (`id`, `services`, `status`) VALUES
+(1, 'Domain', 1),
+(3, 'Hosting', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `satt_customer_notes`
+--
+
+DROP TABLE IF EXISTS `satt_customer_notes`;
+CREATE TABLE IF NOT EXISTS `satt_customer_notes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `reason` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `satt_customer_notes`
+--
+
+INSERT INTO `satt_customer_notes` (`id`, `reason`, `status`) VALUES
+(2, 'communication gap', 0),
+(5, 'Heigh price', 1),
+(4, 'already purchase from others', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `satt_customer_progres`
+--
+
+DROP TABLE IF EXISTS `satt_customer_progres`;
+CREATE TABLE IF NOT EXISTS `satt_customer_progres` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `progress_state` varchar(255) NOT NULL,
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `satt_customer_progres`
+--
+
+INSERT INTO `satt_customer_progres` (`id`, `progress_state`, `create_date`, `status`) VALUES
+(1, 'Facebook/Website Messaging in Initial State', '2019-08-03 12:03:51', 1),
+(3, 'Facebook/Website Messaging', '2019-08-04 04:38:08', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `satt_customer_type`
+--
+
+DROP TABLE IF EXISTS `satt_customer_type`;
+CREATE TABLE IF NOT EXISTS `satt_customer_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT '0',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `satt_customer_type`
+--
+
+INSERT INTO `satt_customer_type` (`id`, `type`, `status`, `create_date`) VALUES
+(1, 'Facebook Messaging Customer', 1, '2019-08-03 09:42:25'),
+(3, 'Google Messaging Customer', 1, '2019-08-03 10:16:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `satt_official_notes`
+--
+
+DROP TABLE IF EXISTS `satt_official_notes`;
+CREATE TABLE IF NOT EXISTS `satt_official_notes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `admin_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `note` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `admin_id` (`admin_id`),
+  KEY `satt_official_notes_customer_id_foreign` (`customer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `satt_settings`
 --
 
@@ -138,14 +305,15 @@ CREATE TABLE IF NOT EXISTS `satt_users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `satt_users_email_unique` (`email`),
   KEY `satt_users_admin_id_foreign` (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `satt_users`
 --
 
 INSERT INTO `satt_users` (`id`, `user_name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `admin_id`, `from_table`, `status`, `role`) VALUES
-(1, 'teamsatt', 'tariqulislamrc@gmail.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, 'satt_admins', 'active', 'admin');
+(1, 'teamsatt', 'tariqulislamrc@gmail.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, 'satt_admins', 'active', 'admin'),
+(2, 'satt', 'satt@gmail.com', '2019-08-15 18:00:00', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', '2019-08-03 18:00:00', '2019-08-03 18:00:00', 1, 'satt_admins', 'active', 'admin');
 
 -- --------------------------------------------------------
 
@@ -166,7 +334,7 @@ CREATE TABLE IF NOT EXISTS `satt_user_logs` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `satt_user_logs_user_id_foreign` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `satt_user_logs`
@@ -190,7 +358,13 @@ INSERT INTO `satt_user_logs` (`id`, `user_id`, `status`, `ip_address`, `details`
 (126, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/lock.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2Fcourse%2F\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-02 10:10:10\"}', NULL, NULL, '2019-08-02 16:10:10', NULL),
 (127, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-03 11:13:10\"}', NULL, NULL, '2019-08-03 05:13:10', NULL),
 (128, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/lock.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2Fcourse%2F\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-03 11:55:05\"}', NULL, NULL, '2019-08-03 05:55:05', NULL),
-(129, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/lock.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2Fcourse%2F\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-03 12:30:19\"}', NULL, NULL, '2019-08-03 06:30:19', NULL);
+(129, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/lock.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2Fcourse%2F\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-03 12:30:19\"}', NULL, NULL, '2019-08-03 06:30:19', NULL),
+(130, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/lock.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2Fcourse%2F\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-03 01:02:23\"}', NULL, NULL, '2019-08-03 07:02:23', NULL),
+(131, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-04 10:22:47\"}', NULL, NULL, '2019-08-04 04:22:47', NULL),
+(132, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/lock.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2Fbusiness-type%2F\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-04 01:44:10\"}', NULL, NULL, '2019-08-04 07:44:10', NULL),
+(133, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/lock.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2Fleav_us%2F\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-04 06:18:53\"}', NULL, NULL, '2019-08-04 12:18:53', NULL),
+(134, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 10:23:55\"}', NULL, NULL, '2019-08-05 04:23:55', NULL),
+(135, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 10:57:17\"}', NULL, NULL, '2019-08-05 04:57:17', NULL);
 
 -- --------------------------------------------------------
 
@@ -237,6 +411,13 @@ ALTER TABLE `satt_admins`
 ALTER TABLE `satt_courses`
   ADD CONSTRAINT `satt_courses_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `satt_users` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `satt_courses_updated_by_foreign` FOREIGN KEY (`updated_by`) REFERENCES `satt_users` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `satt_official_notes`
+--
+ALTER TABLE `satt_official_notes`
+  ADD CONSTRAINT `satt_official_notes_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `satt_admins` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
+  ADD CONSTRAINT `satt_official_notes_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `satt_customer_informations` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `satt_users`
