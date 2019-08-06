@@ -190,7 +190,7 @@ if (isset($_POST['submit'])) {
 
 
     $signature = $_POST['signature'];
-    $created_at =  date('d/m/Y h:i:s a', time());
+   
 
 
     // vlaidating if required fields are filled up or not.
@@ -261,11 +261,11 @@ if (isset($_POST['submit'])) {
 
     // now its time to insert data in database 
     $query = "INSERT INTO agent_list 
-    			(name,father_name,mother_name,occupation,education_qualification,permanent_house,permanent_road,permanent_village,permanent_post,permanent_up,permanent_dist,permanent_post_code,same_as,present_house,present_road,present_village,present_post,present_up,present_dist,present_post_code,mobile_no,alternate_mobile,email,interested_dist,interested_up,document_type,bussiness_name,terms_agree,signature,created_at)
+    			(name,father_name,mother_name,occupation,education_qualification,permanent_house,permanent_road,permanent_village,permanent_post,permanent_up,permanent_dist,permanent_post_code,same_as,present_house,present_road,present_village,present_post,present_up,present_dist,present_post_code,mobile_no,alternate_mobile,email,interested_dist,interested_up,document_type,bussiness_name,terms_agree,signature,created_at,status)
 
     			VALUES
 
-				('$name','$father_name','$mother_name','$occupation','$education_qualification','$permanent_house','$permanent_road','$permanent_village','$permanent_post','$permanent_up','$permanent_dist','$permanent_post_code','$same_as','$present_house','$present_road','$present_village','$present_post','$present_up','$present_dist','$present_post_code','$mobile_no','$alternate_mobile','$email','$interested_dist','$interested_up','$document_type','$bussiness_name','$terms_agree','$signature','$created_at')";
+				('$name','$father_name','$mother_name','$occupation','$education_qualification','$permanent_house','$permanent_road','$permanent_village','$permanent_post','$permanent_up','$permanent_dist','$permanent_post_code','$same_as','$present_house','$present_road','$present_village','$present_post','$present_up','$present_dist','$present_post_code','$mobile_no','$alternate_mobile','$email','$interested_dist','$interested_up','$document_type','$bussiness_name','$terms_agree','$signature',now(),'Registered')";
 
     $last_insert_id = $db->custom_insert($query);
 

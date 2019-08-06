@@ -98,7 +98,9 @@ $(document).ready(function() {
                     $('#submiting').hide();
                     if (data.title == 'success') {
                          $('#agent_form')[0].reset();
-                       
+                       setTimeout(function(){
+                        window.location = 'http://www.sattit.com/web-apps';
+                       },3000);
                     }
                    
                     
