@@ -4,33 +4,182 @@
 ?>
 
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/course/ajax.php" id="content_form" method="post">
+<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/customerdetails/ajax.php" id="content_form" method="post">
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Create New Course <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="course_name" class="col-form-label">Course Name <span class="text-danger">*</span></label>
-                <input type="text" name="course_name" id="course_name" class="form-control" placeholder="New Course Name" required autofocus value="">
+                <label for="course_name" class="col-form-label">Cutomer Name <span class="text-danger">*</span></label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Cutomer Name" required autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="facebook_name" class="col-form-label">Facebook Name<span class="text-danger">*</span></label>
+                <input type="text" name="facebook_name" id="facebook_name" class="form-control" placeholder="Facebook Name " required value="">
+
+            </div>
+        </div>
+    </div>
+
+     <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="number" class="col-form-label">Mobile Number<span class="text-danger">*</span></label>
+                <input type="text" name="number" id="number" class="form-control" placeholder="Mobile Number" required autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="email" class="col-form-label">Valid Email Address<span class="text-danger">*</span></label>
+                <input type="text" name="email" id="email" class="form-control" placeholder="Valid Email Address" required value="">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="introduction_date" class="col-form-label">Introduction Date<span class="text-danger">*</span></label>
+                <input type="date" name="introduction_date" id="introduction_date" class="form-control" placeholder="Introduction Date" required autofocus value="">
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+              <label for="customer_reference" class="col-form-label">Select Customer Reference<span class="text-danger">*</span></label>
+              <select class="form-control form-control-lg" id="customer_reference" name="customer_reference">
+                <option>Customer Reference</option>
+                <?php 
+                     $query = "SELECT * FROM satt_customer_type where status=1";
+                    $result = $db->select($query);
+                    if ($result) {
+                        while ($row = $result->fetch_assoc()) { ?>
+                           <option value="<?php echo $row['type'] ?>"><?php echo $row['type']; ?> </option>  
+                      <?php  }
+                        $row = $result->fetch_assoc();
+                    } else {
+                        http_response_code(500);
+                        die(json_encode(['message' => 'Category  Not Found']));
+                    }
+                ?>
+              </select>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+              <label for="progressive_state">Select Progress State</label>
+              <select class="form-control" id="progressive_state" name="progressive_state">
+                <option>Progress State</option>
+                <?php 
+                     $query = "SELECT * FROM satt_customer_progres where status=1";
+                    $result = $db->select($query);
+                    if ($result) {
+                        while ($row = $result->fetch_assoc()) { ?>
+                           <option value="<?php echo $row['progress_state'] ?>"><?php echo $row['progress_state']; ?> </option>  
+                      <?php  }
+                        $row = $result->fetch_assoc();
+                    } else {
+                        http_response_code(500);
+                        die(json_encode(['message' => 'Category  Not Found']));
+                    }
+                ?>
+              </select>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+              <label for="interested_services">Select Interested Service</label>
+              <select multiple="multiple" class="form-control select" id="interested_services" name="interested_services[]">
+                <?php 
+                     $query = "SELECT * FROM satt_customer_interestedservice where status=1";
+                    $result = $db->select($query);
+                    if ($result) {
+                        while ($row = $result->fetch_assoc()) { ?>
+                           <option value="<?php echo $row['services'] ?>"><?php echo $row['services']; ?> </option>  
+                      <?php  }
+                        $row = $result->fetch_assoc();
+                    } else {
+                        http_response_code(500);
+                        die(json_encode(['message' => 'Category  Not Found']));
+                    }
+                ?>
+              </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="institute_type" class="col-form-label">Institute Category<span class="text-danger">*</span></label>
+                <input type="text" name="institute_type" id="institute_type" class="form-control" placeholder="Institute Category" required value="">
 
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="course_code" class="col-form-label">Course Code <span class="text-danger">*</span></label>
-                <input type="text" name="course_code" id="course_code" class="form-control" placeholder="New Course Code" required value="">
+                <label for="institute_name" class="col-form-label">Institute Name<span class="text-danger">*</span></label>
+                <input type="text" name="institute_name" id="institute_name" class="form-control" placeholder="Interested Services" required autofocus value="">
+            </div>
+        </div>
+    </div>
+
+
+        
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="institute_address" class="col-form-label">Institute Address</label>
+                <textarea name="institute_address" id="institute_address" rows="2" class="form-control" style="resize: none;" placeholder="Enter Institute Address"></textarea>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="institute_district" class="col-form-label">Institute District<span class="text-danger">*</span></label>
+                <input type="text" name="institute_district" id="institute_district" class="form-control" placeholder="Institute District" required autofocus value="">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+         <div class="col-lg-6">
+            <div class="form-group">
+              <label for="software_category">Select Software Category</label>
+              <select multiple="multiple" class="form-control select" id="software_category" name="software_category[]">
+                <?php 
+                     $query = "SELECT * FROM satt_customer_business_type where status=1";
+                    $result = $db->select($query);
+                    if ($result) {
+                        while ($row = $result->fetch_assoc()) { ?>
+                           <option value="<?php echo $row['software_type'] ?>"><?php echo $row['software_type']; ?> </option>  
+                      <?php  }
+                        $row = $result->fetch_assoc();
+                    } else {
+                        http_response_code(500);
+                        die(json_encode(['message' => 'Category  Not Found']));
+                    }
+                ?>
+              </select>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="last_contacted_date" class="col-form-label">Last Contacted Date<span class="text-danger">*</span></label>
+                <input type="date" name="last_contacted_date" id="last_contacted_date" class="form-control" placeholder="Last Contacted Date" required value="">
 
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="course_description" class="col-form-label">Course Description</label>
-                <textarea name="course_description" id="course_description" rows="3" class="form-control" style="resize: none;" placeholder="Enter New Course Description Here"></textarea>
-            </div>
-        </div>
-    </div>
+
     <div class="row">
         <div class="col-lg-12">
             <div class="form-check form-check-switchery form-check-inline form-check-right">

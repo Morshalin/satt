@@ -2,10 +2,10 @@
 -- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 05, 2019 at 07:08 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Host: 127.0.0.1:3306
+-- Generation Time: Aug 06, 2019 at 06:00 AM
+-- Server version: 5.7.24
+-- PHP Version: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,7 +28,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `agent_list`
 --
 
-CREATE TABLE `agent_list` (
+DROP TABLE IF EXISTS `agent_list`;
+CREATE TABLE IF NOT EXISTS `agent_list` (
   `id` int(11) NOT NULL,
   `agent_serial` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -65,7 +66,8 @@ CREATE TABLE `agent_list` (
   `terms_agree` tinyint(1) DEFAULT NULL,
   `signature` varchar(225) DEFAULT NULL,
   `created-at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` varchar(250) NOT NULL DEFAULT 'Registered'
+  `status` varchar(250) NOT NULL DEFAULT 'Registered',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -84,14 +86,16 @@ INSERT INTO `agent_list` (`id`, `agent_serial`, `name`, `father_name`, `mother_n
 -- Table structure for table `developer`
 --
 
-CREATE TABLE `developer` (
+DROP TABLE IF EXISTS `developer`;
+CREATE TABLE IF NOT EXISTS `developer` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `mobile_no` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '0'
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -100,10 +104,12 @@ CREATE TABLE `developer` (
 -- Table structure for table `password_resets`
 --
 
-CREATE TABLE `password_resets` (
+DROP TABLE IF EXISTS `password_resets`;
+CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -112,8 +118,9 @@ CREATE TABLE `password_resets` (
 -- Table structure for table `satt_admins`
 --
 
-CREATE TABLE `satt_admins` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `satt_admins`;
+CREATE TABLE IF NOT EXISTS `satt_admins` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `first_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -126,8 +133,10 @@ CREATE TABLE `satt_admins` (
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `satt_admins_user_id_foreign` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `satt_admins`
@@ -142,8 +151,9 @@ INSERT INTO `satt_admins` (`id`, `first_name`, `last_name`, `user_name`, `gender
 -- Table structure for table `satt_courses`
 --
 
-CREATE TABLE `satt_courses` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `satt_courses`;
+CREATE TABLE IF NOT EXISTS `satt_courses` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `course_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `course_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `course_description` text COLLATE utf8mb4_unicode_ci,
@@ -151,8 +161,11 @@ CREATE TABLE `satt_courses` (
   `created_by` bigint(20) UNSIGNED DEFAULT NULL,
   `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `satt_courses_created_by_foreign` (`created_by`),
+  KEY `satt_courses_updated_by_foreign` (`updated_by`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `satt_courses`
@@ -168,12 +181,14 @@ INSERT INTO `satt_courses` (`id`, `course_name`, `course_code`, `course_descript
 -- Table structure for table `satt_customer_business_type`
 --
 
-CREATE TABLE `satt_customer_business_type` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `satt_customer_business_type`;
+CREATE TABLE IF NOT EXISTS `satt_customer_business_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `software_type` varchar(255) DEFAULT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` int(11) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `satt_customer_business_type`
@@ -181,7 +196,10 @@ CREATE TABLE `satt_customer_business_type` (
 
 INSERT INTO `satt_customer_business_type` (`id`, `software_type`, `create_date`, `status`) VALUES
 (3, 'Schools Management', '2019-08-04 08:23:53', 1),
-(2, 'College Management', '2019-08-04 08:07:09', 0);
+(2, 'College Management', '2019-08-04 08:07:09', 1),
+(4, 'Super shop', '2019-08-05 11:31:26', 1),
+(5, 'Hardware Shop', '2019-08-05 11:31:48', 1),
+(6, 'Pharmacy', '2019-08-05 11:32:09', 1);
 
 -- --------------------------------------------------------
 
@@ -189,8 +207,9 @@ INSERT INTO `satt_customer_business_type` (`id`, `software_type`, `create_date`,
 -- Table structure for table `satt_customer_informations`
 --
 
-CREATE TABLE `satt_customer_informations` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `satt_customer_informations`;
+CREATE TABLE IF NOT EXISTS `satt_customer_informations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `facebook_name` varchar(255) DEFAULT NULL,
   `number` varchar(255) DEFAULT NULL,
@@ -198,23 +217,23 @@ CREATE TABLE `satt_customer_informations` (
   `introduction_date` varchar(255) DEFAULT NULL,
   `customer_reference` varchar(255) DEFAULT NULL,
   `progressive_state` varchar(255) DEFAULT NULL,
-  `interested_services` varchar(255) DEFAULT NULL,
   `institute_type` varchar(255) DEFAULT NULL,
   `institute_name` varchar(255) DEFAULT NULL,
-  `institute_address` varchar(255) DEFAULT NULL,
+  `institute_address` text,
   `institute_district` varchar(255) DEFAULT NULL,
-  `official_notes` mediumtext,
   `last_contacted_date` varchar(255) DEFAULT NULL,
-  `customer_leave_us` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `satt_customer_informations`
 --
 
-INSERT INTO `satt_customer_informations` (`id`, `name`, `facebook_name`, `number`, `email`, `introduction_date`, `customer_reference`, `progressive_state`, `interested_services`, `institute_type`, `institute_name`, `institute_address`, `institute_district`, `official_notes`, `last_contacted_date`, `customer_leave_us`, `status`) VALUES
-(1, 'Morshalin', 'Md Morshalin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `satt_customer_informations` (`id`, `name`, `facebook_name`, `number`, `email`, `introduction_date`, `customer_reference`, `progressive_state`, `institute_type`, `institute_name`, `institute_address`, `institute_district`, `last_contacted_date`, `status`) VALUES
+(1, 'Morshalin', 'Md Morshalin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(2, 'Kanak', NULL, NULL, 'kanak@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(3, 'Morshalin', 'Morshalin', '01792747486', 'mdshaddam10@gmail.com', 'August 13, 2019, 12:00 am', 'Facebook Messaging Customer', 'Facebook/Website Messaging in Initial State', 'School', 'primary school', 'school', 'Rajshahi', '2019-08-20', 0);
 
 -- --------------------------------------------------------
 
@@ -222,11 +241,13 @@ INSERT INTO `satt_customer_informations` (`id`, `name`, `facebook_name`, `number
 -- Table structure for table `satt_customer_interestedservice`
 --
 
-CREATE TABLE `satt_customer_interestedservice` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `satt_customer_interestedservice`;
+CREATE TABLE IF NOT EXISTS `satt_customer_interestedservice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `services` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `satt_customer_interestedservice`
@@ -242,11 +263,13 @@ INSERT INTO `satt_customer_interestedservice` (`id`, `services`, `status`) VALUE
 -- Table structure for table `satt_customer_notes`
 --
 
-CREATE TABLE `satt_customer_notes` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `satt_customer_notes`;
+CREATE TABLE IF NOT EXISTS `satt_customer_notes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `reason` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `satt_customer_notes`
@@ -263,12 +286,14 @@ INSERT INTO `satt_customer_notes` (`id`, `reason`, `status`) VALUES
 -- Table structure for table `satt_customer_progres`
 --
 
-CREATE TABLE `satt_customer_progres` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `satt_customer_progres`;
+CREATE TABLE IF NOT EXISTS `satt_customer_progres` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `progress_state` varchar(255) NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` int(11) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `satt_customer_progres`
@@ -284,12 +309,14 @@ INSERT INTO `satt_customer_progres` (`id`, `progress_state`, `create_date`, `sta
 -- Table structure for table `satt_customer_type`
 --
 
-CREATE TABLE `satt_customer_type` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `satt_customer_type`;
+CREATE TABLE IF NOT EXISTS `satt_customer_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT '0',
-  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `satt_customer_type`
@@ -297,7 +324,21 @@ CREATE TABLE `satt_customer_type` (
 
 INSERT INTO `satt_customer_type` (`id`, `type`, `status`, `create_date`) VALUES
 (1, 'Facebook Messaging Customer', 1, '2019-08-03 09:42:25'),
-(3, 'Google Messaging Customer', 1, '2019-08-03 10:16:58');
+(5, 'Social Network Twitter', 0, '2019-08-05 05:40:47'),
+(3, 'Google Messaging Customer', 0, '2019-08-03 10:16:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `satt_interested_services`
+--
+
+DROP TABLE IF EXISTS `satt_interested_services`;
+CREATE TABLE IF NOT EXISTS `satt_interested_services` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -305,13 +346,27 @@ INSERT INTO `satt_customer_type` (`id`, `type`, `status`, `create_date`) VALUES
 -- Table structure for table `satt_official_notes`
 --
 
-CREATE TABLE `satt_official_notes` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `satt_official_notes`;
+CREATE TABLE IF NOT EXISTS `satt_official_notes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `admin_id` bigint(20) UNSIGNED DEFAULT NULL,
   `customer_id` int(11) DEFAULT NULL,
-  `note` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `note` text NOT NULL,
+  `creat_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `admin_id` (`admin_id`),
+  KEY `satt_official_notes_customer_id_foreign` (`customer_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `satt_official_notes`
+--
+
+INSERT INTO `satt_official_notes` (`id`, `admin_id`, `customer_id`, `note`, `creat_date`, `status`) VALUES
+(1, 1, 1, 'very bad programmer.', '2019-08-05 07:11:46', 1),
+(2, 1, 2, 'very good programmer.', '2019-08-05 07:11:46', 1),
+(5, 1, 1, 'good working', '2019-08-05 11:48:00', 1);
 
 -- --------------------------------------------------------
 
@@ -319,12 +374,14 @@ CREATE TABLE `satt_official_notes` (
 -- Table structure for table `satt_settings`
 --
 
-CREATE TABLE `satt_settings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `satt_settings`;
+CREATE TABLE IF NOT EXISTS `satt_settings` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `value` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -333,8 +390,9 @@ CREATE TABLE `satt_settings` (
 -- Table structure for table `satt_users`
 --
 
-CREATE TABLE `satt_users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `satt_users`;
+CREATE TABLE IF NOT EXISTS `satt_users` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
@@ -345,15 +403,19 @@ CREATE TABLE `satt_users` (
   `admin_id` bigint(20) UNSIGNED DEFAULT NULL,
   `from_table` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT 'satt_admins',
   `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
-  `role` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'admin'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `role` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'admin',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `satt_users_email_unique` (`email`),
+  KEY `satt_users_admin_id_foreign` (`admin_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `satt_users`
 --
 
 INSERT INTO `satt_users` (`id`, `user_name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `admin_id`, `from_table`, `status`, `role`) VALUES
-(1, 'teamsatt', 'tariqulislamrc@gmail.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, 'satt_admins', 'active', 'admin');
+(1, 'teamsatt', 'tariqulislamrc@gmail.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, 1, 'satt_admins', 'active', 'admin'),
+(2, 'satt', 'satt@gmail.com', '2019-08-15 18:00:00', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', '2019-08-03 18:00:00', '2019-08-03 18:00:00', 1, 'satt_admins', 'active', 'admin');
 
 -- --------------------------------------------------------
 
@@ -361,8 +423,9 @@ INSERT INTO `satt_users` (`id`, `user_name`, `email`, `email_verified_at`, `pass
 -- Table structure for table `satt_user_logs`
 --
 
-CREATE TABLE `satt_user_logs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `satt_user_logs`;
+CREATE TABLE IF NOT EXISTS `satt_user_logs` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `ip_address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -370,8 +433,10 @@ CREATE TABLE `satt_user_logs` (
   `user_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `satt_user_logs_user_id_foreign` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `satt_user_logs`
@@ -401,7 +466,14 @@ INSERT INTO `satt_user_logs` (`id`, `user_id`, `status`, `ip_address`, `details`
 (132, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/lock.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2Fbusiness-type%2F\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-04 01:44:10\"}', NULL, NULL, '2019-08-04 07:44:10', NULL),
 (133, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/lock.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2Fleav_us%2F\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-04 06:18:53\"}', NULL, NULL, '2019-08-04 12:18:53', NULL),
 (134, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 10:23:55\"}', NULL, NULL, '2019-08-05 04:23:55', NULL),
-(135, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 10:57:17\"}', NULL, NULL, '2019-08-05 04:57:17', NULL);
+(135, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 10:57:17\"}', NULL, NULL, '2019-08-05 04:57:17', NULL),
+(136, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 12:04:18\"}', NULL, NULL, '2019-08-05 06:04:18', NULL),
+(137, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 12:50:57\"}', NULL, NULL, '2019-08-05 06:50:57', NULL),
+(138, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 12:55:05\"}', NULL, NULL, '2019-08-05 06:55:05', NULL),
+(139, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/lock.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2FOffice_note%2F\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 01:45:28\"}', NULL, NULL, '2019-08-05 07:45:28', NULL),
+(140, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/lock.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2Fcustomerdetails%2F\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 04:45:41\"}', NULL, NULL, '2019-08-05 10:45:41', NULL),
+(141, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2Fcustomerdetails\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 06:08:42\"}', NULL, NULL, '2019-08-05 12:08:42', NULL),
+(142, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-06 09:53:55\"}', NULL, NULL, '2019-08-06 03:53:55', NULL);
 
 -- --------------------------------------------------------
 
@@ -409,8 +481,9 @@ INSERT INTO `satt_user_logs` (`id`, `user_id`, `status`, `ip_address`, `details`
 -- Table structure for table `satt_venues`
 --
 
-CREATE TABLE `satt_venues` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `satt_venues`;
+CREATE TABLE IF NOT EXISTS `satt_venues` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `venue_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `venue_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `venue_description` text COLLATE utf8mb4_unicode_ci,
@@ -418,8 +491,11 @@ CREATE TABLE `satt_venues` (
   `created_by` bigint(20) UNSIGNED DEFAULT NULL,
   `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `satt_venues_created_by_foreign` (`created_by`),
+  KEY `satt_venues_updated_by_foreign` (`updated_by`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `satt_venues`
@@ -431,10 +507,24 @@ INSERT INTO `satt_venues` (`id`, `venue_name`, `venue_code`, `venue_description`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sat_software_category`
+--
+
+DROP TABLE IF EXISTS `sat_software_category`;
+CREATE TABLE IF NOT EXISTS `sat_software_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `software_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `software_language`
 --
 
-CREATE TABLE `software_language` (
+DROP TABLE IF EXISTS `software_language`;
+CREATE TABLE IF NOT EXISTS `software_language` (
   `id` int(11) NOT NULL,
   `software_language_name` varchar(255) DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -455,7 +545,8 @@ INSERT INTO `software_language` (`id`, `software_language_name`, `date`, `status
 -- Table structure for table `software_status`
 --
 
-CREATE TABLE `software_status` (
+DROP TABLE IF EXISTS `software_status`;
+CREATE TABLE IF NOT EXISTS `software_status` (
   `id` int(11) NOT NULL,
   `software_status_name` varchar(255) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -469,234 +560,6 @@ CREATE TABLE `software_status` (
 INSERT INTO `software_status` (`id`, `software_status_name`, `date`, `status`) VALUES
 (1, 'kanak', '2019-08-03 09:43:18', 1),
 (6, 'tazbinur', '2019-08-03 09:45:34', 1);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `agent_list`
---
-ALTER TABLE `agent_list`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `developer`
---
-ALTER TABLE `developer`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
-
---
--- Indexes for table `satt_admins`
---
-ALTER TABLE `satt_admins`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `satt_admins_user_id_foreign` (`user_id`);
-
---
--- Indexes for table `satt_courses`
---
-ALTER TABLE `satt_courses`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `satt_courses_created_by_foreign` (`created_by`),
-  ADD KEY `satt_courses_updated_by_foreign` (`updated_by`);
-
---
--- Indexes for table `satt_customer_business_type`
---
-ALTER TABLE `satt_customer_business_type`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `satt_customer_informations`
---
-ALTER TABLE `satt_customer_informations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `satt_customer_interestedservice`
---
-ALTER TABLE `satt_customer_interestedservice`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `satt_customer_notes`
---
-ALTER TABLE `satt_customer_notes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `satt_customer_progres`
---
-ALTER TABLE `satt_customer_progres`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `satt_customer_type`
---
-ALTER TABLE `satt_customer_type`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `satt_official_notes`
---
-ALTER TABLE `satt_official_notes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `admin_id` (`admin_id`),
-  ADD KEY `satt_official_notes_customer_id_foreign` (`customer_id`);
-
---
--- Indexes for table `satt_settings`
---
-ALTER TABLE `satt_settings`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `satt_users`
---
-ALTER TABLE `satt_users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `satt_users_email_unique` (`email`),
-  ADD KEY `satt_users_admin_id_foreign` (`admin_id`);
-
---
--- Indexes for table `satt_user_logs`
---
-ALTER TABLE `satt_user_logs`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `satt_user_logs_user_id_foreign` (`user_id`);
-
---
--- Indexes for table `satt_venues`
---
-ALTER TABLE `satt_venues`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `satt_venues_created_by_foreign` (`created_by`),
-  ADD KEY `satt_venues_updated_by_foreign` (`updated_by`);
-
---
--- Indexes for table `software_language`
---
-ALTER TABLE `software_language`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `software_status`
---
-ALTER TABLE `software_status`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `agent_list`
---
-ALTER TABLE `agent_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `developer`
---
-ALTER TABLE `developer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `satt_admins`
---
-ALTER TABLE `satt_admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `satt_courses`
---
-ALTER TABLE `satt_courses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `satt_customer_business_type`
---
-ALTER TABLE `satt_customer_business_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `satt_customer_informations`
---
-ALTER TABLE `satt_customer_informations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `satt_customer_interestedservice`
---
-ALTER TABLE `satt_customer_interestedservice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `satt_customer_notes`
---
-ALTER TABLE `satt_customer_notes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `satt_customer_progres`
---
-ALTER TABLE `satt_customer_progres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `satt_customer_type`
---
-ALTER TABLE `satt_customer_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `satt_official_notes`
---
-ALTER TABLE `satt_official_notes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `satt_settings`
---
-ALTER TABLE `satt_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `satt_users`
---
-ALTER TABLE `satt_users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `satt_user_logs`
---
-ALTER TABLE `satt_user_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
-
---
--- AUTO_INCREMENT for table `satt_venues`
---
-ALTER TABLE `satt_venues`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `software_language`
---
-ALTER TABLE `software_language`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `software_status`
---
-ALTER TABLE `software_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -719,7 +582,7 @@ ALTER TABLE `satt_courses`
 -- Constraints for table `satt_official_notes`
 --
 ALTER TABLE `satt_official_notes`
-  ADD CONSTRAINT `satt_official_notes_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `satt_admins` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
+  ADD CONSTRAINT `satt_official_notes_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `satt_users` (`admin_id`) ON DELETE SET NULL ON UPDATE NO ACTION,
   ADD CONSTRAINT `satt_official_notes_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `satt_customer_informations` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;
 
 --
@@ -727,6 +590,19 @@ ALTER TABLE `satt_official_notes`
 --
 ALTER TABLE `satt_users`
   ADD CONSTRAINT `satt_users_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `satt_admins` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `satt_user_logs`
+--
+ALTER TABLE `satt_user_logs`
+  ADD CONSTRAINT `satt_user_logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `satt_users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `satt_venues`
+--
+ALTER TABLE `satt_venues`
+  ADD CONSTRAINT `satt_venues_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `satt_users` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `satt_venues_updated_by_foreign` FOREIGN KEY (`updated_by`) REFERENCES `satt_users` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

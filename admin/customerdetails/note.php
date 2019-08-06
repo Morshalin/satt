@@ -2,7 +2,13 @@
   require_once '../../config/config.php';
   ajax();
 ?>
-
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#check").click(function(){
+        $(".leave").toggle();
+    });
+});
+</script>
 <!-- Login form -->
 <form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/Office_note/ajax.php" id="content_form" method="post">
   <fieldset class="mb-3">
@@ -29,6 +35,22 @@
               </select>
             </div>
         </div>
+
+        <div class="col-lg-2 mt-3">
+             <label for="customer_id">Check Reason</label>
+            <div class="form-check form-check-switchery form-check-inline form-check-right">
+                <label for="course_description" class="form-check-label">On/Off</label>
+                  <input type="checkbox" name="check" id="check" value="1" class="form-check-input-switchery mt-3" data-fouc checked>
+
+            </div>
+        </div>
+        <div class="col-lg-4" >
+            <div class="form-group leave">
+                <label for="institute_name" class="col-form-label">Leave Reason<span class="text-danger">*</span></label>
+                <input type="text" name="institute_name" id="" class="form-control" placeholder="Interested Services" required autofocus value="">
+            </div>
+        </div>
+
     </div>
     <div class="row">
         <div class="col-md-12">
