@@ -46,10 +46,29 @@ $data = array();
 $i = 0;
 if ($result) {
   while ($row = mysqli_fetch_assoc($result)) {
+    $software_id = $row['id'];
+    if ($software_id) {
+      $query_lang_multi = "select * from software_language_multi WHERE software_id = '$software_id' ";
+      $result_lang_multi = $db->select($query_lang_multi);
+      $a ='';
+      while ($row_lang_multi = mysqli_fetch_assoc($result_lang_multi)) {
+          $lang_id = $row_lang_multi['language_id'];
+          $query_lang = "select * from software_language WHERE id = '$lang_id'";
+          $result_lang = $db->select($query_lang)->fetch_assoc();
+          $lang_name = $result_lang['software_language_name'];
+          $a .= '<span class="badge badge-success mr-1x">'.$lang_name.'</span>';
+    }
+  }
     $data[] = array(
       "DT_RowIndex" => $i + 1,
       "id" => $row['id'],
-      "software_details_name" => '<strong>' . $row['software_details_name'] . '</strong>',
+      "software_name" => '<strong>' . $row['software_name'] . '</strong>',
+      "software_status_name" => '<strong>' . $row['software_status_name'] . '</strong>',
+      "language_name" => $a,
+      // "developer_name" => '<strong>' . $row['developer_name'] . '</strong>',
+      "create_date" => '<strong>' . $row['create_date'] . '</strong>',
+      "short_feature" => '<strong>' . $row['short_feature'] . '</strong>',
+      "condition_details" => '<strong>' . $row['condition_details'] . '</strong>',
       "action" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
         <div class="list-icons" id="action_menu_' . $row['id'] . '">

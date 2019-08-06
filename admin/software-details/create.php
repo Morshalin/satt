@@ -42,7 +42,7 @@
                        if ($select_software_language) {
                         while ($software_language = $select_software_language->fetch_assoc()) {
                           ?>
-                          <option value="<?php echo $software_language['software_language_name'].', '.$software_language['id']; ?>" ><?php echo $software_language['software_language_name']; ?></option>
+                          <option value="<?php echo $software_language['id']; ?>" ><?php echo $software_language['software_language_name']; ?></option>
 
                         <?php } }?>
                 </select>
@@ -59,7 +59,7 @@
                        if ($select_developer) {
                         while ($developer = $select_developer->fetch_assoc()) {
                           ?>
-                          <option value="<?php echo $developer['name'].', '.$developer['id']; ?>" ><?php echo $developer['name']; ?></option>
+                          <option value="<?php echo $developer['id']; ?>" ><?php echo $developer['name']; ?></option>
 
                         <?php } }?>
                 </select>
