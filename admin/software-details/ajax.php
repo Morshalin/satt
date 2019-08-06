@@ -66,21 +66,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$error = array();
 
-	$software_status = $fm->validation($_POST['software_status']);
+	$software_status = $_POST['software_status'];
 	$a = explode(',',  $software_status);
 	$software_status_name = $a[0];
 	$software_status_id = $a[1];
 
-	$language_name = $fm->validation($_POST['language_name']);
-	$aa = explode(',',  $language_name);
-	$software_language_name = $aa[0];
-	$software_language_id = $aa[1];
-
-	$developer_name = $fm->validation($_POST['developer_name']);
-	$aaa = explode(',',  $developer_name);
-	$developer_name1 = $aaa[0];
-	$developer_id = $aaa[1];
-
+	$language_name = $_POST['language_name'];
+	$developer_name = $_POST['developer_name'];
 	$software_name = $fm->validation($_POST['software_name']);
 	$create_date = $fm->validation($_POST['create_date']);
 	$end_date = $fm->validation($_POST['end_date']);
@@ -131,29 +123,54 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
 		$query = "INSERT INTO software_details (software_name,software_status_name,software_status_id,create_date,end_date,short_feature,user_manual,condition_details, status) VALUES ('$software_name','$software_status_name','$software_status_id','$create_date','$end_date','$short_feature','$user_manual','$condition_details', '$status')";
-		$result = $db->insert($query);
+		$last_id = $db->custom_insert($query);
+		if ($last_id) {
+			// multi Language insert
+			for ($i = 0; $i < count($language_name); $i++) {
+					$sql2 = "INSERT INTO software_language_multi(software_id,language_id) VALUES('$last_id','$language_name[$i]')";
+					$insertrow1 = $db->insert($sql2);
+				}
+			// multi Developer insert
+			for ($i = 0; $i < count($developer_name); $i++) {
+					$sql2 = "INSERT INTO software_develope_by(software_id,developer_id) VALUES('$last_id','$developer_name[$i]')";
+					$insertrow1 = $db->insert($sql2);
+				}
 
-		
-		if ($result != false) {
-			die(json_encode(['message' => 'Software Language Added Successfull']));
-		} else {
-			http_response_code(500);
-			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
-		}
-	}
-}
+			$query = "INSERT INTO software_price (software_name,software_id,demo_url,installation_charge,monthly_charge,yearly_charge,direct_sell,total_price, agent_commission_one_time,agent_commission_monthly,discount_offer,yearly_renew_charge) VALUES ('$software_name','$last_id','$demo_url','$installation_charge','$monthly_charge','$yearly_charge','$direct_sell','$total_price', '$agent_commission_one_time','$agent_commission_monthly','$discount_offer','$yearly_renew_charge')";
+			$result = $db->insert($query);
+
+			if ($result != false) {
+				die(json_encode(['message' => 'Software Language Added Successfull']));
+			} else {
+				http_response_code(500);
+				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+			}
+		} //last id end
+	} //else end
+} 
 
 /*================================================================
 		Delate  Data into Database
 ===================================================================*/
 // $error['software_language_name'] = 'Course Name Required';
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET['action'] == 'delete') {
-	$software_language_id = $_GET['software_language_id'];
-	if ($software_language_id) {
-		$query = "DELETE FROM software_language WHERE id = '$software_language_id'";
+	$software_details_id = $_GET['software_details_id'];
+	if ($software_details_id) {
+		$query = "DELETE FROM software_details WHERE id = '$software_details_id'";
 		$result = $db->delete($query);
 		if ($result) {
-			die(json_encode(['message' => 'Software Language Deleted Successfull']));
+			$query = "DELETE FROM software_price WHERE software_id = '$software_details_id'";
+			$result = $db->delete($query);
+
+			$query1 = "DELETE FROM software_develope_by WHERE software_id = '$software_details_id'";
+			$result1 = $db->delete($query1);
+
+			$query2 = "DELETE FROM software_language_multi WHERE software_id = '$software_details_id'";
+			$result2 = $db->delete($query2);
+
+			if ($result2) {
+				die(json_encode(['message' => 'Software Language Deleted Successfull']));
+			}
 		}
 	}
 	http_response_code(500);
@@ -163,12 +180,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET[
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'PUT' AND isset($_GET['action']) AND $_GET['action'] == 'status') {
-	$software_language_id = $_GET['software_language_id'];
+	$software_details_id = $_GET['software_details_id'];
 	$status = $_GET['status'];
 	$status = $status ? 0 : 1;
 
-	if ($software_language_id) {
-		$query = "UPDATE software_language SET status = '$status' WHERE id = '$software_language_id'";
+	if ($software_details_id) {
+		$query = "UPDATE software_details SET status = '$status' WHERE id = '$software_details_id'";
 		$result = $db->delete($query);
 		if ($result) {
 			die(json_encode(['message' => 'Software Language Status Changed Successfull']));

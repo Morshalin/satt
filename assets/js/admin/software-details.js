@@ -97,10 +97,10 @@ var DatatableButtonsHtml5 = function() {
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 9]
+                targets: [0, 8]
             }, {
                 orderable: false,
-                targets: [8, 9]
+                targets: [7, 8]
             }],
             order: [1, 'asc'],
             processing: true,
@@ -117,13 +117,11 @@ var DatatableButtonsHtml5 = function() {
                 }, {
                     data: 'language_name'
                 }, {
-                    data: 'developer_name'
+                    data: 'create_date'
                 }, {
                     data: 'short_feature'
                 }, {
                     data: 'condition_details'
-                }, {
-                    data: 'customer_question'
                 }, {
                     data: 'status'
                 },{
