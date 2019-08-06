@@ -64,19 +64,14 @@ if ($result) {
               <i class="icon-menu9"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/developer/show.php?developer_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
-              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/developer/edit.php?developer_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
-              <span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/developer/ajax.php?developer_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/show.php?agent_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/edit.php?agent_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
+              <span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/agent/ajax.php?agent_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
             </div>
           </div>
         </div>
         ',
-      "status" => '
-        <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="status_loading_' . $row['id'] . '"  style="display: none">
-        <label class="form-check-label" id="status_' . $row['id'] . '" title="' . ($row['status'] == 1 ? 'Active' : 'InActive') . '" data-popup="tooltip-custom" data-placement="bottom">
-        <input type="checkbox" class="form-check-status-switchery" id="change_status" data-id="' . $row['id'] . '" data-status="' . $row['status'] . '" data-url="' . ADMIN_URL . '/developer/ajax.php?developer_id=' . $row['id'] . '&action=status&status=' . $row['status'] . '"' . ($row['status'] == 1 ? 'checked' : '') . ' data-fouc >
-        </label>
-          ',
+      "status" => '<span class="badge badge-success">'.$row['status'].'</span>',
     );
     $i++;
   }
