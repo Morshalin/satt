@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/course');
+Session::checkSession('admin', ADMIN_URL . '/Office_note');
 ## Read value
 $draw = $_GET['draw'];
 $row = $_GET['start'];
@@ -42,7 +42,14 @@ $totalRecordwithFilter = $records['allcount'];
 /*==============================================================================
 ## Fetch records
 =================================================================================*/
-$query = "select * from satt_courses WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+/*$query = "select * from  satt_official_notes WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;*/
+$query = "SELECT a.user_name, c.name, n.note, n.creat_date, n.status, n.id
+from satt_admins  a inner join satt_official_notes  n on
+a.id = n.admin_id inner join satt_customer_informations  c on 
+c.id = n.customer_id";
+
+
+
 $result = $db->select($query);
 $data = array();
 $i = 0;
@@ -51,9 +58,10 @@ if ($result) {
 		$data[] = array(
 			"DT_RowIndex" => $i + 1,
 			"id" => $row['id'],
-			"course_name" => '<strong>' . $row['course_name'] . '</strong>',
-			"course_code" => $row['course_code'],
-			"course_description" => $row['course_description'],
+			"user_name" => '<strong>' . $row['user_name'] . '</strong>',
+			"name" => $row['name'],
+			"note" => $row['note'],
+      "creat_date" => $row['creat_date'],
 			"action" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
         <div class="list-icons" id="action_menu_' . $row['id'] . '">
@@ -62,17 +70,17 @@ if ($result) {
           		<i class="icon-menu9"></i>
           	</a>
           	<div class="dropdown-menu dropdown-menu-right">
-          		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/course/show.php?course_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
-          		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/course/edit.php?course_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
-          		<span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/course/ajax.php?course_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
+          		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/show.php?note_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
+          		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/edit.php?note_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
+          		<span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/Office_note/ajax.php?note_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
           	</div>
           </div>
         </div>
         ',
-			"course_status" => '
+			"status" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="status_loading_' . $row['id'] . '"  style="display: none">
-        <label class="form-check-label" id="status_' . $row['id'] . '" title="' . ($row['course_status'] == 1 ? 'Active' : 'InActive') . '" data-popup="tooltip-custom" data-placement="bottom">
-        <input type="checkbox" class="form-check-status-switchery" id="change_status" data-id="' . $row['id'] . '" data-status="' . $row['course_status'] . '" data-url="' . ADMIN_URL . '/course/ajax.php?course_id=' . $row['id'] . '&action=status&status=' . $row['course_status'] . '"' . ($row['course_status'] == 1 ? 'checked' : '') . ' data-fouc >
+        <label class="form-check-label" id="status_' . $row['id'] . '" title="' . ($row['status'] == 1 ? 'Active' : 'InActive') . '" data-popup="tooltip-custom" data-placement="bottom">
+        <input type="checkbox" class="form-check-status-switchery" id="change_status" data-id="' . $row['id'] . '" data-status="' . $row['status'] . '" data-url="' . ADMIN_URL . '/Office_note/ajax.php?status_id=' . $row['id'] . '&action=status&status=' . $row['status'] . '"' . ($row['status'] == 1 ? 'checked' : '') . ' data-fouc >
         </label>
         	',
 		);

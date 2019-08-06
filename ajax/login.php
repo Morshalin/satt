@@ -45,9 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST['login'])) {
 				$query = "INSERT INTO satt_user_logs (user_id, status, ip_address, details, created_at) VALUES ('$userId', true, '$ip_address', '$details', now());";
 				$db->insert($query);
 				$userRole = $user['role'];
+				$admin_id = $user['admin_id'];
 				Session::set('login', true);
 				Session::set($userRole, true);
 				Session::set('userRole', $userRole);
+				Session::set('admin_id', $admin_id);
 				Session::set('login_message', $msg);
 				Session::set('userData', $login_user);
 				Session::set($userRole . 'Id', $userId);

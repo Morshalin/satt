@@ -1,12 +1,12 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('admin', ADMIN_URL.'/course', 'Course');
+  Session::checkSession('admin', ADMIN_URL.'/Office_note', 'Office_note');
   $data = array();
-  $data['page_title'] = 'Course';
+  $data['page_title'] = 'Office Note';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'Course';
+  $data['page_index'] = 'Office Note';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/admin/course'];
+  $data['page_js'] = ['assets/js/admin/Office_note'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
@@ -30,7 +30,7 @@
   <div class="card border-top-success rounded-top-0" id="table_card">
   	<div class="card-header header-elements-inline bg-light border-grey-300" >
   		<h5 class="card-title"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Dashboard'; ?>
-  		<button type="button" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/course/create.php"><i class="icon-stack-plus mr-1"></i>New Course</button>
+  		<button type="button" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/Office_note/create.php"><i class="icon-stack-plus mr-1"></i>Office Note</button>
   		</h5>
   		<div class="header-elements">
   			<div class="list-icons">
@@ -45,13 +45,14 @@
   			<img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
   		</div> -->
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/course/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/Office_note/table.php">
   				<thead>
   					<tr>
   						<th>#</th>
-  						<th>Course</th>
-              <th>Code</th>
-  						<th>Description</th>
+  						<th>Admin Name</th>
+              <th>Customer Name</th>
+  						<th>Note Description</th>
+              <th>Create Date</th>
   						<th>Status</th>
   						<th>Action</th>
   					</tr>
