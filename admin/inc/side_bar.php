@@ -26,7 +26,7 @@
 
 
 
-  <?php $nav_items_section_2 = ['software-status', 'software-language','software-details']; ?>
+  <?php $nav_items_section_2 = ['software-status', 'software-language','software-details','software-price']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_2, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Software Setup</span></a>
 
@@ -34,6 +34,7 @@
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/software-status" class="nav-link<?php active_page($data, 'software-status'); ?>">Software Status</a></li>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/software-language" class="nav-link<?php active_page($data, 'software-language'); ?>">Software Language</a></li>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/software-details" class="nav-link<?php active_page($data, 'software-details'); ?>">Software Details</a></li>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/software-price" class="nav-link<?php active_page($data, 'software-price'); ?>">Software Price</a></li>
     </ul>
   </li>
 
