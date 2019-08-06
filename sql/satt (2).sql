@@ -2,10 +2,10 @@
 -- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Aug 06, 2019 at 06:00 AM
--- Server version: 5.7.24
--- PHP Version: 7.2.14
+-- Host: 127.0.0.1
+-- Generation Time: Aug 06, 2019 at 08:25 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,10 +28,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `agent_list`
 --
 
-DROP TABLE IF EXISTS `agent_list`;
-CREATE TABLE IF NOT EXISTS `agent_list` (
+CREATE TABLE `agent_list` (
   `id` int(11) NOT NULL,
-  `agent_serial` varchar(255) DEFAULT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `father_name` varchar(225) DEFAULT NULL,
   `mother_name` varchar(225) DEFAULT NULL,
@@ -65,20 +64,25 @@ CREATE TABLE IF NOT EXISTS `agent_list` (
   `bussiness_name` varchar(225) DEFAULT NULL,
   `terms_agree` tinyint(1) DEFAULT NULL,
   `signature` varchar(225) DEFAULT NULL,
-  `created-at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `status` varchar(250) NOT NULL DEFAULT 'Registered',
-  PRIMARY KEY (`id`)
+  `send_mail` int(11) NOT NULL DEFAULT '0',
+  `confirmation_letter` varchar(255) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `agent_list`
 --
 
-INSERT INTO `agent_list` (`id`, `agent_serial`, `name`, `father_name`, `mother_name`, `occupation`, `education_qualification`, `permanent_house`, `permanent_road`, `permanent_village`, `permanent_post`, `permanent_up`, `permanent_dist`, `permanent_post_code`, `same_as`, `present_house`, `present_road`, `present_village`, `present_post`, `present_up`, `present_dist`, `present_post_code`, `mobile_no`, `alternate_mobile`, `email`, `interested_dist`, `interested_up`, `document_type`, `photo`, `document_front`, `document_back`, `tread_license`, `bussiness_name`, `terms_agree`, `signature`, `created-at`, `status`) VALUES
-(1, '50', 'à¦®à¦¾à¦¹à¦«à§à¦œ ', 'à¦†à¦¬à§à¦² à¦•à¦¾à¦¶à§‡à¦®  ', 'à¦¸à¦¾à¦¹à§‡à¦¬à¦¾ à¦†à¦•à§à¦¤à¦¾à¦° ', 'à¦•à¦®à§à¦ªà¦¿à¦‰à¦Ÿà¦¾à¦° à¦…à¦ªà¦¾à¦°à§‡à¦Ÿà¦°  ', 'à¦¬à¦¿ à¦ (à¦«à¦¾à¦œà¦¿à¦²) à¦ªà¦¾à¦¸ ', '', 'à§¦à§¨', 'à¦‰à¦¤à§à¦¤à¦° à¦§à¦²à¦¿à§Ÿà¦¾ ', 'à¦¬à¦¾à¦²à§à§Ÿà¦¾ à¦šà§Œà¦®à§à¦¹à¦¨à§€ ', 'à¦«à§‡à¦¨à§€ à¦¸à¦¦à¦°  ', 'à¦«à§‡à¦¨à§€ ', 'à§©à§¯à§¦à§¦', 1, '', '', '', '', '', '', '', '01811227734', '', 'mahfuzbhuiyan91@gmail.com', 'Feni ', 'Feni ', 'NID', 'admin/uploads/photo/febd5bb1cc.jpg', 'admin/uploads/NID/febd5bb1cc.jpg', 'admin/uploads/NID/back_febd5bb1cc.jpg', '', 'à¦®à¦¿à¦›à¦¬à¦¾à¦¹à§à¦² à¦•à§à¦°à¦†à¦¨ à¦®à¦¾à¦¦à§à¦°à¦¾à¦¸à¦¾  ', 1, 'à¦®à¦¾à¦¹à¦«à§à¦œ ', '2019-07-03 17:49:10', 'Processing '),
-(2, '51', 'à¦«à¦œà¦²à§‡ à¦°à¦¾à¦¬à§à¦¬à§€', 'à¦°à§‡à¦œà¦¾à¦‰à¦² à¦•à¦°à¦¿à¦®', 'à¦¤à¦¾à¦¨à¦œà¦¿à¦¨à¦¾ à¦†à¦•à§à¦¤à¦¾à¦°', 'à¦¬à§à¦¯à¦¾à¦¬à¦¸à¦¾à§Ÿà§€', 'à¦‰à¦šà§à¦š à¦®à¦¾à¦§à§à¦¯à¦®à¦¿à¦•', '', '', 'à¦•à¦¿à¦°à§à¦¤à§à¦¤à¦¨à§€à§Ÿà¦¾à¦ªà¦¾à§œà¦¾', 'à¦ªà§‹à§œà¦¾à¦°à¦¹à¦¾à¦Ÿ', 'à¦¨à§€à¦²à¦«à¦¾à¦®à¦¾à¦°à§€', 'à¦¨à§€à¦²à¦«à¦¾à¦®à¦¾à¦°à§€', 'à§«à§©à§¦à§¦', 1, '', '', '', '', '', '', '', ' 01780524138', '01521388679', 'fr.computer38@gmail.com', 'à¦¨à§€à¦²à¦«à¦¾à¦®à¦¾à¦°à§€', 'à¦¨à§€à¦²à¦«à¦¾à¦®à¦¾à¦°à§€', 'Birth_Certificate', 'admin/uploads/photo/0b708a6997.jpg', '', '', '', 'à¦à¦«.à¦†à¦° à¦•à¦®à§à¦ªà¦¿à¦‰à¦Ÿà¦¾à¦°', 1, 'à¦«à¦œà¦²à§‡ à¦°à¦¾à¦¬à§à¦¬à§€', '2019-07-03 18:23:57', 'Processing '),
-(3, '52', 'à¦†à¦¬à¦¦à§à¦¸ à¦¸à¦¾à¦®à¦¾à¦¦', 'à¦¹à§‹à¦›à¦¾à¦‡à¦¨ à¦†à¦¹à¦®à¦¦à§‡', 'à¦°à¦¾à¦¬à§‡à§Ÿà¦¾ à¦¬à§‡à¦—à¦®', 'à¦›à¦¾à¦¤à§à¦°', 'Diploma', '', '', 'à¦¹à§‹à¦—à¦²à§€', 'à¦¸à¦¿à¦‚à¦¹à§‡à¦° à¦—à¦¾à¦“', 'à¦«à¦°à¦¿à¦¦à¦—à¦žà§à¦œ', 'à¦šà¦¾à¦¦à¦ªà§à¦°', 'à§©à§¬à§«à§¨', 1, '', '', '', '', '', '', '', '01845891962', '', 'abdussamad018@gmail.com', 'à¦šà¦¾à¦¦à¦ªà§à¦°', 'à¦«à¦°à¦¿à¦¦à¦—à¦žà§à¦œ', 'NID', 'admin/uploads/photo/9d5e4dde8e.jpg', 'admin/uploads/NID/9d5e4dde8e.jpg', 'admin/uploads/NID/back_9d5e4dde8e.jpg', '', '', 1, 'à¦†à¦¬à¦¦à§à¦¸ à¦¸à¦¾à¦®à¦¾à¦¦', '2019-07-03 19:40:11', 'Processing '),
-(4, '53', 'Md Rasel Mahamud', 'Md Mokles Rhoman', 'Sufia Begam', 'job', 'HSC', '', '', 'Damoder pur', 'Damoderpur', 'kaligonj ', 'jhenaidah ', '7350', 0, '', '', 'Damoder pur', 'Damoderpur', 'kaligonj ', 'jhenaidah ', '7350', '01302669601', '01973966929', 'raseljkd2@gmail.com', 'jessore ', 'bagherpara', 'NID', 'admin/uploads/photo/66ae694de6.jpg', '', '', '', '', 1, 'Md Rasel Mahamud', '2019-07-04 02:59:53', 'Processing ');
+INSERT INTO `agent_list` (`id`, `user_id`, `name`, `father_name`, `mother_name`, `occupation`, `education_qualification`, `permanent_house`, `permanent_road`, `permanent_village`, `permanent_post`, `permanent_up`, `permanent_dist`, `permanent_post_code`, `same_as`, `present_house`, `present_road`, `present_village`, `present_post`, `present_up`, `present_dist`, `present_post_code`, `mobile_no`, `alternate_mobile`, `email`, `interested_dist`, `interested_up`, `document_type`, `photo`, `document_front`, `document_back`, `tread_license`, `bussiness_name`, `terms_agree`, `signature`, `created_at`, `status`, `send_mail`, `confirmation_letter`, `updated_at`) VALUES
+(6, NULL, 'Md. Abul Khair Sohag', 'Md. Salah Uddin', 'Most. Khairun Nesa', 'Softwae Developer', 'ICE RU', '#021', '102121', 'Uzanpara', 'Matikata', 'Godagari', 'Rajshahi', '6290', 1, '#021', '102121', 'Uzanpara', 'Matikata', 'Godagari', 'Rajshahi', '6290', '01753474401', '01701010760', 'abulkhairsohag@gmail.com', 'Rajshahi', 'Rajshahi', 'NID', 'images/img-5366d69e13.jpg', 'document_image/front-5366d69e13.jpg', 'document_image/back-5366d69e13.jpg', 'trade_license_image/trade5366d69e13.jpg', 'Satt IT', 1, 'Abul Khair Sohag', '0000-00-00 00:00:00', 'Registered', 0, NULL, NULL),
+(7, NULL, 'Abir', 'dsfdf', 'asdas', 'sdf', 'ICE RU', 'sd', 'sdf', 'asd', 'asd', 'Godagari', 'Rajshahi', 'dsf', 1, 'sd', 'sdf', 'asd', 'asd', 'Godagari', 'Rajshahi', 'dsf', '21', 'asd', 'a@gmail.com', 'xcvx', 'cv', 'Passport', 'images/img-a1cfc884b5.jpg', 'document_image/front-a1cfc884b5.jpg', NULL, 'trade_license_image/tradea1cfc884b5.jpg', 'sfssfsfg', 1, 'dsf', '0000-00-00 00:00:00', 'Registered', 0, NULL, NULL),
+(8, NULL, 'Abir', 'dsfdf', 'asdas', 'das', 'ICE RU', 'sd', 'sdf', 'asd', 'zc', 'sdf', 'sdf', 'zcx', 1, 'sd', 'sdf', 'asd', 'zc', 'sdf', 'sdf', 'zcx', 'sdfsfasdfsdf', '', 'a@gmail.com', 'Rajshahi', 'cv', 'Passport', 'images/img-2e8ba4fac1.jpg', 'document_image/front-2e8ba4fac1.jpg', NULL, NULL, '', 1, 'dsf', '2019-08-05 12:08:56', 'Registered', 0, NULL, NULL),
+(9, NULL, 'Abir', 'dsfdf', 'sdf', 'sdf', 'zxc', 'sdf', 'asd', 'asd', 'zc', 'sdfa', 'asd', 'dsf', 0, 'sdf', 'sdf', 'Uzanpara', 'Matikata', 'Godagari', 'asd', 'ads', '01753474401', '01701010760', 'a@gmail.com', 'xcvx', 'cv', 'NID', 'images/img-34ea50db4c.jpg', 'document_image/front-34ea50db4c.jpg', 'document_image/back-34ea50db4c.jpg', 'trade_license_image/trade34ea50db4c.jpg', 'Satt IT', 1, 'sfd', '2019-08-05 14:11:16', 'Registered', 0, NULL, NULL),
+(10, NULL, 'Motiur Rahman', 'zxczxc', 'sdf', 'sdf', 'zxc', 'sd', 'sdf', 'asd', 'asd', 'sdf', 'sdf', 'sdf', 1, 'sd', 'sdf', 'asd', 'asd', 'sdf', 'sdf', 'sdf', '01753474401', 'asd', 'a@gmail.com', 'xcvx', 'cv', 'Passport', 'images/img-8dbc32307a.jpg', 'document_image/front-8dbc32307a.jpg', NULL, NULL, '', 1, 'dsf', '2019-08-05 14:16:50', 'Registered', 0, NULL, NULL),
+(11, NULL, 'Abir', 'dsfdf', 'asdas', 'sdf', 'ICE RU', 'sdf', 'asd', 'asd', 'sdf', 'sdfa', 'sdf', 'ads', 1, 'sdf', 'asd', 'asd', 'sdf', 'sdfa', 'sdf', 'ads', '01753474401', 'zxc', 'a@gmail.com', 'xcvx', 'cv', 'Passport', 'images/img-f5b7886097.jpg', 'document_image/front-f5b7886097.jpg', NULL, NULL, '', 1, 'sfd', '2019-08-05 14:17:51', 'Registered', 0, NULL, NULL),
+(12, NULL, 'abir', 'dsfdf', 'asdas', 'das', 'df', 'sd', 'sdf', 'zxc', 'sdf', 'sdfa', 'sdf', 'ads', 1, 'sd', 'sdf', 'zxc', 'sdf', 'sdfa', 'sdf', 'ads', '01753474401', 'asd', 'a@gmail.com', 'xcvx', 'cv', 'Passport', 'images/img-0e1b37fdfb.jpg', 'document_image/front-0e1b37fdfb.jpg', NULL, NULL, '', 1, 'as', '2019-08-05 14:19:05', 'Registered', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -86,17 +90,28 @@ INSERT INTO `agent_list` (`id`, `agent_serial`, `name`, `father_name`, `mother_n
 -- Table structure for table `developer`
 --
 
-DROP TABLE IF EXISTS `developer`;
-CREATE TABLE IF NOT EXISTS `developer` (
+CREATE TABLE `developer` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `mobile_no` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  `bio` longtext,
+  `facebook` varchar(255) DEFAULT NULL,
+  `twitter` varchar(255) DEFAULT NULL,
+  `linkedin` varchar(255) DEFAULT NULL,
+  `instagram` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `developer`
+--
+
+INSERT INTO `developer` (`id`, `name`, `email`, `mobile_no`, `image`, `address`, `bio`, `facebook`, `twitter`, `linkedin`, `instagram`, `status`) VALUES
+(1, 'Kanak Debnath', 'kanakdebnath826@gmail.com', '01767515963', 'image/e786436c33.jpg', 'kumarpara, Rajshahi', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit alias recusandae harum eum obcaecati sunt vitae sequi veritatis tempore vel?', 'www.facebook.com/kanaksatt', 'https://twitter.com/kanakdebnath9', 'https://www.linkedin.com/in/kanak-debnath-a0b146141/', 'https://www.instagram.com/debnath_kanak/', 1),
+(2, 'Abul Khair Sohag', 'abulkhairsohag@gmail.com', '01753474401', 'image/009bf8a95b.jpg', 'Saheb bazar,Rajshai', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit nostrum blanditiis recusandae laboriosam tempore, obcaecati ducimus vel amet. Optio, quaerat.', 'https://www.facebook.com/abul.khair.sohag', 'w', 'w', 'w', 1);
 
 -- --------------------------------------------------------
 
@@ -104,12 +119,10 @@ CREATE TABLE IF NOT EXISTS `developer` (
 -- Table structure for table `password_resets`
 --
 
-DROP TABLE IF EXISTS `password_resets`;
-CREATE TABLE IF NOT EXISTS `password_resets` (
+CREATE TABLE `password_resets` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  KEY `password_resets_email_index` (`email`)
+  `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -118,9 +131,8 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 -- Table structure for table `satt_admins`
 --
 
-DROP TABLE IF EXISTS `satt_admins`;
-CREATE TABLE IF NOT EXISTS `satt_admins` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `satt_admins` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `first_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -133,10 +145,8 @@ CREATE TABLE IF NOT EXISTS `satt_admins` (
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `satt_admins_user_id_foreign` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `satt_admins`
@@ -151,9 +161,8 @@ INSERT INTO `satt_admins` (`id`, `first_name`, `last_name`, `user_name`, `gender
 -- Table structure for table `satt_courses`
 --
 
-DROP TABLE IF EXISTS `satt_courses`;
-CREATE TABLE IF NOT EXISTS `satt_courses` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `satt_courses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `course_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `course_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `course_description` text COLLATE utf8mb4_unicode_ci,
@@ -161,11 +170,8 @@ CREATE TABLE IF NOT EXISTS `satt_courses` (
   `created_by` bigint(20) UNSIGNED DEFAULT NULL,
   `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `satt_courses_created_by_foreign` (`created_by`),
-  KEY `satt_courses_updated_by_foreign` (`updated_by`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `satt_courses`
@@ -181,14 +187,12 @@ INSERT INTO `satt_courses` (`id`, `course_name`, `course_code`, `course_descript
 -- Table structure for table `satt_customer_business_type`
 --
 
-DROP TABLE IF EXISTS `satt_customer_business_type`;
-CREATE TABLE IF NOT EXISTS `satt_customer_business_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `satt_customer_business_type` (
+  `id` int(11) NOT NULL,
   `software_type` varchar(255) DEFAULT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  `status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `satt_customer_business_type`
@@ -196,10 +200,7 @@ CREATE TABLE IF NOT EXISTS `satt_customer_business_type` (
 
 INSERT INTO `satt_customer_business_type` (`id`, `software_type`, `create_date`, `status`) VALUES
 (3, 'Schools Management', '2019-08-04 08:23:53', 1),
-(2, 'College Management', '2019-08-04 08:07:09', 1),
-(4, 'Super shop', '2019-08-05 11:31:26', 1),
-(5, 'Hardware Shop', '2019-08-05 11:31:48', 1),
-(6, 'Pharmacy', '2019-08-05 11:32:09', 1);
+(2, 'College Management', '2019-08-04 08:07:09', 0);
 
 -- --------------------------------------------------------
 
@@ -207,9 +208,8 @@ INSERT INTO `satt_customer_business_type` (`id`, `software_type`, `create_date`,
 -- Table structure for table `satt_customer_informations`
 --
 
-DROP TABLE IF EXISTS `satt_customer_informations`;
-CREATE TABLE IF NOT EXISTS `satt_customer_informations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `satt_customer_informations` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `facebook_name` varchar(255) DEFAULT NULL,
   `number` varchar(255) DEFAULT NULL,
@@ -217,23 +217,23 @@ CREATE TABLE IF NOT EXISTS `satt_customer_informations` (
   `introduction_date` varchar(255) DEFAULT NULL,
   `customer_reference` varchar(255) DEFAULT NULL,
   `progressive_state` varchar(255) DEFAULT NULL,
+  `interested_services` varchar(255) DEFAULT NULL,
   `institute_type` varchar(255) DEFAULT NULL,
   `institute_name` varchar(255) DEFAULT NULL,
-  `institute_address` text,
+  `institute_address` varchar(255) DEFAULT NULL,
   `institute_district` varchar(255) DEFAULT NULL,
+  `official_notes` mediumtext,
   `last_contacted_date` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+  `customer_leave_us` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `satt_customer_informations`
 --
 
-INSERT INTO `satt_customer_informations` (`id`, `name`, `facebook_name`, `number`, `email`, `introduction_date`, `customer_reference`, `progressive_state`, `institute_type`, `institute_name`, `institute_address`, `institute_district`, `last_contacted_date`, `status`) VALUES
-(1, 'Morshalin', 'Md Morshalin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(2, 'Kanak', NULL, NULL, 'kanak@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(3, 'Morshalin', 'Morshalin', '01792747486', 'mdshaddam10@gmail.com', 'August 13, 2019, 12:00 am', 'Facebook Messaging Customer', 'Facebook/Website Messaging in Initial State', 'School', 'primary school', 'school', 'Rajshahi', '2019-08-20', 0);
+INSERT INTO `satt_customer_informations` (`id`, `name`, `facebook_name`, `number`, `email`, `introduction_date`, `customer_reference`, `progressive_state`, `interested_services`, `institute_type`, `institute_name`, `institute_address`, `institute_district`, `official_notes`, `last_contacted_date`, `customer_leave_us`, `status`) VALUES
+(1, 'Morshalin', 'Md Morshalin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -241,13 +241,11 @@ INSERT INTO `satt_customer_informations` (`id`, `name`, `facebook_name`, `number
 -- Table structure for table `satt_customer_interestedservice`
 --
 
-DROP TABLE IF EXISTS `satt_customer_interestedservice`;
-CREATE TABLE IF NOT EXISTS `satt_customer_interestedservice` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `satt_customer_interestedservice` (
+  `id` int(11) NOT NULL,
   `services` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `satt_customer_interestedservice`
@@ -263,13 +261,11 @@ INSERT INTO `satt_customer_interestedservice` (`id`, `services`, `status`) VALUE
 -- Table structure for table `satt_customer_notes`
 --
 
-DROP TABLE IF EXISTS `satt_customer_notes`;
-CREATE TABLE IF NOT EXISTS `satt_customer_notes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `satt_customer_notes` (
+  `id` int(11) NOT NULL,
   `reason` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `satt_customer_notes`
@@ -286,14 +282,12 @@ INSERT INTO `satt_customer_notes` (`id`, `reason`, `status`) VALUES
 -- Table structure for table `satt_customer_progres`
 --
 
-DROP TABLE IF EXISTS `satt_customer_progres`;
-CREATE TABLE IF NOT EXISTS `satt_customer_progres` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `satt_customer_progres` (
+  `id` int(11) NOT NULL,
   `progress_state` varchar(255) NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `satt_customer_progres`
@@ -309,14 +303,12 @@ INSERT INTO `satt_customer_progres` (`id`, `progress_state`, `create_date`, `sta
 -- Table structure for table `satt_customer_type`
 --
 
-DROP TABLE IF EXISTS `satt_customer_type`;
-CREATE TABLE IF NOT EXISTS `satt_customer_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `satt_customer_type` (
+  `id` int(11) NOT NULL,
   `type` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT '0',
-  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `satt_customer_type`
@@ -324,21 +316,7 @@ CREATE TABLE IF NOT EXISTS `satt_customer_type` (
 
 INSERT INTO `satt_customer_type` (`id`, `type`, `status`, `create_date`) VALUES
 (1, 'Facebook Messaging Customer', 1, '2019-08-03 09:42:25'),
-(5, 'Social Network Twitter', 0, '2019-08-05 05:40:47'),
-(3, 'Google Messaging Customer', 0, '2019-08-03 10:16:58');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `satt_interested_services`
---
-
-DROP TABLE IF EXISTS `satt_interested_services`;
-CREATE TABLE IF NOT EXISTS `satt_interested_services` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `service` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+(3, 'Google Messaging Customer', 1, '2019-08-03 10:16:58');
 
 -- --------------------------------------------------------
 
@@ -346,27 +324,13 @@ CREATE TABLE IF NOT EXISTS `satt_interested_services` (
 -- Table structure for table `satt_official_notes`
 --
 
-DROP TABLE IF EXISTS `satt_official_notes`;
-CREATE TABLE IF NOT EXISTS `satt_official_notes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `satt_official_notes` (
+  `id` int(11) NOT NULL,
   `admin_id` bigint(20) UNSIGNED DEFAULT NULL,
   `customer_id` int(11) DEFAULT NULL,
-  `note` text NOT NULL,
-  `creat_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `admin_id` (`admin_id`),
-  KEY `satt_official_notes_customer_id_foreign` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `satt_official_notes`
---
-
-INSERT INTO `satt_official_notes` (`id`, `admin_id`, `customer_id`, `note`, `creat_date`, `status`) VALUES
-(1, 1, 1, 'very bad programmer.', '2019-08-05 07:11:46', 1),
-(2, 1, 2, 'very good programmer.', '2019-08-05 07:11:46', 1),
-(5, 1, 1, 'good working', '2019-08-05 11:48:00', 1);
+  `note` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -374,14 +338,12 @@ INSERT INTO `satt_official_notes` (`id`, `admin_id`, `customer_id`, `note`, `cre
 -- Table structure for table `satt_settings`
 --
 
-DROP TABLE IF EXISTS `satt_settings`;
-CREATE TABLE IF NOT EXISTS `satt_settings` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `satt_settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `value` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -390,9 +352,8 @@ CREATE TABLE IF NOT EXISTS `satt_settings` (
 -- Table structure for table `satt_users`
 --
 
-DROP TABLE IF EXISTS `satt_users`;
-CREATE TABLE IF NOT EXISTS `satt_users` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `satt_users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `user_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
@@ -403,19 +364,15 @@ CREATE TABLE IF NOT EXISTS `satt_users` (
   `admin_id` bigint(20) UNSIGNED DEFAULT NULL,
   `from_table` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT 'satt_admins',
   `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
-  `role` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'admin',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `satt_users_email_unique` (`email`),
-  KEY `satt_users_admin_id_foreign` (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `role` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'admin'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `satt_users`
 --
 
 INSERT INTO `satt_users` (`id`, `user_name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `admin_id`, `from_table`, `status`, `role`) VALUES
-(1, 'teamsatt', 'tariqulislamrc@gmail.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, 1, 'satt_admins', 'active', 'admin'),
-(2, 'satt', 'satt@gmail.com', '2019-08-15 18:00:00', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', '2019-08-03 18:00:00', '2019-08-03 18:00:00', 1, 'satt_admins', 'active', 'admin');
+(1, 'teamsatt', 'tariqulislamrc@gmail.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, 'satt_admins', 'active', 'admin');
 
 -- --------------------------------------------------------
 
@@ -423,9 +380,8 @@ INSERT INTO `satt_users` (`id`, `user_name`, `email`, `email_verified_at`, `pass
 -- Table structure for table `satt_user_logs`
 --
 
-DROP TABLE IF EXISTS `satt_user_logs`;
-CREATE TABLE IF NOT EXISTS `satt_user_logs` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `satt_user_logs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `ip_address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -433,10 +389,8 @@ CREATE TABLE IF NOT EXISTS `satt_user_logs` (
   `user_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `satt_user_logs_user_id_foreign` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `satt_user_logs`
@@ -467,13 +421,7 @@ INSERT INTO `satt_user_logs` (`id`, `user_id`, `status`, `ip_address`, `details`
 (133, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/lock.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2Fleav_us%2F\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-04 06:18:53\"}', NULL, NULL, '2019-08-04 12:18:53', NULL),
 (134, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 10:23:55\"}', NULL, NULL, '2019-08-05 04:23:55', NULL),
 (135, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 10:57:17\"}', NULL, NULL, '2019-08-05 04:57:17', NULL),
-(136, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 12:04:18\"}', NULL, NULL, '2019-08-05 06:04:18', NULL),
-(137, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 12:50:57\"}', NULL, NULL, '2019-08-05 06:50:57', NULL),
-(138, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 12:55:05\"}', NULL, NULL, '2019-08-05 06:55:05', NULL),
-(139, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/lock.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2FOffice_note%2F\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 01:45:28\"}', NULL, NULL, '2019-08-05 07:45:28', NULL),
-(140, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/lock.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2Fcustomerdetails%2F\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 04:45:41\"}', NULL, NULL, '2019-08-05 10:45:41', NULL),
-(141, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php?goto=http%3A%2F%2Flocalhost%2Fsatt%2Fadmin%2Fcustomerdetails\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-05 06:08:42\"}', NULL, NULL, '2019-08-05 12:08:42', NULL),
-(142, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost/satt/login.php\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36\",\"ts\":\"2019-08-06 09:53:55\"}', NULL, NULL, '2019-08-06 03:53:55', NULL);
+(136, 1, 1, '::1', '{\"ip\":\"::1\",\"re\":\"http://localhost:8080/satt/login.php\",\"ag\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36\",\"ts\":\"2019-08-06 11:08:56\"}', NULL, NULL, '2019-08-06 05:08:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -481,9 +429,8 @@ INSERT INTO `satt_user_logs` (`id`, `user_id`, `status`, `ip_address`, `details`
 -- Table structure for table `satt_venues`
 --
 
-DROP TABLE IF EXISTS `satt_venues`;
-CREATE TABLE IF NOT EXISTS `satt_venues` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `satt_venues` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `venue_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `venue_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `venue_description` text COLLATE utf8mb4_unicode_ci,
@@ -491,11 +438,8 @@ CREATE TABLE IF NOT EXISTS `satt_venues` (
   `created_by` bigint(20) UNSIGNED DEFAULT NULL,
   `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `satt_venues_created_by_foreign` (`created_by`),
-  KEY `satt_venues_updated_by_foreign` (`updated_by`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `satt_venues`
@@ -507,15 +451,53 @@ INSERT INTO `satt_venues` (`id`, `venue_name`, `venue_code`, `venue_description`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sat_software_category`
+-- Table structure for table `software_details`
 --
 
-DROP TABLE IF EXISTS `sat_software_category`;
-CREATE TABLE IF NOT EXISTS `sat_software_category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `software_details` (
+  `id` int(11) NOT NULL,
   `software_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `software_status_name` varchar(255) DEFAULT NULL,
+  `software_status_id` int(11) DEFAULT NULL,
+  `create_date` timestamp NULL DEFAULT NULL,
+  `end_date` timestamp NULL DEFAULT NULL,
+  `update_date` timestamp NULL DEFAULT NULL,
+  `short_feature` varchar(255) DEFAULT NULL,
+  `user_manual` varchar(255) DEFAULT NULL,
+  `condition_details` text,
+  `customer_question` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `software_details`
+--
+
+INSERT INTO `software_details` (`id`, `software_name`, `software_status_name`, `software_status_id`, `create_date`, `end_date`, `update_date`, `short_feature`, `user_manual`, `condition_details`, `customer_question`, `status`) VALUES
+(6, 'Inventory', 'Bug fIxing mode', 7, '2019-07-31 18:00:00', '2019-08-09 18:00:00', NULL, 'fsgvgss', 'ggcgss', 'sggsdsd', NULL, 1),
+(7, 'shg', 'Bug fIxing mode', 7, '2019-08-04 18:00:00', '2019-08-23 18:00:00', NULL, 'fd', 'gfssgfd', 'fdgfgfsd', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `software_develope_by`
+--
+
+CREATE TABLE `software_develope_by` (
+  `id` int(11) NOT NULL,
+  `software_id` int(11) DEFAULT NULL,
+  `developer_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `software_develope_by`
+--
+
+INSERT INTO `software_develope_by` (`id`, `software_id`, `developer_id`) VALUES
+(5, 6, 1),
+(6, 6, 2),
+(7, 7, 1),
+(8, 7, 2);
 
 -- --------------------------------------------------------
 
@@ -523,8 +505,7 @@ CREATE TABLE IF NOT EXISTS `sat_software_category` (
 -- Table structure for table `software_language`
 --
 
-DROP TABLE IF EXISTS `software_language`;
-CREATE TABLE IF NOT EXISTS `software_language` (
+CREATE TABLE `software_language` (
   `id` int(11) NOT NULL,
   `software_language_name` varchar(255) DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -536,8 +517,71 @@ CREATE TABLE IF NOT EXISTS `software_language` (
 --
 
 INSERT INTO `software_language` (`id`, `software_language_name`, `date`, `status`) VALUES
-(2, 'abc', '2019-08-03 12:01:51', 1),
-(4, 'kanak', '2019-08-03 12:02:00', 1);
+(2, 'PHP', '2019-08-03 12:01:51', 1),
+(4, 'Mysql', '2019-08-03 12:02:00', 1),
+(5, 'Laravel', '2019-08-05 05:48:23', 1),
+(6, 'Ajax', '2019-08-05 05:48:32', 1),
+(7, 'jQuery', '2019-08-05 05:48:41', 1),
+(8, 'React', '2019-08-05 05:48:50', 1),
+(9, 'VueJs', '2019-08-05 05:48:58', 1),
+(10, 'Cake PHP', '2019-08-05 05:49:06', 1),
+(11, 'Codignator', '2019-08-05 05:49:16', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `software_language_multi`
+--
+
+CREATE TABLE `software_language_multi` (
+  `id` int(11) NOT NULL,
+  `software_id` int(11) DEFAULT NULL,
+  `language_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `software_language_multi`
+--
+
+INSERT INTO `software_language_multi` (`id`, `software_id`, `language_id`) VALUES
+(8, 6, 2),
+(9, 6, 4),
+(10, 6, 6),
+(11, 6, 7),
+(12, 7, 2),
+(13, 7, 4),
+(14, 7, 6),
+(15, 7, 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `software_price`
+--
+
+CREATE TABLE `software_price` (
+  `id` int(11) NOT NULL,
+  `software_name` varchar(255) DEFAULT NULL,
+  `software_id` int(11) DEFAULT NULL,
+  `demo_url` varchar(255) DEFAULT NULL,
+  `installation_charge` varchar(255) DEFAULT NULL,
+  `monthly_charge` varchar(255) DEFAULT NULL,
+  `yearly_charge` varchar(255) DEFAULT NULL,
+  `direct_sell` varchar(255) DEFAULT NULL,
+  `total_price` varchar(255) DEFAULT NULL,
+  `agent_commission_one_time` varchar(255) DEFAULT NULL,
+  `agent_commission_monthly` varchar(255) DEFAULT NULL,
+  `discount_offer` varchar(255) DEFAULT NULL,
+  `yearly_renew_charge` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `software_price`
+--
+
+INSERT INTO `software_price` (`id`, `software_name`, `software_id`, `demo_url`, `installation_charge`, `monthly_charge`, `yearly_charge`, `direct_sell`, `total_price`, `agent_commission_one_time`, `agent_commission_monthly`, `discount_offer`, `yearly_renew_charge`) VALUES
+(3, 'Inventory', 6, 'gsfgf', '456', '41', '456', '4516', '4561', '414', '465', '176', '781'),
+(4, 'shg', 7, 'gfsd', '42', '4562', '2456', '2546', '4562', '4562', '2456', '2456', '4526');
 
 -- --------------------------------------------------------
 
@@ -545,8 +589,7 @@ INSERT INTO `software_language` (`id`, `software_language_name`, `date`, `status
 -- Table structure for table `software_status`
 --
 
-DROP TABLE IF EXISTS `software_status`;
-CREATE TABLE IF NOT EXISTS `software_status` (
+CREATE TABLE `software_status` (
   `id` int(11) NOT NULL,
   `software_status_name` varchar(255) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -558,8 +601,58 @@ CREATE TABLE IF NOT EXISTS `software_status` (
 --
 
 INSERT INTO `software_status` (`id`, `software_status_name`, `date`, `status`) VALUES
-(1, 'kanak', '2019-08-03 09:43:18', 1),
-(6, 'tazbinur', '2019-08-03 09:45:34', 1);
+(1, 'Live', '2019-08-03 09:43:18', 1),
+(6, 'Developing Mode', '2019-08-03 09:45:34', 1),
+(7, 'Bug fIxing mode', '2019-08-05 05:46:54', 1),
+(8, 'To develope', '2019-08-05 05:47:10', 1),
+(9, 'To purchase ready made Code', '2019-08-05 05:47:25', 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `agent_list`
+--
+ALTER TABLE `agent_list`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `developer`
+--
+ALTER TABLE `developer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `satt_admins`
+--
+ALTER TABLE `satt_admins`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `satt_admins_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `satt_users`
+--
+ALTER TABLE `satt_users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `satt_users_email_unique` (`email`),
+  ADD KEY `satt_users_admin_id_foreign` (`admin_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `satt_admins`
+--
+ALTER TABLE `satt_admins`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `satt_users`
+--
+ALTER TABLE `satt_users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -572,37 +665,10 @@ ALTER TABLE `satt_admins`
   ADD CONSTRAINT `satt_admins_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `satt_users` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `satt_courses`
---
-ALTER TABLE `satt_courses`
-  ADD CONSTRAINT `satt_courses_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `satt_users` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `satt_courses_updated_by_foreign` FOREIGN KEY (`updated_by`) REFERENCES `satt_users` (`id`) ON DELETE SET NULL;
-
---
--- Constraints for table `satt_official_notes`
---
-ALTER TABLE `satt_official_notes`
-  ADD CONSTRAINT `satt_official_notes_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `satt_users` (`admin_id`) ON DELETE SET NULL ON UPDATE NO ACTION,
-  ADD CONSTRAINT `satt_official_notes_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `satt_customer_informations` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;
-
---
 -- Constraints for table `satt_users`
 --
 ALTER TABLE `satt_users`
   ADD CONSTRAINT `satt_users_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `satt_admins` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `satt_user_logs`
---
-ALTER TABLE `satt_user_logs`
-  ADD CONSTRAINT `satt_user_logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `satt_users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `satt_venues`
---
-ALTER TABLE `satt_venues`
-  ADD CONSTRAINT `satt_venues_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `satt_users` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `satt_venues_updated_by_foreign` FOREIGN KEY (`updated_by`) REFERENCES `satt_users` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
