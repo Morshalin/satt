@@ -3,7 +3,7 @@
 Session::checkSession('admin', ADMIN_URL . '/agent', 'Agent');
   $data = array();
   $data['page_title'] = 'Agent Handel';
-  $data['element'] = ['modal' => 'lg'];
+  $data['element'] = ['modal' => 'full'];
   $data['page_index'] = 'agent';
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/agent'];
