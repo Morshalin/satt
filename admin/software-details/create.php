@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="software_name" class="col-form-label">Software Language Name <span class="text-danger">*</span></label>
+                <label for="software_name" class="col-form-label">Software Name <span class="text-danger">*</span></label>
                 <input type="text" name="software_name" id="software_name" class="form-control" placeholder="Type Software Name" required autofocus value="">
 
             </div>
@@ -104,62 +104,62 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="demo_url" class="col-form-label">Software Demo Url </label>
-                <input type="text" name="demo_url" id="demo_url" class="form-control" placeholder="Type Demo Url" required autofocus value="">
+                <input type="text" name="demo_url" id="demo_url" class="form-control" placeholder="Type Demo Url" autofocus value="">
 
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="installation_charge" class="col-form-label">Installation Charge </label>
-                <input type="number" name="installation_charge" id="installation_charge" class="form-control" placeholder="Type Installation Charge" required autofocus value="">
+                <input type="number" name="installation_charge" id="installation_charge" class="form-control" placeholder="Type Installation Charge" autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="monthly_charge" class="col-form-label">Monthly Cahrge </label>
-                <input type="number" name="monthly_charge" id="monthly_charge" class="form-control" placeholder="Type Monthly Cahrge" required autofocus value="">
+                <input type="number" name="monthly_charge" id="monthly_charge" class="form-control" placeholder="Type Monthly Cahrge" autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="yearly_charge" class="col-form-label">Yearly Charge </label>
-                <input type="number" name="yearly_charge" id="yearly_charge" class="form-control" placeholder="Type Yearly Charge" required autofocus value="">
+                <input type="number" name="yearly_charge" id="yearly_charge" class="form-control" placeholder="Type Yearly Charge" autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="direct_sell" class="col-form-label">Direct Sell(One Time) </label>
-                <input type="number" name="direct_sell" id="direct_sell" class="form-control" placeholder="Type Direct Sell(One Time)" required autofocus value="">
+                <input type="number" name="direct_sell" id="direct_sell" class="form-control" placeholder="Type Direct Sell(One Time)" autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="total_price" class="col-form-label">Total Price </label>
-                <input type="number" name="total_price" id="total_price" class="form-control" placeholder="Type Total Price" required autofocus value="">
+                <input type="number" name="total_price" id="total_price" class="form-control" placeholder="Type Total Price" autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="agent_commission_one_time" class="col-form-label">Agent Commission (One Time Sell) </label>
-                <input type="number" name="agent_commission_one_time" id="agent_commission_one_time" class="form-control" placeholder="Type Agent Commission (One Time Sell)" required autofocus value="">
+                <input type="number" name="agent_commission_one_time" id="agent_commission_one_time" class="form-control" placeholder="Type Agent Commission (One Time Sell)" autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="agent_commission_monthly" class="col-form-label">Agent Commission (Monthly) </label>
-                <input type="number" name="agent_commission_monthly" id="agent_commission_monthly" class="form-control" placeholder="Type Agent Commission (Monthly)" required autofocus value="">
+                <input type="number" name="agent_commission_monthly" id="agent_commission_monthly" class="form-control" placeholder="Type Agent Commission (Monthly)" autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="discount_offer" class="col-form-label">Maximum Discount Offer  </label>
-                <input type="number" name="discount_offer" id="discount_offer" class="form-control" placeholder="Type Discount Offer" required autofocus value="">
+                <input type="number" name="discount_offer" id="discount_offer" class="form-control" placeholder="Type Discount Offer" autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="yearly_renew_charge" class="col-form-label">Yearly Renew Charge </label>
-                <input type="number" name="yearly_renew_charge" id="yearly_renew_charge" class="form-control" placeholder="Type Yearly Renew Charge" required autofocus value="">
+                <input type="number" name="yearly_renew_charge" id="yearly_renew_charge" class="form-control" placeholder="Type Yearly Renew Charge" autofocus value="">
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@ if ($columnName == 'DT_RowIndex') {
 =================================================================================*/
 $searchQuery = " ";
 if ($searchValue != '') {
-  $searchQuery = " and (id like '%" . $searchValue . "%' or software_name like '%" . $searchValue . "%') ";
+  $searchQuery = " and (id like '%" . $searchValue . "%' or software_name like '%" . $searchValue . "%' or software_status_name like '%" . $searchValue . "%' or create_date like '%" . $searchValue . "%' or end_date like '%" . $searchValue . "%') ";
 }
 /*==============================================================================
 ## Total number of records without filtering
@@ -47,6 +47,8 @@ $i = 0;
 if ($result) {
   while ($row = mysqli_fetch_assoc($result)) {
     $software_id = $row['id'];
+    $short_feature = $fm->textShorten($row['short_feature'],30);
+    $condition_details = $fm->textShorten($row['condition_details'],30);
     if ($software_id) {
       $query_lang_multi = "select * from software_language_multi WHERE software_id = '$software_id' ";
       $result_lang_multi = $db->select($query_lang_multi);
@@ -56,7 +58,20 @@ if ($result) {
           $query_lang = "select * from software_language WHERE id = '$lang_id'";
           $result_lang = $db->select($query_lang)->fetch_assoc();
           $lang_name = $result_lang['software_language_name'];
-          $a .= '<span class="badge badge-success mr-1x">'.$lang_name.'</span>';
+          $a .= '<span class="badge badge-success mr-1">'.$lang_name.'</span>';
+    }
+
+
+
+    $query_develope_by = "select * from software_develope_by WHERE software_id = '$software_id' ";
+      $result_develope_by = $db->select($query_develope_by);
+      $b ='';
+      while ($row_develope_by = mysqli_fetch_assoc($result_develope_by)) {
+          $developer_id = $row_develope_by['developer_id'];
+          $query_developer = "select * from developer WHERE id = '$developer_id'";
+          $result_developer = $db->select($query_developer)->fetch_assoc();
+          $developer_name = $result_developer['name'];
+          $b .= '<span class="badge badge-success mr-1">'.$developer_name.'</span>';
     }
   }
     $data[] = array(
@@ -65,10 +80,10 @@ if ($result) {
       "software_name" => '<strong>' . $row['software_name'] . '</strong>',
       "software_status_name" => '<strong>' . $row['software_status_name'] . '</strong>',
       "language_name" => $a,
-      // "developer_name" => '<strong>' . $row['developer_name'] . '</strong>',
+      "developer_name" => $b,
       "create_date" => '<strong>' . $row['create_date'] . '</strong>',
-      "short_feature" => '<strong>' . $row['short_feature'] . '</strong>',
-      "condition_details" => '<strong>' . $row['condition_details'] . '</strong>',
+      "short_feature" => '<strong>' . $short_feature . '</strong>',
+      "condition_details" => '<strong>' . $condition_details . '</strong>',
       "action" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
         <div class="list-icons" id="action_menu_' . $row['id'] . '">
