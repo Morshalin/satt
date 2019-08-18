@@ -19,7 +19,7 @@ if ($columnName == 'DT_RowIndex') {
 =================================================================================*/
 $searchQuery = " ";
 if ($searchValue != '') {
-  $searchQuery = " and (id like '%" . $searchValue . "%' or name like '%" . $searchValue . "%') ";
+  $searchQuery = " and (id like '%" . $searchValue . "%' or name like '%" . $searchValue . "%' or email like '%" . $searchValue . "%' or mobile_no like '%" . $searchValue . "%' or interested_dist like '%" . $searchValue . "%' or interested_up like '%" . $searchValue . "%' or status like '%" . $searchValue . "%' or level like '%" . $searchValue . "%' or occupation like '%" . $searchValue . "%') ";
 }
 /*==============================================================================
 ## Total number of records without filtering
@@ -46,6 +46,20 @@ $data = array();
 $i = 0;
 if ($result) {
   while ($row = mysqli_fetch_assoc($result)) {
+    $display_generate_appointment ='';
+    $display_send_mail ='';
+    $display_download_appointment ='';
+    if ($row['confirmation_letter']) {
+          $display_generate_appointment = 'none';
+          $display_send_mail ='block';
+          $display_download_appointment ='block';
+      }else{
+         $display_download_appointment ='none';
+          $display_send_mail ='none';
+          $display_generate_appointment = 'block';
+
+
+      }
     $data[] = array(
       "DT_RowIndex" => $i + 1,
       "id" => $row['id'],
@@ -63,15 +77,34 @@ if ($result) {
             <a href="#" class="list-icons-item" data-toggle="dropdown">
               <i class="icon-menu9"></i>
             </a>
+
             <div class="dropdown-menu dropdown-menu-right">
-              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/show.php?agent_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
-              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/edit.php?agent_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
-              <span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/agent/ajax.php?agent_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/show.php?agent_id=' . $row['id'] . '"><i class="icon-eye"></i> View All Info</span>
+
+              <span class="dropdown-item" style="display:'.$display_generate_appointment.'" id="generate_appoint_letter" data-url="' . ADMIN_URL . '/agent/ajax_create_pdf.php?agent_id=' . $row['id'] . '"><i class="icon-redo"></i> Generate Confirmation Letter</span>
+
+              <a class="dropdown-item" download style="display:'.$display_download_appointment.'"  href="' . ADMIN_URL . '/'.'agent/' . $row['confirmation_letter'] . '"><i class="icon-download"></i> Download Confirmation Letter</a>
+
+              
+              <span  class="dropdown-item " id="send_mail" style="display:'.$display_send_mail.'"  data-url="' . ADMIN_URL . '/agent/ajax_send_mail.php?agent_id=' . $row['id'] . '"><i class="icon-envelope"></i> Send Confirmation Mail</span>
+
+              <span class="dropdown-item edit_status" id="content_managment" data-id="'.$row['id'].'" data-url="' . ADMIN_URL . '/agent/edit.php?agent_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit Status</span>
+
+             
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/selling_product_list.php?agent_id=' . $row['id'] . '"><i class="icon-add"></i> Add Selling Products</span>
+
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/add_client.php?agent_id=' . $row['id'] . '"><i class="icon-people"></i> Assign Clients Of Agent</span>
+
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/add_note.php?agent_id=' . $row['id'] . '"><i class="icon-book"></i> Add Note</span>
+
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/add_contact.php?agent_id=' . $row['id'] . '"><i class="icon-phone"></i> Add Last Contact Info</span>
+
+               <span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/agent/ajax.php?agent_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
             </div>
           </div>
         </div>
         ',
-      "status" => '<span class="badge badge-success">'.$row['status'].'</span>',
+      "status" => '<span class="badge badge-success ml-1">'.$row['status'].'</span>'.($row['status'] == 'Promote'?'<span class="badge badge-success ml-1">'.$row['level'].'</span>':'').'<span class="badge badge-success ml-1">mail('.$row['send_mail'].')</span>',
     );
     $i++;
   }
