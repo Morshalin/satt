@@ -102,7 +102,7 @@ var DatatableButtonsHtml5 = function() {
                 orderable: false,
                 targets: [5, 6]
             }],
-            order: [1, 'asc'],
+            order: [0, 'DESC'],
             processing: true,
             serverSide: true,
             ajax: $('.content_managment_table').data('url'),
@@ -148,6 +148,8 @@ var DatatableButtonsHtml5 = function() {
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
                     _modalFormValidation();
+                    _componentDatePicker();
+                    _componentTimePicker();
                 })
                 .fail(function(data) {
                     $('.modal-body').html('<span style="color:red; font-weight: bold;"> Something Went Wrong. Please Try again later.......</span>');
@@ -164,11 +166,244 @@ var DatatableButtonsHtml5 = function() {
         });
     };
 
+     var _componentSendMail = function() {
+        $(document).on('click', '#send_mail', function(e) {
+            e.preventDefault();
+            // it will get action url
+           
+            var url = $(this).data('url');
+            $.ajax({
+                    url: url,
+                    type: 'Get',
+                    dataType: 'json'
+                })
+                .done(function(data) { 
+                      new PNotify({
+                          title: "Success",
+                          text: data.message,
+                          type: "success",
+                          addclass: 'alert alert-styled-left',
+                      });
+                      tariq.ajax.reload();
+                })
+                .fail(function(data) {
+                    
+                    if (data.responseText) {
+                      new PNotify({
+                          title: 'Opps!',
+                          text: data,
+                          type: 'error',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    }
+                    $('#modal-loader').hide();
+                });
+        });
+    };
+
+
+
+
+
+
+     var _componentGenerateAppointment = function() {
+        $(document).on('click', '#generate_appoint_letter', function(e) {
+            e.preventDefault();
+            // it will get action url
+           
+            var url = $(this).data('url');
+            $.ajax({
+                    url: url,
+                    type: 'Get',
+                    dataType: 'html'
+                })
+                .done(function(data) { 
+                      new PNotify({
+                          title: 'Success!',
+                          text: "Appointment Letter Generated Successfully",
+                          type: 'success',
+                          addclass: 'alert alert-styled-left',
+                      });
+
+                      tariq.ajax.reload();
+                })
+                .fail(function(data) {
+                    
+                    if (data.responseText) {
+                      new PNotify({
+                          title: 'Opps!',
+                          text: $.parseJSON(data.responseText).message,
+                          type: 'error',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    }
+                    $('#modal-loader').hide();
+                });
+        });
+    };
+
+
+     var _componentAddClient = function() {
+        $(document).on('click', '.delete_agetnt_product', function(e) {
+            e.preventDefault();
+            // it will get action url
+           
+            var url = $(this).data('url');
+            var id = '#tr_'+$(this).attr("id");
+            $.ajax({
+                    url: url,
+                    type: 'Get',
+                    dataType: 'json'
+                })
+                .done(function(data) { 
+                    new PNotify({
+                          title: 'Well Done!',
+                          text: data.message,
+                          type: 'success',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    $(id).remove();
+                })
+                .fail(function(data) {
+                    
+                    if (data.responseText) {
+                      new PNotify({
+                          title: 'Opps!',
+                          text: $.parseJSON(data.responseText).message,
+                          type: 'error',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    }
+                    $('#modal-loader').hide();
+                });
+        });
+    };
+
+
+     var _componentAddClient = function() {
+        $(document).on('click', '.delete_agetnt_contact', function(e) {
+            e.preventDefault();
+            // it will get action url
+           
+            var url = $(this).data('url');
+            var id = '#tr_'+$(this).attr("id");
+            $.ajax({
+                    url: url,
+                    type: 'Get',
+                    dataType: 'json'
+                })
+                .done(function(data) { 
+                    new PNotify({
+                          title: 'Well Done!',
+                          text: data.message,
+                          type: 'success',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    $(id).remove();
+                })
+                .fail(function(data) {
+                    
+                    if (data.responseText) {
+                      new PNotify({
+                          title: 'Opps!',
+                          text: $.parseJSON(data.responseText).message,
+                          type: 'error',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    }
+                    $('#modal-loader').hide();
+                });
+        });
+    };
+
+     var _componentDeleteNote = function() {
+        $(document).on('click', '.delete_note', function(e) {
+            e.preventDefault();
+            // it will get action url
+           
+            var url = $(this).data('url');
+            var id = '#tr_'+$(this).attr("id");
+            $.ajax({
+                    url: url,
+                    type: 'Get',
+                    dataType: 'json'
+                })
+                .done(function(data) { 
+                    new PNotify({
+                          title: 'Well Done!',
+                          text: data.message,
+                          type: 'success',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    $(id).remove();
+                })
+                .fail(function(data) {
+                    
+                    if (data.responseText) {
+                      new PNotify({
+                          title: 'Opps!',
+                          text: $.parseJSON(data.responseText).message,
+                          type: 'error',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    }
+                    $('#modal-loader').hide();
+                });
+        });
+    };
+
+
+     var _componentDeleteAgentProduct = function() {
+        $(document).on('click', '.delete_agetnt_client', function(e) {
+            e.preventDefault();
+            // it will get action url
+           
+            var url = $(this).data('url');
+            var id = '#tr_'+$(this).attr("id");
+            $.ajax({
+                    url: url,
+                    type: 'Get',
+                    dataType: 'json'
+                })
+                .done(function(data) { 
+                    new PNotify({
+                          title: 'Well Done!',
+                          text: data.message,
+                          type: 'success',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    $(id).remove();
+                })
+                .fail(function(data) {
+                    
+                    if (data.responseText) {
+                      new PNotify({
+                          title: 'Opps!',
+                          text: $.parseJSON(data.responseText).message,
+                          type: 'error',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    }
+                    $('#modal-loader').hide();
+                });
+        });
+    };
+
+   
+
+
+
+
     return {
         init: function() {
             _componentDatatableButtonsHtml5();
             _componentSelect2Normal();
             _componentRemoteModalLoad();
+            _componentGenerateAppointment();
+            _componentDeleteAgentProduct();
+            _componentAddClient();
+            _componentSendMail();
+            _componentDeleteNote();
         }
     }
 }();
@@ -177,3 +412,17 @@ var DatatableButtonsHtml5 = function() {
 document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
 });
+
+ $(document).on('change','#status',function(){
+        var status = $(this).val();
+        if (status == 'Promote') {
+            $("#level_div").show(500);
+            $("#level").attr('required',    true);
+        }else{
+        $("#level_div").hide(500);
+        $("#level").val("");
+            $("#level").attr('required',false);
+
+
+        }
+    });

@@ -726,3 +726,20 @@ var _componentDatePicker = function() {
         "alwaysShowCalendars": true,
     });
 };
+
+var _componentTimePicker = function() {
+    var locatDate = moment.utc().format('h:mm:s a');
+    var stillUtc = moment.utc(locatDate).toDate();
+    // console.log(locatDate);
+    $('.time').daterangepicker({
+        "applyClass": 'bg-slate-600',
+        "cancelClass": 'btn-light',
+        "singleDatePicker": true,
+        "timePicker": true,
+        "locale": {
+            "format": 'h:mm:s a'
+        },
+        "showDropdowns": true,
+        "alwaysShowCalendars": true,
+    });
+};

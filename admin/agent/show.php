@@ -28,7 +28,7 @@ if (isset($_GET['agent_id'])) {
                     <table class="table table-bordered table-striped table-vcenter ">
                         <tr>
                             <td class="text-center">
-                                Registered
+                                <?php echo $row['status'] ?>
                             </td>
                         </tr>
                     </table>
@@ -40,7 +40,7 @@ if (isset($_GET['agent_id'])) {
                     <table class="table table-bordered table-striped table-vcenter ">
                         <tr>
                             <td class="text-center">
-                               <a href="https://agent.sattit.com/storage/Photos/August2019/md-hasibul-2019-08-06-5d4907c0c1f18.jpg" target="_blank"> <img src="https://agent.sattit.com/storage/Photos/August2019/md-hasibul-2019-08-06-5d4907c0c1f18.jpg" alt="" height="300px" width="300px"></a>
+                               <a href="<?php echo '../../agent/'.$row['photo'] ?>" target="_blank"> <img src="<?php echo '../../agent/'.$row['photo'] ?>" alt="" height="300px" width="300px"></a>
                             </td>
                         </tr>
                     </table>
@@ -50,37 +50,37 @@ if (isset($_GET['agent_id'])) {
                     <table class="table table-bordered table-striped table-vcenter ">
                         <tr>
                             <td>
-                                <strong>Name:</strong> MD. Hasibul
+                                <strong>Name:</strong> <?php echo $row['name'] ?>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <strong>Father Name:</strong> MD. Naim Uddin
+                                <strong>Father Name:</strong> <?php echo $row['father_name'] ?>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <strong>Mother Name:</strong> Hasna Hena
+                                <strong>Mother Name:</strong> <?php echo $row['mother_name'] ?>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <strong>Occupation:</strong> Student
+                                <strong>Occupation:</strong> <?php echo $row['occupation'] ?>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <strong>Eduactional qualification:</strong> HSC
+                                <strong>Eduactional qualification:</strong> <?php echo $row['education_qualification'] ?>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <strong>Interested Dist:</strong> Faridpur
+                                <strong>Interested District:</strong> <?php echo $row['interested_dist'] ?>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <strong>Interested Up:</strong> Nagarkanda
+                                <strong>Interested Upazila:</strong> <?php echo $row['interested_up'] ?>
                             </td>
                         </tr>
                     </table>
@@ -92,64 +92,114 @@ if (isset($_GET['agent_id'])) {
                     <table class="table table-bordered table-striped table-vcenter ">
                         <tr>
                             <td>Road: </td>
-                            <td>N/A</td>
+                            <?php 
+                                if ($row['permanent_road']) {
+                                    ?>
+                                        <td><?php echo $row['permanent_road'] ?></td>
+                                    <?php
+                                }else{
+                                    ?>
+                                        <td>N/A</td>
+                                    <?php
+                                }
+                             ?>
+                            
                         </tr>
                         <tr>
                             <td>House: </td>
-                            <td>N/A</td>
+                            <?php 
+                                if ($row['permanent_house']) {
+                                    ?>
+                                        <td><?php echo $row['permanent_house'] ?></td>
+                                    <?php
+                                }else{
+                                    ?>
+                                        <td>N/A</td>
+                                    <?php
+                                }
+                             ?>
                         </tr>
                         <tr>
                             <td>Village: </td>
-                            <td>Shankarpasha</td>
+                            <td><?php echo $row['permanent_village'] ?></td>
                         </tr>
                         <tr>
                             <td>Post: </td>
-                            <td>Talma</td>
+                            <td><?php echo $row['permanent_post'] ?></td>
                         </tr>
                         <tr>
-                            <td>Up: </td>
-                            <td>Nagarkanda</td>
+                            <td>Upazila: </td>
+                            <td><?php echo $row['permanent_up'] ?></td>
                         </tr>
                         <tr>
                             <td>District: </td>
-                            <td>Faridpur</td>
+                            <td><?php echo $row['permanent_dist'] ?></td>
                         </tr>
                         <tr>
                             <td>Post Code: </td>
-                            <td>7841</td>
+                            <td><?php echo $row['permanent_post_code'] ?></td>
                         </tr>
                     </table>
                 </div>
                 <div class="col-md-6">
-                    <h3>Present Address <small>Same As Present</small></h3>
+                    <h3>Present Address 
+                        <?php 
+                        if ($row['same_as'] == '1') {
+                           ?>
+                           <small>Same As Present</small>
+                           <?php
+                        } ?>
+                        
+                    </h3>
                     <table class="table table-bordered table-striped table-vcenter ">
                         <tr>
                             <td>Road: </td>
-                            <td>N/A</td>
+                            <?php 
+                                if ($row['present_road']) {
+                                    ?>
+                                        <td><?php echo $row['present_road'] ?></td>
+                                    <?php
+                                }else{
+                                    ?>
+                                        <td>N/A</td>
+                                    <?php
+                                }
+                             ?>
+                            
                         </tr>
                         <tr>
                             <td>House: </td>
-                            <td>N/A</td>
+                            <?php 
+                                if ($row['present_house']) {
+                                    ?>
+                                        <td><?php echo $row['present_house'] ?></td>
+                                    <?php
+                                }else{
+                                    ?>
+                                        <td>N/A</td>
+                                    <?php
+                                }
+                             ?>
                         </tr>
                         <tr>
                             <td>Village: </td>
-                            <td>Shankarpasha</td>
+                            <td><?php echo $row['present_village'] ?></td>
                         </tr>
                         <tr>
                             <td>Post: </td>
-                            <td>Talma</td>
+                            <td><?php echo $row['present_post'] ?></td>
                         </tr>
                         <tr>
-                            <td>Up: </td>
-                            <td>Nagarkanda</td>
+                            <td>Upazila: </td>
+                            <td><?php echo $row['present_up'] ?></td>
                         </tr>
                         <tr>
                             <td>District: </td>
-                            <td>Faridpur</td>
+                            <td><?php  echo $row['present_dist'] ?></td>
                         </tr>
                         <tr>
                             <td>Post Code: </td>
-                            <td>7841</td>
+                            <td><?php echo $row['present_post_code'] ?></td>
                         </tr>
                     </table>
                 </div>
@@ -160,30 +210,75 @@ if (isset($_GET['agent_id'])) {
                     <table class="table table-bordered table-striped table-vcenter ">
                         <tr>
                             <td>Mobile: </td>
-                            <td>01736003767</td>
+                            <td><?php echo $row['mobile_no'] ?></td>
                         </tr>
                         <tr>
                             <td>Alternate Mobile: </td>
-                            <td>01736003767</td>
+                            <?php 
+                                if ($row['alternate_mobile']) {
+                                    ?>
+                                    <td><?php echo $row['alternate_mobile'] ?></td>
+                                    <?php
+                                }else{
+                                    ?>
+                                     <td>N/A</td>
+                                    <?php
+                                }
+                             ?>
+                            
                         </tr>
                         <tr>
                             <td>Email: </td>
-                            <td>ahsanhasib1@gmail.com</td>
+                            <td><?php echo $row['email'] ?></td>
                         </tr>
                         <tr>
                             <td>Signature: </td>
-                            <td>Hasibul</td>
+                            <td><?php echo $row['signature'] ?></td>
                         </tr>
                     </table>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Birth_Certificate</h3>
+                    <h3>
+                    <?php 
+                    if ($row['document_type'] == "Birth_Certificate") {
+                        $sohag = explode('_', $row['document_type']);
+                        echo implode(' ', $sohag);
+                    }else{
+                        echo $row['document_type'];
+                    } 
+                    ?>
+                    </h3>
                     <table class="table table-bordered table-striped table-vcenter ">
                         <tr>
-                            <td>Document: </td>
-                            <td> <a href="https://agent.sattit.com/storage/Birth_Certificate/August2019/md-hasibul-2019-08-06-5d4907c0c6e77.jpg" target="_blank"><img src="https://agent.sattit.com/storage/Birth_Certificate/August2019/md-hasibul-2019-08-06-5d4907c0c6e77.jpg" alt="" width="300px"></a></td>
+                            <td><?php 
+
+                                if ($row['document_type'] == "NID") {
+                                   echo('NID Front Page:');
+                                }else{
+                                    echo("Document:");
+                                }
+
+                             ?></td>
+                            <td> <a href="<?php echo('../../agent/'.$row['document_front']) ?>" target="_blank"><img src="<?php echo('../../agent/'.$row['document_front']) ?>" alt="" width="300px"></a></td>
+                        </tr>
+                         <tr>
+                            <td><?php 
+
+                                if ($row['document_type'] == "NID") {
+                                   echo('NID Back Page:');
+                                   ?>
+                                   </td>
+                            <td> 
+                                <a href="<?php echo('../../agent/'.$row['document_back']) ?>" target="_blank"><img src="<?php echo('../../agent/'.$row['document_back']) ?>" alt="" width="300px"></a>
+                            </td>
+
+
+                                   <?php
+                                }
+
+                             ?>
                         </tr>
                                             </table>
                 </div>
@@ -193,8 +288,8 @@ if (isset($_GET['agent_id'])) {
                     <h3>Bussiness</h3>
                     <table class="table table-bordered table-striped table-vcenter ">
                         <tr>
-                            <td > </td>
-                            <td> <a href="https://agent.sattit.com/storage/Trade/August2019/md-hasibul-2019-08-06-5d4907c0dfaf8.jpg" target="_blank"><img src="https://agent.sattit.com/storage/Trade/August2019/md-hasibul-2019-08-06-5d4907c0dfaf8.jpg" alt="" width="300px"></a></td>
+                            <td >Organization Name : <?php echo($row['bussiness_name']) ?></td>
+                            <td> <a href="<?php echo('../../agent/'.$row['tread_license']) ?>" target="_blank"><img src="<?php echo('../../agent/'.$row['tread_license']) ?>" alt="" width="300px"></a></td>
                         </tr>
                     </table>
                 </div>
