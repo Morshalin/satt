@@ -70,40 +70,40 @@ var DatatableButtonsHtml5 = function() {
                 className: 'btn btn-danger',
                 text: 'Delete',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/message/action.php', action = 'delete', msg = 'Once deleted, it will deleted all related Data!');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/message_type/action.php', action = 'delete', msg = 'Once deleted, it will deleted all related Data!');
                 }
             },{
                 extend: 'selected',
                 className: 'btn bg-success',
                 text: 'Online',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/message/action.php', action = 'active', msg = 'Change Status To Online');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/message_type/action.php', action = 'active', msg = 'Change Status To Online');
                 }
             }, {
                 extend: 'selected',
                 className: 'btn bg-secondary',
                 text: 'Offline',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/message/action.php', action = 'inactive', msg = 'Change Status To Offline');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/message_type/action.php', action = 'inactive', msg = 'Change Status To Offline');
                 }
             }, {
                 extend: 'selected',
                 className: 'btn bg-warning',
                 text: 'Toggle Status',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/message/action.php', action = 'toggle', msg = 'Toggle Status');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/message_type/action.php', action = 'toggle', msg = 'Toggle Status');
                 }
             }],
             select: true,
             columnDefs: [{
-                width: "100px",
-                targets: [7]
-            }, {
-                width: "20px",
+                width: "200px",
                 targets: [0]
             }, {
+                width: "700px",
+                targets: [1]
+            }, {
                 orderable: false,
-                targets: [7]
+                targets: [2]
             }],
             order: [1, 'asc'],
             processing: true,
@@ -114,18 +114,8 @@ var DatatableButtonsHtml5 = function() {
                 {
                     data: 'DT_RowIndex'
                 }, {
-                    data: 'message_type'
+                    data: 'type'
                 }, {
-                    data: 'customer_question'
-                }, {
-                    data: 'our_reply'
-                },{
-                    data: 'software_information'
-                },{
-                    data: 'contact_details'
-                },{
-                    data: 'introduction_message'
-                },{
                     data: 'action'
                 }
             ]

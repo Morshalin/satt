@@ -2,10 +2,10 @@
 require_once '../../config/config.php';
 ajax();
 Session::checkSession('admin', ADMIN_URL . '/message', 'Message');
-if (isset($_GET['message_id'])) {
-	$course_id = $_GET['message_id'];
+if (isset($_GET['message_type_id'])) {
+	$course_id = $_GET['message_type_id'];
 	if ($course_id) {
-		$query = "SELECT * FROM satt_message WHERE id = '$course_id'";
+		$query = "SELECT * FROM satt_message_type WHERE id = '$course_id'";
 		$result = $db->select($query);
 		if (!$result) {
 			http_response_code(500);
@@ -18,15 +18,10 @@ if (isset($_GET['message_id'])) {
 ===================================================================*/
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['action'] == 'update') {
-	$course_id = $_GET['message_id'];
+	$course_id = $_GET['message_type_id'];
 	if ($course_id) {
 		$error = array();
 		$message_type = $fm->validation($_POST['message_type']);
-		$customer_question = $fm->validation($_POST['customer_question']);
-		$our_reply = $fm->validation($_POST['our_reply']);
-		$software_information = $fm->validation($_POST['software_information']);
-		$contact_details = $fm->validation($_POST['contact_details']);
-		$introduction_message = $fm->validation($_POST['introduction_message']);
 
 		// $courseCheck = $fm->dublicateCheck('satt_courses', 'course_name', $course_name);
 		// $codeCheck = $fm->dublicateCheck('satt_courses', 'course_code', $course_code);
@@ -37,42 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			$error['message_type'] = 'Message type Can Not Be More Than 500 Charecters';
 		}
 
-		if (!$customer_question) {
-			$error['customer_question'] = 'Customer question Field required';
-		} else if (strlen($customer_question) > 500) {
-			$error['customer_question'] = 'Customer question Can Not Be More Than 500 Charecters';
-		}
-
-		if (!$our_reply) {
-			$error['our_reply'] = 'Our reply Field required';
-		} else if (strlen($our_reply) > 500) {
-			$error['our_reply'] = 'Our reply Can Not Be More Than 500 Charecters';
-		}
-
-		if (!$software_information) {
-			$error['software_information'] = 'Software information Field required';
-		} else if (strlen($software_information) > 500) {
-			$error['software_information'] = 'Software information Can Not Be More Than 500 Charecters';
-		}
-
-		if (!$contact_details) {
-			$error['contact_details'] = 'Contact details Field required';
-		} else if (strlen($contact_details) > 500) {
-			$error['contact_details'] = 'Contact details Can Not Be More Than 500 Charecters';
-		}
-
-		if (!$introduction_message) {
-			$error['introduction_message'] = 'Introduction message Field required';
-		} else if (strlen($introduction_message) > 500) {
-			$error['introduction_message'] = 'Introduction message Can Not Be More Than 500 Charecters';
-		}
-
 
 		if ($error) {
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 		} else {
-			$query = "UPDATE satt_message SET message_type = '$message_type', customer_question = '$customer_question', our_reply = '$our_reply', software_information = '$software_information', contact_details = '$contact_details', introduction_message = '$introduction_message' WHERE id='$course_id'";
+			$query = "UPDATE satt_message_type SET type = '$message_type' WHERE id='$course_id'";
 			$result = $db->update($query);
 			if ($result != false) {
 				die(json_encode(['message' => 'Message Updated Successfull']));
@@ -91,17 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$error = array();
 	$message_type = $fm->validation($_POST['message_type']);
-	$customer_question = $fm->validation($_POST['customer_question']);
-	$our_reply = $fm->validation($_POST['our_reply']);
-	$software_information = $fm->validation($_POST['software_information']);
-	$contact_details = $fm->validation($_POST['contact_details']);
-	$introduction_message = $fm->validation($_POST['introduction_message']);
-
-	if (isset($_POST['status'])) {
-		$status = 1;
-	} else {
-		$status = 0;
-	}
 
 	if (!$message_type) {
 		$error['message_type'] = 'Message required';
@@ -115,10 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		http_response_code(500);
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
-		$query = "INSERT INTO satt_message(message_type, customer_question, our_reply, software_information, contact_details, introduction_message, status) VALUES ('$message_type', '$customer_question', '$our_reply', '$software_information', '$contact_details', '$introduction_message', '$status')";
+		$query = "INSERT INTO satt_message_type(type) VALUES ('$message_type')";
 		$result = $db->insert($query);
 		if ($result != false) {
-			die(json_encode(['message' => 'Message Added Successfull']));
+			die(json_encode(['message' => 'Message Type Added Successfull']));
 		} else {
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
@@ -131,9 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ===================================================================*/
 // $error['type'] = 'Course Name Required';
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET['action'] == 'delete') {
-	$message_id = $_GET['message_id'];
-	if ($message_id) {
-		$query = "DELETE FROM satt_message WHERE id = '$message_id'";
+	$message_type_id = $_GET['message_type_id'];
+	if ($message_type_id) {
+		$query = "DELETE FROM satt_message_type WHERE id = '$message_type_id'";
 		$result = $db->delete($query);
 		if ($result) {
 			die(json_encode(['message' => 'Message Deleted Successfull']));
@@ -146,12 +100,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET[
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'PUT' AND isset($_GET['action']) AND $_GET['action'] == 'status') {
-	$message_id = $_GET['message_id'];
+	$message_type_id = $_GET['message_type_id'];
 	$status = $_GET['status'];
 	$status = $status ? 0 : 1;
 
-	if ($message_id) {
-		$query = "UPDATE satt_message SET status = '$status' WHERE id = '$message_id'";
+	if ($message_type_id) {
+		$query = "UPDATE satt_message SET status = '$status' WHERE id = '$message_type_id'";
 		$result = $db->delete($query);
 		if ($result) {
 			die(json_encode(['message' => 'Message Status Changed Successfull']));

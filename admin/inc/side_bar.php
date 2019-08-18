@@ -51,7 +51,9 @@
     <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Messages</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_4, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
-      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/message" class="nav-link<?php active_page($data, 'customer-details'); ?>">Message manager</a></li>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/message" class="nav-link<?php active_page($data, 'customer-details'); ?>">All message</a></li>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/message_type" class="nav-link<?php active_page($data, 'customer-details'); ?>">Message type</a></li>
 
  </ul>
 </li>

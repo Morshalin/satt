@@ -49,12 +49,12 @@ if ($result) {
 		$data[] = array(
 			"DT_RowIndex" => $i + 1,
 			"id" => $row['id'],
-			"message_type" => '<strong>' . $row['message_type'] . '</strong>',
-      "customer_question" => '<strong>' . $row['customer_question'] . '</strong>',
-      "our_reply" => '<strong>' . $row['our_reply'] . '</strong>',
-      "software_information" => '<strong>' . $row['software_information'] . '</strong>',
-      "contact_details" => '<strong>' . $row['contact_details'] . '</strong>',
-      "introduction_message" => '<strong>' . $row['introduction_message'] . '</strong>',
+			"message_type" =>  $fm->textShorten($row['message_type'] , 50) ,
+      "customer_question" => '<strong>' . $fm->textShorten($row['customer_question'] , 50) . '</strong>',
+      "our_reply" => '<strong>' . $fm->textShorten($row['our_reply'] , 50)  . '</strong>',
+      "software_information" => $fm->textShorten($row['software_information'] , 50) ,
+      "contact_details" => $fm->textShorten($row['contact_details'] , 50) ,
+      "introduction_message" =>  $fm->textShorten($row['introduction_message'] , 50) ,
 			"action" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
         <div class="list-icons" id="action_menu_' . $row['id'] . '">
@@ -70,12 +70,12 @@ if ($result) {
           </div>
         </div>
         ',
-			"status" => '
-        <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="status_loading_' . $row['id'] . '"  style="display: none">
-        <label class="form-check-label" id="status_' . $row['id'] . '" title="' . ($row['status'] == 1 ? 'Active' : 'InActive') . '" data-popup="tooltip-custom" data-placement="bottom">
-        <input type="checkbox" class="form-check-status-switchery" id="change_status" data-id="' . $row['id'] . '" data-status="' . $row['status'] . '" data-url="' . ADMIN_URL . '/message/ajax.php?message_id=' . $row['id'] . '&action=status&status=' . $row['status'] . '"' . ($row['status'] == 1 ? 'checked' : '') . ' data-fouc >
-        </label>
-        	',
+			// "status" => '
+      //   <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="status_loading_' . $row['id'] . '"  style="display: none">
+      //   <label class="form-check-label" id="status_' . $row['id'] . '" title="' . ($row['status'] == 1 ? 'Active' : 'InActive') . '" data-popup="tooltip-custom" data-placement="bottom">
+      //   <input type="checkbox" class="form-check-status-switchery" id="change_status" data-id="' . $row['id'] . '" data-status="' . $row['status'] . '" data-url="' . ADMIN_URL . '/message/ajax.php?message_id=' . $row['id'] . '&action=status&status=' . $row['status'] . '"' . ($row['status'] == 1 ? 'checked' : '') . ' data-fouc >
+      //   </label>
+      //   	',
 		);
 		$i++;
 	}
