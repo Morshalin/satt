@@ -52,7 +52,7 @@ Session::checkSession('admin', ADMIN_URL . '/software-details', 'Software Detail
               <th>Software Name</th>
               <th>Software Status</th>
               <th>Language</th>
-              <!-- <th>Developed By</th> -->
+              <th>Developed By</th>
               <th>Start Date</th>
               <th>Short Features</th>
   						<th>Condition</th>
