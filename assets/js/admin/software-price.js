@@ -65,45 +65,14 @@ var DatatableButtonsHtml5 = function() {
                 extend: 'selectNone',
                 className: 'btn bg-blue-800',
                 text: 'Unselect All'
-            }, {
-                extend: 'selected',
-                className: 'btn btn-danger',
-                text: 'Delete',
-                action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/message/action.php', action = 'delete', msg = 'Once deleted, it will deleted all related Data!');
-                }
-            },{
-                extend: 'selected',
-                className: 'btn bg-success',
-                text: 'Online',
-                action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/message/action.php', action = 'active', msg = 'Change Status To Online');
-                }
-            }, {
-                extend: 'selected',
-                className: 'btn bg-secondary',
-                text: 'Offline',
-                action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/message/action.php', action = 'inactive', msg = 'Change Status To Offline');
-                }
-            }, {
-                extend: 'selected',
-                className: 'btn bg-warning',
-                text: 'Toggle Status',
-                action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/message/action.php', action = 'toggle', msg = 'Toggle Status');
-                }
             }],
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [7]
-            }, {
-                width: "20px",
-                targets: [0]
+                targets: [0, 11]
             }, {
                 orderable: false,
-                targets: [7]
+                targets: [ 11]
             }],
             order: [1, 'asc'],
             processing: true,
@@ -114,17 +83,25 @@ var DatatableButtonsHtml5 = function() {
                 {
                     data: 'DT_RowIndex'
                 }, {
-                    data: 'message_type'
+                    data: 'software_name'
                 }, {
-                    data: 'customer_question'
+                    data: 'installation_charge'
                 }, {
-                    data: 'our_reply'
+                    data: 'monthly_charge'
+                }, {
+                    data: 'yearly_charge'
+                }, {
+                    data: 'direct_sell'
+                }, {
+                    data: 'total_price'
+                }, {
+                    data: 'agent_commission_one_time'
                 },{
-                    data: 'software_information'
+                    data: 'agent_commission_monthly'
                 },{
-                    data: 'contact_details'
+                    data: 'discount_offer'
                 },{
-                    data: 'introduction_message'
+                    data: 'yearly_renew_charge'
                 },{
                     data: 'action'
                 }
@@ -152,7 +129,10 @@ var DatatableButtonsHtml5 = function() {
                     $('.modal-body').html(data).fadeIn(); // load response
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
+                     _componentSelect2Modal();
+                    _componentDatePicker();
                     _modalFormValidation();
+
                 })
                 .fail(function(data) {
                     $('.modal-body').html('<span style="color:red; font-weight: bold;"> Something Went Wrong. Please Try again later.......</span>');
@@ -172,7 +152,6 @@ var DatatableButtonsHtml5 = function() {
     return {
         init: function() {
             _componentDatatableButtonsHtml5();
-            _componentSelect2Normal();
             _componentRemoteModalLoad();
         }
     }

@@ -1,12 +1,12 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('admin', ADMIN_URL.'/message', 'Message');
+Session::checkSession('admin', ADMIN_URL . '/software-price', 'Software Price');
   $data = array();
-  $data['page_title'] = 'Message';
+  $data['page_title'] = 'software Price';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'message';
+  $data['page_index'] = 'software-price';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/admin/message'];
+  $data['page_js'] = ['assets/js/admin/software-price'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
@@ -29,8 +29,8 @@
 <div class="content">
   <div class="card border-top-success rounded-top-0" id="table_card">
   	<div class="card-header header-elements-inline bg-light border-grey-300" >
-  		<!-- <h5 class="card-title"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Dashboard'; ?> -->
-  		<button type="button" class="btn btn-outline alpha-info text-info-800 border-info-600" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/message/create.php"><i class="icon-stack-plus mr-1"></i>Add message</button>
+  		<h5 class="card-title"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Dashboard'; ?>
+  		<button type="button" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/software-price/create.php"><i class="icon-stack-plus mr-1"></i>Add software Price</button>
   		</h5>
   		<div class="header-elements">
   			<div class="list-icons">
@@ -45,16 +45,20 @@
   			<img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
   		</div> -->
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/message/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/software-price/table.php">
   				<thead>
   					<tr>
   						<th>#</th>
-  						<th>Message type</th>
-  						<th>Customer question</th>
-              <th>Our reply</th>
-              <th>Software information</th>
-              <th>Our contact details</th>
-              <th>Introduction message</th>
+              <th>Software Name</th>
+              <th>Installation charge</th>
+              <th>Monthly charge</th>
+              <th>Yearly charge</th>
+              <th>Direct sell</th>
+  						<th>Total price</th>
+  						<th>Agent commission (one time)</th>
+              <th>Agent commission (monthly)</th>
+              <th>Discount offer</th>
+              <th>Yearly renew charge</th>
   						<th>Action</th>
   					</tr>
   				</thead>
