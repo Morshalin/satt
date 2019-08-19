@@ -36,16 +36,16 @@ if (isset($_GET['agent_id'])) {
 
 
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-6" style=" margin-top: 40px;">
                     <div class="form-group">
                         <label for="name" class="col-form-label"><span>Upload Image <small class="text-danger">(Max Size: 1 MB)</small></span> <span class="text-danger">*</span></label>
                         <input type="file" name="photo" id="photo" class="form-control"  required autofocus >
                         <input type="hidden" id="photo_size" name="photo_size">
                     </div>
                 </div>
-                <div class="col-lg-6" style=" margin-top: 40px;">
+                <div class="col-lg-6"  align="center">
                     <div class="form-group">
-                        <img src="" alt="No image found">
+                        <img src="images/Letterhead-96.png" alt="No image found" width="150px" height="190px">
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@ if (isset($_GET['agent_id'])) {
 
 
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="form-group">
                         <label for="education_qualification" class="col-form-label"> Eduactional qualification: <span class="text-danger">*</span></label>
                         <input class="form-control" type="text" name="education_qualification" placeholder=" Eduactional qualification" required id="education_qualification" autofocus>
@@ -111,8 +111,8 @@ if (isset($_GET['agent_id'])) {
                 </div>
                 <div class="col-lg-6" style=" margin-top: 8px;">
                     <div class="form-group">
-                        <label for="permanent_road"> Road no: <span class="text-danger">*</span></label>
-                        <input class="form-control" type="text" name="permanent_road" placeholder="If Available" id="permanent_road" required="" autofocus>
+                        <label for="permanent_road"> Road no: </label>
+                        <input class="form-control" type="text" name="permanent_road" placeholder="If Available" id="permanent_road"  autofocus>
                     </div>
                 </div>
             </div>
@@ -153,16 +153,82 @@ if (isset($_GET['agent_id'])) {
 
 
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="form-group">
                         <label for="permanent_post_code" class="col-form-label"> Postal code: <span class="text-danger">*</span></label>
                         <input class="form-control" type="text" name="permanent_post_code" placeholder="Postal code" id="permanent_post_code" autofocus required="">
                     </div>
                 </div>
+                
+            </div>
+
+
+            <div class="row mt-2">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <h5 class="font-weight-bold">Current Address:</h5>
+                        <span>
+                            <input type="checkbox"  name="same_as" id="same_as"> <span style="font-size: 12px">Same As Permanent</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="present_house" class="col-form-label"> House no: </label>
+                        <input class="form-control" type="text" name="present_house" placeholder="If Avialable" id="present_house" autofocus>
+                    </div>
+                </div>
                 <div class="col-lg-6" style=" margin-top: 8px;">
                     <div class="form-group">
-                        <label for="permanent_dist"> District: <span class="text-danger">*</span></label>
-                        <input class="form-control" type="text" name="permanent_dist" placeholder="Post" id="permanent_dist" required="" autofocus>
+                        <label for="present_road"> Road no: </label>
+                        <input class="form-control" type="text" name="present_road" placeholder="If Available" id="present_road"  autofocus>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="present_village" class="col-form-label"> Village: <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="present_village" placeholder="Village" id="present_village" autofocus required="">
+                    </div>
+                </div>
+                <div class="col-lg-6" style=" margin-top: 8px;">
+                    <div class="form-group">
+                        <label for="present_post"> Post: <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="present_post" placeholder="Post" id="present_post" required="" autofocus>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="present_up" class="col-form-label"> Thana: <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="present_up" placeholder="Thana" id="present_up" autofocus required="">
+                    </div>
+                </div>
+                <div class="col-lg-6" style=" margin-top: 8px;">
+                    <div class="form-group">
+                        <label for="present_dist"> District: <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="present_dist" placeholder="Post" id="present_dist" required="" autofocus>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="present_post_code" class="col-form-label"> Postal code: <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="present_post_code" placeholder="Postal code" id="present_post_code" autofocus required="">
                     </div>
                 </div>
             </div>
@@ -171,178 +237,157 @@ if (isset($_GET['agent_id'])) {
             <div class="row mt-2">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <h5 class="font-weight-bold">Current Address:</h5>
-                        <input type="checkbox"  name="same_as" id="same_as"> <span style="font-size: 12px">Same As Permanent</span>
-
-                        
+                        <h5 class="font-weight-bold">Contact Information:</h5>
                     </div>
                 </div>
             </div>
 
 
 
-
-
-
-
-
-
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="mobile_no" class="col-form-label"> Mobile No: <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="mobile_no" placeholder="01*********" id="mobile_no" autofocus required="">
+                    </div>
+                </div>
+                <div class="col-lg-6" style=" margin-top: 8px;">
+                    <div class="form-group">
+                        <label for="alternate_mobile"> Alternate mobile no: </label>
+                        <input class="form-control" type="text" name="alternate_mobile" placeholder="01*********  " id="alternate_mobile"  autofocus>
+                    </div>
+                </div>
+            </div>
 
 
 
 
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="row">
-
-
-                       
-                        
-                        
-                        <div class="mt-5">
-                        </div>
-                        <div class="col-sm-3 col-xs-12">
-                            <p> <span class="text-danger"></span></p>
-                        </div>
-                        <div class="col-sm-9 col-xs-12 mb-5">
-                            <div class="row mt-5" id="address_area">
-                               
-                                <div class="col-lg-6" id="presend">
-                                    <p class="font-weight-bold"> Current address <br>
-                                        <input type="checkbox" name="same_as" id="same_as"> <span style="font-size: 12px">Same As Permanent</span>
-                                    </p>
-                                    <div class="mt-1">
-                                        <label for="present_house"> House no: </label>
-                                        <input contenteditable="py-2 px-1" type="text" class="" placeholder="if available" id="present_house"  name="present_house">
-                                    </div>
-                                    <div class="mt-3">
-                                        <label for="present_road"> Road no:  </label>
-                                        <input contenteditable="py-2 px-1" type="text" class="" placeholder="Road no" id="present_road" name="present_road">
-                                    </div>
-                                    <div class="mt-3">
-                                        <label for="present_village"> Village: <span class="text-danger">*</span></label>
-                                        <input contenteditable="py-2 px-1" type="text" placeholder="Village" class="" id="present_village" name="present_village" required="">
-                                    </div>
-                                    <div class="mt-3">
-                                        <label for="present_post"> Post:  <span class="text-danger">*</span></label>
-                                        <input contenteditable="py-2 px-1" type="text" placeholder="Post" class="" name="present_post" id="present_post" required="">
-                                    </div>
-                                    <div class="mt-3">
-                                        <label for="present_up"> Thana: <span class="text-danger">*</span></label>
-                                        <input contenteditable="py-2 px-1" type="text" placeholder="Thana" name="present_up" id="present_up" required="">
-                                    </div>
-                                    <div class="mt-3">
-                                        <label for="present_dist"> District <span class="text-danger">*</span></label>
-                                        <input contenteditable="py-2 px-1" type="text" placeholder="District " class="" id="present_dist" name="present_dist" required="">
-                                    </div>
-                                    <div class="mt-3">
-                                        <label for="present_post_code"> Postal code:   <span class="text-danger">*</span> </label>
-                                        <input contenteditable="py-2 px-1" type="text" placeholder="Postal code" class="" id="present_post_code" name="present_post_code" required="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-xs-12 mt-2">
-                            <label for="mobile_no"> Mobile No: <span class="text-danger">*</span></label>
-                        </div>
-                        <div class="col-sm-9 col-xs-12 mt-2">
-                            <input class="from_area" type="text" placeholder="01*********" name="mobile_no" id="mobile_no" required="">
-                        </div>
-                        <div class="col-sm-3 col-xs-12 mt-2">
-                            <label for="alternate_mobile"> Alternate mobile no: </label>
-                        </div>
-                        <div class="col-sm-9 col-xs-12 mt-2">
-                            <input class="from_area" type="text" placeholder="01********* " name="alternate_mobile" id="alternate_mobile">
-                        </div>
-                        <div class="col-sm-3 col-xs-12 mt-2">
-                            <label for="email"> E-mail: <span class="text-danger">*</span></label>
-                        </div>
-                        <div class="col-sm-9 col-xs-12 mt-2">
-                            <input class="from_area" type="email" placeholder="name@mail.com  " name="email" id="email" required="">
-                        </div>
-                        <div class="col-sm-3 col-xs-12 mt-2">
-                            <label for="interested_dist"> Working district: <span class="text-danger">*</span></label>
-                        </div>
-                        <div class="col-sm-9 col-xs-12 mt-2">
-                            <input class="from_area" type="text" name="interested_dist" placeholder="Working district" id="interested_dist" required="">
-                        </div>
-                        <div class="col-sm-3 col-xs-12 mt-2">
-                            <label for="interested_up"> Working thana: <span class="text-danger">*</span></label>
-                        </div>
-                        <div class="col-sm-9 col-xs-12 mt-2">
-                            <input class="from_area" type="text" name="interested_up" placeholder="Working thana" id="interested_up" required="">
-                        </div>
-                        <div class="col-lg-3 col-md-3"></div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="custom-control custom-checkbox mt-5">
-                                <input type="checkbox" class="custom-control-input" id="terms_agree" name="terms_agree" required="" data-parsley-errors-container="#terms_agree_error">
-                                <label class="custom-control-label ml-4 mt-2" for="terms_agree">I promise all the information given above is correct </label>
-                                <span id="terms_agree_error"></span>
-                            </div>
-                            <div class="col-lg-3 col-md-3"></div>
-                        </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="email" class="col-form-label">  E-mail: <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="email" placeholder="name@mail.com " id="email" autofocus required="">
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <div class="container py-3 bg-white" style="width: 100%; padding-right: 10%; padding-left: 10%">
-        <div class="row">
-            <div class="col-lg-3 col-md-3">
-                <p class="document">Upload document:</p>
-            </div>
-            <div class="col-lg-9 col-md-9">
-                <select class="" name="document_type" id="select_another" required=""> Select one
-                    <option value=""> select one </option>
-                    <option value="Passport"> Passport </option>
-                    <option value="Birth_Certificate"> Birth certificate</option>
-                    <option value="NID"> NID card </option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="" id="front_end" style="display: none">
-                <br>
-                <input class="form-control-file" type="file" name="document_front" id="document_front" required="">
-                <span class="text-muted" id="document_front_end_help">Upload Your Nid's Frontend Image</span><span><small class="text-danger"><br>(max size 1 Mb)</small></span>
-                <input type="hidden" id="document_front_size" name="document_front_size">
-            </div>
-            <div  id="backend" style="display: none;">
-                <div class="col-9 px-0">
-                    <br>
-                    <input type="file" class="form-control-file"  name="document_back" id="document_back">
-                    <span class="text-muted" id="document_back_end_help">Upload Your Nid's Backend Image</span><span><small class="text-danger"><br>(max size 1 Mb)</small></span>
-                    <input type="hidden" id="document_back_size" name="document_back_size">
+
+
+            <div class="row mt-2">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <h5 class="font-weight-bold">Interested Working Area:</h5>
+                    </div>
                 </div>
             </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="interested_dist" class="col-form-label"> Working district: <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="interested_dist" placeholder="Working district" id="interested_dist" autofocus required="">
+                    </div>
+                </div>
+                <div class="col-lg-6" style=" margin-top: 8px;">
+                    <div class="form-group">
+                        <label for="interested_up"> Working thana: <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="interested_up" placeholder="Working thana  " id="interested_up"  autofocus required="">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mt-2">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <h5 class="font-weight-bold">Important Documents:</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 ">
+                    <div class="form-group">
+                        <label for="document_type" class="col-form-label"> Document Type: <span class="text-danger">*</span></label>
+                        <select name="document_type" id="document_type" required="" class="form-control"> Select one
+                            <option value=""> select one </option>
+                            <option value="Passport"> Passport </option>
+                            <option value="Birth_Certificate"> Birth certificate</option>
+                            <option value="NID"> NID card </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-6 ">
+                    <div class="form-group">
+                        <label for="document_front" class="col-form-label"> Upload Your Nid's Frontend Image: <span><small class="text-danger"><br>(max size 1 Mb)</small></span> <span class="text-danger">*</span></label>
+                        <input type="file" name="document_front" id="document_front" class="form-control"  required autofocus >
+                        <input type="hidden" id="document_front_size" name="document_front_size">
+                    </div>
+                </div>
+                <div class="col-lg-6 ">
+                    <div class="form-group">
+                        <label for="document_back" class="col-form-label"> Upload Your Nid's Backend Image: <span><small class="text-danger"><br>(max size 1 Mb)</small></span> <span class="text-danger">*</span></label>
+                        <input type="file" name="document_back" id="document_back" class="form-control"  required autofocus >
+                        <input type="hidden" id="document_back_size" name="document_back_size">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-6 mt-3">
+                    <div class="form-group">
+                        <label for="document_front" class="col-form-label"> Organization name: <span class="text-danger">*</span></label>
+                        <input type="text" placeholder="if available" name="bussiness_name" id="bussiness_name" class="form-control"  autofocus >
+                    </div>
+                </div>
+                <div class="col-lg-6 ">
+                    <div class="form-group">
+                        <label for="tread_license" class="col-form-label"> Trade lisence: <span><small class="text-danger"><br>(max size 1 Mb)</small></span> <span class="text-danger">*</span></label>
+                        <input type="file" name="tread_license" id="tread_license" class="form-control"  required autofocus >
+                        <input type="hidden" id="tread_license_size" name="tread_license_size">
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-lg-12 ">
+                    <div class="form-group">
+                        <label for="tread_license" class="col-form-label"> E-signatuire: <span class="text-danger">*</span></label>
+                        <input type="text" placeholder="Your Full Name" name="signature" id="signature" class="form-control"  autofocus >
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-lg-12 ">
+                    <div class="form-group" align="center">
+                        
+                        <input type="button"   name="submit" style="width: 40%;" id="submit" class="btn btn-success"  value="Submit" >
+                        <input type="button"   name="submiting" style="width: 40%; display: none;" id="submiting" class="btn btn-success"  value="Submitting" disabled="">
+                    </div>
+                </div>
+            </div>
+
+
+
+
+          
         </div>
-        <div class="row mt-3">
-            <div class="col-lg-3">
-                <p class="prothisthan_name mt-2">Organization name </p>
-            </div>
-            <div class="col-lg-3">
-                <input type="text" class="protgisthan" placeholder="if available" name="bussiness_name">
-            </div>
-            <div class="col-lg-2">
-                <p class="treand"> Trade lisence</p>
-            </div>
-            <div class="col-lg-4" style="margin-top: 10px">
-                <input type="file" class="form-control-file" id="tread_license" name="tread_license">
-                <input type="hidden" id="tread_license_size" name="tread_license_size">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 my-3">
-                <input type="text" class="name protgisthan py-2" placeholder="E-signatuire (your full name):" name="signature" id="signature" required="">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 mx-auto mt-2 mt-3 mb-5">
-                <button class="btn bg-success text-white" style="width: 100%;" type="submit" id="submit" disabled=""> Submit</button>
-                <button class="btn bg-info text-white" style="width: 100%; display: none; " id="submiting" disabled="" > Submitting</button>
-            </div>
-        </div>
-    </div>
+    </section>
+
 
 
 
