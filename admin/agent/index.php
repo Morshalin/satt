@@ -2,7 +2,7 @@
   require_once '../../config/config.php';
 Session::checkSession('admin', ADMIN_URL . '/agent', 'Agent');
   $data = array();
-  $data['page_title'] = 'Agent Handel';
+  $data['page_title'] = 'Manage Agent ';
   $data['element'] = ['modal' => 'full'];
   $data['page_index'] = 'agent';
   $data['page_css'] = [];
@@ -30,7 +30,8 @@ Session::checkSession('admin', ADMIN_URL . '/agent', 'Agent');
   <div class="card border-top-success rounded-top-0" id="table_card">
   	<div class="card-header header-elements-inline bg-light border-grey-300" >
   		<h5 class="card-title"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Dashboard'; ?>
-  		<!-- <button type="button" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/developer/create.php"><i class="icon-stack-plus mr-1"></i>Add Developer</button> -->
+  		
+      <a href="../../agent/index.php" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round"><i class="icon-stack-plus mr-1"></i>Register New Agent</a>
   		</h5>
   		<div class="header-elements">
   			<div class="list-icons">
