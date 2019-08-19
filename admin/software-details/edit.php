@@ -3,19 +3,19 @@ require_once '../../config/config.php';
 ajax();
 Session::checkSession('admin', ADMIN_URL . '/software-details', 'Software Details');
 if (isset($_GET['software_details_id'])) {
-	$software_details_id = $_GET['software_details_id'];
-	$query = "SELECT * FROM software_details WHERE id='$software_details_id'";
-	$result = $db->select($query);
-	if ($result) {
-		$row = $result->fetch_assoc();
-	} else {
-		http_response_code(500);
-		die(json_encode(['message' => 'Software Details Not Found']));
-	}
+  $software_details_id = $_GET['software_details_id'];
+  $query = "SELECT * FROM software_details WHERE id='$software_details_id'";
+  $result = $db->select($query);
+  if ($result) {
+    $row = $result->fetch_assoc();
+  } else {
+    http_response_code(500);
+    die(json_encode(['message' => 'Software Details Not Found']));
+  }
 
 } else {
-	http_response_code(500);
-	die(json_encode(['message' => 'UnAthorized']));
+  http_response_code(500);
+  die(json_encode(['message' => 'UnAthorized']));
 }
 
 ?>
@@ -45,7 +45,7 @@ if (isset($_GET['software_details_id'])) {
                             $status_id = $software_status['id'];
                             ?>
 
-                            <option value="<?php echo $software_status['software_status_name'].','.$software_status['id']; ?>" <?=$row['software_status_id'] == $status_id ? ' selected="selected"' : '';?>   ><?php echo $software_status['software_status_name']; ?></option>
+                            <option value="<?php echo $software_status['software_status_name'].','.$software_status['id']; ?>" <?=$row['software_status_id'] == $status_id ? ' selected="selected"' : '';?>   > <?php echo $software_status['software_status_name']; ?></option>
 
                             <?php } }?>
                         </select>
