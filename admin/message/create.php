@@ -32,35 +32,35 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="type" class="col-form-label">Customer question <span class="text-danger">*</span></label>
-                <textarea type="text" name="customer_question" id="customer_question" class="form-control" placeholder="Customer Reference" required autofocus rows="5" cols="80">  </textarea>
+                <textarea type="text" name="customer_question" id="customer_question" class="form-control" placeholder="Customer Reference" required autofocus rows="3" cols="80">  </textarea>
             </div>
         </div>
 
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="type" class="col-form-label">Our reply <span class="text-danger">*</span></label>
-                <textarea type="text" name="our_reply" id="our_reply" class="form-control" placeholder="Customer Reference" required autofocus rows="5" cols="80">  </textarea>
+                <textarea type="text" name="our_reply" id="our_reply" class="form-control" placeholder="Customer Reference" required autofocus rows="3" cols="80">  </textarea>
             </div>
         </div>
 
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="type" class="col-form-label">Software information <span class="text-danger">*</span></label>
-                <textarea type="text" name="software_information" id="software_information" class="form-control" placeholder="Customer Reference" required autofocus rows="5" cols="80">  </textarea>
+                <textarea type="text" name="software_information" id="software_information" class="form-control" placeholder="Customer Reference" required autofocus rows="3" cols="80">  </textarea>
             </div>
         </div>
 
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="type" class="col-form-label">Contact details <span class="text-danger">*</span></label>
-                <textarea type="text" name="contact_details" id="contact_details" class="form-control" placeholder="Customer Reference" required autofocus rows="5" cols="80">  </textarea>
+                <textarea type="text" name="contact_details" id="contact_details" class="form-control" placeholder="Customer Reference" required autofocus rows="3" cols="80">  </textarea>
             </div>
         </div>
 
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="type" class="col-form-label">Introduction message <span class="text-danger">*</span></label>
-                <textarea type="text" name="introduction_message" id="introduction_message" class="form-control" placeholder="Customer Reference" required autofocus rows="5" cols="80">  </textarea>
+                <textarea type="text" name="introduction_message" id="introduction_message" class="form-control" placeholder="Customer Reference" required autofocus rows="3" cols="80">  </textarea>
             </div>
         </div>
     </div>

@@ -11,7 +11,7 @@
         <div class="col-lg-6 text-center mx-auto">
             <div class="form-group">
                 <label for="type" class="col-form-label">Message type <span class="text-danger">*</span></label>
-                <input type="text" name="message_type" id="message_type" class="form-control" placeholder="Customer Reference" required autofocus>
+                <input type="text" name="message_type" id="message_type" class="form-control" placeholder="Message type" required autofocus>
             </div>
         </div>
       </div>
