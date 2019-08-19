@@ -19,7 +19,7 @@
 
   <?php $nav_items_section_2 = ['software-status', 'software-language','software-details','software-price']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_2, $data['page_index']) ?>">
-    <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Software Setup</span></a>
+    <a href="#" class="nav-link"><i class="icon-hammer-wrench"></i> <span>Software Setup</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_2, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/software-status" class="nav-link<?php active_page($data, 'software-status'); ?>">Software Status</a></li>
@@ -31,7 +31,7 @@
 
   <?php $nav_items_section_3 = ['customer-details','customer-type', 'progressive-state','interested-services','business-type','Office_note','leav_us']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_3, $data['page_index']) ?>">
-    <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Customer</span></a>
+    <a href="#" class="nav-link"><i class="icon-user-tie"></i> <span>Customer</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_3, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/customerdetails" class="nav-link<?php active_page($data, 'customer-details'); ?>">Customer Information</a></li>
@@ -48,7 +48,7 @@
 
   <?php $nav_items_section_4 = ['message']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_4, $data['page_index']) ?>">
-    <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Messages</span></a>
+    <a href="#" class="nav-link"><i class="icon-envelop4"></i> <span>Messages</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_4, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/message" class="nav-link<?php active_page($data, 'customer-details'); ?>">All message</a></li>
@@ -61,7 +61,7 @@
 
     <?php $nav_items_section_5 = ['developer']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_5, $data['page_index']) ?>">
-    <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Developer Setup</span></a>
+    <a href="#" class="nav-link"><i class="icon-user-lock"></i> <span>Developer Setup</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_2, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/developer" class="nav-link<?php active_page($data, 'developer'); ?>">Developer Manage</a></li>
@@ -72,7 +72,7 @@
 
     <?php $nav_items_section_agent = ['agent']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_agent, $data['page_index']) ?>">
-    <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Agent</span></a>
+    <a href="#" class="nav-link"><i class="icon-users4"></i> <span>Agent</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_agent, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/agent" class="nav-link<?php active_page($data, 'agent'); ?>">Manage Agent</a></li>

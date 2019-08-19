@@ -19,7 +19,7 @@ if ($columnName == 'DT_RowIndex') {
 =================================================================================*/
 $searchQuery = " ";
 if ($searchValue != '') {
-  $searchQuery = " and (id like '%" . $searchValue . "%' or name like '%" . $searchValue . "%') ";
+  $searchQuery = " and (id like '%" . $searchValue . "%' or name like '%" . $searchValue . "%' or email like '%" . $searchValue . "%' or mobile_no like '%" . $searchValue . "%' or address like '%" . $searchValue . "%') ";
 }
 /*==============================================================================
 ## Total number of records without filtering

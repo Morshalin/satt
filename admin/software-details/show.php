@@ -121,7 +121,7 @@ if (isset($_GET['software_details_id'])) {
             <legend class="text-uppercase font-size-m font-weight-bold">Software Price Details </legend>
             <div class="row">
                     <b class="col-md-4">Software Demo URL :</b>
-                    <h6 class="col-md-8"><a target="blank" href="<?php echo $row_price['demo_url']; ?>"><?php echo $row_price['demo_url']; ?></a></h6>
+                    <h6 class="col-md-8"><a target="blank" href="https://<?php echo $row_price['demo_url']; ?>"><?php echo $row_price['demo_url']; ?></a></h6>
             </div>
             <div class="row">
                     <b class="col-md-4">Installation Charge :</b>
