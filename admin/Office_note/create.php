@@ -8,7 +8,7 @@
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Create Notes <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <div class="form-group">
               <label for="customer_id">Select Customer Name</label>
               <select class="form-control" id="customer_id" name="customer_id">
@@ -23,12 +23,13 @@
                         $row = $result->fetch_assoc();
                     } else {
                         http_response_code(500);
-                        die(json_encode(['message' => 'Course Not Found']));
+                        die(json_encode(['message' => 'Customer Information Not Found']));
                     }
                 ?>
               </select>
             </div>
         </div>
+    </div>
     </div>
     <div class="row">
         <div class="col-md-12">

@@ -49,10 +49,12 @@
   				<thead>
   					<tr>
   						<th>#</th>
-  						<th>Course</th>
-              <th>Code</th>
-  						<th>Description</th>
-  						<th>Status</th>
+  						<th>Customer Name</th>
+              <th>Customer Number</th>
+  						<th>Customer Email</th>
+  						<th>institute Category</th>
+              <th>Institute Name</th>
+              <th>Status</th>
   						<th>Action</th>
   					</tr>
   				</thead>

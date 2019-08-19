@@ -9,7 +9,7 @@ if (isset($_GET['note_id'])) {
 		$result = $db->select($query);
 		if (!$result) {
 			http_response_code(500);
-			die(json_encode(['message' => 'Course Not Found']));
+			die(json_encode(['message' => 'Note Not Found']));
 		}
 	}
 }
@@ -22,12 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 	if ($note_id) {
 		$error = array();
 		$note = $fm->validation($_POST['note']);
-		$course_code = $fm->validation($_POST['course_code']);
-		$course_description = $fm->validation($_POST['course_description']);
 
-		$courseCheck = $fm->dublicateCheck('satt_official_notes', 'note', $note);
-		$codeCheck = $fm->dublicateCheck('satt_official_notes', 'course_code', $course_code);
+		if (isset($_POST['leave_reason'])) {
+		$leave_reason = $_POST['leave_reason'];
+		}else{
+			$leave_reason="";
+		}
 
+		$noteCheck = $fm->dublicateCheck('satt_official_notes', 'note', $note);
 		if (isset($_POST['status'])) {
 			$status = 1;
 		} else {
@@ -35,40 +37,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 		}
 
 		if (!$note) {
-			$error['note'] = 'Course Name Field required';
-		} elseif ($courseCheck) {
-			$course_row = $courseCheck->fetch_assoc();
-			if ($course_row['id'] != $note_id) {
-				$error['note'] = 'Course Already Exists';
-			}
-
-		} elseif (strlen($note) > 255) {
-			$error['note'] = 'Course Name Can Not Be More Than 255 Charecters';
+			$error['note'] = 'Note Field required';
 		}
 
-		if (!$course_code) {
-			$error['course_code'] = 'Course Code Field required';
-		} elseif ($codeCheck) {
-			$code_row = $codeCheck->fetch_assoc();
-			if ($code_row['id'] != $note_id) {
-				$error['course_code'] = 'Course Code Already Exits';
-			}
-		} elseif (strlen($course_code) > 255) {
-			$error['course_code'] = 'Course Code Can Not Be More Than 255 Charecters';
-		}
 
-		if (strlen($course_description) > 500) {
-			$error['course_description'] = 'Course Code Can Not Be More Than 500 Charecters';
+		if (strlen($note) > 500) {
+			$error['note'] = 'Note Can Not Be More Than 500 Charecters';
 		}
 
 		if ($error) {
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 		} else {
-			$query = "UPDATE satt_official_notes SET note = '$note', course_code = '$course_code', course_description = '$course_description', status = '$status' WHERE id='$note_id'";
+			$query = "UPDATE satt_official_notes SET note = '$note', leave_reason='$leave_reason', update_date = now(), status = '$status' WHERE id='$note_id'";
 			$result = $db->update($query);
 			if ($result != false) {
-				die(json_encode(['message' => 'Course Updated Successfull']));
+				die(json_encode(['message' => 'Note Updated Successfull']));
 			} else {
 				http_response_code(500);
 				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));

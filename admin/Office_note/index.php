@@ -53,6 +53,7 @@
               <th>Customer Name</th>
   						<th>Note Description</th>
               <th>Create Date</th>
+              <th>Update Date</th>
   						<th>Status</th>
   						<th>Action</th>
   					</tr>

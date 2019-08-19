@@ -1,26 +1,37 @@
 <?php
-  require_once '../../config/config.php';
-  ajax();
+require_once '../../config/config.php';
+ajax();
 ?>
-<script type="text/javascript">
-$(document).ready(function(){
-    $("#check").click(function(){
-        $(".leave").toggle();
-    });
-});
-</script>
+<?php 
+  if (isset($_GET['delid'])) {
+   $delid = $_GET['delid'];
+   $delquery = "DELETE FROM  satt_official_notes WHERE id ='$delid'";
+   $delresult = $db->delete($delquery);
+   if ($delresult) {
+    die(json_encode(['message' => 'Note Delete Successfuly']));
+  } else {
+    http_response_code(500);
+    die(json_encode(['message' => 'Note Not Found']));
+  }
+
+}
+?>
+
+<?php 
+    if (isset($_GET['customerdetails_id'])) {
+       $customerdetails_id = $_GET['customerdetails_id'];
+?>
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/Office_note/ajax.php" id="content_form" method="post">
+<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/customerdetails/ajax.php" id="content_form" method="post">
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Create Notes <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-              <label for="customer_id">Select Customer Name</label>
-              <select class="form-control" id="customer_id" name="customer_id">
-                <option>Customer Name</option>
+              <label for="customerdetails_id">Select Customer Name</label>
+              <select class="form-control" id="customerdetails_id" name="customerdetails_id">
                 <?php 
-                     $query = "SELECT * FROM satt_customer_informations";
+                     $query = "SELECT * FROM satt_customer_informations where id ='$customerdetails_id'";
                     $result = $db->select($query);
                     if ($result) {
                         while ($row = $result->fetch_assoc()) { ?>
@@ -29,25 +40,42 @@ $(document).ready(function(){
                         $row = $result->fetch_assoc();
                     } else {
                         http_response_code(500);
-                        die(json_encode(['message' => 'Course Not Found']));
+                        die(json_encode(['message' => 'Note Not Found']));
                     }
                 ?>
               </select>
             </div>
         </div>
 
-        <div class="col-lg-2 mt-3">
-             <label for="customer_id">Check Reason</label>
-            <div class="form-check form-check-switchery form-check-inline form-check-right">
-                <label for="course_description" class="form-check-label">On/Off</label>
-                  <input type="checkbox" name="check" id="check" value="1" class="form-check-input-switchery mt-3" data-fouc checked>
-
+        <div class="col-lg-2">
+             <label for="check"><strong>Check Reason</strong></label>
+            <div class="">
+                <label for="check" class="form-check-label">On/Off</label>
+                  <input type="checkbox" name="check" id="check" value="0" class="mt-2">
             </div>
         </div>
-        <div class="col-lg-4" >
+        <div class="col-lg-4" id="flied"
+        style="display: none;">
             <div class="form-group leave">
                 <label for="institute_name" class="col-form-label">Leave Reason<span class="text-danger">*</span></label>
-                <input type="text" name="institute_name" id="" class="form-control" placeholder="Interested Services" required autofocus value="">
+              <select multiple="multiple" class="form-control select" id="leave_reason" name="leave_reason[]">
+                <option value=""></option>
+                <?php 
+                     $query = "SELECT * FROM satt_customer_notes where status=1";
+                    $result = $db->select($query);
+                    if ($result) {
+                        while ($row = $result->fetch_assoc()) { ?>
+                           <option value="<?php echo $row['id'] ?>"><?php echo $row['reason']; ?> </option>  
+                      <?php  }
+                        $row = $result->fetch_assoc();
+                    } else {
+                        http_response_code(500);
+                        die(json_encode(['message' => 'Reasion Not Found']));
+                    }
+                ?>
+              </select>
+
+                   
             </div>
         </div>
 
@@ -69,6 +97,7 @@ $(document).ready(function(){
             </div>
         </div>
     </div>
+    <input type="hidden" name="action" value="add_note">
     <div class="form-group row">
         <div class="col-lg-4 offset-lg-4">
             <button type="submit" name="create" class="btn btn-primary ml-31" id="submit">Submit</button>
@@ -78,4 +107,55 @@ $(document).ready(function(){
     </div>
 </fieldset>
 </form>
+<br>
+
+<table class="table">
+  <tr>
+   <th>Admin Name</th>
+   <th>Customer name</th>
+   <th>Leave Reasion</th>
+   <th>Customer Note</th>
+   <th>Create Date</th>
+   <th>update Date</th>
+   <th>Action</th>
+</tr>
+<?php 
+
+$notequery = "SELECT *, a.user_name, c.name, n.id, n.note, n.creat_date, n.update_date
+from satt_official_notes  n
+join satt_admins  a on a.id = n.admin_id 
+join satt_customer_informations  c on c.id = n.customer_id 
+and n.customer_id = '$customerdetails_id'";
+  $noteresult = $db->select($notequery);
+  if ($noteresult) {
+    while ($notedata = $noteresult->fetch_assoc()) { 
+      ?>
+        <tr>
+        <td><?php echo $notedata['user_name'];?></td>
+        <td><?php echo $notedata['name'];?></td>
+        <td>
+          <?php
+            $reason = '';
+            $sql = "SELECT satt_customer_notes.reason from  satt_leave_reason inner join  satt_customer_notes on satt_leave_reason.leave_reason = satt_customer_notes.id where  satt_leave_reason.custimer_id = '$customerdetails_id'";
+        
+              $result = $db->select($sql);
+              if ($result) {
+                  while ($data = $result->fetch_assoc()) { ?>
+                     <span class="badge badge-success mr-1"><?php echo $data['reason']; ?></span>
+                  <?php } } ?>
+        </td>
+        <td><?php echo $notedata['note'];?></td>
+        <td><?php echo $notedata['creat_date'];?></td>
+        <td><?php echo $notedata['update_date'];?></td>
+        <td><a class="btn btn-danger" href="?delid=<?php echo $notedata['id'];?>">Delete</a>
+        </td>
+    </tr>
+   <?php } } ?>
+
+</table>
+
+
+
+
+<?php } ?>
 <!-- /login form -->

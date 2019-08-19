@@ -70,37 +70,37 @@ var DatatableButtonsHtml5 = function() {
                 className: 'btn btn-danger',
                 text: 'Delete',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/course/action.php', action = 'delete', msg = 'Once deleted, it will deleted all related Data!');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/customerdetails/action.php', action = 'delete', msg = 'Once deleted, it will deleted all related Data!');
                 }
             },{
                 extend: 'selected',
                 className: 'btn bg-success',
                 text: 'Online',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/course/action.php', action = 'active', msg = 'Change Status To Online');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/customerdetails/action.php', action = 'active', msg = 'Change Status To Online');
                 }
             }, {
                 extend: 'selected',
                 className: 'btn bg-secondary',
                 text: 'Offline',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/course/action.php', action = 'inactive', msg = 'Change Status To Offline');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/customerdetails/action.php', action = 'inactive', msg = 'Change Status To Offline');
                 }
             }, {
                 extend: 'selected',
                 className: 'btn bg-warning',
                 text: 'Toggle Status',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/course/action.php', action = 'toggle', msg = 'Toggle Status');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/customerdetails/action.php', action = 'toggle', msg = 'Toggle Status');
                 }
             }],
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 4]
+                targets: [0, 7]
             }, {
                 orderable: false,
-                targets: [4, 5]
+                targets: [6, 7]
             }],
             order: [1, 'asc'],
             processing: true,
@@ -111,13 +111,17 @@ var DatatableButtonsHtml5 = function() {
                 {
                     data: 'DT_RowIndex'
                 }, {
-                    data: 'course_name'
+                    data: 'name'
                 }, {
-                    data: 'course_code'
+                    data: 'number'
                 }, {
-                    data: 'course_description'
+                    data: 'email'
+                },  {
+                    data: 'institute_type'
                 }, {
-                    data: 'course_status'
+                    data: 'institute_name'
+                },{
+                    data: 'status'
                 },{
                     data: 'action'
                 }
@@ -146,6 +150,7 @@ var DatatableButtonsHtml5 = function() {
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
                     _componentSelect2Normal();
+                    _componentDatePicker();
                     _modalFormValidation();
                 })
                 .fail(function(data) {
@@ -175,4 +180,14 @@ var DatatableButtonsHtml5 = function() {
 // ------------------------------
 document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
+});
+
+$(document).ready(function(){
+    $(document).on('click', '#check', function(){
+        if (this.checked) {
+            $("#flied").show();
+        } else{
+            $("#flied").hide();
+        }
+    });
 });
