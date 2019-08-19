@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/course');
+Session::checkSession('admin', ADMIN_URL . '/customerdetails');
 ## Read value
 $draw = $_GET['draw'];
 $row = $_GET['start'];
@@ -19,22 +19,22 @@ if ($columnName == 'DT_RowIndex') {
 =================================================================================*/
 $searchQuery = " ";
 if ($searchValue != '') {
-	$searchQuery = " and (id like '%" . $searchValue . "%' or course_name like '%" . $searchValue . "%' or
-        course_code like '%" . $searchValue . "%' or
+	$searchQuery = " and (id like '%" . $searchValue . "%' or customerdetails_name like '%" . $searchValue . "%' or
+        customerdetails_code like '%" . $searchValue . "%' or
         course_description like'%" . $searchValue . "%' ) ";
 }
 /*==============================================================================
 ## Total number of records without filtering
 =================================================================================*/
 
-$sel = $db->select("select count(*) as allcount from satt_courses");
+$sel = $db->select("select count(*) as allcount from satt_customer_informations");
 $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['allcount'];
 
 /*==============================================================================
 ## Total number of record with filtering
 =================================================================================*/
-$sel = $db->select("select count(*) as allcount from satt_courses WHERE 1 " . $searchQuery);
+$sel = $db->select("select count(*) as allcount from satt_customer_informations WHERE 1 " . $searchQuery);
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
@@ -42,18 +42,32 @@ $totalRecordwithFilter = $records['allcount'];
 /*==============================================================================
 ## Fetch records
 =================================================================================*/
-$query = "select * from satt_courses WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$query = "select * from satt_customer_informations WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $result = $db->select($query);
 $data = array();
 $i = 0;
 if ($result) {
 	while ($row = mysqli_fetch_assoc($result)) {
+    /*$note="warning";
+    $query = "SELECT * FROM satt_official_notes WHERE leave_reason = 0";
+    $results = $db->select($query);
+    if ($results) {
+      while ($datas = $results->fetch_assoc()) {
+       if($row['id'] == $datas['customer_id']){
+        $note="danger";
+       }else{
+         $note="success";
+       }
+      }
+    }*/
 		$data[] = array(
 			"DT_RowIndex" => $i + 1,
 			"id" => $row['id'],
-			"course_name" => '<strong>' . $row['course_name'] . '</strong>',
-			"course_code" => $row['course_code'],
-			"course_description" => $row['course_description'],
+			"name" => '<strong>' . $row['name'] . '</strong>',
+			"number" => $row['number'],
+			"email" => $row['email'],
+      "institute_type" => $row['institute_type'],
+      "institute_name" => $row['institute_name'],
 			"action" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
         <div class="list-icons" id="action_menu_' . $row['id'] . '">
@@ -62,20 +76,20 @@ if ($result) {
           		<i class="icon-menu9"></i>
           	</a>
           	<div class="dropdown-menu dropdown-menu-right">
-              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/customerdetails/note.php?course_id=' . $row['id'] . '"><i class="icon-eye"></i> Note </span>
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/customerdetails/note.php?customerdetails_id=' . $row['id'] . '"><i class="icon-eye"></i> Note </span>
 
-              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/course/show.php?course_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/customerdetails/show.php?customerdetails_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
 
-          		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/course/edit.php?course_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
-          		<span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/course/ajax.php?course_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
+          		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/customerdetails/edit.php?customerdetails_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
+          		<span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/customerdetails/ajax.php?customerdetails_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
           	</div>
           </div>
         </div>
         ',
-			"course_status" => '
+			"status" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="status_loading_' . $row['id'] . '"  style="display: none">
-        <label class="form-check-label" id="status_' . $row['id'] . '" title="' . ($row['course_status'] == 1 ? 'Active' : 'InActive') . '" data-popup="tooltip-custom" data-placement="bottom">
-        <input type="checkbox" class="form-check-status-switchery" id="change_status" data-id="' . $row['id'] . '" data-status="' . $row['course_status'] . '" data-url="' . ADMIN_URL . '/course/ajax.php?course_id=' . $row['id'] . '&action=status&status=' . $row['course_status'] . '"' . ($row['course_status'] == 1 ? 'checked' : '') . ' data-fouc >
+        <label class="form-check-label" id="status_' . $row['id'] . '" title="' . ($row['status'] == 1 ? 'Active' : 'InActive') . '" data-popup="tooltip-custom" data-placement="bottom">
+        <input type="checkbox" class="form-check-status-switchery" id="change_status" data-id="' . $row['id'] . '" data-status="' . $row['status'] . '" data-url="' . ADMIN_URL . '/customerdetails/ajax.php?status_id=' . $row['id'] . '&action=status&status=' . $row['status'] . '"' . ($row['status'] == 1 ? 'checked' : '') . ' data-fouc >
         </label>
         	',
 		);

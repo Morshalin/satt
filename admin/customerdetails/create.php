@@ -6,11 +6,11 @@
 <!-- Login form -->
 <form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/customerdetails/ajax.php" id="content_form" method="post">
   <fieldset class="mb-3">
-    <legend class="text-uppercase font-size-sm font-weight-bold">Create New Course <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
+    <legend class="text-uppercase font-size-sm font-weight-bold">Customer Information <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="course_name" class="col-form-label">Cutomer Name <span class="text-danger">*</span></label>
+                <label for="course_name" class="col-form-label">Customer Name <span class="text-danger">*</span></label>
                 <input type="text" name="name" id="name" class="form-control" placeholder="Cutomer Name" required autofocus value="">
             </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="introduction_date" class="col-form-label">Introduction Date<span class="text-danger">*</span></label>
-                <input type="date" name="introduction_date" id="introduction_date" class="form-control" placeholder="Introduction Date" required autofocus value="">
+                <input type="text" name="introduction_date" id="introduction_date" class="form-control date" placeholder="Select Start Date" required autofocus value="">
             </div>
         </div>
 
@@ -103,7 +103,7 @@
                     $result = $db->select($query);
                     if ($result) {
                         while ($row = $result->fetch_assoc()) { ?>
-                           <option value="<?php echo $row['services'] ?>"><?php echo $row['services']; ?> </option>  
+                           <option value="<?php echo $row['id'] ?>"><?php echo $row['services']; ?> </option>  
                       <?php  }
                         $row = $result->fetch_assoc();
                     } else {
@@ -160,7 +160,7 @@
                     $result = $db->select($query);
                     if ($result) {
                         while ($row = $result->fetch_assoc()) { ?>
-                           <option value="<?php echo $row['software_type'] ?>"><?php echo $row['software_type']; ?> </option>  
+                           <option value="<?php echo $row['id'] ?>"><?php echo $row['software_type']; ?> </option>  
                       <?php  }
                         $row = $result->fetch_assoc();
                     } else {
@@ -183,15 +183,15 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="form-check form-check-switchery form-check-inline form-check-right">
-                <label for="course_description" class="form-check-label">Status</label>
-                  <input type="checkbox" name="course_status" id="course_status" value="1" class="form-check-input-switchery mt-3" data-fouc checked>
+                <label for="status" class="form-check-label">Status</label>
+                  <input type="checkbox" name="status" id="status" value="1" class="form-check-input-switchery mt-3" data-fouc checked>
 
             </div>
         </div>
     </div>
     <div class="form-group row">
         <div class="col-lg-4 offset-lg-4">
-            <button type="submit" name="create" class="btn btn-primary ml-31" id="submit">Submit</button>
+            <button type="submit" name="submit" class="btn btn-primary ml-31" id="submit">Submit</button>
             <button type="button" class="btn btn-link" id="submiting" style="display: none;" disabled="">Submiting <img src="<?php echo BASE_URL; ?>/assets/ajaxloader.gif"></button>
             <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
         </div>

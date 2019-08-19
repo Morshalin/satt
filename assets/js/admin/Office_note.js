@@ -97,10 +97,10 @@ var DatatableButtonsHtml5 = function() {
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 6]
+                targets: [0, 7]
             }, {
                 orderable: false,
-                targets: [4, 5]
+                targets: [6, 7]
             }],
             order: [1, 'asc'],
             processing: true,
@@ -118,6 +118,8 @@ var DatatableButtonsHtml5 = function() {
                     data: 'note'
                 }, {
                     data: 'creat_date'
+                },{
+                    data: 'update_date'
                 },{
                     data: 'status'
                 },{
@@ -176,4 +178,17 @@ var DatatableButtonsHtml5 = function() {
 // ------------------------------
 document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
+});
+
+$(document).ready(function(){
+    // $("#check").click(function(){
+    //     $("#flied").toggle();
+    // });
+    $(document).on('click', '#check', function(){
+        if (this.checked) {
+            $("#flied").show();
+        } else{
+            $("#flied").hide();
+        }
+    });
 });

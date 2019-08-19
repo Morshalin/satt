@@ -1,16 +1,16 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/course', 'Course');
-if (isset($_GET['course_id'])) {
-	$course_id = $_GET['course_id'];
-	$query = "SELECT * FROM satt_courses WHERE id='$course_id'";
+Session::checkSession('admin', ADMIN_URL . '/Office_note', 'Office_note');
+if (isset($_GET['note_id'])) {
+	$note_id = $_GET['note_id'];
+	$query = "SELECT * FROM satt_official_notes WHERE id='$note_id'";
 	$result = $db->select($query);
 	if ($result) {
 		$row = $result->fetch_assoc();
 	} else {
 		http_response_code(500);
-		die(json_encode(['message' => 'Course Not Found']));
+		die(json_encode(['message' => 'Note Not Found']));
 	}
 
 } else {
@@ -21,30 +21,46 @@ if (isset($_GET['course_id'])) {
 ?>
 
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/course/ajax.php?course_id=<?php echo $course_id; ?>&action=update" id="content_form" method="post">
+<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/Office_note/ajax.php?note_id=<?php echo $note_id; ?>&action=update" id="content_form" method="post">
   <fieldset class="mb-3">
-    <legend class="text-uppercase font-size-sm font-weight-bold">Update Course <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
+    <legend class="text-uppercase font-size-sm font-weight-bold">Update Note Description <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-md-12">
             <div class="form-group">
-                <label for="course_name" class="col-form-label">Course Name <span class="text-danger">*</span></label>
-                <input type="text" name="course_name" id="course_name" class="form-control" placeholder="New Course Name" required autofocus value="<?php echo $row['course_name'] ?>">
-
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <label for="course_code" class="col-form-label">Course Code <span class="text-danger">*</span></label>
-                <input type="text" name="course_code" id="course_code" class="form-control" placeholder="New Course Code" required value="<?php echo $row['course_code'] ?>">
-
+                <label for="note" class="col-form-label">Note Description</label>
+                <textarea name="note" id="note" rows="3" class="form-control" style="resize: none;"><?php echo $row['note'] ?></textarea>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="course_description" class="col-form-label">Course Description</label>
-                <textarea name="course_description" id="course_description" rows="3" class="form-control" style="resize: none;" placeholder="Enter New Course Description Here"><?php echo $row['course_description'] ?></textarea>
+        <div class="col-lg-2">
+             <label for="customerdetails_id"><strong>Check Reason</strong></label>
+            <div class="">
+                <label for="check" class="form-check-label">On/Off</label>
+                  <input type="checkbox" name="check" id="check" value="0" class="mt-2">
+            </div>
+        </div>
+        <div class="col-lg-10" id="flied"
+        style="display: none;">
+            <div class="form-group leave">
+                <label for="institute_name" class="col-form-label">Leave Reason<span class="text-danger">*</span></label>
+                <select class="form-control" id="leave_reason" name="leave_reason">
+                <option></option>
+                <?php 
+                     $query = "SELECT * FROM satt_customer_notes";
+                    $result = $db->select($query);
+                    if ($result) {
+                        while ($row = $result->fetch_assoc()) { ?>
+                           <option value="<?php echo $row['id'] ?>"><?php echo $row['reason']; ?> </option>  
+                      <?php  }
+                        $row = $result->fetch_assoc();
+                    } else {
+                        http_response_code(500);
+                        die(json_encode(['message' => 'Reasion Not Found']));
+                    }
+                ?>
+              </select>
+                   
             </div>
         </div>
     </div>
@@ -52,8 +68,7 @@ if (isset($_GET['course_id'])) {
         <div class="col-lg-12">
             <div class="form-check form-check-switchery form-check-inline form-check-right">
                 <label for="course_description" class="form-check-label">Status</label>
-                  <input type="checkbox" name="course_status" id="course_status" value="1" class="form-check-input-switchery mt-3" data-fouc <?php echo $row['course_status'] == 1 ? 'checked' : ''; ?>>
-
+                  <input type="checkbox" name="status" id="status" value="1" class="form-check-input-switchery mt-3" data-fouc <?php echo $row['status'] == 1 ? 'checked' : ''; ?>>
             </div>
         </div>
     </div>
