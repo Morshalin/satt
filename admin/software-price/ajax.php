@@ -82,21 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			$query = "INSERT INTO
 			software_price_log(software_name, software_id, demo_url, installation_charge, monthly_charge, yearly_charge, direct_sell, total_price, agent_commission_one_time, agent_commission_monthly, discount_offer, yearly_renew_charge) VALUES ('$old_software_name','$old_software_id','$old_demo_url','$old_installation_charge','$old_monthly_charge','$old_yearly_charge','$old_direct_sell','$old_total_price','$old_agent_commission_one_time','$old_agent_commission_monthly','$old_discount_offer','$old_yearly_renew_charge');";
 			$result = $db->insert($query);
-			//inserting record
-			$query = "UPDATE software_price SET
-			software_name='$software_name',
-			installation_charge='$installation_charge',
-			demo_url='$demo_url',
-			monthly_charge='$monthly_charge',
-			yearly_charge='$yearly_charge',
-			direct_sell='$direct_sell',
-			total_price='$total_price',
-			agent_commission_one_time='$agent_commission_one_time',
-			agent_commission_monthly='$agent_commission_monthly',
-			discount_offer='$discount_offer',
-			yearly_renew_charge='$yearly_renew_charge'
-			WHERE id=$software_price_id;";
-			$result = $db->update($query);
 			if ($result != false) {
 				die(json_encode(['message' => 'Software Price Updated Successfull']));
 			} else {
