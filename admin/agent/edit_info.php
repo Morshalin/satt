@@ -172,7 +172,9 @@ if (isset($_GET['agent_id'])) {
                 <div class="col-lg-6">
                     <div class="form-group">
                         <h5 class="font-weight-bold">Current Address:</h5>
-                        <input type="checkbox" name="same_as" id="same_as"> <span style="font-size: 12px">Same As Permanent</span>
+                        <input type="checkbox"  name="same_as" id="same_as"> <span style="font-size: 12px">Same As Permanent</span>
+
+                        
                     </div>
                 </div>
             </div>
