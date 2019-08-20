@@ -80,8 +80,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 		else {
 			//inserting record
 			$query = "INSERT INTO
-			software_price_log(software_name, software_id, demo_url, installation_charge, monthly_charge, yearly_charge, direct_sell, total_price, agent_commission_one_time, agent_commission_monthly, discount_offer, yearly_renew_charge) VALUES ('$old_software_name','$old_software_id','$old_demo_url','$old_installation_charge','$old_monthly_charge','$old_yearly_charge','$old_direct_sell','$old_total_price','$old_agent_commission_one_time','$old_agent_commission_monthly','$old_discount_offer','$old_yearly_renew_charge');";
+			software_price_log(software_name, demo_url, installation_charge, monthly_charge, yearly_charge, direct_sell, total_price, agent_commission_one_time, agent_commission_monthly, discount_offer, yearly_renew_charge) VALUES ('$old_software_name','$old_demo_url','$old_installation_charge','$old_monthly_charge','$old_yearly_charge','$old_direct_sell','$old_total_price','$old_agent_commission_one_time','$old_agent_commission_monthly','$old_discount_offer','$old_yearly_renew_charge');";
 			$result = $db->insert($query);
+
+			$query = "UPDATE software_price SET
+			demo_url='$demo_url',
+			installation_charge='$installation_charge',
+			monthly_charge='$monthly_charge',
+			yearly_charge='$yearly_charge',
+			direct_sell='$direct_sell',
+			total_price='$total_price',
+			agent_commission_one_time='$agent_commission_one_time',
+			agent_commission_monthly='$agent_commission_monthly',
+			discount_offer='$discount_offer',
+			yearly_renew_charge='$yearly_renew_charge' WHERE id='$software_price_id';";
+
+			$result = $db->update($query);
+
 			if ($result != false) {
 				die(json_encode(['message' => 'Software Price Updated Successfull']));
 			} else {
@@ -99,21 +114,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$error = array();
 
-	$software_status = $_POST['software_status'];
-	$a = explode(',',  $software_status);
-	$software_status_name = $a[0];
-	$software_status_id = $a[1];
+	// $software_status = $_POST['software_status'];
+	// $a = explode(',',  $software_status);
+	// $software_status_name = $a[0];
+	// $software_status_id = $a[1];
 
-	$language_name = $_POST['language_name'];
-	$developer_name = $_POST['developer_name'];
-	$software_name = $fm->validation($_POST['software_name']);
-	$create_date = $fm->validation($_POST['create_date']);
-	$end_date = $fm->validation($_POST['end_date']);
-	$short_feature = $fm->validation($_POST['short_feature']);
-	$user_manual = $fm->validation($_POST['user_manual']);
-	$condition_details = $fm->validation($_POST['condition_details']);
+	// $language_name = $_POST['language_name'];
+	// $developer_name = $_POST['developer_name'];
+	// $software_name = $fm->validation($_POST['software_name']);
+	// $create_date = $fm->validation($_POST['create_date']);
+	// $end_date = $fm->validation($_POST['end_date']);
+	// $short_feature = $fm->validation($_POST['short_feature']);
+	// $user_manual = $fm->validation($_POST['user_manual']);
+	// $condition_details = $fm->validation($_POST['condition_details']);
 
 	// software price details
+	$software_name = $fm->validation($_POST['software_name']);
 	$demo_url = $fm->validation($_POST['demo_url']);
 	$installation_charge = $fm->validation($_POST['installation_charge']);
 	$monthly_charge = $fm->validation($_POST['monthly_charge']);
@@ -125,61 +141,78 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$discount_offer = $fm->validation($_POST['discount_offer']);
 	$yearly_renew_charge = $fm->validation($_POST['yearly_renew_charge']);
 
-
-	if (isset($_POST['status'])) {
-		$status = 1;
-	} else {
-		$status = 0;
-	}
-
 	if (!$software_name) {
 		$error['software_name'] = 'Software Name Field required';
 	}
-		if (!$software_status) {
-		$error['software_status'] = 'Software Status Field required';
+		if (!$demo_url) {
+		$error['demo_url'] = 'demo url Field required';
 	}
-		if (!$language_name) {
-		$error['language_name'] = 'Software Language Field required';
+		if (!$installation_charge) {
+		$error['installation_charge'] = 'installation charge Field required';
 	}
-		if (!$developer_name) {
-		$error['developer_name'] = 'Developer Name Field required';
+		if (!$monthly_charge) {
+		$error['monthly_charge'] = 'monthly charge Field required';
 	}
-		if (!$create_date) {
-		$error['create_date'] = 'Create Date Field required';
+		if (!$yearly_charge) {
+		$error['yearly_charge'] = 'yearly charge Field required';
 	}
-		if (!$short_feature) {
-		$error['short_feature'] = 'Short Feature Field required';
+		if (!$direct_sell) {
+		$error['direct_sell'] = 'direct sell Field required';
+	}
+		if (!$total_price) {
+		$error['total_price'] = 'total price Field required';
+	}
+		if (!$agent_commission_one_time) {
+		$error['agent_commission_one_time'] = 'agent commission one time Field required';
+	}
+		if (!$agent_commission_monthly) {
+		$error['agent_commission_monthly'] = 'agent commission monthly Field required';
+	}
+		if (!$discount_offer) {
+		$error['discount_offer'] = 'discount offer Field required';
+	}
+		if (!$yearly_renew_charge) {
+		$error['yearly_renew_charge'] = 'yearly renew charge Field required';
 	}
 
 	if ($error) {
 		http_response_code(500);
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
-		$query = "INSERT INTO software_details (software_name,software_status_name,software_status_id,create_date,end_date,short_feature,user_manual,condition_details, status) VALUES ('$software_name','$software_status_name','$software_status_id','$create_date','$end_date','$short_feature','$user_manual','$condition_details', '$status')";
-		$last_id = $db->custom_insert($query);
-		if ($last_id) {
-			// multi Language insert
-			for ($i = 0; $i < count($language_name); $i++) {
-					$sql2 = "INSERT INTO software_price_multi(software_id,language_id) VALUES('$last_id','$language_name[$i]')";
-					$insertrow1 = $db->insert($sql2);
-				}
-			// multi Developer insert
-			for ($i = 0; $i < count($developer_name); $i++) {
-					$sql2 = "INSERT INTO software_develope_by(software_id,developer_id) VALUES('$last_id','$developer_name[$i]')";
-					$insertrow1 = $db->insert($sql2);
-				}
+		$query = "INSERT INTO software_price(
+			software_name,
+			-- software_id,
+			demo_url,
+			installation_charge,
+			monthly_charge,
+			yearly_charge,
+			direct_sell,
+			total_price,
+			agent_commission_one_time,
+			agent_commission_monthly,
+			discount_offer,
+			yearly_renew_charge) VALUES (
+				'$software_name',
+				'$demo_url',
+				'$installation_charge',
+				'$monthly_charge',
+				'$yearly_charge',
+				'$direct_sell',
+				'$total_price',
+				'$agent_commission_one_time',
+				'$agent_commission_monthly',
+				'$discount_offer',
+				'$yearly_renew_charge');";
 
-			$query = "INSERT INTO software_price (software_name,software_id,demo_url,installation_charge,monthly_charge,yearly_charge,direct_sell,total_price, agent_commission_one_time,agent_commission_monthly,discount_offer,yearly_renew_charge) VALUES ('$software_name','$last_id','$demo_url','$installation_charge','$monthly_charge','$yearly_charge','$direct_sell','$total_price', '$agent_commission_one_time','$agent_commission_monthly','$discount_offer','$yearly_renew_charge')";
-			$result = $db->insert($query);
+				$result = $db->insert($query);
 
-			if ($result != false) {
-				die(json_encode(['message' => 'Software Language Added Successfull']));
-			} else {
-				http_response_code(500);
-				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+		if ($result != false) {
+			die(json_encode(['message' => 'Software price added Successfull']));
+		} else {
+			http_response_code(500);
+			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+		}
 			}
-		} //last id end
-	} //else end
 }
 
 /*================================================================
