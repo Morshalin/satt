@@ -69,10 +69,10 @@ var DatatableButtonsHtml5 = function() {
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 11]
+                targets: [0, 6]
             }, {
                 orderable: false,
-                targets: [ 11]
+                targets: [ 6]
             }],
             order: [1, 'asc'],
             processing: true,
@@ -95,14 +95,6 @@ var DatatableButtonsHtml5 = function() {
                 }, {
                     data: 'total_price'
                 }, {
-                    data: 'agent_commission_one_time'
-                },{
-                    data: 'agent_commission_monthly'
-                },{
-                    data: 'discount_offer'
-                },{
-                    data: 'yearly_renew_charge'
-                },{
                     data: 'action'
                 }
             ]

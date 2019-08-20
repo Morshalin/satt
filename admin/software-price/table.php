@@ -56,10 +56,6 @@ if ($result) {
       "yearly_charge" => '<strong>' . $row['yearly_charge'] . '</strong>',
       "direct_sell" => '<strong>' . $row['direct_sell'] . '</strong>',
       "total_price" => '<strong>' . $row['total_price'] . '</strong>',
-      "agent_commission_one_time" => '<strong>' . $row['agent_commission_one_time'] . '</strong>',
-      "agent_commission_monthly" => '<strong>' . $row['agent_commission_monthly'] . '</strong>',
-      "discount_offer" => '<strong>' . $row['discount_offer'] . '</strong>',
-      "yearly_renew_charge" => '<strong>' . $row['yearly_renew_charge'] . '</strong>',
       "action" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
         <div class="list-icons" id="action_menu_' . $row['id'] . '">

@@ -55,10 +55,6 @@ Session::checkSession('admin', ADMIN_URL . '/software-price', 'Software Price');
               <th>Yearly charge</th>
               <th>Direct sell</th>
   						<th>Total price</th>
-  						<th>Agent commission (one time)</th>
-              <th>Agent commission (monthly)</th>
-              <th>Discount offer</th>
-              <th>Yearly renew charge</th>
   						<th>Action</th>
   					</tr>
   				</thead>
