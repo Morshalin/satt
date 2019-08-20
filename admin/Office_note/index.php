@@ -4,7 +4,7 @@
   $data = array();
   $data['page_title'] = 'Office Note';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'Office Note';
+  $data['page_index'] = 'Office_note';
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/Office_note'];
 ?>

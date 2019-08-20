@@ -4,7 +4,7 @@
   $data = array();
   $data['page_title'] = 'Customertype';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'customer type';
+  $data['page_index'] = 'customer-type';
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/customertype'];
 ?>

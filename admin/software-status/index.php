@@ -4,7 +4,7 @@
   $data = array();
   $data['page_title'] = 'Software Status';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'Software-status';
+  $data['page_index'] = 'software-status';
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/software-status'];
 ?>

@@ -4,7 +4,7 @@ Session::checkSession('admin', ADMIN_URL . '/software-details', 'Software Detail
   $data = array();
   $data['page_title'] = 'Software Details';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'Software-details';
+  $data['page_index'] = 'software-details';
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/software-details'];
 ?>
