@@ -99,7 +99,7 @@ if (isset($_GET['software_price_id'])) {
 		</div>
     <div class="form-group row text-right">
         <div class="col-lg-12 offset-lg-12">
-            <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" style="padding-right: 50px; padding-left: 50px">Close</button>
         </div>
     </div>
 </fieldset>

@@ -28,7 +28,7 @@ if (isset($_GET['software_price_id'])) {
         <div class="col-lg-12">
             <div class="form-group">
                 <label for="course_name" class="col-form-label">Software Name </label>
-                <input type="text" name="software_name" id="software_name" class="form-control" placeholder="New Software Status Name" autofocus value="<?php echo $row['software_name'] ?>">
+                <input type="text" name="software_name" id="software_name" class="form-control" placeholder="New Software Status Name" readonly autofocus value="<?php echo $row['software_name'] ?>">
 								<input type="hidden" name="old_software_id"  value="<?php echo $row['software_id'] ?>">
 								<input type="hidden" name="old_software_name"  value="<?php echo $row['software_name'] ?>">
             </div>
@@ -110,13 +110,18 @@ if (isset($_GET['software_price_id'])) {
 						</div>
 				</div>
 		</div>
-    <div class="form-group row">
+    <!-- <div class="form-group row">
         <div class="col-lg-4 offset-lg-4">
             <button type="submit" name="create" class="btn btn-primary ml-31" id="submit">Update</button>
             <button type="button" class="btn btn-link" id="submiting" style="display: none;" disabled="">Submiting <img src="<?php echo BASE_URL; ?>/assets/ajaxloader.gif"></button>
             <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
         </div>
-    </div>
+    </div> -->
+		<div class="col-lg-12 text-right">
+				<button type="submit" name="create" class="btn btn-success" style="padding-right: 50px; padding-left: 50px; margin-right: 10px" id="submit">Update</button>
+				<button type="button" class="btn btn-link" id="submiting" style="display: none;" disabled="">Submiting <img src="<?php echo BASE_URL; ?>/assets/ajaxloader.gif"></button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
+		</div>
 </fieldset>
 </form>
 <!-- /login form -->
