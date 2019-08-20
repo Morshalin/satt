@@ -30,7 +30,7 @@
   <div class="card border-top-success rounded-top-0" id="table_card">
   	<div class="card-header header-elements-inline bg-light border-grey-300" >
   		<h5 class="card-title"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Dashboard'; ?>
-  		<button type="button" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/Office_note/create.php"><i class="icon-stack-plus mr-1"></i>Office Note</button>
+  		<button type="button" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/Office_note/create.php"><i class="icon-stack-plus mr-1"></i>Cutomer Details</button>
   		</h5>
   		<div class="header-elements">
   			<div class="list-icons">
@@ -49,12 +49,12 @@
   				<thead>
   					<tr>
   						<th>#</th>
-  						<th>Admin Name</th>
-              <th>Customer Name</th>
-  						<th>Note Description</th>
-              <th>Create Date</th>
-              <th>Update Date</th>
-  						<th>Status</th>
+  						<th>Customer Name</th>
+              <th>Customer Number</th>
+  						<th>Customer Email</th>
+  						<th>introduction Date</th>
+              <th>Last Contacted Date</th>
+              <th>Status</th>
   						<th>Action</th>
   					</tr>
   				</thead>

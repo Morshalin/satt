@@ -19,23 +19,22 @@ if ($columnName == 'DT_RowIndex') {
 =================================================================================*/
 $searchQuery = " ";
 if ($searchValue != '') {
-	$searchQuery = " and (n.id like '%" . $searchValue . "%' or a.user_name like '%" .$searchValue . "%' or c.email like '%" . $searchValue . "%' or
-        c.name like '%" . $searchValue . "%') ";
+	$searchQuery = " and (id like '%" . $searchValue . "%' or Office_note_name like '%" . $searchValue . "%' or
+        Office_note_code like '%" . $searchValue . "%' or
+        course_description like'%" . $searchValue . "%' ) ";
 }
 /*==============================================================================
 ## Total number of records without filtering
 =================================================================================*/
 
-$sel = $db->select("select count(*) as allcount from satt_admins  a inner join satt_official_notes  n on
-a.id = n.admin_id inner join satt_customer_informations  c");
+$sel = $db->select("select count(*) as allcount from satt_customer_informations");
 $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['allcount'];
 
 /*==============================================================================
 ## Total number of record with filtering
 =================================================================================*/
-$sel = $db->select("select count(*) as allcount from satt_admins  a inner join satt_official_notes  n on
-a.id = n.admin_id inner join satt_customer_informations  c WHERE 1 " . $searchQuery);
+$sel = $db->select("select count(*) as allcount from satt_customer_informations WHERE 1 " . $searchQuery);
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
@@ -43,27 +42,22 @@ $totalRecordwithFilter = $records['allcount'];
 /*==============================================================================
 ## Fetch records
 =================================================================================*/
-/*$query = "select * from  satt_official_notes WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;*/
-$query = "SELECT a.user_name, c.name,c.email, n.note, n.creat_date, n.update_date, n.status, n.id
-from satt_admins  a inner join satt_official_notes  n on
-a.id = n.admin_id inner join satt_customer_informations  c on 
-c.id = n.customer_id" . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
-
-
-
+$query = "select * from satt_extra_office_notes WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $result = $db->select($query);
 $data = array();
 $i = 0;
 if ($result) {
 	while ($row = mysqli_fetch_assoc($result)) {
+    
+      
 		$data[] = array(
 			"DT_RowIndex" => $i + 1,
 			"id" => $row['id'],
-			"user_name" => '<strong>' . $row['user_name'] . '</strong>',
-			"name" => $row['name'],
-			"note" => $row['note'],
-      "creat_date" => $row['creat_date'],
-      "update_date" => $row['update_date'],
+			"name" => '<strong>'. $row['name'] . '</strong>',
+			"number" => $row['number'],
+			"email" => $row['email'],
+      "introduction_date" => $row['introduction_date'],
+      "last_contacted_date" => $row['last_contacted_date'],
 			"action" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
         <div class="list-icons" id="action_menu_' . $row['id'] . '">
@@ -72,9 +66,11 @@ if ($result) {
           		<i class="icon-menu9"></i>
           	</a>
           	<div class="dropdown-menu dropdown-menu-right">
-          		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/show.php?note_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
-          		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/edit.php?note_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
-          		<span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/Office_note/ajax.php?note_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
+
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/show.php?Office_note_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
+
+          		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/edit.php?Office_note_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
+          		<span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/Office_note/ajax.php?Office_note_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
           	</div>
           </div>
         </div>
@@ -86,10 +82,9 @@ if ($result) {
         </label>
         	',
 		);
-		$i++;
-	}
+$i++;
 }
-
+}
 /*===========================================================
 ## Response
 =============================================================*/

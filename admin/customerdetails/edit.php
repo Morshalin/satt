@@ -10,7 +10,7 @@ if (isset($_GET['customerdetails_id'])) {
 		$row = $result->fetch_assoc();
 	} else {
 		http_response_code(500);
-		die(json_encode(['message' => 'Course Not Found']));
+		die(json_encode(['message' => 'Customer Information Not Found']));
 	}
 
 } else {
@@ -63,7 +63,16 @@ if (isset($_GET['customerdetails_id'])) {
                 <input type="date" name="introduction_date" value="<?php echo $row['introduction_date']; ?>" id="introduction_date" class="form-control date" placeholder="Introduction Date" required autofocus value="">
             </div>
         </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="last_contacted_date" class="col-form-label">Last Contacted Date<span class="text-danger">*</span></label>
+                <input type="date" name="last_contacted_date" value="<?php echo $row['last_contacted_date']; ?>" id="last_contacted_date" class="form-control date" placeholder="Last Contacted Date" required value="">
 
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
               <label for="customer_reference" class="col-form-label">Select Customer Reference<span class="text-danger">*</span></label>
@@ -85,8 +94,6 @@ if (isset($_GET['customerdetails_id'])) {
               </select>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
               <label for="progressive_state">Select Progress State</label>
@@ -107,7 +114,9 @@ if (isset($_GET['customerdetails_id'])) {
               </select>
             </div>
         </div>
+    </div>
 
+    <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
               <label for="interested_services">Select Interested Service</label>
@@ -136,9 +145,6 @@ if (isset($_GET['customerdetails_id'])) {
               </select>
             </div>
         </div>
-    </div>
-
-    <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="institute_type" class="col-form-label">Institute Category<span class="text-danger">*</span></label>
@@ -146,31 +152,30 @@ if (isset($_GET['customerdetails_id'])) {
 
             </div>
         </div>
+    </div>
+        
+    <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="institute_name" class="col-form-label">Institute Name<span class="text-danger">*</span></label>
                 <input type="text" name="institute_name" value="<?php echo $row['institute_name']; ?>" id="institute_name" class="form-control" placeholder="Interested Services" required autofocus>
             </div>
         </div>
-    </div>
-        
-    <div class="row">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="institute_address" class="col-form-label">Institute Address</label>
                 <textarea name="institute_address" value="<?php echo $row['institute_address']; ?>" id="institute_address" rows="2" class="form-control" style="resize: none;" placeholder="Enter Institute Address"><?php echo $row['institute_address']; ?></textarea>
             </div>
         </div>
-
-        <div class="col-lg-6">
-            <div class="form-group">
-                <label for="institute_district" class="col-form-label">Institute District<span class="text-danger">*</span></label>
-                <input type="text" name="institute_district"  value="<?php echo $row['institute_district']; ?>" id="institute_district" class="form-control" placeholder="Institute District" required autofocus value="">
-            </div>
-        </div>
     </div>
 
     <div class="row">
+          <div class="col-lg-6">
+              <div class="form-group">
+                  <label for="institute_district" class="col-form-label">Institute District<span class="text-danger">*</span></label>
+                  <input type="text" name="institute_district"  value="<?php echo $row['institute_district']; ?>" id="institute_district" class="form-control" placeholder="Institute District" required autofocus value="">
+              </div>
+          </div>
          <div class="col-lg-6">
             <div class="form-group">
               <label for="software_category">Select Software Category</label>
@@ -200,13 +205,7 @@ if (isset($_GET['customerdetails_id'])) {
                 </select>
             </div>
         </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <label for="last_contacted_date" class="col-form-label">Last Contacted Date<span class="text-danger">*</span></label>
-                <input type="date" name="last_contacted_date" value="<?php echo $row['last_contacted_date']; ?>" id="last_contacted_date" class="form-control date" placeholder="Last Contacted Date" required value="">
-
-            </div>
-        </div>
+        
     </div>
 
     <div class="row">

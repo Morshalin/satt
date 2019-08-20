@@ -48,22 +48,21 @@ $data = array();
 $i = 0;
 if ($result) {
 	while ($row = mysqli_fetch_assoc($result)) {
-    /*$note="warning";
-    $query = "SELECT * FROM satt_official_notes WHERE leave_reason = 0";
+    // $warningid = $row['id'];
+    $note="warning";
+    $danger = $row["id"];
+    $query = "SELECT * FROM satt_leave_reason where custimer_id='$danger'";
     $results = $db->select($query);
     if ($results) {
-      while ($datas = $results->fetch_assoc()) {
-       if($row['id'] == $datas['customer_id']){
-        $note="danger";
-       }else{
-         $note="success";
-       }
-      }
-    }*/
+          $note="danger";
+        }else{
+           $note="success";
+        }
+      
 		$data[] = array(
 			"DT_RowIndex" => $i + 1,
 			"id" => $row['id'],
-			"name" => '<strong>' . $row['name'] . '</strong>',
+			"name" => '<strong class="text-'.$note.'">'. $row['name'] . '</strong>',
 			"number" => $row['number'],
 			"email" => $row['email'],
       "institute_type" => $row['institute_type'],
@@ -93,10 +92,9 @@ if ($result) {
         </label>
         	',
 		);
-		$i++;
-	}
+$i++;
 }
-
+}
 /*===========================================================
 ## Response
 =============================================================*/

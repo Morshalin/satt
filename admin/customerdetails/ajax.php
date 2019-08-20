@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 		$institute_address   = $fm->validation($_POST['institute_address']);
 		$institute_district  = $fm->validation($_POST['institute_district']);
 		$software_category   =$_POST['software_category'];
-		$last_contacted_date = $fm->validation($_POST['last_contacted_date']);
+		$last_contacted_date = $fm->formatDate($_POST['last_contacted_date']);
 		
 
 		if (isset($_POST['status'])) {
@@ -211,12 +211,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' and isset($_POST['action']) and $_POST[
 					$sql2 = "INSERT INTO satt_leave_reason(custimer_id,leave_reason) VALUES('$customer_id','$leave_reason[$i]')";
 					$insertrow1 = $db->insert($sql2);
 				}
-			}else{
-				$leave_reason ="";
-				$sql2 = "INSERT INTO satt_leave_reason(custimer_id,leave_reason) VALUES('$customer_id','$leave_reason')";
-					$insertrow1 = $db->insert($sql2);
 			}
-
 		if ($result != false) {
 			die(json_encode(['message' => 'Note Added Successfull']));
 		} else {
@@ -245,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$institute_address   = $fm->validation($_POST['institute_address']);
 	$institute_district  = $fm->validation($_POST['institute_district']);
 	$software_category   =$_POST['software_category'];
-	$last_contacted_date = $fm->validation($_POST['last_contacted_date']);
+	$last_contacted_date = $fm->formatDate($_POST['last_contacted_date']);
 	
 
 	$number_check = $fm->dublicateCheck('satt_customer_informations', 'number', $number);
@@ -378,7 +373,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	$customerdetails_id = $_GET['customerdetails_id'];
 	if ($customerdetails_id) {
-		$query = "DELETE  satt_customer_informations, sat_software_category, satt_interested_services from satt_customer_informations inner join sat_software_category ON satt_customer_informations.id = sat_software_category.cutomer_details_id inner join satt_interested_services on satt_customer_informations.id =satt_interested_services.cutomer_details_id WHERE satt_customer_informations.id = '$customerdetails_id'";
+		// $query = "DELETE  satt_customer_informations, sat_software_category, satt_interested_services from satt_customer_informations inner join sat_software_category ON satt_customer_informations.id = sat_software_category.cutomer_details_id inner join satt_interested_services on satt_customer_informations.id =satt_interested_services.cutomer_details_id WHERE satt_customer_informations.id = '$customerdetails_id'";
+		$query = "DELETE FROM  satt_customer_informations WHERE id = '$customerdetails_id'";
 		$result = $db->delete($query);
 		if ($result) {
 			die(json_encode(['message' => 'Customer Information Deleted Successfull']));
@@ -388,25 +384,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET[
 	die(json_encode(['message' => 'Something Happend Wrong. Please Try Again Later']));
 }
 
+
+
+
 /*================================================================
-		Delate  Data into Database
+		Delate  note into Database
 ===================================================================*/
-// $error['course_name'] = 'Course Name Required';
-if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET['action'] == 'notedelete') {
+if (isset($_GET['delid'])) {
 	$delid = $_GET['delid'];
 	if ($delid) {
 		$delquery = "DELETE FROM  satt_official_notes WHERE id ='$delid'";
-		$result = $db->delete($query);
-		if ($result) {
-			die(json_encode(['message' => 'Note Deleted Successfull']));
+		$result = $db->delete($delquery);
+		if($result){
+           die(json_encode(['message' => 'Note Deleted Successfully']));
+		}else {
+			http_response_code(500);
+			die(json_encode(['message' => 'Note Not Found']));
 		}
 	}
-	http_response_code(500);
-	die(json_encode(['message' => 'Something Happend Wrong. Please Try Again Later']));
 }
 
 
+if (isset($_GET['notedelid'])) {
+	$notedelid = $_GET['notedelid'];
+	if ($notedelid) {
+		$delquery = "DELETE FROM  satt_leave_reason WHERE custimer_id ='$notedelid'";
+		$result = $db->delete($delquery);
+		if($result){
+           die(json_encode(['message' => 'Reasion Deleted Successfully']));
+		}else {
+			http_response_code(500);
+			die(json_encode(['message' => 'Reasion Not Found']));
+		}
+	}
+}
 
+/*================================================================
+		Update Status  note into Database
+===================================================================*/
 if ($_SERVER['REQUEST_METHOD'] == 'PUT' AND isset($_GET['action']) AND $_GET['action'] == 'status') {
 	$status_id = $_GET['status_id'];
 	$status = $_GET['status'];

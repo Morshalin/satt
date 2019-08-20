@@ -14,7 +14,7 @@ class Format {
 
 	//formatDate
 	public function formatDate($date) {
-		return date('F j, Y, g:i a', strtotime($date));
+		return date('F j, Y', strtotime($date));
 	} //formatDate
 
 	//textShorten

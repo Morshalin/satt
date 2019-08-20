@@ -2,7 +2,7 @@
   require_once '../../config/config.php';
   Session::checkSession('admin', ADMIN_URL.'/business-type', 'business-type');
   $data = array();
-  $data['page_title'] = 'business type ';
+  $data['page_title'] = 'Business Type ';
   $data['element'] = ['modal' => 'lg'];
   $data['page_index'] = 'business-type';
   $data['page_css'] = [];

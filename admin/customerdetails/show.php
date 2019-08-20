@@ -10,7 +10,7 @@ if (isset($_GET['customerdetails_id'])) {
         $row = $result->fetch_assoc();
     } else {
         http_response_code(500);
-        die(json_encode(['message' => 'Course Not Found']));
+        die(json_encode(['message' => 'Customer Information Not Found']));
     }
 
 } else {
