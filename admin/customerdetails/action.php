@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST['action'])) {
 	if ($_POST['action'] == 'delete') {
 		if ($ids) {
 			foreach ($ids as $id) {
-				$query = "DELETE  satt_customer_informations, sat_software_category, satt_interested_services from satt_customer_informations inner join sat_software_category ON satt_customer_informations.id = sat_software_category.cutomer_details_id inner join satt_interested_services on satt_customer_informations.id =satt_interested_services.cutomer_details_id WHERE satt_customer_informations.id = '$id'";
+				$query = "DELETE FROM  satt_customer_informations WHERE id = '$id'";
 				$result = $db->delete($query);
 			}
 			die(json_encode(['message' => '(' . count($ids) . ') ' . (count($ids) == 1 ? 'customerdetails' : 'customerdetails') . ' Deleted Successfull']));

@@ -2,14 +2,14 @@
 require_once '../../config/config.php';
 ajax();
 Session::checkSession('admin', ADMIN_URL . '/Office_note', 'Office_note');
-if (isset($_GET['note_id'])) {
-	$note_id = $_GET['note_id'];
-	if ($note_id) {
-		$query = "SELECT * FROM satt_official_notes WHERE id = '$note_id'";
+if (isset($_GET['Office_note_id'])) {
+	$Office_note_id = $_GET['Office_note_id'];
+	if ($Office_note_id) {
+		$query = "SELECT * FROM satt_extra_office_notes WHERE id = '$Office_note_id'";
 		$result = $db->select($query);
 		if (!$result) {
 			http_response_code(500);
-			die(json_encode(['message' => 'Note Not Found']));
+			die(json_encode(['message' => 'Customer Information Not Found']));
 		}
 	}
 }
@@ -18,59 +18,121 @@ if (isset($_GET['note_id'])) {
 ===================================================================*/
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['action'] == 'update') {
-	$note_id = $_GET['note_id'];
-	if ($note_id) {
 		$error = array();
-		$note = $fm->validation($_POST['note']);
+		$name = $fm->validation($_POST['name']);
+		$facebook_name       = $fm->validation($_POST['facebook_name']);
+		$number              = $fm->validation($_POST['number']);
+		$email               = $fm->validation($_POST['email']);
+		$introduction_date   = $fm->formatDate($_POST['introduction_date']);
+		$customer_reference  = $fm->validation($_POST['customer_reference']);
+		$progressive_state   = $fm->validation($_POST['progressive_state']);
+		$interested_services = $_POST['interested_services'];
+		$institute_type      = $fm->validation($_POST['institute_type']);
+		$institute_name      = $fm->validation($_POST['institute_name']);
+		$institute_address   = $fm->validation($_POST['institute_address']);
+		$institute_district  = $fm->validation($_POST['institute_district']);
+		$software_category   = $_POST['software_category'];
+		$note                = $fm->validation($_POST['note']);
+		$last_contacted_date = $fm->formatDate($_POST['last_contacted_date']);
+		
 
-		if (isset($_POST['leave_reason'])) {
-		$leave_reason = $_POST['leave_reason'];
-		}else{
-			$leave_reason="";
-		}
-
-		$noteCheck = $fm->dublicateCheck('satt_official_notes', 'note', $note);
 		if (isset($_POST['status'])) {
 			$status = 1;
 		} else {
 			$status = 0;
 		}
 
-		if (!$note) {
-			$error['note'] = 'Note Field required';
+		if (!$name) {
+			$error['name'] = 'Customer Name Field required';
+		}elseif (strlen($facebook_name) > 255) {
+			$error['facebook_name'] = 'Customer Name Can Not Be More Than 255 Charecters';
 		}
 
 
-		if (strlen($note) > 500) {
-			$error['note'] = 'Note Can Not Be More Than 500 Charecters';
+	
+
+		if (!$number) {
+			$error['number'] = 'Number  Field required';
 		}
+
+
 
 		if ($error) {
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 		} else {
-			$query = "UPDATE satt_official_notes SET note = '$note', leave_reason='$leave_reason', update_date = now(), status = '$status' WHERE id='$note_id'";
-			$result = $db->update($query);
-			if ($result != false) {
-				die(json_encode(['message' => 'Note Updated Successfull']));
+				/*foreach ($$interested_services as  $value) {
+					die(json_encode(['errors' => print_r($value)]));
+				}*/
+				$query = "UPDATE  satt_extra_office_notes 
+					SET 
+					name='$name', 
+					facebook_name='$facebook_name', 
+					number='$number', 
+					email='$email', 
+					introduction_date   ='$introduction_date', 
+					customer_reference  ='$customer_reference', 
+					progressive_state   ='$progressive_state', 
+					institute_type      ='$institute_type', 
+					institute_name      ='$institute_name', 
+					institute_address   ='$institute_address', 
+					institute_district  ='$institute_district', 
+					last_contacted_date ='$last_contacted_date', 
+					note                ='$last_contacted_date',
+					status='$status' WHERE id= '$Office_note_id'";
+
+			 $result = $db->update($query);
+			if ($result) {
+				$querydelete ="DELETE FROM  satt_extra_interested_service WHERE cutomer_details_id='$Office_note_id'";
+				$resultdel = $db->delete($querydelete);
+				if ($resultdel) {
+					for ($i = 0; $i < count($interested_services); $i++) {
+						$sql1 = "INSERT INTO  satt_extra_interested_service(cutomer_details_id,interested_services_id) VALUES('$Office_note_id','$interested_services[$i]')";
+						$insertrow1 = $db->insert($sql1);
+					}
+				}
+
+				// multi Developer insert
+				$querydels ="DELETE FROM satt_extra__software_category WHERE cutomer_details_id='$Office_note_id'";
+				$resultdeltes = $db->delete($querydels);
+				if ($resultdeltes) {
+				for ($i = 0; $i < count($software_category); $i++) {
+						$sql2 = "INSERT INTO satt_extra__software_category(software_id,cutomer_details_id) VALUES('$software_category[$i]','$Office_note_id')";
+						$insertrow2 = $db->insert($sql2);
+					}
+				}
+			if ($insertrow2 != false) {
+				die(json_encode(['message' => 'Customer Information Update Successfull']));
 			} else {
 				http_response_code(500);
 				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 			}
 		}
 	}
-	http_response_code(500);
-	die(json_encode(['message' => 'Something Happend Wrong. Please Try Again Later']));
 }
+
+
 /*================================================================
 		Insert Data into Database
 ===================================================================*/
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$admin_id = Session::get('admin_id');
 	$error = array();
-	$customer_id = $fm->validation($_POST['customer_id']);
-	$note = $fm->validation($_POST['note']);
 
+	$name = $fm->validation($_POST['name']);
+	$facebook_name       = $fm->validation($_POST['facebook_name']);
+	$number              = $fm->validation($_POST['number']);
+	$email               = $fm->validation($_POST['email']);
+	$introduction_date   = $fm->formatDate($_POST['introduction_date']);
+	$customer_reference  = $fm->validation($_POST['customer_reference']);
+	$progressive_state   = $fm->validation($_POST['progressive_state']);
+	$interested_services = $_POST['interested_services'];
+	$institute_type      = $fm->validation($_POST['institute_type']);
+	$institute_name      = $fm->validation($_POST['institute_name']);
+	$institute_address   = $fm->validation($_POST['institute_address']);
+	$institute_district  = $fm->validation($_POST['institute_district']);
+	$software_category   = $_POST['software_category'];
+	$note                = $fm->validation($_POST['note']);
+	$last_contacted_date = $fm->formatDate($_POST['last_contacted_date']);
 
 	if (isset($_POST['status'])) {
 		$status = 1;
@@ -78,22 +140,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$status = 0;
 	}
 
-	if (!$note) {
-		$error['note'] = 'Note  Field required';
+	if (!$name) {
+		$error['name'] = 'Customer Name Field required';
+	}elseif (strlen($facebook_name) > 255) {
+		$error['facebook_name'] = 'Customer Name Can Not Be More Than 255 Charecters';
 	}
 
-	
-	if (strlen($note) > 500) {
-		$error['note'] = 'Course Code Can Not Be More Than 500 Charecters';
+
+	if (!$number) {
+		$error['number'] = 'Number  Field required';
 	}
+
+
 
 	if ($error) {
 		http_response_code(500);
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
-		$query = "INSERT INTO satt_official_notes (admin_id, customer_id, note, status) VALUES ('$admin_id', '$customer_id', '$note','$status')";
-		$result = $db->insert($query);
-		if ($result != false) {
+			$query = "INSERT INTO satt_extra_office_notes (name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district, last_contacted_date,note, status)
+
+		 VALUES ('$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$last_contacted_date','$note','$status')";
+		 $last_id = $db->custom_insert($query);
+		if (isset($interested_services)) {
+			// multi interested Service
+			for ($i = 0; $i < count($interested_services); $i++) {
+					$sql2 = "INSERT INTO satt_extra_interested_service(cutomer_details_id,interested_services_id) VALUES('$last_id','$interested_services[$i]')";
+					$insertrow1 = $db->insert($sql2);
+				}
+			}
+			if (isset($software_category)) {
+				for ($i = 0; $i < count($software_category); $i++) {
+					$sql2 = "INSERT INTO satt_extra__software_category(software_id,cutomer_details_id) VALUES('$software_category[$i]','$last_id')";
+					$insertrow1 = $db->insert($sql2);
+				}
+			}
+		if ($last_id != false) {
 			die(json_encode(['message' => 'Note Added Successfull']));
 		} else {
 			http_response_code(500);
@@ -104,15 +185,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 /*================================================================
 		Delate  Data into Database
-===================================================================*/
-// $error['note'] = 'Course Name Required';
+================================================================*/
+ // $error['course_name'] = 'Course Name Required';
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET['action'] == 'delete') {
-	$note_id = $_GET['note_id'];
-	if ($note_id) {
-		$query = "DELETE FROM satt_official_notes WHERE id = '$note_id'";
+	$Office_note_id = $_GET['Office_note_id'];
+	if ($Office_note_id) {
+		$query = "DELETE FROM  satt_extra_office_notes WHERE id = '$Office_note_id'";
 		$result = $db->delete($query);
 		if ($result) {
-			die(json_encode(['message' => 'Course Deleted Successfull']));
+			die(json_encode(['message' => 'Note  Deleted Successfull']));
 		}
 	}
 	http_response_code(500);
@@ -120,17 +201,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET[
 }
 
 
-
+/*================================================================
+		Update Status  note into Database
+===================================================================*/
 if ($_SERVER['REQUEST_METHOD'] == 'PUT' AND isset($_GET['action']) AND $_GET['action'] == 'status') {
 	$status_id = $_GET['status_id'];
 	$status = $_GET['status'];
 	$status = $status ? 0 : 1;
 
 	if ($status_id) {
-		$query = "UPDATE satt_official_notes SET status = '$status' WHERE id = '$status_id'";
+		$query = "UPDATE satt_extra_office_notes SET status = '$status' WHERE id = '$status_id'";
 		$result = $db->delete($query);
 		if ($result) {
-			die(json_encode(['message' => 'Course Status Changed Successfull']));
+			die(json_encode(['message' => 'Status Changed Successfull']));
 		}
 	}
 	http_response_code(500);

@@ -2,9 +2,9 @@
   require_once '../../config/config.php';
   Session::checkSession('admin', ADMIN_URL.'/customertype', 'customertype');
   $data = array();
-  $data['page_title'] = 'Customertype';
+  $data['page_title'] = 'Customer Reference';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'customer type';
+  $data['page_index'] = 'customer ';
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/customertype'];
 ?>
@@ -49,7 +49,7 @@
   				<thead>
   					<tr>
   						<th>#</th>
-  						<th>CustomerReference</th>
+  						<th>Customer Reference</th>
   						<th>Status</th>
               <th>Create Date</th>
   						<th>Action</th>

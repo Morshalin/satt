@@ -168,11 +168,48 @@ var DatatableButtonsHtml5 = function() {
         });
     };
 
+     var _componentDeleteNote = function() {
+        $(document).on('click', '.delete_note', function(e) {
+            e.preventDefault();
+            // it will get action url
+           
+            var url = $(this).data('url');
+            var id = '#tr_'+$(this).attr("id");
+            $.ajax({
+                    url: url,
+                    type: 'Get',
+                    dataType: 'json'
+                })
+                .done(function(data) { 
+                    new PNotify({
+                          title: 'Well Done!',
+                          text: data.message,
+                          type: 'success',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    $(id).remove();
+                })
+                .fail(function(data) {
+                    
+                    if (data.responseText) {
+                      new PNotify({
+                          title: 'Opps!',
+                          text: $.parseJSON(data.responseText).message,
+                          type: 'error',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    }
+                    $('#modal-loader').hide();
+                });
+        });
+    };
+
+
     return {
         init: function() {
             _componentDatatableButtonsHtml5();
-        
             _componentRemoteModalLoad();
+            _componentDeleteNote();
         }
     }
 }();

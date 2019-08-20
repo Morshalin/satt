@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="course_name" class="col-form-label">Customer Name <span class="text-danger">*</span></label>
+                <label for="name" class="col-form-label">Customer Name <span class="text-danger">*</span></label>
                 <input type="text" name="name" id="name" class="form-control" placeholder="Cutomer Name" required autofocus value="">
             </div>
         </div>
@@ -43,10 +43,19 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="introduction_date" class="col-form-label">Introduction Date<span class="text-danger">*</span></label>
-                <input type="text" name="introduction_date" id="introduction_date" class="form-control date" placeholder="Select Start Date" required autofocus value="">
+                <input type="date" name="introduction_date" id="introduction_date" class="form-control date" placeholder="Select Start Date" required autofocus value="">
             </div>
         </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="last_contacted_date" class="col-form-label">Last Contacted Date<span class="text-danger">*</span></label>
+                <input type="date" name="last_contacted_date" id="last_contacted_date" class="form-control date" placeholder="Last Contacted Date" required value="">
 
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
               <label for="customer_reference" class="col-form-label">Select Customer Reference<span class="text-danger">*</span></label>
@@ -68,10 +77,6 @@
               </select>
             </div>
         </div>
-
-    </div>
-
-    <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
               <label for="progressive_state">Select Progress State</label>
@@ -93,7 +98,9 @@
               </select>
             </div>
         </div>
+    </div>
 
+    <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
               <label for="interested_services">Select Interested Service</label>
@@ -114,9 +121,6 @@
               </select>
             </div>
         </div>
-    </div>
-
-    <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="institute_type" class="col-form-label">Institute Category<span class="text-danger">*</span></label>
@@ -124,33 +128,32 @@
 
             </div>
         </div>
+    </div>
+
+
+        
+    <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="institute_name" class="col-form-label">Institute Name<span class="text-danger">*</span></label>
                 <input type="text" name="institute_name" id="institute_name" class="form-control" placeholder="Interested Services" required autofocus value="">
             </div>
         </div>
-    </div>
-
-
-        
-    <div class="row">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="institute_address" class="col-form-label">Institute Address</label>
                 <textarea name="institute_address" id="institute_address" rows="2" class="form-control" style="resize: none;" placeholder="Enter Institute Address"></textarea>
             </div>
         </div>
+    </div>
 
+    <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="institute_district" class="col-form-label">Institute District<span class="text-danger">*</span></label>
                 <input type="text" name="institute_district" id="institute_district" class="form-control" placeholder="Institute District" required autofocus value="">
             </div>
         </div>
-    </div>
-
-    <div class="row">
          <div class="col-lg-6">
             <div class="form-group">
               <label for="software_category">Select Software Category</label>
@@ -169,13 +172,6 @@
                     }
                 ?>
               </select>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <label for="last_contacted_date" class="col-form-label">Last Contacted Date<span class="text-danger">*</span></label>
-                <input type="date" name="last_contacted_date" id="last_contacted_date" class="form-control" placeholder="Last Contacted Date" required value="">
-
             </div>
         </div>
     </div>

@@ -59,7 +59,6 @@ ajax();
             <div class="form-group leave">
                 <label for="institute_name" class="col-form-label">Leave Reason<span class="text-danger">*</span></label>
               <select multiple="multiple" class="form-control select" id="leave_reason" name="leave_reason[]">
-                <option value=""></option>
                 <?php 
                      $query = "SELECT * FROM satt_customer_notes where status=1";
                     $result = $db->select($query);
@@ -130,7 +129,7 @@ and n.customer_id = '$customerdetails_id'";
   if ($noteresult) {
     while ($notedata = $noteresult->fetch_assoc()) { 
       ?>
-        <tr>
+        <tr id="tr_<?php echo $notedata['id']; ?>">
         <td><?php echo $notedata['user_name'];?></td>
         <td><?php echo $notedata['name'];?></td>
         <td>
@@ -141,14 +140,15 @@ and n.customer_id = '$customerdetails_id'";
               $result = $db->select($sql);
               if ($result) {
                   while ($data = $result->fetch_assoc()) { ?>
-                     <span class="badge badge-success mr-1"><?php echo $data['reason']; ?></span>
-                  <?php } } ?>
+                     <span class="badge badge-success mr-1"><?php echo $data['reason']; ?> </span>
+                  <?php }  ?>
+                  <button class="mt-1 btn btn-danger btn-sm delete_note" data-dismiss="modal" data-url="<?php echo ADMIN_URL ?>/customerdetails/ajax.php?notedelid=<?php echo $customerdetails_id; ?>">Delete</button>
+                <?php } ?>
         </td>
         <td><?php echo $notedata['note'];?></td>
         <td><?php echo $notedata['creat_date'];?></td>
         <td><?php echo $notedata['update_date'];?></td>
-        <td><a class="btn btn-danger" href="?delid=<?php echo $notedata['id'];?>">Delete</a>
-        </td>
+        <td><button class="btn btn-danger btn-small delete_note" data-url="<?php echo ADMIN_URL ?>/customerdetails/ajax.php?delid=<?php echo $notedata['id']; ?>" id="<?php echo $notedata['id']; ?>">Delete </button></td>
     </tr>
    <?php } } ?>
 

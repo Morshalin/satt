@@ -111,15 +111,15 @@ var DatatableButtonsHtml5 = function() {
                 {
                     data: 'DT_RowIndex'
                 }, {
-                    data: 'user_name'
-                }, {
                     data: 'name'
                 }, {
-                    data: 'note'
+                    data: 'number'
                 }, {
-                    data: 'creat_date'
-                },{
-                    data: 'update_date'
+                    data: 'email'
+                },  {
+                    data: 'introduction_date'
+                }, {
+                    data: 'last_contacted_date'
                 },{
                     data: 'status'
                 },{
@@ -149,6 +149,8 @@ var DatatableButtonsHtml5 = function() {
                     $('.modal-body').html(data).fadeIn(); // load response
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
+                    _componentSelect2Normal();
+                    _componentDatePicker();
                     _modalFormValidation();
                 })
                 .fail(function(data) {
@@ -166,11 +168,48 @@ var DatatableButtonsHtml5 = function() {
         });
     };
 
+     var _componentDeleteNote = function() {
+        $(document).on('click', '.delete_note', function(e) {
+            e.preventDefault();
+            // it will get action url
+           
+            var url = $(this).data('url');
+            var id = '#tr_'+$(this).attr("id");
+            $.ajax({
+                    url: url,
+                    type: 'Get',
+                    dataType: 'json'
+                })
+                .done(function(data) { 
+                    new PNotify({
+                          title: 'Well Done!',
+                          text: data.message,
+                          type: 'success',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    $(id).remove();
+                })
+                .fail(function(data) {
+                    
+                    if (data.responseText) {
+                      new PNotify({
+                          title: 'Opps!',
+                          text: $.parseJSON(data.responseText).message,
+                          type: 'error',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    }
+                    $('#modal-loader').hide();
+                });
+        });
+    };
+
+
     return {
         init: function() {
             _componentDatatableButtonsHtml5();
-            _componentSelect2Normal();
             _componentRemoteModalLoad();
+            _componentDeleteNote();
         }
     }
 }();
@@ -181,9 +220,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 $(document).ready(function(){
-    // $("#check").click(function(){
-    //     $("#flied").toggle();
-    // });
     $(document).on('click', '#check', function(){
         if (this.checked) {
             $("#flied").show();
