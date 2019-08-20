@@ -440,28 +440,24 @@ document.addEventListener('DOMContentLoaded', function() {
             $("#frontend_img_div").show(500);
           $("#document_front").val("");
             $("#backend_img_div").show(500);
-            $("#backend_img_div").attr('required',true);
         }else if(document_type == 'Passport'){
             $("#up_front_text").html('Upload Image Of Passport');
 
             $("#frontend_img_div").show(500);
           $("#document_front").val("");
             $("#backend_img_div").hide(500);
-            $("#backend_img_div").attr('required',false);
             $("#document_back").val("");
         }else if(document_type == 'Birth_Certificate'){
             $("#up_front_text").html('Upload Image Of Birth Certificate');
             $("#frontend_img_div").show(500);
           $("#document_front").val("");
             $("#backend_img_div").hide(500);
-            $("#backend_img_div").attr('required',false);
             $("#document_back").val("");
         }else{
           $("#frontend_img_div").hide(500);
           $("#document_front").val("");
 
           $("#backend_img_div").hide(500);
-          $("#backend_img_div").attr('required',false);
           $("#document_back").val("");
 
 
@@ -476,22 +472,21 @@ function readURL(input,img_show,field_id) {
 
     var a=$(field_id)[0].files[0].size;
 
-    if ( a > 1048576) {
-      $(field_id).val("");
-      // Swal.fire({
-      //             title: "error",
-      //             text: "Please Make Sure The Image Size Is Less Than 1 MB" ,
-      //             type: "error"
-      //         });
-      // swal({
-      //       title: "error",
-      //       text: "Please Make Sure The Image Size Is Less Than 1 Mb",
-      //       icon: "warning",
-      //       buttons: true,
-      //       // dangerMode: true,
-      //   })
-      // alert(a)
 
+
+    var file = $(field_id)[0].files[0];
+    var fileType = file["type"];
+    var validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+    if ($.inArray(fileType, validImageTypes) < 0) {
+      $(field_id).val("");
+        new PNotify({
+                    title: 'Error',
+                    text: "Please Select An Image With Extension: jpg, jpeg, png or gif",
+                    type: 'error',
+                    addclass: 'alert alert-styled-left',
+                });
+    }else if ( a > 1048576) {
+      $(field_id).val("");
        new PNotify({
                     title: 'Error',
                     text: "Please Make Sure The Image Size Is Less Than 1 MB",
@@ -499,21 +494,52 @@ function readURL(input,img_show,field_id) {
                     addclass: 'alert alert-styled-left',
                 });
     }else{
-
       reader.onload = function (e) {
         $(img_show)
         .show()
         .attr('src', e.target.result)
         .width(160)
         .height(190);
-
       };
-
       reader.readAsDataURL(input.files[0]);
 
     }
   }
 }
 
+// checking if the present address and permanent address is same or not 
+$(document).on('change','#same_as',function(){
+  if (this.checked) {
+    $('.present_address').attr('readonly',true);
+  }else{
+    $('.present_address').attr('readonly',false);
+  }
+});
+
+// if present and paermanent address are same then putting the permanent address values to present address
+$(document).on('change','#same_as',function(){
+  if (this.checked) {
+    $('.present_address').attr('readonly',true);
+    $("#present_house").val($("#permanent_house").val());
+    $("#present_road").val($("#permanent_road").val());
+    $("#present_village").val($("#permanent_village").val());
+    $("#present_post").val($("#permanent_post").val());
+    $("#present_up").val($("#permanent_up").val());
+    $("#present_dist").val($("#permanent_dist").val());
+    $("#present_post_code").val($("#permanent_post_code").val());
+
+  }else{
+    $('.present_address').attr('readonly',false);
+  }
+});
 
 
+function makeSamePresent(permanent_id,present_id){
+  var same = document.getElementById("same_as");
+
+  if (same.checked == true){
+    var permanent = document.getElementById(permanent_id).value;
+    document.getElementById(present_id).value=permanent ; 
+    console.log(permanent);
+  }
+}
