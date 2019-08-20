@@ -4,7 +4,7 @@
   $data = array();
   $data['page_title'] = 'business type ';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'business type';
+  $data['page_index'] = 'business-type';
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/businesstype'];
 ?>

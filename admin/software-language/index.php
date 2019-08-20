@@ -4,7 +4,7 @@ Session::checkSession('admin', ADMIN_URL . '/software-language', 'Software Langu
   $data = array();
   $data['page_title'] = 'Software Language';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'Software-language';
+  $data['page_index'] = 'software-language';
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/software-language'];
 ?>

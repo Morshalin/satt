@@ -4,7 +4,7 @@
   $data = array();
   $data['page_title'] = 'Interested Services';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'Interested Services';
+  $data['page_index'] = 'interested-services';
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/interestedservices'];
 ?>

@@ -173,45 +173,40 @@ if (isset($_GET['software_details_id'])) {
 
 
             <div class="col-lg-6">
-            <br>
             <div class="row">
-                    <b class="col-md-8">Software Demo URL :</b>
-                    <h6 class="col-md-4"><a target="blank" href="https://<?php echo $new_row_price['demo_url']; ?>"><?php echo $new_row_price['demo_url']; ?></a></h6>
-            </div>
-            <div class="row">
-                    <b class="col-md-8">Installation Charge :</b>
+                    <b class="col-md-8">New Installation Charge :</b>
                     <h6 class="col-md-4"><?php echo $new_row_price['installation_charge']; ?> /=</h6>
             </div>
             <div class="row">
-                    <b class="col-md-8">Monthly Cahrge :</b>
+                    <b class="col-md-8">New Monthly Cahrge :</b>
                     <h6 class="col-md-4"><?php echo $new_row_price['monthly_charge']; ?> /=</h6>
             </div>
             <div class="row">
-                    <b class="col-md-8">Yearly Charge :</b>
+                    <b class="col-md-8">New Yearly Charge :</b>
                     <h6 class="col-md-4"><?php echo $new_row_price['yearly_charge']; ?> /=</h6>
             </div>
             <div class="row">
-                    <b class="col-md-8">Direct Sell(One Time) :</b>
+                    <b class="col-md-8">New Direct Sell(One Time) :</b>
                     <h6 class="col-md-4"><?php echo $new_row_price['direct_sell']; ?> /=</h6>
             </div>
             <div class="row">
-                    <b class="col-md-8">Total Price :</b>
+                    <b class="col-md-8">New Total Price :</b>
                     <h6 class="col-md-4"><?php echo $new_row_price['total_price']; ?> /=</h6>
             </div>
             <div class="row">
-                    <b class="col-md-8">Agent Commission (One Time Sell) :</b>
+                    <b class="col-md-8">New Agent Commission (One Time Sell) :</b>
                     <h6 class="col-md-4"><?php echo $new_row_price['agent_commission_one_time']; ?> /=</h6>
             </div>
             <div class="row">
-                    <b class="col-md-8">Agent Commission (Monthly) :</b>
+                    <b class="col-md-8">New Agent Commission (Monthly) :</b>
                     <h6 class="col-md-4"><?php echo $new_row_price['agent_commission_monthly']; ?> /=</h6>
             </div>
             <div class="row">
-                    <b class="col-md-8">Maximum Discount Offer  :</b>
+                    <b class="col-md-8">New Maximum Discount Offer  :</b>
                     <h6 class="col-md-4"><?php echo $new_row_price['discount_offer']; ?> /=</h6>
             </div>
              <div class="row">
-                    <b class="col-md-8">Yearly Renew Charge  :</b>
+                    <b class="col-md-8">New Yearly Renew Charge  :</b>
                     <h6 class="col-md-4"><?php echo $new_row_price['yearly_renew_charge']; ?> /=</h6>
             </div>
 
@@ -220,7 +215,7 @@ if (isset($_GET['software_details_id'])) {
 
 
 
-                 
+
          <?php   }
             } else {
                 http_response_code(500);

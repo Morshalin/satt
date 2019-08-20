@@ -4,7 +4,7 @@
   $data = array();
   $data['page_title'] = 'Customer Details';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'Customer Details';
+  $data['page_index'] = 'customer-details';
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/customerdetails'];
 ?>

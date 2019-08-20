@@ -21,7 +21,7 @@
                 <select class="select form-control"  name="software_status" id="software_status">
                     <option value="">Select Software Status</option>
                        <?php
-                       $query_software_status = "SELECT * FROM software_status";
+                       $query_software_status = "SELECT * FROM software_status where status = '1' ";
                        $select_software_status = $db->select($query_software_status);
                        if ($select_software_status) {
                         while ($software_status = $select_software_status->fetch_assoc()) {
@@ -37,7 +37,7 @@
                 <label for="software_status_name" class="col-form-label">Software Language <span class="text-danger">*</span></label>
                 <select class="select form-control"  multiple="multiple" name="language_name[]" id="language_name">
                        <?php
-                       $query_software_language = "SELECT * FROM software_language";
+                       $query_software_language = "SELECT * FROM software_language where status = '1' ";
                        $select_software_language = $db->select($query_software_language);
                        if ($select_software_language) {
                         while ($software_language = $select_software_language->fetch_assoc()) {
@@ -54,7 +54,7 @@
                 <label for="software_status_name" class="col-form-label">Developed By <span class="text-danger">*</span></label>
                 <select class="select form-control"  multiple="multiple" name="developer_name[]" id="developer_name">
                        <?php
-                       $query_developer = "SELECT * FROM developer";
+                       $query_developer = "SELECT * FROM developer where status = '1' ";
                        $select_developer = $db->select($query_developer);
                        if ($select_developer) {
                         while ($developer = $select_developer->fetch_assoc()) {

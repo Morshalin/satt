@@ -4,7 +4,7 @@
   $data = array();
   $data['page_title'] = 'progressive state';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'progressive state';
+  $data['page_index'] = 'progressive-state';
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/progressivestate'];
 ?>

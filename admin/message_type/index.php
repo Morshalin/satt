@@ -1,10 +1,10 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('admin', ADMIN_URL.'/message', 'Message');
+  Session::checkSession('admin', ADMIN_URL.'/message_type', 'Message');
   $data = array();
   $data['page_title'] = 'Message type';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'message';
+  $data['page_index'] = 'message-type';
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/message_type'];
 ?>

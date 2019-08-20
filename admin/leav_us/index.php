@@ -4,7 +4,7 @@
   $data = array();
   $data['page_title'] = 'Leav Us';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'Leav Us';
+  $data['page_index'] = 'leav_us';
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/leav_us'];
 ?>
