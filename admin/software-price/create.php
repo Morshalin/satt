@@ -13,6 +13,7 @@
                 <label for="software_name" class="col-form-label">Software Name <span class="text-danger">*</span></label>
                 <!-- <input type="text" name="software_name" id="software_name" class="form-control" placeholder="Type Software Name" required autofocus value=""> -->
                 <select type="text" name="software_name" id="software_name" class="form-control" required autofocus>
+                    <option value="">Please Select One</option>
                   <?php
                   $result = $db->select("SELECT * FROM software_details");
 
