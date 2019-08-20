@@ -413,6 +413,7 @@ document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
 });
 
+// changint status of agent
  $(document).on('change','#status',function(){
         var status = $(this).val();
         if (status == 'Promote') {
@@ -426,3 +427,93 @@ document.addEventListener('DOMContentLoaded', function() {
 
         }
     });
+
+
+
+// showing and hiding document upload fieldes relating with the document type 
+
+ $(document).on('change','#document_type',function(){
+        var document_type = $(this).val();
+        if (document_type == 'NID') {
+            $("#up_front_text").html('Upload Frontend Image Of NID');
+
+            $("#frontend_img_div").show(500);
+          $("#document_front").val("");
+            $("#backend_img_div").show(500);
+            $("#backend_img_div").attr('required',true);
+        }else if(document_type == 'Passport'){
+            $("#up_front_text").html('Upload Image Of Passport');
+
+            $("#frontend_img_div").show(500);
+          $("#document_front").val("");
+            $("#backend_img_div").hide(500);
+            $("#backend_img_div").attr('required',false);
+            $("#document_back").val("");
+        }else if(document_type == 'Birth_Certificate'){
+            $("#up_front_text").html('Upload Image Of Birth Certificate');
+            $("#frontend_img_div").show(500);
+          $("#document_front").val("");
+            $("#backend_img_div").hide(500);
+            $("#backend_img_div").attr('required',false);
+            $("#document_back").val("");
+        }else{
+          $("#frontend_img_div").hide(500);
+          $("#document_front").val("");
+
+          $("#backend_img_div").hide(500);
+          $("#backend_img_div").attr('required',false);
+          $("#document_back").val("");
+
+
+        }
+    });
+
+// showing image instantly beside the image selection window
+
+function readURL(input,img_show,field_id) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    var a=$(field_id)[0].files[0].size;
+
+    if ( a > 1048576) {
+      $(field_id).val("");
+      // Swal.fire({
+      //             title: "error",
+      //             text: "Please Make Sure The Image Size Is Less Than 1 MB" ,
+      //             type: "error"
+      //         });
+      // swal({
+      //       title: "error",
+      //       text: "Please Make Sure The Image Size Is Less Than 1 Mb",
+      //       icon: "warning",
+      //       buttons: true,
+      //       // dangerMode: true,
+      //   })
+      // alert(a)
+
+       new PNotify({
+                    title: 'Error',
+                    text: "Please Make Sure The Image Size Is Less Than 1 MB",
+                    type: 'error',
+                    addclass: 'alert alert-styled-left',
+                });
+    }else{
+
+      reader.onload = function (e) {
+        $(img_show)
+        .show()
+        .attr('src', e.target.result)
+        .width(160)
+        .height(190);
+
+      };
+
+      reader.readAsDataURL(input.files[0]);
+
+    }
+  }
+}
+
+
+
