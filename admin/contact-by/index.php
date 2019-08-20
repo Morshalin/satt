@@ -1,12 +1,12 @@
 <?php
   require_once '../../config/config.php';
-Session::checkSession('admin', ADMIN_URL . '/agent', 'Agent');
+Session::checkSession('admin', ADMIN_URL . '/software-details', 'Software Details');
   $data = array();
-  $data['page_title'] = 'Manage Agent ';
-  $data['element'] = ['modal' => 'full'];
-  $data['page_index'] = 'Mange-agent';
+  $data['page_title'] = 'Contact By';
+  $data['element'] = ['modal' => 'lg'];
+  $data['page_index'] = 'Contact-by';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/admin/agent'];
+  $data['page_js'] = ['assets/js/admin/contact_by'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
@@ -30,7 +30,7 @@ Session::checkSession('admin', ADMIN_URL . '/agent', 'Agent');
   <div class="card border-top-success rounded-top-0" id="table_card">
   	<div class="card-header header-elements-inline bg-light border-grey-300" >
   		<h5 class="card-title"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Dashboard'; ?>
-  		<a href="../../agent/index.php" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round"><i class="icon-stack-plus mr-1"></i>Register New Agent</a>
+  		<button type="button" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/contact-by/create.php"><i class="icon-stack-plus mr-1"></i>Add Person Who Contact With Agent</button>
   		</h5>
   		<div class="header-elements">
   			<div class="list-icons">
@@ -45,15 +45,18 @@ Session::checkSession('admin', ADMIN_URL . '/agent', 'Agent');
   			<img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
   		</div> -->
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/agent/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/software-details/table.php">
   				<thead>
   					<tr>
   						<th>#</th>
-  						<th>Name</th>
-              <th>Image</th>
-              <th>Contact</th>
-              <th>Interested</th>
-              <th>Status</th>
+              <th>Software Name</th>
+              <th>Software Status</th>
+              <th>Language</th>
+              <th>Developed By</th>
+              <th>Start Date</th>
+              <th>Short Features</th>
+  						<th>Condition</th>
+  						<th>Status</th>
   						<th>Action</th>
   					</tr>
   				</thead>

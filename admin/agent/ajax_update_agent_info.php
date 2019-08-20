@@ -23,7 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 	if ($agent_id) {
 
 	$query = "SELECT * FROM agent_list WHERE id = '$agent_id'";
-	$result = $db->select($query);
+	$result = $db->select($query)->fetch_assoc();
+}
 	
 
 	// $error = array();
@@ -108,14 +109,138 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
     $div_trade = explode(".", $file_name_trade);
     $file_extension_trade = strtolower(end($div_trade));
     $unique_image_trade = md5(time()); 
-    $unique_image_trade= 'trade'.substr($unique_image_trade, 0,10).'.'.$file_extension_trade;
+    $unique_image_trade= 'trade-'.substr($unique_image_trade, 0,10).'.'.$file_extension_trade;
     $uploaded_image_trade = 'trade_license_image/'.$unique_image_trade;
 
     $signature = $_POST['signature'];
 
 
+    $query = "UPDATE agent_list SET 
+			name = '$name',
+			father_name = '$father_name',
+			mother_name = '$mother_name',
+			occupation = '$occupation',
+			education_qualification = '$education_qualification',
+			permanent_house = '$permanent_house',
+			permanent_road = '$permanent_road',
+			permanent_village = '$permanent_village',
+			permanent_post = '$permanent_post',
+			permanent_up = '$permanent_up',
+			permanent_dist = '$permanent_dist',
+			permanent_post_code = '$permanent_post_code',
+			same_as = '$same_as',
+			present_house = '$present_house',
+			present_road = '$present_road',
+			present_village = '$present_village',
+			present_post = '$present_post',
+			present_up = '$present_up',
+			present_dist = '$present_dist',
+			present_post_code = '$present_post_code',
+			mobile_no = '$mobile_no',
+			alternate_mobile = '$alternate_mobile',
+			email = '$email',
+			interested_dist = '$interested_dist',
+			interested_up = '$interested_up',
+			document_type = '$document_type',
+			bussiness_name = '$bussiness_name',
+			signature = '$signature',
+			updated_at = now()
+			 WHERE id='$agent_id'";
+			$update = $db->update($query);
+			if ($update) {
+
+				// information update is completed now it's time to update the images 
+				    if ($file_name_photo) {
+					    if ($result['photo']) {
+					    	unlink('../../agent/'.$result['photo']);
+					    	move_uploaded_file($file_temp_photo, '../../agent/'.$uploaded_image_photo);
+					    	$query = "UPDATE agent_list SET 
+							photo = '$uploaded_image_photo'
+							WHERE id = '$agent_id'";
+							$update = $db->update($query);
+					    }else{
+					    	move_uploaded_file($file_temp_photo, '../../agent/'.$uploaded_image_photo);
+					    	$query = "UPDATE agent_list SET 
+							photo = '$uploaded_image_photo'
+							WHERE id = '$agent_id' ";
+							$update = $db->update($query);
+					    }
+					    	
+				    }
+
+				    if ($file_name_doc_front) {
+				    	if ($result['document_front']) {
+					    	unlink('../../agent/'.$result['document_front']);
+					    	move_uploaded_file($file_temp_doc_front, '../../agent/'.$uploaded_image_doc_front);
+					    	$query = "UPDATE agent_list SET 
+							document_front = '$uploaded_image_doc_front'
+							WHERE id = '$agent_id'";
+							$update = $db->update($query);
+					    }else{
+					    	move_uploaded_file($file_temp_doc_front, '../../agent/'.$uploaded_image_doc_front);
+					    	$query = "UPDATE agent_list SET 
+							document_front = '$uploaded_image_doc_front'
+							WHERE id = '$agent_id'";
+							$update = $db->update($query);
+					    }
+				    }
+
+				    if ($file_name_doc_back) {
+				    	if ($result['document_back']) {
+							unlink('../../agent/'.$result['document_back']);
+					    	move_uploaded_file($file_temp_doc_back, '../../agent/'.$uploaded_image_doc_back);
+					    	$query = "UPDATE agent_list SET 
+							document_back = '$uploaded_image_doc_back'
+							WHERE id = '$agent_id'";
+							$update = $db->update($query);
+					    }else{
+					    	move_uploaded_file($file_temp_doc_back, '../../agent/'.$uploaded_image_doc_back);
+					    	$query = "UPDATE agent_list SET 
+							document_back = '$uploaded_image_doc_back'
+							WHERE id = '$agent_id'";
+							$update = $db->update($query);
+					    }
+				    }
+
+				    // if document type is not nid then the document back image is not needed
+				    if ($document_type != "NID") {
+				    	if ($result['document_back']) {
+				    		unlink('../../agent/'.$result['document_back']);
+				    		$query = "UPDATE agent_list SET 
+							document_back = ''
+							WHERE id = '$agent_id'";
+							$update = $db->update($query);
+
+				    	}
+				    }
+				    if ($file_name_trade) {
+					    
+				    	if ($result['tread_license']) {
+				    		unlink('../../agent/'.$result['tread_license']);
+					    	move_uploaded_file($file_temp_trade, '../../agent/'.$uploaded_image_trade);
+					    	$query = "UPDATE agent_list SET 
+							tread_license = '$uploaded_image_trade'
+							WHERE id = '$agent_id'";
+							$update = $db->update($query);
+					    }else{
+					    	move_uploaded_file($file_temp_trade, '../../agent/'.$uploaded_image_trade);
+					    	$query = "UPDATE agent_list SET 
+							tread_license = '$uploaded_image_trade'
+							WHERE id = '$agent_id'";
+							$update = $db->update($query);
+					    }
+
+				    }
+
+				die(json_encode(['message' => 'Agent Info Is Updated Successfully']));
+			}else{
+				http_response_code(500);
+				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+			}
+	
 
 
+}
 
     // if ($file_name_photo) {
 	    
@@ -172,43 +297,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 
 
 	
-	if (!$status) {
-		$error['status'] = 'status Field required';
-	}
+	// if (!$status) {
+	// 	$error['status'] = 'status Field required';
+	// }
 
-	if (!$level && $status == 'Promoted') {
-		$error['level'] = 'Level Field required';
-	}
+	// if (!$level && $status == 'Promoted') {
+	// 	$error['level'] = 'Level Field required';
+	// }
 
 
 
-		if ($error) {
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
-		} else {
 
-			$query = "UPDATE agent_list SET 
-			status = '$status',
-			level = '$level'
-			 WHERE id='$agent_id'";
-			$result = $db->update($query);
-			// $update = "";
-
-					die(json_encode(['message' => 'Developer Updated Successfull']));
-				
-				if ($update) {
-					die(json_encode(['message' => 'Developer Updated Successfull']));
-				}else{
-					http_response_code(500);
-					die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
-				}
-		}
-	}else{
-		http_response_code(500);
-	die(json_encode(['message' => 'Agent Not Found']));
-	}
+			
 	
-}
+
 
 
 

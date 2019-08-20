@@ -81,7 +81,7 @@ if ($result) {
             <div class="dropdown-menu dropdown-menu-right">
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/show.php?agent_id=' . $row['id'] . '"><i class="icon-eye"></i> View All Info</span>
 
-              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/edit_info.php?agent_id=' . $row['id'] . '"><i class="icon-pen"></i>Edit Info</span>
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/edit_info.php?agent_id=' . $row['id'] . '"><i class="icon-pen"></i>Edit Agent\'s Personal Info</span>
 
               <span class="dropdown-item" style="display:'.$display_generate_appointment.'" id="generate_appoint_letter" data-url="' . ADMIN_URL . '/agent/ajax_create_pdf.php?agent_id=' . $row['id'] . '"><i class="icon-redo"></i> Generate Confirmation Letter</span>
 

@@ -70,12 +70,16 @@
 
 
 
-    <?php $nav_items_section_agent = ['agent']; ?>
+    <?php $nav_items_section_agent = ['agent','Contact-by','Mange-agent']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_agent, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-users4"></i> <span>Agent</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_agent, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
-      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/agent" class="nav-link<?php active_page($data, 'agent'); ?>">Manage Agent</a></li>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/agent" class="nav-link<?php active_page($data, 'Mange-agent'); ?>">Manage Agent</a></li>
+
+      <li class="nav-item"><a href="../../agent/index.php" class="nav-link<?php active_page($data, 'agent'); ?>">Register New Agent</a></li>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/contact-by" class="nav-link<?php active_page($data, 'Contact-by'); ?>">Contact By</a></li>
     </ul>
   </li>
 

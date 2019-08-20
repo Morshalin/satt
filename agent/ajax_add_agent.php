@@ -170,7 +170,7 @@ if (isset($_POST['submit'])) {
     $div_trade = explode(".", $file_name_trade);
     $file_extension_trade = strtolower(end($div_trade));
     $unique_image_trade = md5(time()); 
-    $unique_image_trade= 'trade'.substr($unique_image_trade, 0,10).'.'.$file_extension_trade;
+    $unique_image_trade= 'trade-'.substr($unique_image_trade, 0,10).'.'.$file_extension_trade;
     $uploaded_image_trade = 'trade_license_image/'.$unique_image_trade;
 
     if ($file_name_trade) {

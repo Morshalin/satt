@@ -367,17 +367,25 @@ if (isset($_GET['agent_id'])) {
 
 
             <div class="row">
-                <div class="col-lg-6 mt-3">
+                <div class="col-lg-12 mt-3">
                     <div class="form-group">
                         <label for="document_front" class="col-form-label"> Organization name: </label>
-                        <input type="text" placeholder="if available" name="bussiness_name" id="bussiness_name" class="form-control"  autofocus >
+                        <input type="text" placeholder="if available" name="bussiness_name" id="bussiness_name" class="form-control"  autofocus value="<?php echo $row['bussiness_name'] ?>">
                     </div>
                 </div>
-                <div class="col-lg-6 ">
+            </div>
+
+
+            <div class="row" id="frontend_img_div">
+                <div class="col-lg-6" style=" margin-top: 40px;">
                     <div class="form-group">
                         <label for="tread_license" class="col-form-label"> Trade lisence: <span><small class="text-danger">(max size 1 Mb)</small></label>
-                        <input type="file" name="tread_license" id="tread_license" class="form-control"  autofocus onchange="readURL(this,'#','#tread_license')">
-                        <input type="hidden" id="tread_license_size" name="tread_license_size">
+                        <input type="file" name="tread_license" id="tread_license" class="form-control"   autofocus  onchange="readURL(this,'#show_dock_trade_license_img','#tread_license')">
+                    </div>
+                </div>
+                <div class="col-lg-6"  align="center">
+                    <div class="form-group">
+                        <img id="show_dock_trade_license_img" src="<?php echo BASE_URL.'/agent/'.$row['tread_license'] ?>" alt="Image not vailable" width="160px" height="190px">
                     </div>
                 </div>
             </div>
@@ -389,7 +397,7 @@ if (isset($_GET['agent_id'])) {
                 <div class="col-lg-12 ">
                     <div class="form-group">
                         <label for="tread_license" class="col-form-label"> E-signatuire: <span class="text-danger">*</span></label>
-                        <input type="text" placeholder="Your Full Name" name="signature" id="signature" class="form-control"  autofocus >
+                        <input type="text" placeholder="Your Full Name" name="signature" id="signature" class="form-control"  autofocus value="<?php echo $row['signature'] ?>">
                     </div>
                 </div>
             </div>
