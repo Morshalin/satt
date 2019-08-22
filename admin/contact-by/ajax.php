@@ -1,15 +1,15 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/software-details', 'Software Details');
-if (isset($_GET['software_details_id'])) {
-	$software_details_id = $_GET['software_details_id'];
-	if ($software_details_id) {
-		$query = "SELECT * FROM software_details WHERE id = '$software_details_id'";
+Session::checkSession('admin', ADMIN_URL . '/customertype', 'customertype');
+if (isset($_GET['id'])) {
+	$id = $_GET['id'];
+	if ($id) {
+		$query = "SELECT * FROM agent_contact_by WHERE id = '$id'";
 		$result = $db->select($query);
 		if (!$result) {
 			http_response_code(500);
-			die(json_encode(['message' => 'Software Details Not Found']));
+			die(json_encode(['message' => 'Person Not Found']));
 		}
 	}
 }
@@ -18,88 +18,41 @@ if (isset($_GET['software_details_id'])) {
 ===================================================================*/
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['action'] == 'update') {
-	$software_details_id = $_GET['software_details_id'];
-	if ($software_details_id) {
+	$id = $_GET['id'];
+	if ($id) {
 		$error = array();
-		$software_status = $_POST['software_status'];
-		$a = explode(',',  $software_status);
-		$software_status_name = $a[0];
-		$software_status_id = $a[1];
+	$contact_person_id = $fm->validation($_POST['contact_person_id']);
+	$name = $fm->validation($_POST['name']);
+	
 
-		$language_name = $_POST['language_name'];
-		$developer_name = $_POST['developer_name'];
-		$software_name = $fm->validation($_POST['software_name']);
-		$create_date = $fm->validation($_POST['create_date']);
-		$end_date = $fm->validation($_POST['end_date']);
-		$update_date = date('d-M-Y');
-		$short_feature = $fm->validation($_POST['short_feature']);
-		$user_manual = $fm->validation($_POST['user_manual']);
-		$condition_details = $fm->validation($_POST['condition_details']);
+	// $idCheck = $fm->dublicateCheck('agent_contact_by', 'contact_person_id', $contact_person_id);
+	$query = "SELECT * FROM agent_contact_by WHERE contact_person_id = '$contact_person_id' AND id <> '$id'";
+	$get_person = $db->select($query);
 
-		if (isset($_POST['status'])) {
-			$status = 1;
-		} else {
-			$status = 0;
-		}
+	if (isset($_POST['status'])) {
+		$status = 1;
+	} else {
+		$status = 0;
+	}
 
-		if (!$software_name) {
-			$error['software_name'] = 'Software Name Field required';
-		}
-			if (!$software_status) {
-			$error['software_status'] = 'Software Status Field required';
-		}
-			if (!$language_name) {
-			$error['language_name'] = 'Software Language Field required';
-		}
-			if (!$developer_name) {
-			$error['developer_name'] = 'Developer Name Field required';
-		}
-			if (!$create_date) {
-			$error['create_date'] = 'Create Date Field required';
-		}
-			if (!$short_feature) {
-			$error['short_feature'] = 'Short Feature Field required';
-		}
+	if (!$contact_person_id) {
+		$error['contact_person_id'] = 'Person ID Field required';
+	} elseif ($get_person) {
+		$error['contact_person_id'] = 'Person\'s ID Is Already Exits';
+	} elseif (!$name) {
+		$error['name'] = 'Person Name Field required';
+	}
 
+		
 		if ($error) {
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 		} else {
-			$query = "UPDATE software_details SET 
-
-			software_name = '$software_name',
-			software_status_name = '$software_status_name',
-			software_status_id = '$software_status_id',
-			create_date = '$create_date',
-			end_date = '$end_date',
-			update_date = '$update_date',
-			short_feature = '$short_feature',
-			user_manual = '$user_manual',
-			condition_details = '$condition_details',
-			 status = '$status' WHERE id='$software_details_id'";
+			$query = "UPDATE agent_contact_by SET contact_person_id = '$contact_person_id', name='$name', status = '$status' WHERE id='$id'";
 			$result = $db->update($query);
-
-			if ($result) {
-				// multi Language insert
-				$querylang = "DELETE FROM software_language_multi WHERE software_id = '$software_details_id'";
-				$resultlang = $db->delete($querylang);
-				if ($resultlang) {
-						for ($i = 0; $i < count($language_name); $i++) {
-						$sql2 = "INSERT INTO software_language_multi(software_id,language_id) VALUES('$software_details_id','$language_name[$i]')";
-						$insertrow1 = $db->insert($sql2);
-							}
-					}
-				// multi Developer insert
-				$querydeve = "DELETE FROM software_develope_by WHERE software_id = '$software_details_id'";
-				$resultdeve = $db->delete($querydeve);
-				if ($resultdeve) {
-						for ($i = 0; $i < count($developer_name); $i++) {
-								$sql2 = "INSERT INTO software_develope_by(software_id,developer_id) VALUES('$software_details_id','$developer_name[$i]')";
-								$insertrow1 = $db->insert($sql2);
-							}
-					}
-					die(json_encode(['message' => 'Software Details Updated Successfull']));
-			}else {
+			if ($result != false) {
+				die(json_encode(['message' => 'Updated Successfully']));
+			} else {
 				http_response_code(500);
 				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 			}
@@ -113,33 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 ===================================================================*/
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$error = array();
+	$contact_person_id = $fm->validation($_POST['contact_person_id']);
+	$name = $fm->validation($_POST['name']);
+	
 
-	$software_status = $_POST['software_status'];
-	$a = explode(',',  $software_status);
-	$software_status_name = $a[0];
-	$software_status_id = $a[1];
-
-	$language_name = $_POST['language_name'];
-	$developer_name = $_POST['developer_name'];
-	$software_name = $fm->validation($_POST['software_name']);
-	$create_date = $fm->validation($_POST['create_date']);
-	$end_date = $fm->validation($_POST['end_date']);
-	$short_feature = $fm->validation($_POST['short_feature']);
-	$user_manual = $fm->validation($_POST['user_manual']);
-	$condition_details = $fm->validation($_POST['condition_details']);
-
-	// software price details
-	$demo_url = $fm->validation($_POST['demo_url']);
-	$installation_charge = $fm->validation($_POST['installation_charge']);
-	$monthly_charge = $fm->validation($_POST['monthly_charge']);
-	$yearly_charge = $fm->validation($_POST['yearly_charge']);
-	$direct_sell = $fm->validation($_POST['direct_sell']);
-	$total_price = $fm->validation($_POST['total_price']);
-	$agent_commission_one_time = $fm->validation($_POST['agent_commission_one_time']);
-	$agent_commission_monthly = $fm->validation($_POST['agent_commission_monthly']);
-	$discount_offer = $fm->validation($_POST['discount_offer']);
-	$yearly_renew_charge = $fm->validation($_POST['yearly_renew_charge']);
-
+	$idCheck = $fm->dublicateCheck('agent_contact_by', 'contact_person_id', $contact_person_id);
 
 	if (isset($_POST['status'])) {
 		$status = 1;
@@ -147,78 +78,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$status = 0;
 	}
 
-	if (!$software_name) {
-		$error['software_name'] = 'Software Name Field required';
+	if (!$contact_person_id) {
+		$error['contact_person_id'] = 'Person ID Field required';
+	} elseif ($idCheck) {
+		$error['contact_person_id'] = 'Person Is Already Exits';
+	} elseif (!$name) {
+		$error['name'] = 'Person Name Field required';
 	}
-		if (!$software_status) {
-		$error['software_status'] = 'Software Status Field required';
-	}
-		if (!$language_name) {
-		$error['language_name'] = 'Software Language Field required';
-	}
-		if (!$developer_name) {
-		$error['developer_name'] = 'Developer Name Field required';
-	}
-		if (!$create_date) {
-		$error['create_date'] = 'Create Date Field required';
-	}
-		if (!$short_feature) {
-		$error['short_feature'] = 'Short Feature Field required';
-	}
+
+
 
 	if ($error) {
 		http_response_code(500);
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
-		$query = "INSERT INTO software_details (software_name,software_status_name,software_status_id,create_date,end_date,short_feature,user_manual,condition_details, status) VALUES ('$software_name','$software_status_name','$software_status_id','$create_date','$end_date','$short_feature','$user_manual','$condition_details', '$status')";
-		$last_id = $db->custom_insert($query);
-		if ($last_id) {
-			// multi Language insert
-			for ($i = 0; $i < count($language_name); $i++) {
-					$sql2 = "INSERT INTO software_language_multi(software_id,language_id) VALUES('$last_id','$language_name[$i]')";
-					$insertrow1 = $db->insert($sql2);
-				}
-			// multi Developer insert
-			for ($i = 0; $i < count($developer_name); $i++) {
-					$sql2 = "INSERT INTO software_develope_by(software_id,developer_id) VALUES('$last_id','$developer_name[$i]')";
-					$insertrow1 = $db->insert($sql2);
-				}
-
-			$query = "INSERT INTO software_price (software_name,software_id,demo_url,installation_charge,monthly_charge,yearly_charge,direct_sell,total_price, agent_commission_one_time,agent_commission_monthly,discount_offer,yearly_renew_charge) VALUES ('$software_name','$last_id','$demo_url','$installation_charge','$monthly_charge','$yearly_charge','$direct_sell','$total_price', '$agent_commission_one_time','$agent_commission_monthly','$discount_offer','$yearly_renew_charge')";
-			$result = $db->insert($query);
-
-			if ($result != false) {
-				die(json_encode(['message' => 'Software Added Successfull']));
-			} else {
-				http_response_code(500);
-				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
-			}
-		} //last id end
-	} //else end
-} 
+		$query = "INSERT INTO agent_contact_by (contact_person_id, name,status) VALUES ('$contact_person_id','$name','$status')";
+		$result = $db->insert($query);
+		if ($result != false) {
+			die(json_encode(['message' => 'Person Added Successfully']));
+		} else {
+			http_response_code(500);
+			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+		}
+	}
+}
 
 /*================================================================
-		Delate  Data into Database
+		Delete  Data into Database
 ===================================================================*/
-// $error['software_language_name'] = 'Course Name Required';
+// $error['type'] = 'Course Name Required';
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET['action'] == 'delete') {
-	$software_details_id = $_GET['software_details_id'];
-	if ($software_details_id) {
-		$query = "DELETE FROM software_details WHERE id = '$software_details_id'";
+	$id = $_GET['id'];
+	if ($id) {
+		$query = "DELETE FROM agent_contact_by WHERE id = '$id'";
 		$result = $db->delete($query);
 		if ($result) {
-			$query = "DELETE FROM software_price WHERE software_id = '$software_details_id'";
-			$result = $db->delete($query);
-
-			$query1 = "DELETE FROM software_develope_by WHERE software_id = '$software_details_id'";
-			$result1 = $db->delete($query1);
-
-			$query2 = "DELETE FROM software_language_multi WHERE software_id = '$software_details_id'";
-			$result2 = $db->delete($query2);
-
-			if ($result2) {
-				die(json_encode(['message' => 'Software Deleted Successfull']));
-			}
+			die(json_encode(['message' => 'Deleted Successfully']));
 		}
 	}
 	http_response_code(500);
@@ -226,17 +121,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET[
 }
 
 
-
+/*================================================================
+		Change Status  Data into Database
+===================================================================*/
 if ($_SERVER['REQUEST_METHOD'] == 'PUT' AND isset($_GET['action']) AND $_GET['action'] == 'status') {
-	$software_details_id = $_GET['software_details_id'];
+	$status_id = $_GET['status_id'];
 	$status = $_GET['status'];
 	$status = $status ? 0 : 1;
 
-	if ($software_details_id) {
-		$query = "UPDATE software_details SET status = '$status' WHERE id = '$software_details_id'";
+	if ($status_id) {
+		$query = "UPDATE agent_contact_by SET status = '$status' WHERE id = '$status_id'";
 		$result = $db->delete($query);
 		if ($result) {
-			die(json_encode(['message' => 'Software Status Changed Successfull']));
+			die(json_encode(['message' => 'Status Changed Successfully']));
 		}
 	}
 	http_response_code(500);

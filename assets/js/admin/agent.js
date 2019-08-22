@@ -150,6 +150,7 @@ var DatatableButtonsHtml5 = function() {
                     _modalFormValidation();
                     _componentDatePicker();
                     _componentTimePicker();
+                    _componentSelect2Modal();
                 })
                 .fail(function(data) {
                     $('.modal-body').html('<span style="color:red; font-weight: bold;"> Something Went Wrong. Please Try again later.......</span>');

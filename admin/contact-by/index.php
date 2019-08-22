@@ -1,6 +1,6 @@
 <?php
   require_once '../../config/config.php';
-Session::checkSession('admin', ADMIN_URL . '/software-details', 'Software Details');
+Session::checkSession('admin', ADMIN_URL . '/contact-by', 'Contact By');
   $data = array();
   $data['page_title'] = 'Contact By';
   $data['element'] = ['modal' => 'lg'];
@@ -45,17 +45,12 @@ Session::checkSession('admin', ADMIN_URL . '/software-details', 'Software Detail
   			<img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
   		</div> -->
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/software-details/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/contact-by/table.php">
   				<thead>
   					<tr>
   						<th>#</th>
-              <th>Software Name</th>
-              <th>Software Status</th>
-              <th>Language</th>
-              <th>Developed By</th>
-              <th>Start Date</th>
-              <th>Short Features</th>
-  						<th>Condition</th>
+              <th>ID No</th>
+              <th>Name</th>
   						<th>Status</th>
   						<th>Action</th>
   					</tr>

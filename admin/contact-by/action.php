@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/software-details', 'Software Details');
+Session::checkSession('admin', ADMIN_URL . '/contact-by', 'Contact By');
 if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST['action'])) {
 	$ids = $_POST['ids'];
 	if ($_POST['action'] == 'delete') { 

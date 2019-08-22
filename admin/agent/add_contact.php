@@ -37,7 +37,21 @@ if (isset($_GET['agent_id'])) {
             <div class="form-group">
                 <label for="software_status" class="col-form-label">Contact By  <span class="text-danger">*</span></label>
                
-                <input type="text" id="contact_by" name="contact_by" class="form-control" placeholder="Type Name">
+               
+                <select name="contact_by" id="contact_by" class="form-control select" required="">
+                    <option value="">Please Select One</option>
+                    <?php 
+                        $query = "SELECT * FROM agent_contact_by WHERE status = '1'";
+                        $get_person = $db->select($query);
+                        if ($get_person) {
+                            while ($person = $get_person->fetch_assoc()) {
+                               ?>
+                                <option value="<?php echo 'ID: '.$person['contact_person_id'].', Name: '.$person['name'] ?>"><?php echo 'ID: '.$person['contact_person_id'].', Name: '.$person['name'] ?></option>
+                               <?php
+                            }
+                        }
+                     ?>
+                </select>
             </div>
         </div>
         <div class="col-lg-4"></div>
@@ -80,7 +94,7 @@ if (isset($_GET['agent_id'])) {
 <div class="content">
   <div class="card border-top-success rounded-top-0" id="table_card">
     <div class="card-header header-elements-inline bg-light border-grey-300" >
-        <h5 class="card-title text-center"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Customer List'; ?>
+        <h5 class="card-title text-center"><?php echo isset($data['page_title']) ? $data['page_title'] : 'List Of Contact Info'; ?>
         
         </h5>
        
