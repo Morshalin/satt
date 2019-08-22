@@ -38,6 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 	$linkedin = $fm->validation($_POST['linkedin']);
 	$instagram = $fm->validation($_POST['instagram']);
 
+	$courseCheck = $fm->dublicateCheck('developer', 'email', $email);
+	$courseCheck = $fm->dublicateCheck('developer', 'mobile_no', $mobile_no);
 
 	$image = $_FILES['image'];
     $file_name = $image['name'];
@@ -49,8 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
     $unique_image= substr($unique_image, 0,10).'.'.$file_extension;
     $uploaded_image = 'image/'.$unique_image;
 
-	$courseCheck = $fm->dublicateCheck('developer', 'email', $email);
-	$courseCheck = $fm->dublicateCheck('developer', 'mobile_no', $mobile_no);
+
 
 		if (isset($_POST['status'])) {
 			$status = 1;
