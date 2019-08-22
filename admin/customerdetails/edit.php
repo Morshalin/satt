@@ -35,7 +35,6 @@ if (isset($_GET['customerdetails_id'])) {
             <div class="form-group">
                 <label for="facebook_name" class="col-form-label">Facebook Name<span class="text-danger">*</span></label>
                 <input type="text" name="facebook_name" id="facebook_name" class="form-control" value="<?php echo $row['facebook_name']; ?>" required value="">
-
             </div>
         </div>
     </div>
@@ -60,13 +59,13 @@ if (isset($_GET['customerdetails_id'])) {
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="introduction_date" class="col-form-label">Introduction Date<span class="text-danger">*</span></label>
-                <input type="date" name="introduction_date" value="<?php echo $row['introduction_date']; ?>" id="introduction_date" class="form-control date" placeholder="Introduction Date" required autofocus value="">
+                <input type="text" name="introduction_date" value="<?php echo $row['introduction_date']; ?>" id="introduction_date" class="form-control date" placeholder="Introduction Date" required autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="last_contacted_date" class="col-form-label">Last Contacted Date<span class="text-danger">*</span></label>
-                <input type="date" name="last_contacted_date" value="<?php echo $row['last_contacted_date']; ?>" id="last_contacted_date" class="form-control date" placeholder="Last Contacted Date" required value="">
+                <input type="text" name="last_contacted_date" value="<?php echo $row['last_contacted_date']; ?>" id="last_contacted_date" class="form-control date" placeholder="Last Contacted Date" required value="">
 
             </div>
         </div>

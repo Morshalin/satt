@@ -43,13 +43,13 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="introduction_date" class="col-form-label">Introduction Date<span class="text-danger">*</span></label>
-                <input type="date" name="introduction_date" id="introduction_date" class="form-control date" placeholder="Select Start Date" required autofocus value="">
+                <input type="text" name="introduction_date" id="introduction_date" class="form-control date" placeholder="Select Start Date" required autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="last_contacted_date" class="col-form-label">Last Contacted Date<span class="text-danger">*</span></label>
-                <input type="date" name="last_contacted_date" id="last_contacted_date" class="form-control date" placeholder="Last Contacted Date" required value="">
+                <input type="text" name="last_contacted_date" id="last_contacted_date" class="form-control date" placeholder="Last Contacted Date" required value="">
 
             </div>
         </div>

@@ -19,9 +19,8 @@ if ($columnName == 'DT_RowIndex') {
 =================================================================================*/
 $searchQuery = " ";
 if ($searchValue != '') {
-	$searchQuery = " and (id like '%" . $searchValue . "%' or customerdetails_name like '%" . $searchValue . "%' or
-        customerdetails_code like '%" . $searchValue . "%' or
-        course_description like'%" . $searchValue . "%' ) ";
+	$searchQuery = " and (id like '%" . $searchValue . "%' or name like '%" . $searchValue . "%' or
+        number like '%" . $searchValue . "%' or email like'%" . $searchValue . "%' or introduction_date like'%" . $searchValue . "%' or last_contacted_date like'%" . $searchValue . "%') ";
 }
 /*==============================================================================
 ## Total number of records without filtering

@@ -19,9 +19,8 @@ if ($columnName == 'DT_RowIndex') {
 =================================================================================*/
 $searchQuery = " ";
 if ($searchValue != '') {
-	$searchQuery = " and (id like '%" . $searchValue . "%' or Office_note_name like '%" . $searchValue . "%' or
-        Office_note_code like '%" . $searchValue . "%' or
-        course_description like'%" . $searchValue . "%' ) ";
+  $searchQuery = " and (id like '%" . $searchValue . "%' or name like '%" . $searchValue . "%' or
+        number like '%" . $searchValue . "%' or email like'%" . $searchValue . "%' or introduction_date like'%" . $searchValue . "%' or last_contacted_date like'%" . $searchValue . "%') ";
 }
 /*==============================================================================
 ## Total number of records without filtering
@@ -55,9 +54,9 @@ if ($result) {
 			"id" => $row['id'],
 			"name" => '<strong>'. $row['name'] . '</strong>',
 			"number" => $row['number'],
-			"email" => $row['email'],
-      "introduction_date" => $row['introduction_date'],
-      "last_contacted_date" => $row['last_contacted_date'],
+			"note" => $row['note'],
+      "introduction_date" => $fm->formatDate($row['introduction_date']),
+      "last_contacted_date" => $fm->formatDate($row['last_contacted_date']),
 			"action" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
         <div class="list-icons" id="action_menu_' . $row['id'] . '">

@@ -40,7 +40,7 @@ if (isset($_GET['customerdetails_id'])) {
     </tr>
     <tr>
         <td class="font-weight-bold">Introduction Date</td>
-        <td><?php echo $row['introduction_date']?></td>
+        <td><?php echo $fm->formatDate($row['introduction_date']); ?></td>
     </tr>
      <tr>
         <td class="font-weight-bold">Customer Reference</td>
@@ -99,7 +99,7 @@ if (isset($_GET['customerdetails_id'])) {
     </tr>
     <tr>
         <td class="font-weight-bold">Last Contact Date</td>
-        <td><?php echo $row['last_contacted_date']?></td>
+        <td><?php echo $fm->formatDate($row['last_contacted_date']); ?></td>
     </tr>
 </table>
 <br >

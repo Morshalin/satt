@@ -42,7 +42,7 @@ $data['page_js'] = ['assets/js/login'];
 								</div>
 							</div>
 
-              <div class="form-check">
+              				<div class="form-check">
 								<label class="form-check-label">
 									<input type="checkbox" class="form-check-input" name="remember">
 									Remember Me

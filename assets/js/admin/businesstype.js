@@ -100,7 +100,7 @@ var DatatableButtonsHtml5 = function() {
                 targets: [0, 4]
             }, {
                 orderable: false,
-                targets: [1, 4]
+                targets: [3, 4]
             }],
             order: [1, 'asc'],
             processing: true,

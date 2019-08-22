@@ -28,13 +28,13 @@ if (isset($_GET['Office_note_id'])) {
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="course_name" class="col-form-label">Customer Name <span class="text-danger">*</span></label>
-                <input type="text" name="name" id="name" class="form-control" value="<?php echo $row['name']; ?>" required autofocus value="">
+                <input type="text" name="name" id="name" class="form-control" value="<?php echo $row['name']; ?>">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="facebook_name" class="col-form-label">Facebook Name<span class="text-danger">*</span></label>
-                <input type="text" name="facebook_name" id="facebook_name" class="form-control" value="<?php echo $row['facebook_name']; ?>" required value="">
+                <input type="text" name="facebook_name" id="facebook_name" class="form-control" value="<?php echo $row['facebook_name']; ?>">
 
             </div>
         </div>
@@ -44,13 +44,13 @@ if (isset($_GET['Office_note_id'])) {
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="number" class="col-form-label">Mobile Number<span class="text-danger">*</span></label>
-                <input type="text" name="number" id="number" value="<?php echo $row['number']; ?>" class="form-control" placeholder="Mobile Number" required autofocus value="">
+                <input type="text" name="number" id="number" value="<?php echo $row['number']; ?>" class="form-control" placeholder="Mobile Number">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="email" class="col-form-label">Valid Email Address<span class="text-danger">*</span></label>
-                <input type="text" name="email" value="<?php echo $row['email']; ?>" id="email" class="form-control" placeholder="Valid Email Address" required value="">
+                <input type="text" name="email" value="<?php echo $row['email']; ?>" id="email" class="form-control" placeholder="Valid Email Address">
 
             </div>
         </div>
@@ -60,13 +60,13 @@ if (isset($_GET['Office_note_id'])) {
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="introduction_date" class="col-form-label">Introduction Date<span class="text-danger">*</span></label>
-                <input type="date" name="introduction_date" value="<?php echo $row['introduction_date']; ?>" id="introduction_date" class="form-control date" placeholder="Introduction Date" required autofocus value="">
+                <input type="text" name="introduction_date" value="<?php echo $row['introduction_date']; ?>" id="introduction_date" class="form-control date" placeholder="Introduction Date">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="last_contacted_date" class="col-form-label">Last Contacted Date<span class="text-danger">*</span></label>
-                <input type="date" name="last_contacted_date" value="<?php echo $row['last_contacted_date']; ?>" id="last_contacted_date" class="form-control date" placeholder="Last Contacted Date" required value="">
+                <input type="text" name="last_contacted_date" value="<?php echo $row['last_contacted_date']; ?>" id="last_contacted_date" class="form-control date" placeholder="Last Contacted Date">
 
             </div>
         </div>
@@ -148,7 +148,7 @@ if (isset($_GET['Office_note_id'])) {
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="institute_type" class="col-form-label">Institute Category<span class="text-danger">*</span></label>
-                <input type="text" name="institute_type" value="<?php echo $row['institute_type']; ?>" id="institute_type" class="form-control" placeholder="Institute Category" required>
+                <input type="text" name="institute_type" value="<?php echo $row['institute_type']; ?>" id="institute_type" class="form-control" placeholder="Institute Category">
 
             </div>
         </div>
@@ -158,7 +158,7 @@ if (isset($_GET['Office_note_id'])) {
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="institute_name" class="col-form-label">Institute Name<span class="text-danger">*</span></label>
-                <input type="text" name="institute_name" value="<?php echo $row['institute_name']; ?>" id="institute_name" class="form-control" placeholder="Interested Services" required autofocus>
+                <input type="text" name="institute_name" value="<?php echo $row['institute_name']; ?>" id="institute_name" class="form-control" placeholder="Interested Services">
             </div>
         </div>
         <div class="col-md-6">
@@ -173,7 +173,7 @@ if (isset($_GET['Office_note_id'])) {
           <div class="col-lg-6">
               <div class="form-group">
                   <label for="institute_district" class="col-form-label">Institute District<span class="text-danger">*</span></label>
-                  <input type="text" name="institute_district"  value="<?php echo $row['institute_district']; ?>" id="institute_district" class="form-control" placeholder="Institute District" required autofocus value="">
+                  <input type="text" name="institute_district"  value="<?php echo $row['institute_district']; ?>" id="institute_district" class="form-control" placeholder="Institute District">
               </div>
           </div>
          <div class="col-lg-6">
