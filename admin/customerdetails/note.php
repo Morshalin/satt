@@ -115,7 +115,6 @@ ajax();
    <th>Leave Reasion</th>
    <th>Customer Note</th>
    <th>Create Date</th>
-   <th>update Date</th>
    <th>Action</th>
 </tr>
 <?php 
@@ -147,7 +146,6 @@ and n.customer_id = '$customerdetails_id'";
         </td>
         <td><?php echo $notedata['note'];?></td>
         <td><?php echo $notedata['creat_date'];?></td>
-        <td><?php echo $notedata['update_date'];?></td>
         <td><button class="btn btn-danger btn-small delete_note" data-url="<?php echo ADMIN_URL ?>/customerdetails/ajax.php?delid=<?php echo $notedata['id']; ?>" id="<?php echo $notedata['id']; ?>">Delete </button></td>
     </tr>
    <?php } } ?>

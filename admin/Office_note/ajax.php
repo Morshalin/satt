@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 		$facebook_name       = $fm->validation($_POST['facebook_name']);
 		$number              = $fm->validation($_POST['number']);
 		$email               = $fm->validation($_POST['email']);
-		$introduction_date   = $fm->formatDate($_POST['introduction_date']);
+		$introduction_date   = $_POST['introduction_date'];
 		$customer_reference  = $fm->validation($_POST['customer_reference']);
 		$progressive_state   = $fm->validation($_POST['progressive_state']);
 		$interested_services = $_POST['interested_services'];
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 		$institute_district  = $fm->validation($_POST['institute_district']);
 		$software_category   = $_POST['software_category'];
 		$note                = $fm->validation($_POST['note']);
-		$last_contacted_date = $fm->formatDate($_POST['last_contacted_date']);
+		$last_contacted_date = $_POST['last_contacted_date'];
 		
 
 		if (isset($_POST['status'])) {
@@ -44,8 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 
 		if (!$name) {
 			$error['name'] = 'Customer Name Field required';
-		}elseif (strlen($facebook_name) > 255) {
-			$error['facebook_name'] = 'Customer Name Can Not Be More Than 255 Charecters';
 		}
 
 
@@ -61,9 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 		} else {
-				/*foreach ($$interested_services as  $value) {
-					die(json_encode(['errors' => print_r($value)]));
-				}*/
 				$query = "UPDATE  satt_extra_office_notes 
 					SET 
 					name='$name', 
@@ -78,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 					institute_address   ='$institute_address', 
 					institute_district  ='$institute_district', 
 					last_contacted_date ='$last_contacted_date', 
-					note                ='$last_contacted_date',
+					note                ='$note',
 					status='$status' WHERE id= '$Office_note_id'";
 
 			 $result = $db->update($query);
@@ -122,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$facebook_name       = $fm->validation($_POST['facebook_name']);
 	$number              = $fm->validation($_POST['number']);
 	$email               = $fm->validation($_POST['email']);
-	$introduction_date   = $fm->formatDate($_POST['introduction_date']);
+	$introduction_date   = $_POST['introduction_date'];
 	$customer_reference  = $fm->validation($_POST['customer_reference']);
 	$progressive_state   = $fm->validation($_POST['progressive_state']);
 	$interested_services = $_POST['interested_services'];
@@ -132,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$institute_district  = $fm->validation($_POST['institute_district']);
 	$software_category   = $_POST['software_category'];
 	$note                = $fm->validation($_POST['note']);
-	$last_contacted_date = $fm->formatDate($_POST['last_contacted_date']);
+	$last_contacted_date = $_POST['last_contacted_date'];
 
 	if (isset($_POST['status'])) {
 		$status = 1;

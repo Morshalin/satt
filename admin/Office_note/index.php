@@ -51,7 +51,7 @@
   						<th>#</th>
   						<th>Customer Name</th>
               <th>Customer Number</th>
-  						<th>Customer Email</th>
+  						<th>Customer Notes</th>
   						<th>introduction Date</th>
               <th>Last Contacted Date</th>
               <th>Status</th>

@@ -115,7 +115,7 @@ var DatatableButtonsHtml5 = function() {
                 }, {
                     data: 'number'
                 }, {
-                    data: 'email'
+                    data: 'note'
                 },  {
                     data: 'introduction_date'
                 }, {

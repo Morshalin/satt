@@ -60,7 +60,6 @@ if ($result) {
           		<i class="icon-menu9"></i>
           	</a>
           	<div class="dropdown-menu dropdown-menu-right">
-          		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/business-type/show.php?software_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
           		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/business-type/edit.php?software_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
           		<span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/business-type/ajax.php?software_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
           	</div>
