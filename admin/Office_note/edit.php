@@ -183,7 +183,7 @@ if (isset($_GET['Office_note_id'])) {
 
               <select multiple="multiple" class="form-control select" id="software_category" name="software_category[]">
                   <?php 
-                    $query_cus = "SELECT * FROM satt_customer_business_type where status=1";
+                    $query_cus = "SELECT * FROM software_details where status=1";
                     $resultcus = $db->select($query_cus);
 
                    $query_soft= "SELECT * FROM satt_extra__software_category WHERE cutomer_details_id = '$Office_note_id'";
@@ -199,7 +199,7 @@ if (isset($_GET['Office_note_id'])) {
                if ($resultcus) {
                   while ($data1 = $resultcus->fetch_assoc()) {
                     ?>
-                    <option value="<?php echo $data1['id']; ?>" <?php if(array_search($data1['id'], $software_id) !== false) {echo 'selected';} ?> ><?php echo $data1['software_type']; ?></option>
+                    <option value="<?php echo $data1['id']; ?>" <?php if(array_search($data1['id'], $software_id) !== false) {echo 'selected';} ?> ><?php echo $data1['software_name']; ?></option>
 
                     <?php } }?>
                 </select>

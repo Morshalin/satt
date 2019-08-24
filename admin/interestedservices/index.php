@@ -30,7 +30,7 @@
   <div class="card border-top-success rounded-top-0" id="table_card">
   	<div class="card-header header-elements-inline bg-light border-grey-300" >
   		<h5 class="card-title"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Dashboard'; ?>
-  		<button type="button" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/interestedservices/create.php"><i class="icon-stack-plus mr-1"></i>Interested Services</button>
+  		<button type="button" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/interestedservices/create.php"><i class="icon-stack-plus mr-1"></i>Add Interested Services</button>
   		</h5>
   		<div class="header-elements">
   			<div class="list-icons">

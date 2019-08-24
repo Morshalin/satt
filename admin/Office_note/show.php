@@ -87,12 +87,12 @@ if (isset($_GET['Office_note_id'])) {
         <td class="font-weight-bold">Software Category</td>
        <td>
          <?php 
-             $sql = "SELECT satt_customer_business_type.software_type from  satt_extra__software_category inner join  satt_customer_business_type on satt_extra__software_category.software_id = satt_customer_business_type.id where satt_extra__software_category.cutomer_details_id = '$Office_note_id'";
+             $sql = "SELECT software_details.software_name from  satt_extra__software_category inner join  software_details on satt_extra__software_category.software_id = software_details.id where satt_extra__software_category.cutomer_details_id = '$Office_note_id'";
      
              $result = $db->select($sql);
              if ($result) {
                  while ($data = $result->fetch_assoc()) { ?>
-                    <span class="badge badge-success mr-1"><?php echo $data['software_type']; ?></span>
+                    <span class="badge badge-success mr-1"><?php echo $data['software_name']; ?></span>
                  <?php } } ?>
             
          </td>

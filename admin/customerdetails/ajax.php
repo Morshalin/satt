@@ -14,6 +14,69 @@ if (isset($_GET['customerdetails_id'])) {
 	}
 }
 /*================================================================
+	Update Username And password data into database
+===================================================================*/
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['update']) AND $_GET['update'] == 'updatevalue') {
+		$error = array();
+		$username         = $fm->validation($_POST['username']);
+		$password         = $fm->validation($_POST['password']);
+		$confirm_password = $fm->validation($_POST['confirm_password']);
+
+		$username_check = $fm->dublicateCheck('satt_customer_informations', 'username', $username);
+		
+		
+
+		if (isset($_POST['status'])) {
+			$status = 1;
+		} else {
+			$status = 0;
+		}
+
+		if (!$username) {
+			$error['name'] = 'Username Name Field required';
+		}elseif (strlen($username) > 255) {
+			$error['username'] = 'Username Can Not Be More Than 255 Charecters';
+		}elseif ($username_check) {
+		$error['username_check'] = 'Username Already Exits';
+	}
+
+
+		if (!$password) {
+			$error['password'] = 'password  Field required';
+		}elseif (strlen($password) > 255) {
+			$error['password'] = 'password  Can Not Be More Than 255 Charecters';
+		}
+
+		if (!$confirm_password) {
+			$error['confirm_password'] = 'Confirm password  Field required';
+		}else if ($password != $confirm_password){
+			$error['password'] = 'Confirm password not match';
+		}
+
+		if ($error) {
+			http_response_code(500);
+			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+		}else {
+			$password = md5($password);
+			$query = "UPDATE  satt_customer_informations 
+				SET 
+				username='$username', 
+				password='$password'
+				 WHERE id = '$customerdetails_id'";
+			$result = $db->update($query);
+			if ($result) {
+				die(json_encode(['message' => 'Username And Password Set Successfull']));
+			} else {
+				http_response_code(500);
+				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+			}
+	}
+}
+
+
+
+/*================================================================
 	Update data into database
 ===================================================================*/
 
