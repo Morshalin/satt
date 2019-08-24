@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 		$total_price = $fm->validation($_POST['total_price']);
 		$agent_commission_one_time = $fm->validation($_POST['agent_commission_one_time']);
 		$agent_commission_monthly = $fm->validation($_POST['agent_commission_monthly']);
+		$agent_commission_yearly = $fm->validation($_POST['agent_commission_yearly']);
 		$discount_offer = $fm->validation($_POST['discount_offer']);
 		$yearly_renew_charge = $fm->validation($_POST['yearly_renew_charge']);
 
@@ -67,6 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			$error['agent_commission_one_time'] = 'Agent commission (one time) Field required';
 		} elseif ($agent_commission_monthly=='') {
 			$error['agent_commission_monthly'] = 'Agent commission (monthly) Field required';
+		} elseif ($agent_commission_yearly=='') {
+			$error['agent_commission_yearly'] = 'Agent commission (yearly) Field required';
 		} elseif ($discount_offer=='') {
 			$error['discount_offer'] = 'Discount offer Field required';
 		} elseif ($yearly_renew_charge=='') {
@@ -92,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			total_price='$total_price',
 			agent_commission_one_time='$agent_commission_one_time',
 			agent_commission_monthly='$agent_commission_monthly',
+			agent_commission_yearly='$agent_commission_yearly',
 			discount_offer='$discount_offer',
 			yearly_renew_charge='$yearly_renew_charge' WHERE id='$software_price_id';";
 
@@ -140,6 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$agent_commission_monthly = $fm->validation($_POST['agent_commission_monthly']);
 	$discount_offer = $fm->validation($_POST['discount_offer']);
 	$yearly_renew_charge = $fm->validation($_POST['yearly_renew_charge']);
+	$agent_commission_yearly = $fm->validation($_POST['agent_commission_yearly']);
 
 	if (!$software_name) {
 		$error['software_name'] = 'Software Name Field required';
@@ -168,6 +173,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if (!$agent_commission_monthly) {
 		$error['agent_commission_monthly'] = 'agent commission monthly Field required';
 	}
+		if (!$agent_commission_yearly) {
+		$error['agent_commission_yearly'] = 'agent commission yearly Field required';
+	}
 		if (!$discount_offer) {
 		$error['discount_offer'] = 'discount offer Field required';
 	}
@@ -190,6 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			total_price,
 			agent_commission_one_time,
 			agent_commission_monthly,
+			agent_commission_yearly,
 			discount_offer,
 			yearly_renew_charge) VALUES (
 				'$software_name',
@@ -201,6 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				'$total_price',
 				'$agent_commission_one_time',
 				'$agent_commission_monthly',
+				'$agent_commission_yearly',
 				'$discount_offer',
 				'$yearly_renew_charge');";
 

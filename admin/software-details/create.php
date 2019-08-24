@@ -98,6 +98,23 @@
         </div>
     </div>
 
+    <legend class="text-uppercase font-size-sm font-weight-bold">Important Links</legend>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="user_manual_link" class="col-form-label">Software User Manual Link</label>
+                <input type="text" name="user_manual_link" id="user_manual_link" class="form-control" placeholder="Type User Manual Link"  autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="feature_video" class="col-form-label">Software Feature Video link </label>
+                <input type="text" name="feature_video" id="feature_video" class="form-control" placeholder="Software Feature Video link"  autofocus value="">
+            </div>
+        </div>
+    </div>
+
+
     <legend class="text-uppercase font-size-sm font-weight-bold">Software Price Details</legend>
 
         <div class="row">
@@ -148,6 +165,12 @@
             <div class="form-group">
                 <label for="agent_commission_monthly" class="col-form-label">Agent Commission (Monthly) </label>
                 <input type="number" name="agent_commission_monthly" id="agent_commission_monthly" class="form-control" placeholder="Type Agent Commission (Monthly)" autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="agent_commission_yearly" class="col-form-label">Agent Commission (Yearly) <span class="text-danger">*</span> </label>
+                <input type="number" name="agent_commission_yearly" id="agent_commission_yearly" class="form-control" placeholder="Type Agent Commission (Yearly)"  autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">

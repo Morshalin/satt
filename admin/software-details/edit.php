@@ -137,6 +137,21 @@ if (isset($_GET['software_details_id'])) {
                 </div>
             </div>
         </div>
+    <legend class="text-uppercase font-size-sm font-weight-bold">Important Links</legend>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="user_manual_link" class="col-form-label">Software User Manual Link</label>
+                <input type="text" name="user_manual_link" id="user_manual_link" class="form-control" placeholder="Type User Manual Link"  autofocus value="<?php echo $row['user_manual_link']; ?>">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="feature_video" class="col-form-label">Software Feature Video link </label>
+                <input type="text" name="feature_video" id="feature_video" class="form-control" placeholder="Software Feature Video link"  autofocus value="<?php echo $row['feature_video']; ?>">
+            </div>
+        </div>
+    </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="form-check form-check-switchery form-check-inline form-check-right">
