@@ -68,6 +68,7 @@ if ($result) {
 
       "email" => '<strong>' . $row['email'].'<br>'.$row['mobile_no'].'<br>'.$row['alternate_mobile'].  '</strong>',
       "interested_dist" => '<strong>' . $row["interested_up"].'<br>'.$row["interested_dist"].'</strong>',
+      "points" => '<strong>'.$row["points"].'</strong>',
 
       
       "action" => '
@@ -89,6 +90,9 @@ if ($result) {
 
               
               <span  class="dropdown-item " id="send_mail" style="display:'.$display_send_mail.'"  data-url="' . ADMIN_URL . '/agent/ajax_send_mail.php?agent_id=' . $row['id'] . '"><i class="icon-envelope"></i> Send Confirmation Mail</span>
+
+              
+              <span  class="dropdown-item " id="content_managment" style="display:'.$display_send_mail.'"  data-url="' . ADMIN_URL . '/agent/add_gift_on_point.php?agent_id=' . $row['id'] . '"><i class="icon-gift"></i>Add Gift On Points</span>
 
               <span class="dropdown-item edit_status" id="content_managment" data-id="'.$row['id'].'" data-url="' . ADMIN_URL . '/agent/edit.php?agent_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit Status</span>
 

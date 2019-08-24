@@ -10,15 +10,13 @@ if (isset($_GET['agent_product_id'])) {
 	if ($agent_product_id) {
 		$query = "DELETE FROM agent_selling_product_list WHERE id = '$agent_product_id'";
 		$result = $db->delete($query);
-      
-            die(json_encode(['message' => 'Product Deleted Successfully']));
-      
+
 		if (!$result) {
 			http_response_code(500);
 			die(json_encode(['message' => 'Agent Not Found']));
+		}else{
+			die(json_encode(['message' => 'Product Deleted Successfully']));
 		}
-
-
 		
 	}
 }
@@ -71,6 +69,43 @@ if (isset($_GET['agent_contact_id'])) {
 		if (!$result) {
 			http_response_code(500);
 			die(json_encode(['message' => 'Contact Info Not Found']));
+		}
+
+
+		
+	}
+}
+
+if (isset($_GET['agent_provided_gift_id'])) {
+	$agent_id = $_GET['agent_id'];
+	$agent_provided_gift_id = $_GET['agent_provided_gift_id'];
+
+	if ($agent_provided_gift_id && $agent_id) {
+		$query = "SELECT * FROM agent_provide_gift WHERE id = '$agent_provided_gift_id'";
+		$gift_cost_point = $db->select($query)->fetch_assoc();
+		$gift_cost_point = $gift_cost_point['cost_point'];
+
+		$query = "SELECT * FROM agent_list WHERE id = '$agent_id'";
+		$agent_point = $db->select($query)->fetch_assoc();
+		$agent_point = $agent_point['points'];
+
+		$updated_point = (int)$agent_point + (int)$gift_cost_point ;
+
+		$query = "DELETE FROM agent_provide_gift WHERE id = '$agent_provided_gift_id'";
+		$result = $db->delete($query);
+      
+            
+      
+		if (!$result) {
+			http_response_code(500);
+			die(json_encode(['message' => 'Gift Info Not Found']));
+		}else{
+			$query = "UPDATE agent_list set points = '$updated_point' WHERE id = '$agent_id'";
+			$update_agent_point = $db->update($query);
+			if ($update_agent_point) {
+				die(json_encode(['message' => "Gift Deleted Successfully"]));
+			}
+			
 		}
 
 

@@ -97,10 +97,10 @@ var DatatableButtonsHtml5 = function() {
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 6]
+                targets: [0, 7]
             }, {
                 orderable: false,
-                targets: [5, 6]
+                targets: [6, 7]
             }],
             order: [0, 'DESC'],
             processing: true,
@@ -118,6 +118,8 @@ var DatatableButtonsHtml5 = function() {
                     data: 'email'
                 }, {
                     data: 'interested_dist'
+                }, {
+                    data: 'points'
                 }, {
                     data: 'status'
                 },{
@@ -244,7 +246,7 @@ var DatatableButtonsHtml5 = function() {
     };
 
 
-     var _componentAddClient = function() {
+     var _componentDeleteAgentProduct = function() {
         $(document).on('click', '.delete_agetnt_product', function(e) {
             e.preventDefault();
             // it will get action url
@@ -317,6 +319,46 @@ var DatatableButtonsHtml5 = function() {
         });
     };
 
+
+
+
+     var _componentDletGift = function() {
+        $(document).on('click', '.delete_provided_gift', function(e) {
+            e.preventDefault();
+            // it will get action url
+           
+            var url = $(this).data('url');
+            var id = '#tr_'+$(this).attr("id");
+            $.ajax({
+                    url: url,
+                    type: 'Get',
+                    dataType: 'json'
+                })
+                .done(function(data) { 
+                    new PNotify({
+                          title: 'Well Done!',
+                          text: data.message,
+                          type: 'success',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    $(id).remove();
+                    tariq.ajax.reload();
+                })
+                .fail(function(data) {
+                    
+                    if (data.responseText) {
+                      new PNotify({
+                          title: 'Opps!',
+                          text: $.parseJSON(data.responseText).message,
+                          type: 'error',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    }
+                    $('#modal-loader').hide();
+                });
+        });
+    };
+
      var _componentDeleteNote = function() {
         $(document).on('click', '.delete_note', function(e) {
             e.preventDefault();
@@ -354,7 +396,7 @@ var DatatableButtonsHtml5 = function() {
     };
 
 
-     var _componentDeleteAgentProduct = function() {
+     var _componentDeleteAgentClient = function() {
         $(document).on('click', '.delete_agetnt_client', function(e) {
             e.preventDefault();
             // it will get action url
@@ -405,6 +447,8 @@ var DatatableButtonsHtml5 = function() {
             _componentAddClient();
             _componentSendMail();
             _componentDeleteNote();
+            _componentDeleteAgentClient();
+             _componentDletGift();
         }
     }
 }();

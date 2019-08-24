@@ -103,14 +103,14 @@ if (isset($_GET['agent_id'])) {
                                 $i++;
                                 $date = $row['sell_date'];
                                 $date = date('d-M-Y', strtotime($date));
-                                $id = $row['id'];
+                                $id_product = $row['id'];
                                 ?>
-                                <tr id="tr_<?php echo $id ?>">
+                                <tr id="tr_<?php echo $id_product ?>">
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $row['software_name']; ?></td>
                                     <td><?php echo $row['client_name']; ?></td>
                                     <td><?php echo $date; ?></td>
-                                    <td><button class="btn btn-danger delete_agetnt_product" data-url="<?php echo ADMIN_URL ?>/agent/ajax_delete.php?agent_product_id=<?php echo $id ?>" id="<?php echo $id ?>">Delete</button></td>
+                                    <td><button class="btn btn-danger delete_agetnt_product" data-url="<?php echo ADMIN_URL ?>/agent/ajax_delete.php?agent_product_id=<?php echo $id_product ?>" id="<?php echo $id_product ?>">Delete</button></td>
                                 </tr>
                                 <?php
                             }
