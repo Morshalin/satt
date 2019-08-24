@@ -79,7 +79,11 @@ if ($result) {
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/customerdetails/show.php?customerdetails_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
 
           		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/customerdetails/edit.php?customerdetails_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
-          		<span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/customerdetails/ajax.php?customerdetails_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
+
+          		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/customerdetails/user_account.php?customerdetails_id=' . $row['id'] . '"><i class="icon-pencil7"></i>User Accout</span>
+
+              <span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/customerdetails/ajax.php?customerdetails_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
+
           	</div>
           </div>
         </div>

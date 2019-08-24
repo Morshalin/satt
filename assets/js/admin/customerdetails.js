@@ -220,6 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 $(document).ready(function(){
+    
     $(document).on('click', '#check', function(){
         if (this.checked) {
             $("#flied").show();
@@ -227,4 +228,97 @@ $(document).ready(function(){
             $("#flied").hide();
         }
     });
+
+    $(document).on('change','#customer_category', function(){
+        var customers = $("#customer_category").val();
+        if (customers == 'contacted_customers') {
+            $("#cust_select_div").show(500);
+            $("#customer_form").hide(500);
+              $('#content_form')[0].reset();
+              $("#interested_services").val(null).trigger('change');
+              $("#software_category").val(null).trigger('change');
+        }else{
+            $("#cust_select_div").hide(500);
+            $("#select_customer").val('');
+
+            $("#customer_form").show(500);
+            $('#content_form')[0].reset();
+              $("#interested_services").val(null).trigger('change');
+              $("#software_category").val(null).trigger('change');
+        }
+    })
+
+    $(document).on('change','#select_customer', function(){
+        var cust_id = $(this).val();
+        if (cust_id!="") {
+            $("#customer_form").show(500);
+            $.ajax({
+                url:ADMIN_URL+"/customerdetails/ajax_get_info.php",
+                method:"GET",
+                data:{cust_id:cust_id},
+                dataType: 'json',
+                success:function(data){
+                    $("#name").val(data.office_notes.name);
+                    $("#facebook_name").val(data.office_notes.facebook_name);
+                    $("#number").val(data.office_notes.number);
+                    $("#email").val(data.office_notes.email);
+                    $("#introduction_date").val(data.office_notes.introduction_date);
+                    $("#last_contacted_date").val(data.office_notes.last_contacted_date);
+                    $("#progressive_state").val(data.office_notes.progressive_state);
+
+                    $("#institute_type").val(data.office_notes.institute_type);
+                    $("#institute_name").val(data.office_notes.institute_name);
+                    $("#institute_address").val(data.office_notes.institute_address);
+                    $("#institute_district").val(data.office_notes.institute_district);
+                    $("#interested_services").html(data.options);
+                    $("#software_category").html(data.option);
+                }
+            });
+        }else{
+            $("#customer_form").hide(500);
+            $('#content_form')[0].reset();
+              $("#interested_services").val(null).trigger('change');
+              $("#software_category").val(null).trigger('change');
+        }
+    })
+
+
+$(document).on("keyup","#content_form", function(){
+        var password = $("#password").val();
+        var confirm_password = $("#confirm_password").val();
+        if (confirm_password) {
+            if (password == confirm_password) {
+            $("#success").html("<strong class='text-success'>Right Confirm password</strong>");
+            }else{
+            $("#success").html("<strong class='text-danger'>Wrong Confirm password</strong>");
+            }
+        }
+        
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });

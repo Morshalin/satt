@@ -36,6 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 		$last_contacted_date = $_POST['last_contacted_date'];
 		
 
+		
+
 		if (isset($_POST['status'])) {
 			$status = 1;
 		} else {
@@ -45,9 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 		if (!$name) {
 			$error['name'] = 'Customer Name Field required';
 		}
-
-
-	
 
 		if (!$number) {
 			$error['number'] = 'Number  Field required';
@@ -129,6 +128,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$note                = $fm->validation($_POST['note']);
 	$last_contacted_date = $_POST['last_contacted_date'];
 
+
+
+
+	$number_check = $fm->dublicateCheck('satt_customer_informations', 'number', $number);
+	$email_check = $fm->dublicateCheck('satt_customer_informations', 'email', $email);
+
 	if (isset($_POST['status'])) {
 		$status = 1;
 	} else {
@@ -143,7 +148,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 	if (!$number) {
-		$error['number'] = 'Number  Field required';
+			$error['number'] = 'Number  Field required';
+		}elseif ($number_check) {
+		$error['number_check'] = 'Number Already Exits';
+	}
+
+	if ($email_check) {
+		$error['email_check'] = 'Email Already Exits';
 	}
 
 

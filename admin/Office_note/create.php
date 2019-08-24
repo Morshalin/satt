@@ -162,11 +162,11 @@
               <label for="software_category">Select Software Category</label>
               <select multiple="multiple" class="form-control select" id="software_category" name="software_category[]">
                 <?php 
-                     $query = "SELECT * FROM satt_customer_business_type where status=1";
+                     $query = "SELECT * FROM software_details where status = 1";
                     $result = $db->select($query);
                     if ($result) {
                         while ($row = $result->fetch_assoc()) { ?>
-                           <option value="<?php echo $row['id'] ?>"><?php echo $row['software_type']; ?> </option>  
+                           <option value="<?php echo $row['id'] ?>"><?php echo $row['software_name']; ?> </option>  
                       <?php  }
                         $row = $result->fetch_assoc();
                     } else {
