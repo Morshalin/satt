@@ -35,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 		$short_feature = $fm->validation($_POST['short_feature']);
 		$user_manual = $fm->validation($_POST['user_manual']);
 		$condition_details = $fm->validation($_POST['condition_details']);
+		$user_manual_link = $fm->validation($_POST['user_manual_link']);
+		$feature_video = $fm->validation($_POST['feature_video']);
 
 		if (isset($_POST['status'])) {
 			$status = 1;
@@ -76,6 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			short_feature = '$short_feature',
 			user_manual = '$user_manual',
 			condition_details = '$condition_details',
+			user_manual_link = '$user_manual_link',
+			feature_video = '$feature_video',
 			 status = '$status' WHERE id='$software_details_id'";
 			$result = $db->update($query);
 
@@ -127,6 +131,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$short_feature = $fm->validation($_POST['short_feature']);
 	$user_manual = $fm->validation($_POST['user_manual']);
 	$condition_details = $fm->validation($_POST['condition_details']);
+	$user_manual_link = $fm->validation($_POST['user_manual_link']);
+	$feature_video = $fm->validation($_POST['feature_video']);
 
 	// software price details
 	$demo_url = $fm->validation($_POST['demo_url']);
@@ -137,6 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$total_price = $fm->validation($_POST['total_price']);
 	$agent_commission_one_time = $fm->validation($_POST['agent_commission_one_time']);
 	$agent_commission_monthly = $fm->validation($_POST['agent_commission_monthly']);
+	$agent_commission_yearly = $fm->validation($_POST['agent_commission_yearly']);
 	$discount_offer = $fm->validation($_POST['discount_offer']);
 	$yearly_renew_charge = $fm->validation($_POST['yearly_renew_charge']);
 
@@ -170,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		http_response_code(500);
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
-		$query = "INSERT INTO software_details (software_name,software_status_name,software_status_id,create_date,end_date,short_feature,user_manual,condition_details, status) VALUES ('$software_name','$software_status_name','$software_status_id','$create_date','$end_date','$short_feature','$user_manual','$condition_details', '$status')";
+		$query = "INSERT INTO software_details (software_name,software_status_name,software_status_id,create_date,end_date,short_feature,user_manual,condition_details,user_manual_link,feature_video, status) VALUES ('$software_name','$software_status_name','$software_status_id','$create_date','$end_date','$short_feature','$user_manual','$condition_details','$user_manual_link','$feature_video', '$status')";
 		$last_id = $db->custom_insert($query);
 		if ($last_id) {
 			// multi Language insert
@@ -184,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					$insertrow1 = $db->insert($sql2);
 				}
 
-			$query = "INSERT INTO software_price (software_name,software_id,demo_url,installation_charge,monthly_charge,yearly_charge,direct_sell,total_price, agent_commission_one_time,agent_commission_monthly,discount_offer,yearly_renew_charge) VALUES ('$software_name','$last_id','$demo_url','$installation_charge','$monthly_charge','$yearly_charge','$direct_sell','$total_price', '$agent_commission_one_time','$agent_commission_monthly','$discount_offer','$yearly_renew_charge')";
+			$query = "INSERT INTO software_price (software_name,software_id,demo_url,installation_charge,monthly_charge,yearly_charge,direct_sell,total_price, agent_commission_one_time,agent_commission_monthly,agent_commission_yearly,discount_offer,yearly_renew_charge) VALUES ('$software_name','$last_id','$demo_url','$installation_charge','$monthly_charge','$yearly_charge','$direct_sell','$total_price', '$agent_commission_one_time','$agent_commission_monthly','$agent_commission_yearly','$discount_offer','$yearly_renew_charge')";
 			$result = $db->insert($query);
 
 			if ($result != false) {

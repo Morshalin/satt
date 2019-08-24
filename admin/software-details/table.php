@@ -94,6 +94,7 @@ if ($result) {
             <div class="dropdown-menu dropdown-menu-right">
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/software-details/show.php?software_details_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/software-details/edit.php?software_details_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/software-details/add-point.php?software_details_id=' . $row['id'] . '"><i class="icon-add"></i> Add Selling Point</span>
               <span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/software-details/ajax.php?software_details_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
             </div>
           </div>

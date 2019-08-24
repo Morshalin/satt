@@ -73,14 +73,20 @@
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="agent_commission_one_time" class="col-form-label">Agent Commission (One Time Sell) (BDT) <span class="text-danger">*</span> </label>
+                <label for="agent_commission_one_time" class="col-form-label">Agent Commission (One Time Sell) <span class="text-danger">*</span> </label>
                 <input type="number" name="agent_commission_one_time" id="agent_commission_one_time" class="form-control" placeholder="Type Agent Commission (One Time Sell)" required autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="agent_commission_monthly" class="col-form-label">Agent Commission (Monthly) (BDT) <span class="text-danger">*</span> </label>
+                <label for="agent_commission_monthly" class="col-form-label">Agent Commission (Monthly) <span class="text-danger">*</span> </label>
                 <input type="number" name="agent_commission_monthly" id="agent_commission_monthly" class="form-control" placeholder="Type Agent Commission (Monthly)" required autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="agent_commission_yearly" class="col-form-label">Agent Commission (Yearly) <span class="text-danger">*</span> </label>
+                <input type="number" name="agent_commission_yearly" id="agent_commission_yearly" class="form-control" placeholder="Type Agent Commission (Yearly)" required autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">

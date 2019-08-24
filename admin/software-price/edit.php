@@ -33,22 +33,23 @@ if (isset($_GET['software_price_id'])) {
 								<input type="hidden" name="old_software_name"  value="<?php echo $row['software_name'] ?>">
             </div>
         </div>
-				<div class="col-lg-12">
+				<div class="col-lg-6">
             <div class="form-group">
                 <label for="course_name" class="col-form-label">Demo URL </label>
                 <input type="text" name="demo_url" id="demo_url" class="form-control" placeholder="New Software Status Name" autofocus value="<?php echo $row['demo_url'] ?>">
 								<input type="hidden" name="old_demo_url"  value="<?php echo $row['demo_url'] ?>">
             </div>
         </div>
-    </div>
-		<div class="row">
-				<div class="col-lg-4">
+        <div class="col-lg-6">
 						<div class="form-group">
 								<label for="course_name" class="col-form-label">Installation charge </label>
 								<input type="text" name="installation_charge" id="installation_charge" class="form-control" placeholder="New Software Status Name" autofocus value="<?php echo $row['installation_charge'] ?>">
 								<input type="hidden" name="old_installation_charge"  value="<?php echo $row['installation_charge'] ?>">
 						</div>
 				</div>
+    </div>
+		<div class="row">
+				
 				<div class="col-lg-4">
 						<div class="form-group">
 								<label for="course_name" class="col-form-label">Monthly charge </label>
@@ -63,8 +64,6 @@ if (isset($_GET['software_price_id'])) {
 								<input type="hidden" name="old_yearly_charge"  value="<?php echo $row['yearly_charge'] ?>">
 						</div>
 				</div>
-		</div>
-		<div class="row">
 				<div class="col-lg-4">
 						<div class="form-group">
 								<label for="course_name" class="col-form-label">Direct sell </label>
@@ -72,6 +71,9 @@ if (isset($_GET['software_price_id'])) {
 								<input type="hidden" name="old_direct_sell"  value="<?php echo $row['direct_sell'] ?>">
 						</div>
 				</div>
+		</div>
+		<div class="row">
+				
 				<div class="col-lg-4">
 						<div class="form-group">
 								<label for="course_name" class="col-form-label">Total price </label>
@@ -86,13 +88,19 @@ if (isset($_GET['software_price_id'])) {
 								<input type="hidden" name="old_agent_commission_one_time"  value="<?php echo $row['agent_commission_one_time'] ?>">
 						</div>
 				</div>
-		</div>
-		<div class="row">
 				<div class="col-lg-4">
 						<div class="form-group">
 								<label for="course_name" class="col-form-label">Agent commission (monthly) </label>
 								<input type="text" name="agent_commission_monthly" id="agent_commission_monthly" class="form-control" placeholder="New Software Status Name" autofocus value="<?php echo $row['agent_commission_monthly'] ?>">
 								<input type="hidden" name="old_agent_commission_monthly"  value="<?php echo $row['agent_commission_monthly'] ?>">
+						</div>
+				</div>
+		</div>
+		<div class="row">
+				<div class="col-lg-4">
+						<div class="form-group">
+								<label for="course_name" class="col-form-label">Agent commission (yearly) </label>
+								<input type="text" name="agent_commission_yearly" id="agent_commission_yearly" class="form-control" placeholder="Agent commission (yearly)" autofocus value="<?php echo $row['agent_commission_yearly'] ?>">
 						</div>
 				</div>
 				<div class="col-lg-4">
