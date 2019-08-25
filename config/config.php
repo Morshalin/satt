@@ -30,6 +30,7 @@ define("DB_NAME", "satt");
 
 define('BASE_URL', app_url() . '/satt');
 define('ADMIN_URL', BASE_URL . '/admin');
+define('CUSTOMER_URL', BASE_URL . '/customer-panel');
 define('TITLE', 'Satt');
 define('FOOTER', 'Satt');
 define('TITLE_DIVIDER', ' | ');

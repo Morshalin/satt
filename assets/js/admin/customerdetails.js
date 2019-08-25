@@ -243,8 +243,8 @@ $(document).ready(function(){
 
             $("#customer_form").show(500);
             $('#content_form')[0].reset();
-              $("#interested_services").val(null).trigger('change');
-              $("#software_category").val(null).trigger('change');
+            $("#interested_services").val(null).trigger('change');
+            $("#software_category").val(null).trigger('change');
         }
     })
 
