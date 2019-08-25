@@ -1,6 +1,7 @@
 <?php
   require_once '../config/config.php';
-  Session::checkSession('customer-panel', ADMIN_URL);
+
+  Session::checkSession('customer-panel', CUSTOMER_URL);
   $goto = '';
   if (isset($_GET['goto'])) {
     $goto =  '?goto='.urlencode($_GET['goto']);
@@ -12,7 +13,8 @@
     Session::destroy('admin', BASE_URL.'/lock.php?goto='.$goto);
   }
   $data = array();
-  $data['page_title'] = 'Admin Dashboard';
+
+  $data['page_title'] = 'Customers Dashboard';
   $data['page_index'] = 'dashboard';
   $data['page_css'] = [];
   $data['page_js'] = [];

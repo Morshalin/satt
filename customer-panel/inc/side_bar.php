@@ -13,7 +13,6 @@
 
 
 
-
   <?php $nav_items_section_2 = ['software-status', 'software-language','software-details','software-price']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_2, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-hammer-wrench"></i> <span>Software Setup</span></a>
@@ -25,6 +24,7 @@
       <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/software-price" class="nav-link<?php active_page($data, 'software-price'); ?>">Software Price</a></li>
     </ul>
   </li>
+
 
 
 

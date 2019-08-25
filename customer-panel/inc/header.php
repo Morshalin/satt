@@ -32,6 +32,8 @@
 	<script>
 
 		const ADMIN_URL = '<?php echo BASE_URL; ?>/admin';
+		const CUSTOMER_URL = '<?php echo BASE_URL; ?>/admin';
+		const CUSTOMER_URL = '<?php echo BASE_URL; ?>/customer-panel';
 		const BASE_URL = '<?php echo BASE_URL; ?>';
 
   </script>
@@ -40,19 +42,22 @@
 
 <body>
 <?php if (Session::get('customer-panel')) {
+
 	?>
 	<!-- Main navbar -->
 	<div class="navbar navbar-expand-md navbar-dark">
     <!-- Header with logos -->
 		<div class="navbar-header navbar-dark d-none d-md-flex align-items-md-center">
 			<div class="navbar-brand navbar-brand-md">
-				<a href="<?php echo ADMIN_URL; ?>" class="d-inline-block">
+
+				<a href="<?php echo CUSTOMER_URL; ?>" class="d-inline-block">
 					<?php echo getLogo(); ?>
 				</a>
 			</div>
 
 			<div class="navbar-brand navbar-brand-xs">
-				<a href="<?php echo ADMIN_URL; ?>" class="d-inline-block">
+
+				<a href="<?php echo CUSTOMER_URL; ?>" class="d-inline-block">
 					<?php echo getSmLogo(); ?>
 				</a>
 			</div>
@@ -63,7 +68,7 @@
 		<!-- Mobile controls -->
 		<div class="d-flex flex-1 d-md-none">
 			<div class="navbar-brand mr-auto">
-				<a href="<?php echo ADMIN_URL; ?>" class="d-inline-block">
+				<a href="<?php echo CUSTOMER_URL; ?>" class="d-inline-block">
 					<?php echo getLogo(); ?>
 				</a>
 			</div>
@@ -102,6 +107,7 @@
 
 					<div class="dropdown-menu dropdown-menu-right">
 						<a href="<?php echo ADMIN_URL; ?>/profile" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
+
 						<div class="dropdown-divider"></div>
 						<a href="<?php echo BASE_URL; ?>/lock.php?goto=<?php echo app_url().$_SERVER['REQUEST_URI']; ?>" class="dropdown-item" id="lock"><i class="icon-user-lock"></i> Lock User</a>
 						<a href="<?php echo BASE_URL; ?>/logout.php" class="dropdown-item" id="logout"><i class="icon-switch2"></i> Logout</a>
@@ -117,6 +123,7 @@
 	<!-- Page content -->
 	<div class="page-content">
 		<?php if (Session::get('customer-panel')) {
+
 			?>
 		<!-- Main sidebar -->
 		<div class="sidebar sidebar-dark sidebar-main sidebar-expand-md">
@@ -148,6 +155,7 @@
 
 							<div class="media-body">
 								<div class="media-title font-weight-semibold"><?php echo gv($user, 'name'); ?></div>
+
 								<div class="font-size-xs opacity-50">
 									<i class="icon-address-book font-size-sm"></i> &nbsp;<?php echo gv($user, 'email'); ?>
 								</div>
