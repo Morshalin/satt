@@ -153,6 +153,7 @@ var DatatableButtonsHtml5 = function() {
                     _componentDatePicker();
                     _componentTimePicker();
                     _componentSelect2Modal();
+                    _componentMonthPicker();
                 })
                 .fail(function(data) {
                     $('.modal-body').html('<span style="color:red; font-weight: bold;"> Something Went Wrong. Please Try again later.......</span>');
@@ -396,6 +397,44 @@ var DatatableButtonsHtml5 = function() {
     };
 
 
+     var _componentDeleteAgentTarget = function() {
+        $(document).on('click', '.delete_agent_target', function(e) {
+            e.preventDefault();
+            // it will get action url
+           
+            var url = $(this).data('url');
+            var id = '#tr_'+$(this).attr("id");
+            $.ajax({
+                    url: url,
+                    type: 'Get',
+                    dataType: 'json'
+                })
+                .done(function(data) { 
+                    new PNotify({
+                          title: 'Well Done!',
+                          text: data.message,
+                          type: 'success',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    $(id).remove();
+                    tariq.ajax.reload();
+                })
+                .fail(function(data) {
+                    
+                    if (data.responseText) {
+                      new PNotify({
+                          title: 'Opps!',
+                          text: $.parseJSON(data.responseText).message,
+                          type: 'error',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    }
+                    $('#modal-loader').hide();
+                });
+        });
+    };
+
+
      var _componentDeleteAgentClient = function() {
         $(document).on('click', '.delete_agetnt_client', function(e) {
             e.preventDefault();
@@ -448,7 +487,8 @@ var DatatableButtonsHtml5 = function() {
             _componentSendMail();
             _componentDeleteNote();
             _componentDeleteAgentClient();
-             _componentDletGift();
+            _componentDletGift();
+            _componentDeleteAgentTarget();
         }
     }
 }();

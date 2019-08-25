@@ -114,4 +114,25 @@ if (isset($_GET['agent_provided_gift_id'])) {
 }
 
 
+
+if (isset($_GET['agent_target_id'])) {
+	// $agent_id = $_GET['agnt_id'];
+	$agent_target_id = $_GET['agent_target_id'];
+
+	if ($agent_target_id) {
+
+		$query = "DELETE FROM agent_target WHERE id = '$agent_target_id'";
+		$result = $db->delete($query);
+
+		if (!$result) {
+			http_response_code(500);
+			die(json_encode(['message' => 'Target Info Not Found']));
+		}else{
+			die(json_encode(['message' => "Target Deleted Successfully"]));
+		}
+		
+	}
+}
+
+
 ?>

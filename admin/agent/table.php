@@ -94,6 +94,9 @@ if ($result) {
               
               <span  class="dropdown-item " id="content_managment" style="display:'.$display_send_mail.'"  data-url="' . ADMIN_URL . '/agent/add_gift_on_point.php?agent_id=' . $row['id'] . '"><i class="icon-gift"></i>Add Gift On Points</span>
 
+              
+              <span  class="dropdown-item " id="content_managment" style="display:'.$display_send_mail.'"  data-url="' . ADMIN_URL . '/agent/add_monthly_target.php?agent_id=' . $row['id'] . '"><i class="icon-target"></i>Add Monthly Target</span>
+
               <span class="dropdown-item edit_status" id="content_managment" data-id="'.$row['id'].'" data-url="' . ADMIN_URL . '/agent/edit.php?agent_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit Status</span>
 
              
@@ -105,7 +108,7 @@ if ($result) {
 
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/add_contact.php?agent_id=' . $row['id'] . '"><i class="icon-phone"></i> Add Last Contact Info</span>
 
-               <span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/agent/ajax.php?agent_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
+               <span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/agent/ajax.php?agent_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete Agent</button></span>
             </div>
           </div>
         </div>
