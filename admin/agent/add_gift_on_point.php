@@ -27,7 +27,7 @@ if (isset($_GET['agent_id'])) {
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
             <div class="form-group">
-                <label for="software_status" class="col-form-label">Select Desired Gift  <span class="text-danger">*</span></label>
+                <label for="gift_id" class="col-form-label">Select Desired Gift  <span class="text-danger">*</span></label>
                
                 <select name="gift_id" id="gift_id" class="form-control">
                     <option value="">Please Select One Gift</option>

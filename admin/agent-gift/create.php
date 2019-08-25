@@ -12,7 +12,7 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="points" class="col-form-label">Points:  <span class="text-danger">*</span></label>
-                <input type="text" name="points" id="points" class="form-control" placeholder="Give Points" required autofocus value="">
+                <input type="number" min="0" name="points" id="points" class="form-control" placeholder="Give Points" required autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">

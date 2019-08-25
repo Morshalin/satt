@@ -30,7 +30,7 @@
 
     <?php $promote_product = ['promote-product']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($promote_product, $data['page_index']) ?>">
-    <a href="#" class="nav-link"><i class="icon-hammer-wrench"></i> <span>Promote Product</span></a>
+    <a href="#" class="nav-link"><i class="icon-list"></i> <span>Promote Product</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($promote_product, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/promote-product" class="nav-link<?php active_page($data, 'promote-product'); ?>">Promote Product</a></li>
