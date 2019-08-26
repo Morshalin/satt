@@ -13,20 +13,20 @@
 
 
 
-  <?php $nav_items_section_2 = ['software-status', 'software-language','software-details','software-price']; ?>
+  <?php $nav_items_section_2 = ['available_product', 'pending-product','confirm-product']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_2, $data['page_index']) ?>">
-    <a href="#" class="nav-link"><i class="icon-hammer-wrench"></i> <span>Software Setup</span></a>
+    <a href="#" class="nav-link"><i class="icon-hammer-wrench"></i> <span>Our Products</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_2, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
-      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/software-status" class="nav-link<?php active_page($data, 'software-status'); ?>">Software Status</a></li>
-      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/software-language" class="nav-link<?php active_page($data, 'software-language'); ?>">Software Language</a></li>
-      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/software-details" class="nav-link<?php active_page($data, 'software-details'); ?>">Software Details</a></li>
-      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/software-price" class="nav-link<?php active_page($data, 'software-price'); ?>">Software Price</a></li>
+
+      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/available_product" class="nav-link<?php active_page($data, 'available_product'); ?>">Available Products</a></li>
+
+      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/pending-product" class="nav-link<?php active_page($data, 'pending-product'); ?>">Pending Products</a></li>
+
+      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/confirm-product" class="nav-link<?php active_page($data, 'confirm-product'); ?>">Confirm Products</a></li>
+
     </ul>
   </li>
-
-
-
 
 
 

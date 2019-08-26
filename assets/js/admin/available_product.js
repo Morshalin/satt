@@ -70,37 +70,37 @@ var DatatableButtonsHtml5 = function() {
                 className: 'btn btn-danger',
                 text: 'Delete',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/Office_note/action.php', action = 'delete', msg = 'Once deleted, it will deleted all related Data!');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/software-status/action.php', action = 'delete', msg = 'Once deleted, it will deleted all related Data!');
                 }
             },{
                 extend: 'selected',
                 className: 'btn bg-success',
                 text: 'Online',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/Office_note/action.php', action = 'active', msg = 'Change Status To Online');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/software-status/action.php', action = 'active', msg = 'Change Status To Online');
                 }
             }, {
                 extend: 'selected',
                 className: 'btn bg-secondary',
                 text: 'Offline',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/Office_note/action.php', action = 'inactive', msg = 'Change Status To Offline');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/software-status/action.php', action = 'inactive', msg = 'Change Status To Offline');
                 }
             }, {
                 extend: 'selected',
                 className: 'btn bg-warning',
                 text: 'Toggle Status',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/Office_note/action.php', action = 'toggle', msg = 'Toggle Status');
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/software-status/action.php', action = 'toggle', msg = 'Toggle Status');
                 }
             }],
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 7]
+                targets: [0, 3]
             }, {
                 orderable: false,
-                targets: [6, 7]
+                targets: [2, 3]
             }],
             order: [1, 'asc'],
             processing: true,
@@ -111,16 +111,8 @@ var DatatableButtonsHtml5 = function() {
                 {
                     data: 'DT_RowIndex'
                 }, {
-                    data: 'name'
+                    data: 'software_status_name'
                 }, {
-                    data: 'number'
-                }, {
-                    data: 'note'
-                },  {
-                    data: 'introduction_date'
-                }, {
-                    data: 'last_contacted_date'
-                },{
                     data: 'status'
                 },{
                     data: 'action'
@@ -149,8 +141,6 @@ var DatatableButtonsHtml5 = function() {
                     $('.modal-body').html(data).fadeIn(); // load response
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
-                     _componentSelect2Modal();
-                    _componentDatePicker();
                     _modalFormValidation();
                 })
                 .fail(function(data) {
@@ -168,48 +158,11 @@ var DatatableButtonsHtml5 = function() {
         });
     };
 
-     var _componentDeleteNote = function() {
-        $(document).on('click', '.delete_note', function(e) {
-            e.preventDefault();
-            // it will get action url
-           
-            var url = $(this).data('url');
-            var id = '#tr_'+$(this).attr("id");
-            $.ajax({
-                    url: url,
-                    type: 'Get',
-                    dataType: 'json'
-                })
-                .done(function(data) { 
-                    new PNotify({
-                          title: 'Well Done!',
-                          text: data.message,
-                          type: 'success',
-                          addclass: 'alert alert-styled-left',
-                      });
-                    $(id).remove();
-                })
-                .fail(function(data) {
-                    
-                    if (data.responseText) {
-                      new PNotify({
-                          title: 'Opps!',
-                          text: $.parseJSON(data.responseText).message,
-                          type: 'error',
-                          addclass: 'alert alert-styled-left',
-                      });
-                    }
-                    $('#modal-loader').hide();
-                });
-        });
-    };
-
-
     return {
         init: function() {
             _componentDatatableButtonsHtml5();
+            _componentSelect2Normal();
             _componentRemoteModalLoad();
-            _componentDeleteNote();
         }
     }
 }();
@@ -217,14 +170,4 @@ var DatatableButtonsHtml5 = function() {
 // ------------------------------
 document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
-});
-
-$(document).ready(function(){
-    $(document).on('click', '#check', function(){
-        if (this.checked) {
-            $("#flied").show();
-        } else{
-            $("#flied").hide();
-        }
-    });
 });

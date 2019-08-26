@@ -74,7 +74,7 @@ if (isset($_GET['customerdetails_id'])) {
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-              <label for="customer_reference" class="col-form-label">Select Customer Reference<span class="text-danger">*</span></label>
+              <label for="customer_reference" class="col-form-label select">Select Customer Reference<span class="text-danger">*</span></label>
               <select class="form-control form-control-lg" id="customer_reference" name="customer_reference">
                 <option>Customer Reference</option>
                 <?php 
@@ -96,7 +96,7 @@ if (isset($_GET['customerdetails_id'])) {
         <div class="col-lg-6">
             <div class="form-group">
               <label for="progressive_state">Select Progress State</label>
-              <select class="form-control" id="progressive_state" name="progressive_state">
+              <select class="form-control select" id="progressive_state" name="progressive_state">
                 <option>Progress State</option>
                 <?php 
                      $query = "SELECT * FROM satt_customer_progres where status=1";

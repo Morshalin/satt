@@ -149,7 +149,7 @@ var DatatableButtonsHtml5 = function() {
                     $('.modal-body').html(data).fadeIn(); // load response
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
-                    _componentSelect2Normal();
+                    _componentSelect2Modal();
                     _componentDatePicker();
                     _modalFormValidation();
                 })
