@@ -16,7 +16,7 @@ if (isset($_GET['agent_id'])) {
 <!-- Login form -->
 <form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/agent/ajax_add_contact.php" id="content_form" method="post">
   <fieldset class="mb-3">
-    <legend class="text-uppercase font-size-sm font-weight-bold">Add Client <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
+    <legend class="text-uppercase font-size-sm font-weight-bold">Add Contact Info <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     
    <div class="row">
          <input type="hidden" value="<?php echo $agent_id ?>" name="agent_id">
@@ -63,7 +63,7 @@ if (isset($_GET['agent_id'])) {
             <div class="form-group">
                 <label for="software_status" class="col-form-label">Contact Time  <span class="text-danger">*</span></label>
                
-                <input type="text" id="content_time" name="contact_time" class="form-control" placeholder="Select Time">
+                <input type="time" id="content_time" name="contact_time" class="form-control" placeholder="Select Time">
             </div>
         </div>
         <div class="col-lg-4"></div>

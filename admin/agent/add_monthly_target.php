@@ -28,7 +28,7 @@ if (isset($_GET['agent_id'])) {
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="month" class="col-form-label">Month  <span class="text-danger">*</span></label>
-               <input type="text" class="form-control" name="month" id="month" >
+               <input type="month" class="form-control" name="month" id="month" >
                 
 
             </div>
@@ -45,7 +45,7 @@ if (isset($_GET['agent_id'])) {
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="target_amount" class="col-form-label">Target Amount <span class="text-danger">*</span></label>
-               <input type="text" class="form-control" name="target_amount" id="target_amount" >
+               <input type="number" min="0" class="form-control" name="target_amount" id="target_amount" >
             </div>
         </div>
         <div class="col-lg-3"></div>
@@ -95,10 +95,62 @@ if (isset($_GET['agent_id'])) {
                             while ($row = $result->fetch_assoc()) {
                                 $i++;
                                 $id = $row['id'];
+                                $month =explode('-', $row['month']);
+                                $month_number = $month[1]; 
+                                switch ($month_number) {
+                                    case '1':
+                                        $month_name = 'January - '.$month[0];
+                                        break;
+                                    
+                                    case '2':
+                                        $month_name = 'February - '.$month[0];
+                                        break;
+                                    
+                                    case '3':
+                                        $month_name = 'March - '.$month[0];
+                                        break;
+                                    
+                                    case '4':
+                                        $month_name = 'April - '.$month[0];
+                                        break;
+                                    
+                                    case '5':
+                                        $month_name = 'May - '.$month[0];
+                                        break;
+                                    
+                                    case '6':
+                                        $month_name = 'Jun - '.$month[0];
+                                        break;
+                                    
+                                    case '7':
+                                        $month_name = 'July - '.$month[0];
+                                        break;
+                                    
+                                    case '8':
+                                        $month_name = 'August - '.$month[0];
+                                        break;
+                                    
+                                    case '9':
+                                        $month_name = 'September - '.$month[0];
+                                        break;
+                                    
+                                    case '10':
+                                        $month_name = 'October - '.$month[0];
+                                        break;
+                                    
+                                    case '11':
+                                        $month_name = 'November - '.$month[0];
+                                        break;
+                                    
+                                    case '12':
+                                        $month_name = 'December - '.$month[0];
+                                        break;
+                              
+                                }
                                 ?>
                                 <tr id="tr_<?php echo $id ?>">
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $row['month']; ?></td>
+                                    <td><?php echo $month_name; ?></td>
                                     <td><?php echo $row['target_amount']; ?></td>
                                     <td><?php echo $row['date']; ?></td>
                                     <td><button class="btn btn-danger delete_agent_target" data-url="<?php echo ADMIN_URL ?>/agent/ajax_delete.php?agent_target_id=<?php echo $id ?>" id="<?php echo $id ?>" data-agent_id="<?php echo($agent_id) ?>">Delete</button></td>
