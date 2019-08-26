@@ -145,6 +145,8 @@ var DatatableButtonsHtml5 = function() {
                     $('.modal-body').html(data).fadeIn(); // load response
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
+                    _componentSelect2Normal();
+                    _componentDatePicker();
                     _modalFormValidation();
                 })
                 .fail(function(data) {
@@ -165,7 +167,6 @@ var DatatableButtonsHtml5 = function() {
     return {
         init: function() {
             _componentDatatableButtonsHtml5();
-            _componentSelect2Normal();
             _componentRemoteModalLoad();
         }
     }
