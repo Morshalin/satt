@@ -64,9 +64,8 @@ if ($result) {
           		<i class="icon-menu9"></i>
           	</a>
           	<div class="dropdown-menu dropdown-menu-right">
-          		<span class="dropdown-item" id="content_managment" data-url="' . AGENT_URL . '/agent-panel/show.php?agents-customer_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
-          		<span class="dropdown-item" id="content_managment" data-url="' . AGENT_URL . '/agent-panel/edit.php?agents-customer_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
-          		<span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . AGENT_URL . '/agent-panel/ajax.php?agents-customer_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
+          		<span class="dropdown-item" id="content_managment" data-url="' . AGENT_URL . '/agents-customer/show.php?agents_customer_id=' . $row['agent_id'] . '"><i class="icon-eye"></i> View</span>
+              <span class="dropdown-item" id="content_managment" data-url="' . AGENT_URL . '/agents-customer/show.php?agents_customer_id=' . $row['client_id'] . '"><i class="icon-eye"></i> View Purchase Report</span>
           	</div>
           </div>
         </div>
@@ -74,7 +73,7 @@ if ($result) {
 			"status" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="status_loading_' . $row['id'] . '"  style="display: none">
         <label class="form-check-label" id="status_' . $row['id'] . '" title="' . ($row['status'] == 1 ? 'Active' : 'InActive') . '" data-popup="tooltip-custom" data-placement="bottom">
-        <input type="checkbox" class="form-check-status-switchery" id="change_status" data-id="' . $row['id'] . '" data-status="' . $row['status'] . '" data-url="' . AGENT_URL . '/agent-panel/ajax.php?agents-customer_id=' . $row['id'] . '&action=status&status=' . $row['status'] . '"' . ($row['status'] == 1 ? 'checked' : '') . ' data-fouc >
+        <input type="checkbox" class="form-check-status-switchery" id="change_status" data-id="' . $row['id'] . '" data-status="' . $row['status'] . '" data-url="' . AGENT_URL . '/agents-customer/ajax.php?agents_customer_id=' . $row['id'] . '&action=status&status=' . $row['status'] . '"' . ($row['status'] == 1 ? 'checked' : '') . ' data-fouc >
         </label>
         	',
 		);
