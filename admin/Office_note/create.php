@@ -59,7 +59,7 @@
         <div class="col-lg-6">
             <div class="form-group">
               <label for="customer_reference" class="col-form-label">Select Customer Reference<span class="text-danger">*</span></label>
-              <select class="form-control form-control-lg" id="customer_reference" name="customer_reference">
+              <select class="form-control form-control-lg select" id="customer_reference" name="customer_reference">
                  <option>Customer Reference</option>
                 <option value="Not Now">Not Now</option>
                 <?php 
@@ -81,7 +81,7 @@
         <div class="col-lg-6">
             <div class="form-group">
               <label for="progressive_state">Select Progress State</label>
-              <select class="form-control form-control-lg" id="progressive_state" name="progressive_state">
+              <select class="form-control form-control-lg select" id="progressive_state" name="progressive_state">
                  <option>Progress State</option>
                 <option value="Not Now">Not Now</option>
                 <?php 
