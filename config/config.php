@@ -49,3 +49,4 @@ include_once 'function.php';
 $user = [];
 $userRole = Session::get('userRole') ? Session::get('userRole') : 'student';
 $user = Session::get('userData') ? Session::get('userData') : $user;
+
