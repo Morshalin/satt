@@ -101,6 +101,7 @@ if (isset($_GET['software_price_id'])) {
 						<div class="form-group">
 								<label for="course_name" class="col-form-label">Agent commission (yearly) </label>
 								<input type="text" name="agent_commission_yearly" id="agent_commission_yearly" class="form-control" placeholder="Agent commission (yearly)" autofocus value="<?php echo $row['agent_commission_yearly'] ?>">
+								<input type="hidden" name="old_agent_commission_yearly"  value="<?php echo $row['agent_commission_yearly'] ?>">
 						</div>
 				</div>
 				<div class="col-lg-4">

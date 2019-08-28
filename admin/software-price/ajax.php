@@ -19,6 +19,8 @@ if (isset($_GET['$software_price_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['action'] == 'update') {
 	$software_price_id = $_GET['software_price_id'];
+	$editor_id = $user['id'];
+	$editor_name = $user['user_name'];
 	if ($software_price_id) {
 		$error = array();
 
@@ -33,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 		$old_total_price = $fm->validation($_POST['old_total_price']);
 		$old_agent_commission_one_time = $fm->validation($_POST['old_agent_commission_one_time']);
 		$old_agent_commission_monthly = $fm->validation($_POST['old_agent_commission_monthly']);
+		$old_agent_commission_yearly = $fm->validation($_POST['old_agent_commission_yearly']);
 		$old_discount_offer = $fm->validation($_POST['old_discount_offer']);
 		$old_yearly_renew_charge = $fm->validation($_POST['old_yearly_renew_charge']);
 		// getting old values
@@ -83,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 		else {
 			//inserting record
 			$query = "INSERT INTO
-			software_price_log(software_name, demo_url, installation_charge, monthly_charge, yearly_charge, direct_sell, total_price, agent_commission_one_time, agent_commission_monthly, discount_offer, yearly_renew_charge) VALUES ('$old_software_name','$old_demo_url','$old_installation_charge','$old_monthly_charge','$old_yearly_charge','$old_direct_sell','$old_total_price','$old_agent_commission_one_time','$old_agent_commission_monthly','$old_discount_offer','$old_yearly_renew_charge');";
+			software_price_log(software_name, demo_url, installation_charge, monthly_charge, yearly_charge, direct_sell, total_price, agent_commission_one_time, agent_commission_monthly,agent_commission_yearly, discount_offer, yearly_renew_charge,editor_id,editor_name) VALUES ('$old_software_name','$old_demo_url','$old_installation_charge','$old_monthly_charge','$old_yearly_charge','$old_direct_sell','$old_total_price','$old_agent_commission_one_time','$old_agent_commission_monthly','$old_agent_commission_yearly','$old_discount_offer','$old_yearly_renew_charge','$editor_id','$editor_name');";
 			$result = $db->insert($query);
 
 			$query = "UPDATE software_price SET
@@ -117,20 +120,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 ===================================================================*/
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$error = array();
-
-	// $software_status = $_POST['software_status'];
-	// $a = explode(',',  $software_status);
-	// $software_status_name = $a[0];
-	// $software_status_id = $a[1];
-
-	// $language_name = $_POST['language_name'];
-	// $developer_name = $_POST['developer_name'];
-	// $software_name = $fm->validation($_POST['software_name']);
-	// $create_date = $fm->validation($_POST['create_date']);
-	// $end_date = $fm->validation($_POST['end_date']);
-	// $short_feature = $fm->validation($_POST['short_feature']);
-	// $user_manual = $fm->validation($_POST['user_manual']);
-	// $condition_details = $fm->validation($_POST['condition_details']);
 
 	// software price details
 	$software_name = $fm->validation($_POST['software_name']);
