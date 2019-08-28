@@ -51,15 +51,27 @@ $result = $db->select($query);
 $data = array();
 $i = 0;
 if ($result) {
-	while ($row = mysqli_fetch_assoc($result)) {
+	while ($row = mysqli_fetch_assoc($result)) { 
+
+		$to_user_id_get_info = $row['client_id'];
+		$get_chat = $db->select("select count(*) as all_count from agent_customer_chat WHERE to_whom ='agent' and to_user_id = '$agent_id' and from_user_id = '$to_user_id_get_info' and seen_status_agent = '0';")->fetch_assoc();
+
+		if ($get_chat['all_count']>0) {
+			$badge_color = "badge-danger";
+		}else{
+			$badge_color = "badge-success";
+		}
+
+
       
 		$data[] = array(
 			"DT_RowIndex" => $i + 1,
 			"name" => $row['name'],
 			"email" => $row['email'],
 			"number" => $row['number'],
+			"unread" => '<badge class="badge '.$badge_color.'">'.$get_chat['all_count'].'</badge>',
 			"action" => '
-       <button id="content_managment" data-url="' . AGENT_URL . '/message-with-customer/ajax_chat.php?customer_id=' . $row['id'] . '" class="btn btn-sm btn-success"><i class="rocketchat"></i>Start Chat</button>
+       <button id="" data-touserid="'.$row['client_id'].'" data-tousername="'.$row['name'].'" class="btn btn-sm btn-success start_chat" data-agent_id="'.$agent_id.'">Start Chat</button>
         ',
 		);
 $i++;

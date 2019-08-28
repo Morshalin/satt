@@ -43,7 +43,7 @@
 
       <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/message-with-customer" class="nav-link<?php active_page($data, 'message-with-customer'); ?>">With Customer</a></li>
 
-      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/message-with-admin" class="nav-link<?php active_page($data, 'message-with-admin'); ?>">With Admin</a></li>
+      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/message-with-admin" class="nav-link<?php active_page($data, 'message-with-admin'); ?>">With SATT IT</a></li>
 
     </ul>
   </li>

@@ -51,6 +51,7 @@
   						<th>Customer Name</th>
   						<th>Email</th>
               <th>Mobile Number</th>
+              <th>Unread</th>
   						<th>Action</th>
   					</tr>
   				</thead>
@@ -61,6 +62,7 @@
   	</div>
   </div>
 </div>
+<div id="user_model_details"></div>
 <!-- /content area -->
 <?php include_once '../inc/footer.php'; ?>
 <script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>

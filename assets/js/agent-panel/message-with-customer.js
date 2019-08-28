@@ -97,10 +97,10 @@ var DatatableButtonsHtml5 = function() {
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 4]
+                targets: [0, 5]
             }, {
                 orderable: false,
-                targets: [0,4]
+                targets: [5]
             }],
             order: [1, 'asc'],
             processing: true,
@@ -116,6 +116,8 @@ var DatatableButtonsHtml5 = function() {
                     data: 'email'
                 },{
                     data: 'number'
+                },{
+                    data: 'unread'
                 },{
                     data: 'action'
                 }
@@ -173,3 +175,108 @@ var DatatableButtonsHtml5 = function() {
 document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
 });
+
+
+
+
+
+$(document).ready(function(){
+    $(document).on('click','.start_chat',function(){
+        // alert('sohag');
+        var to_user_id = $(this).data('touserid');
+        var to_user_name = $(this).data('tousername');
+        var agent_id = $(this).data('agent_id');
+
+        var sohag = make_dialoge_box(to_user_id, to_user_name,agent_id);
+      
+
+
+        var refresh_element = [];
+
+       refresh_element[to_user_id] =  setInterval(function(){
+            $.ajax({
+                url: './insert_chat.php', 
+                data: {
+                        to_user_id_get_info:to_user_id,
+                        agent_id_get_info: agent_id
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    success:function(data){
+                        $('#chat_history_'+to_user_id).html(data);
+                    }
+            })
+        },500);
+
+        $("#user_dialog_"+to_user_id).dialog({
+            autoOpen:false,
+            width:400,
+            close: function() {
+              clearInterval(refresh_element[to_user_id]);
+              change_seen_status(to_user_id, agent_id);
+              tariq.ajax.reload();
+            }
+        });
+        $("#user_dialog_"+to_user_id).dialog('open');
+        change_seen_status(to_user_id,agent_id);
+
+
+    });
+
+
+
+    $(document).on('click','.send_chat',function(){
+        var to_user_id = $(this).attr('id');
+        var agent_id = $(this).data('agent_id');
+        var chat_message = $('#chat_message_'+to_user_id).val();
+        $.ajax({
+            url: './insert_chat.php', 
+            data: {
+                    to_user_id:to_user_id,
+                    agent_id: agent_id,
+                    chat_message: chat_message
+                },
+                type: 'post',
+                dataType: 'json',
+                success:function(data){
+                    $('#chat_message_'+to_user_id).val('');
+                    $('#chat_history_'+to_user_id).html(data);
+                }
+        });
+
+    });
+});
+
+
+
+
+
+function make_dialoge_box(to_user_id, to_user_name,agent_id){
+    var modal_elem = '<div id="user_dialog_'+to_user_id+'" class="to_user_dialog" title="Chat With Customer: '+to_user_name+'">';
+
+    modal_elem +='<div style="height:400px; border:1px solid #ccc; overflow-y:scroll; margin-bottom:24px; padding:16px" class="chat_history" data-touserid="'+to_user_id+'" id="chat_history_'+to_user_id+'"></div>';
+    modal_elem +='<div class="form-group">';
+    modal_elem +='<textarea name="chat_message_'+to_user_id+'" id="chat_message_'+to_user_id+'" class="form-control"></textarea>';
+     modal_elem +='</div><div class="form-group" align="center">';
+     modal_elem +='<button type="button" name="send_chat" id="'+to_user_id+'" class="btn btn-info send_chat" data-agent_id = "'+agent_id+'" >Send</button></div></div>';
+     // return modal_elem;
+     $('#user_model_details').html(modal_elem);
+}
+
+
+
+function change_seen_status(to_user_id_seen_status, agent_id_seen_status){
+       $.ajax({
+                url: './insert_chat.php', 
+                data: {
+                        to_user_id_seen_status:to_user_id_seen_status,
+                        agent_id_seen_status: agent_id_seen_status
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    success:function(data){
+                        console.log(data);
+                    }
+            })
+}
+

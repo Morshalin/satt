@@ -58,6 +58,9 @@
 
 	<!-- Theme JS files -->
 	<script src="<?php echo BASE_URL; ?>/assets/js/app.js"></script>
+	<script src="<?php echo AGENT_URL; ?>/jquery-ui/jquery-ui.min.js"></script>
+
+
 
 
 	<script type="text/javascript">

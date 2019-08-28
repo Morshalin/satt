@@ -1,12 +1,12 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('agent-panel', AGENT_URL.'/message-with-admin', 'message-with-admin');
+  Session::checkSession('agent-panel', AGENT_URL.'/message-with-customer', 'message-with-customer');
   $data = array();
-  $data['page_title'] = 'Admin List';
+  $data['page_title'] = 'Customer List';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'message-with-admin';
+  $data['page_index'] = 'message-with-customer';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/agent-panel/message-with-admin'];
+  $data['page_js'] = ['assets/js/agent-panel/message-with-customer'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
@@ -44,13 +44,13 @@
   		
 
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo AGENT_URL; ?>/message-with-admin/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo AGENT_URL; ?>/message-with-customer/table.php">
   				<thead>
   					<tr>
   						<th>#</th>
-  						<th>Admin Name</th>
+  						<th>Customer Name</th>
   						<th>Email</th>
-              <th>Unread</th>
+              <th>Mobile Number</th>
   						<th>Action</th>
   					</tr>
   				</thead>
@@ -61,9 +61,7 @@
   	</div>
   </div>
 </div>
-
 <div id="user_model_details"></div>
-
 <!-- /content area -->
 <?php include_once '../inc/footer.php'; ?>
 <script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>

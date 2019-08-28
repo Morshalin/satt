@@ -319,11 +319,11 @@ $(document).on('click', '#logout', function(e) {
     });
 });
 
-$(document).on('click', '#lock', function(e) {
-  e.preventDefault();
-  lock_user('user');
+// $(document).on('click', '#lock', function(e) {
+//   e.preventDefault();
+//   lock_user('user');
 
-});
+// });
     /*
      * For Delete Item
      */
