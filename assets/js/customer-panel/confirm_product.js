@@ -74,15 +74,15 @@ var DatatableButtonsHtml5 = function() {
                 {
                     data: 'DT_RowIndex'
                 }, {
-                    data: 'software_name'
+                    data: 'product_name'
                 }, {
-                    data: 'software_status_name'
+                    data: 'pay_type'
                 }, {
-                    data: 'language_name'
+                    data: 'installation_charge'
                 }, {
-                    data: 'short_feature'
+                    data: 'pay_amount'
                 }, {
-                    data: 'condition_details'
+                    data: 'yearly_renew_charge'
                 },{
                     data: 'action'
                 }
