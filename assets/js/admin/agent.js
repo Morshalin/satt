@@ -97,10 +97,10 @@ var DatatableButtonsHtml5 = function() {
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 7]
+                targets: [0, 8]
             }, {
                 orderable: false,
-                targets: [6, 7]
+                targets: [7, 8]
             }],
             order: [0, 'DESC'],
             processing: true,
@@ -118,6 +118,8 @@ var DatatableButtonsHtml5 = function() {
                     data: 'email'
                 }, {
                     data: 'interested_dist'
+                },{
+                    data: 'created_at'
                 }, {
                     data: 'points'
                 }, {

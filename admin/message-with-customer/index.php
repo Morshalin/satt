@@ -1,12 +1,12 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('agent-panel', AGENT_URL.'/message-with-customer', 'message-with-customer');
+  Session::checkSession('admin', ADMIN_URL.'/message-with-customer', 'message-with-customer');
   $data = array();
   $data['page_title'] = 'Customer List';
   $data['element'] = ['modal' => 'lg'];
   $data['page_index'] = 'message-with-customer';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/agent-panel/message-with-customer'];
+  $data['page_js'] = ['assets/js/admin/message-with-customer'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
@@ -44,13 +44,14 @@
   		
 
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo AGENT_URL; ?>/message-with-customer/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/message-with-customer/table.php">
   				<thead>
   					<tr>
   						<th>#</th>
   						<th>Customer Name</th>
   						<th>Email</th>
               <th>Mobile Number</th>
+              <th>Unread</th>
   						<th>Action</th>
   					</tr>
   				</thead>

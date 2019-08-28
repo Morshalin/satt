@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('agent-panel', AGENT_URL . '/message-with-customer');
+Session::checkSession('admin', ADMIN_URL . '/message-with-customer');
 ## Read value
 $draw = $_GET['draw'];
 $row = $_GET['start'];
@@ -13,7 +13,7 @@ $searchValue = $_GET['search']['value']; // Search value
 if ($columnName == 'DT_RowIndex') {
 	$columnName = 'id';
 }
-$agent_id  = $user['id']; 
+$admin_id  = $user['id']; 
 
 /*==============================================================================
 ## Search
@@ -43,23 +43,34 @@ $totalRecordwithFilter = $records['allcount'];
 ## Fetch records
 =================================================================================*/
 
-$query = "SELECT *
-FROM satt_customer_informations
-INNER JOIN agent_client ON satt_customer_informations.id=agent_client.client_id WHERE agent_client.agent_id = '$agent_id' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$query = "select * from satt_customer_informations WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 
 $result = $db->select($query);
 $data = array();
 $i = 0;
 if ($result) {
 	while ($row = mysqli_fetch_assoc($result)) {
+
+
+      $to_user_id_get_info = $row['id'];
+		$get_chat = $db->select("select count(*) as all_count from admin_customer_chat WHERE to_whom ='admin' and to_user_id = '$admin_id' and from_user_id = '$to_user_id_get_info' and seen_status_admin  = '0';")->fetch_assoc();
+
+		if ($get_chat['all_count']>0) {
+			$badge_color = "badge-danger";
+		}else{
+			$badge_color = "badge-success";
+		}
+
+
       
 		$data[] = array(
 			"DT_RowIndex" => $i + 1,
 			"name" => $row['name'],
 			"email" => $row['email'],
 			"number" => $row['number'],
+			"unread" => '<badge class="badge '.$badge_color.'">'.$get_chat['all_count'].'</badge>',
 			"action" => '
-       <button id="" data-touserid="'.$row['id'].'" data-tousername="'.$row['name'].'" class="btn btn-sm btn-success start_chat" data-agent_id="'.$agent_id.'">Start Chat</button>
+       <button id="" data-touserid="'.$row['id'].'" data-tousername="'.$row['name'].'" class="btn btn-sm btn-success start_chat" data-admin_id="'.$admin_id.'">Start Chat</button>
         ',
 		);
 $i++;

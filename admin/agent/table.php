@@ -68,6 +68,7 @@ if ($result) {
 
       "email" => '<strong>' . $row['email'].'<br>'.$row['mobile_no'].'<br>'.$row['alternate_mobile'].  '</strong>',
       "interested_dist" => '<strong>' . $row["interested_up"].'<br>'.$row["interested_dist"].'</strong>',
+      "created_at" => '<strong>'.$row["created_at"].'</strong>',
       "points" => '<strong>'.$row["points"].'</strong>',
 
       

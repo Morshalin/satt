@@ -53,6 +53,7 @@ Session::checkSession('admin', ADMIN_URL . '/agent', 'Agent');
               <th>Image</th>
               <th>Contact</th>
               <th>Interested</th>
+              <th>Applied At</th>
               <th>Points</th>
               <th>Status</th>
   						<th>Action</th>

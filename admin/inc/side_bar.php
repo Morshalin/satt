@@ -14,11 +14,11 @@
 
 
 
-  <?php $nav_items_section_2 = ['software-status', 'software-language','software-details','software-price']; ?>
-  <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_2, $data['page_index']) ?>">
+  <?php $nav_items_section_1 = ['software-status', 'software-language','software-details','software-price']; ?>
+  <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_1, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-hammer-wrench"></i> <span>Software Setup</span></a>
 
-    <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_2, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
+    <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_1, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/software-status" class="nav-link<?php active_page($data, 'software-status'); ?>">Software Status</a></li>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/software-language" class="nav-link<?php active_page($data, 'software-language'); ?>">Software Language</a></li>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/software-details" class="nav-link<?php active_page($data, 'software-details'); ?>">Software Details</a></li>
@@ -79,6 +79,31 @@
 
     </ul>
   </li>
+
+
+
+
+
+
+
+<?php $nav_items_section_2 = ['message','message-type']; ?>
+  <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_2, $data['page_index']) ?>">
+    <a href="#" class="nav-link"><i class="icon-envelop4"></i> <span>Message Note</span></a>
+
+    <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_2, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/message" class="nav-link<?php active_page($data, 'message'); ?>">All message</a></li>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/message_type" class="nav-link<?php active_page($data, 'message-type'); ?>">Message type</a></li>
+
+ </ul>
+</li>
+
+
+
+
+
+
+
 
 
 
