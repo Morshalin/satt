@@ -49,12 +49,7 @@ if (isset($_POST['customer_id'])) {
 		}
 	}
 
-	$Check_cart = $fm->dublicateCheck('satt_order_products', 'product_id', $software_id);
-	if($Check_cart){
-		$message = 'Product Already Purchased';
-		$type = "error";
-		die(json_encode(['message'=>$message,'type'=>$type]));
-	}else{
+	
 
 	$customer_name = $customer_info['name'];
 	$customer_number = $customer_info['number'];
@@ -71,15 +66,15 @@ if (isset($_POST['customer_id'])) {
 	$insert = $db->insert($query);
 
 	if ($insert) {
-		$message = 'Product Purchased Successfully';
+		$message = 'Product Order Received Successfully';
 		$type = "success";
 		die(json_encode(['message'=>$message,'type'=>$type]));
 	}else{
-		$message = 'Product Not Purchased Successfully';
+		$message = 'Product Not Order Received';
 		$type = "error";
 		die(json_encode(['message'=>$message,'type'=>$type]));
 	}
 
-}
+
 }
 ?>
