@@ -26,7 +26,6 @@
     </ul>
   </li>
 
-  <?php $nav_items_section_3 = ['customer-details','customer-type', 'progressive-state','interested-services','Office_note','leav_us']; ?>
 
     <?php $promote_product = ['promote-product']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($promote_product, $data['page_index']) ?>">
@@ -34,6 +33,18 @@
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($promote_product, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/promote-product" class="nav-link<?php active_page($data, 'promote-product'); ?>">Promote Product</a></li>
+    </ul>
+  </li>
+
+
+
+    <?php $order_and_confirm = ['pending-order', 'confirm-order']; ?>
+  <li class="nav-item nav-item-submenu<?php echo nav_item_open($order_and_confirm, $data['page_index']) ?>">
+    <a href="#" class="nav-link"><i class="icon-cart-add2"></i> <span>Order & Confirmation</span></a>
+
+    <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($order_and_confirm, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/pending-order" class="nav-link<?php active_page($data, 'pending-order'); ?>">Pending Orders</a></li>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/confirm-order" class="nav-link<?php active_page($data, 'confirm-order'); ?>">Confirm Orders</a></li>
     </ul>
   </li>
 
