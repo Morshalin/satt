@@ -21,9 +21,20 @@
 
       <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/available_product" class="nav-link<?php active_page($data, 'available_product'); ?>">Available Products</a></li>
 
-      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/pending-product" class="nav-link<?php active_page($data, 'pending-product'); ?>">Pending Products</a></li>
+      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/pending_product" class="nav-link<?php active_page($data, 'pending_product'); ?>">Pending Products</a></li>
 
-      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/confirm-product" class="nav-link<?php active_page($data, 'confirm-product'); ?>">Confirm Products</a></li>
+      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/confirm_product" class="nav-link<?php active_page($data, 'confirm_product'); ?>">Your Products</a></li>
+
+    </ul>
+  </li>
+
+    <?php $nav_items_section_3 = ['available_services']; ?>
+  <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_3, $data['page_index']) ?>">
+    <a href="#" class="nav-link"><i class="icon-hammer-wrench"></i> <span>Our Services</span></a>
+
+    <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_3, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
+
+      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/available_services" class="nav-link<?php active_page($data, 'available_services'); ?>">Available Services</a></li>
 
     </ul>
   </li>

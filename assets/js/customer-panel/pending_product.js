@@ -60,10 +60,10 @@ var DatatableButtonsHtml5 = function() {
             },
             columnDefs: [{
                 width: "100px",
-                targets: [0, 6]
+                targets: [0, 7]
             }, {
                 orderable: false,
-                targets: [6]
+                targets: [7]
             }],
             order: [1, 'asc'],
             processing: true,
@@ -74,15 +74,17 @@ var DatatableButtonsHtml5 = function() {
                 {
                     data: 'DT_RowIndex'
                 }, {
-                    data: 'software_name'
+                    data: 'product_name'
                 }, {
-                    data: 'software_status_name'
+                    data: 'pay_type'
                 }, {
-                    data: 'language_name'
+                    data: 'installation_charge'
                 }, {
-                    data: 'short_feature'
+                    data: 'pay_amount'
                 }, {
-                    data: 'condition_details'
+                    data: 'yearly_renew_charge'
+                }, {
+                    data: 'status'
                 },{
                     data: 'action'
                 }

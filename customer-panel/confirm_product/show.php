@@ -2,9 +2,9 @@
 require_once '../../config/config.php';
 ajax();
 Session::checkSession('customer-panel', ADMIN_URL . '/available_product', 'Available Product');
-if (isset($_GET['software_details_id'])) {
-	$software_details_id = $_GET['software_details_id'];
-	$query = "SELECT * FROM software_details WHERE id='$software_details_id'";
+if (isset($_GET['product_id'])) {
+	$product_id = $_GET['product_id'];
+	$query = "SELECT * FROM software_details WHERE id='$product_id'";
 	$result = $db->select($query);
 	if ($result) {
 		$row = $result->fetch_assoc();
@@ -86,10 +86,6 @@ if (isset($_GET['software_details_id'])) {
                 <b class="col-md-4">Software Proposal and Condition :</b>
                 <h6 class="col-md-8"><?php echo $row['condition_details']; ?></h6>
             </div>
-            <div class="row">
-                <b class="col-md-4">Software User Manual :</b>
-                <h6 class="col-md-8"><?php echo $row['user_manual']; ?></h6>
-            </div>
         </div>
         <div class="col-lg-2"></div>
     </div>
@@ -105,7 +101,7 @@ if (isset($_GET['software_details_id'])) {
         <?php 
         // software price details section   
         if ($software_id) {
-            $new_query_price = "SELECT * FROM software_price WHERE software_id='$software_id'";
+            $new_query_price = "SELECT * FROM software_price_log WHERE software_id='$software_id'";
             $new_result_price = $db->select($new_query_price);
             if ($new_result_price) {
                $new_row_price = $new_result_price->fetch_assoc(); ?>
