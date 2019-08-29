@@ -4,13 +4,10 @@ if (isset($_POST['customer_id'])) {
 	$customer_id = $_POST['customer_id'];
 	$software_id = $_POST['software_id'];
 	$pay_type = $_POST['pay_type'];
+	$agent_id = $_POST['agent_id'];
 
-	$agent_query = "SELECT * FROM agent_client WHERE client_id ='$customer_id'";
-	$agent_result = $db->select($agent_query);
-	if ($agent_result) {
-		$agent_data = $agent_result->fetch_assoc();
-		$agent_id = $agent_data['agent_id'];
-	}else{
+	
+	if ($agent_id==0) {
 		$agent_id='';
 	}
 
@@ -49,12 +46,6 @@ if (isset($_POST['customer_id'])) {
 		}
 	}
 
-	$Check_cart = $fm->dublicateCheck('satt_order_products', 'product_id', $software_id);
-	if($Check_cart){
-		$message = 'Product Already Purchased';
-		$type = "error";
-		die(json_encode(['message'=>$message,'type'=>$type]));
-	}else{
 
 	$customer_name = $customer_info['name'];
 	$customer_number = $customer_info['number'];
@@ -80,6 +71,5 @@ if (isset($_POST['customer_id'])) {
 		die(json_encode(['message'=>$message,'type'=>$type]));
 	}
 
-}
 }
 ?>
