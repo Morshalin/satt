@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('customer-panel', ADMIN_URL . '/available_product', 'Available Product');
+Session::checkSession('customer-panel', CUSTOMER_URL . '/available_product', 'Available Product');
 if (isset($_GET['product_id'])) {
     $product_id = $_GET['product_id'];
     $query = "SELECT * FROM software_details WHERE id='$product_id'";

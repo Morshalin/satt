@@ -41,7 +41,7 @@ $totalRecordwithFilter = $records['allcount'];
 ## Fetch records
 =================================================================================*/
 $customer_id = $user['id'];
-$query = "select * from satt_order_products WHERE status = 0 and customer_id='$customer_id' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$query = "select * from satt_order_products WHERE  roll = 0 and status = 0 and customer_id='$customer_id' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $result = $db->select($query);
 $data = array();
 $i = 0;
@@ -70,7 +70,7 @@ if ($result) {
               <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/pending_product/show.php?product_id=' . $row['product_id'] . '"><i class="icon-eye"></i> View</span>
 
 
-             <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/pending_product/reasion.php?product_id=' . $row['id'] . '"><i class="icon-trash"></i> Delete Product</span>
+             <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/pending_product/reasion.php?product_id=' . $row['id'] . '"><i class="icon-trash"></i> Cancel Product</span>
             </div>
           </div>
         </div>
