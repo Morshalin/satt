@@ -149,13 +149,16 @@ $(document).ready(function(){
         var software_id = $('#software_id').val();
         var customer_id = $('#customer_id').val();
         var pay_type = $('#pay_type').val();
-        // console.log(pay_type);
+        var agent_id = $('#agent_id').val();
+        // console.log(agent_id);
         $.ajax({
             url: './ajax_cart.php',
             data:{
                 software_id : software_id,
                 customer_id : customer_id,
-                pay_type : pay_type
+                pay_type : pay_type,
+                agent_id: agent_id
+                
             },
             type: 'post',
             dataType: 'json',

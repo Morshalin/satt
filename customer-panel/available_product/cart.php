@@ -141,25 +141,58 @@ if (isset($_GET['software_details_id'])) {
         <div class="form-group">
             <label for="pay_types" class="col-form-label"><strong>Select Pay Type </strong><span class="text-danger">*</span></label>
             <select class="select form-control"  name="pay_type" id="pay_type">
-               
-                        <option value="monthly_pay"> Monthly Pay</option>
-                        <option value="yearly_pay">Yearly Pay</option>
-                        <option value="direct_sell">Direct Sell</option>
+                <option value="monthly_pay"> Monthly Pay</option>
+                <option value="yearly_pay">Yearly Pay</option>
+                <option value="direct_sell">Direct Sell</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
 
-                        <input type="hidden" value="<?php echo $charge['agent_commission_one_time']; ?>" name="agent_commission_one_time">
-                        <input type="hidden">
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <div class="form-group">
+            <label for="agent" class="col-form-label"><strong>Select Your Agent</strong><span class="text-danger">*</span></label>
+            <select class="select form-control"  name="agent_id" id="agent_id" required="">
+                <option value="">Please Select One</option>
+             <?php 
+                $query = "SELECT * from agent_client where client_id = '$customer_id'";
+                $result = $db->select($query);
+                if ($result) {
+                   while ($data = $result->fetch_assoc()) {
+                    $agent_name = '';
+                    $agent_up = '';
+                    $agent_id = $data['agent_id'];
+                    $query = "SELECT * FROM agent_list WHERE id = '$agent_id'";
+                    $get_agent = $db->select($query);
+                    if ($get_agent) {
+                        $get_agent_info = $get_agent->fetch_assoc();
+                        $agent_name = $get_agent_info['name'];
+                        $agent_up = $get_agent_info['interested_up'];
+                    }
+             ?>
+                <option value="<?php echo $agent_id; ?>"><?php echo 'Name: '.$agent_name.',  Area:'.$agent_up; ?></option>
+                <?php } }else{
+                    ?>
+                     <option value="0">No Agent Assigned</option>
+                    <?php
+                }
 
-                    </select>
-                </div>
-            </div>
-            <div class="col-lg-2"></div>
+
+                 ?>
+            </select>
+        </div>
+    </div>
+    <div class="col-lg-2"></div>
 </div>
 
 
 
     <div class="form-group row">
         <div class="col-lg-4 offset-lg-4">
-            <button type="submit" name="create" class="btn btn-primary ml-31" id="add_to_cart"><i class="icon-cart"></i> Add To Cart   </button>
+            <button type="submit" name="create" class="btn btn-primary ml-31" id="add_to_cart"><i class="icon-cart"></i> Add To Cart </button>
 
             <button type="button" class="btn btn-link" id="submiting" style="display: none;" disabled="">Submiting <img src="<?php echo BASE_URL; ?>/assets/ajaxloader.gif"></button>
             <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>

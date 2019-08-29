@@ -70,8 +70,7 @@ if ($result) {
               <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/pending_product/show.php?product_id=' . $row['product_id'] . '"><i class="icon-eye"></i> View</span>
 
 
-             <span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . CUSTOMER_URL . '/pending_product/ajax.php?product_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
-
+             <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/pending_product/reasion.php?product_id=' . $row['id'] . '"><i class="icon-trash"></i> Delete Product</span>
             </div>
           </div>
         </div>
