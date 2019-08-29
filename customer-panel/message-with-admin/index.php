@@ -1,12 +1,12 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('agent-panel', AGENT_URL.'/message-with-admin', 'message-with-admin');
+  Session::checkSession('customer-panel', CUSTOMER_URL.'/message-with-admin', 'message-with-admin');
   $data = array();
   $data['page_title'] = 'Admin List';
   $data['element'] = ['modal' => 'lg'];
   $data['page_index'] = 'message-with-admin';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/agent-panel/message-with-admin'];
+  $data['page_js'] = ['assets/js/customer-panel/message-with-admin'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
@@ -44,7 +44,7 @@
   		
 
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo AGENT_URL; ?>/message-with-admin/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo CUSTOMER_URL; ?>/message-with-admin/table.php">
   				<thead>
   					<tr>
   						<th>#</th>

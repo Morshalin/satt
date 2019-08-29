@@ -84,7 +84,7 @@ if (isset($_POST['to_user_id_get_info'])) {
 	}
 
 
-$query = "SELECT * FROM admin_customer_chat WHERE (from_user_id = '$admin_id' AND to_user_id = '$to_user_id') OR (from_user_id = '$to_user_id' AND to_user_id = '$admin_id')  ORDER BY id DESC";
+$query = "SELECT * FROM admin_customer_chat WHERE (from_user_id = '$admin_id_get_info' AND to_user_id = '$to_user_id_get_info') OR (from_user_id = '$to_user_id_get_info' AND to_user_id = '$admin_id_get_info')  ORDER BY id DESC";
 
 		$get_chat_history = $db->select($query);
 
@@ -113,6 +113,7 @@ $query = "SELECT * FROM admin_customer_chat WHERE (from_user_id = '$admin_id' AN
 				$output .= '</ul>';
 		}
 		echo json_encode($output);
+		die();
 }
 
 /*

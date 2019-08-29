@@ -70,37 +70,37 @@ var DatatableButtonsHtml5 = function() {
                 className: 'btn btn-danger',
                 text: 'Delete',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/software-details/action.php', action = 'delete', msg = 'Once deleted, it will deleted all related Data!');
+                    datatableSelectedRowsAction(dt, AGENT_URL+'/agent-panel/action.php', action = 'delete', msg = 'Once deleted, it will deleted all related Data!');
                 }
             },{
                 extend: 'selected',
                 className: 'btn bg-success',
                 text: 'Online',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/software-details/action.php', action = 'active', msg = 'Change Status To Online');
+                    datatableSelectedRowsAction(dt, AGENT_URL+'/agent-panel/action.php', action = 'active', msg = 'Change Status To Online');
                 }
             }, {
                 extend: 'selected',
                 className: 'btn bg-secondary',
                 text: 'Offline',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/software-details/action.php', action = 'inactive', msg = 'Change Status To Offline');
+                    datatableSelectedRowsAction(dt, AGENT_URL+'/agent-panel/action.php', action = 'inactive', msg = 'Change Status To Offline');
                 }
             }, {
                 extend: 'selected',
                 className: 'btn bg-warning',
                 text: 'Toggle Status',
                 action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/software-details/action.php', action = 'toggle', msg = 'Toggle Status');
+                    datatableSelectedRowsAction(dt, AGENT_URL+'/agent-panel/action.php', action = 'toggle', msg = 'Toggle Status');
                 }
             }],
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 5]
+                targets: [0, 3]
             }, {
                 orderable: false,
-                targets: [5]
+                targets: [2, 3]
             }],
             order: [1, 'asc'],
             processing: true,
@@ -114,9 +114,7 @@ var DatatableButtonsHtml5 = function() {
                     data: 'name'
                 }, {
                     data: 'email'
-                }, {
-                    data: 'number'
-                },  {
+                },{
                     data: 'unread'
                 },{
                     data: 'action'
@@ -145,10 +143,7 @@ var DatatableButtonsHtml5 = function() {
                     $('.modal-body').html(data).fadeIn(); // load response
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
-                     _componentSelect2Modal();
-                    _componentDatePicker();
                     _modalFormValidation();
-
                 })
                 .fail(function(data) {
                     $('.modal-body').html('<span style="color:red; font-weight: bold;"> Something Went Wrong. Please Try again later.......</span>');
@@ -168,6 +163,7 @@ var DatatableButtonsHtml5 = function() {
     return {
         init: function() {
             _componentDatatableButtonsHtml5();
+            _componentSelect2Normal();
             _componentRemoteModalLoad();
         }
     }
@@ -179,23 +175,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
-
-
-
-
-
 $(document).ready(function(){
     $(document).on('click','.start_chat',function(){
         // alert('sohag');
         var to_user_id = $(this).data('touserid');
         var to_user_name = $(this).data('tousername');
-        var admin_id = $(this).data('admin_id');
+        var customer_id = $(this).data('customer_id');
         // console.log(to_user_name);
-        var sohag = make_dialoge_box(to_user_id, to_user_name,admin_id);
-        // console.log(sohag);
-        
-        
+        var sohag = make_dialoge_box(to_user_id, to_user_name,customer_id);
+      
+
+
         var refresh_element = [];
 
        refresh_element[to_user_id] =  setInterval(function(){
@@ -203,13 +193,12 @@ $(document).ready(function(){
                 url: './insert_chat.php', 
                 data: {
                         to_user_id_get_info:to_user_id,
-                        admin_id_get_info: admin_id
+                        customer_id_get_info: customer_id
                     },
                     type: 'post',
                     dataType: 'json',
                     success:function(data){
                         // $('#chat_message_'+to_user_id).val('');
-                    
                         $('#chat_history_'+to_user_id).html(data);
                     }
             })
@@ -220,28 +209,26 @@ $(document).ready(function(){
             width:400,
             close: function() {
               clearInterval(refresh_element[to_user_id]);
-              change_seen_status(to_user_id, admin_id);
+              change_seen_status(to_user_id, customer_id);
               tariq.ajax.reload();
             }
         });
         $("#user_dialog_"+to_user_id).dialog('open');
-
-        // for changing seen status
-      change_seen_status(to_user_id,admin_id);
+        change_seen_status(to_user_id,customer_id);
 
     });
 
+
+
     $(document).on('click','.send_chat',function(){
         var to_user_id = $(this).attr('id');
-        var admin_id = $(this).data('admin_id');
-        // alert(admin_id);
+        var customer_id = $(this).data('customer_id');
         var chat_message = $('#chat_message_'+to_user_id).val();
-         // $('#chat_history_'+to_user_id).html(chat_message);
         $.ajax({
             url: './insert_chat.php', 
             data: {
                     to_user_id:to_user_id,
-                    admin_id: admin_id,
+                    customer_id: customer_id,
                     chat_message: chat_message
                 },
                 type: 'post',
@@ -254,34 +241,34 @@ $(document).ready(function(){
 
 
 
-    });
 
- 
+
+    });
 });
 
 
 
 
 
-function make_dialoge_box(to_user_id, to_user_name,admin_id){
-    var modal_elem = '<div id="user_dialog_'+to_user_id+'" class="to_user_dialog" title="Chat With Customer: '+to_user_name+'">';
+function make_dialoge_box(to_user_id, to_user_name,customer_id){
+    var modal_elem = '<div id="user_dialog_'+to_user_id+'" class="to_user_dialog" title="Chat With Admin: '+to_user_name+'">';
 
     modal_elem +='<div style="height:400px; border:1px solid #ccc; overflow-y:scroll; margin-bottom:24px; padding:16px" class="chat_history" data-touserid="'+to_user_id+'" id="chat_history_'+to_user_id+'"></div>';
     modal_elem +='<div class="form-group">';
     modal_elem +='<textarea name="chat_message_'+to_user_id+'" id="chat_message_'+to_user_id+'" class="form-control"></textarea>';
      modal_elem +='</div><div class="form-group" align="center">';
-     modal_elem +='<button type="button" name="send_chat" id="'+to_user_id+'" class="btn btn-info send_chat" data-admin_id = "'+admin_id+'" >Send</button></div></div>';
+     modal_elem +='<button type="button" name="send_chat" id="'+to_user_id+'" class="btn btn-info send_chat" data-customer_id = "'+customer_id+'" >Send</button></div></div>';
      // return modal_elem;
      $('#user_model_details').html(modal_elem);
 }
 
 
-function change_seen_status(to_user_id_seen_status, admin_id_seen_status){
+function change_seen_status(to_user_id_seen_status, customer_id_seen_status){
        $.ajax({
                 url: './insert_chat.php', 
                 data: {
                         to_user_id_seen_status:to_user_id_seen_status,
-                        admin_id_seen_status: admin_id_seen_status
+                        customer_id_seen_status: customer_id_seen_status
                     },
                     type: 'post',
                     dataType: 'json',
@@ -290,5 +277,4 @@ function change_seen_status(to_user_id_seen_status, admin_id_seen_status){
                     }
             })
 }
-
 

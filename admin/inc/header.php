@@ -95,8 +95,16 @@
 			</span>
 
 			<ul class="navbar-nav">
+				<li class="nav-item dropdown">
+					<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown" aria-expanded="true">
+						<i class="icon-bubbles4"></i>
+						<span class="d-md-none ml-2">Messages</span>
+						<span class="badge badge-pill bg-warning-400 ml-auto ml-md-0">2</span>
+					</a>
+				</li>
 
 				<li class="nav-item dropdown dropdown-user">
+
 					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
 						<img src="<?php echo getUserImage($user); ?>" class="rounded-circle" alt="<?php echo gv($user, 'first_name') ?>">
 						<span><?php echo gv($user, 'first_name').' ' .gv($user, 'last_name'); ?></span>

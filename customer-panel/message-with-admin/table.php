@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('agent-panel', AGENT_URL . '/message-with-admin');
+Session::checkSession('customer-panel', CUSTOMER_URL . '/message-with-admin');
 ## Read value
 $draw = $_GET['draw'];
 $row = $_GET['start'];
@@ -15,7 +15,7 @@ if ($columnName == 'DT_RowIndex') {
 }else if($columnName == 'name'){
   $columnName = 'first_name';
 }
-$agent_id  = $user['id']; 
+$customer_id  = $user['id']; 
 
 /*==============================================================================
 ## Search
@@ -53,7 +53,7 @@ if ($result) {
 
 
       $to_user_id_get_info = $row['id'];
-		$get_chat = $db->select("select count(*) as all_count from agent_admin_chat WHERE to_whom ='agent' and to_user_id = '$agent_id' and from_user_id = '$to_user_id_get_info' and seen_status_agent = '0';")->fetch_assoc();
+		$get_chat = $db->select("select count(*) as all_count from admin_customer_chat WHERE to_whom ='customer' and to_user_id = '$customer_id' and from_user_id = '$to_user_id_get_info' and seen_status_customer = '0';")->fetch_assoc();
 
 		if ($get_chat['all_count']>0) {
 			$badge_color = "badge-danger";
@@ -69,7 +69,7 @@ if ($result) {
 			"unread" => '<badge class="badge '.$badge_color.'">'.$get_chat['all_count'].'</badge>',
 			"action" => '
 
-       <button id="" data-touserid="'.$row['id'].'" data-tousername="'.$row['first_name'].' '.$row['last_name'].'" class="btn btn-sm btn-success start_chat" data-agent_id="'.$agent_id.'">Start Chat</button>
+       <button id="" data-touserid="'.$row['id'].'" data-tousername="'.$row['first_name'].' '.$row['last_name'].'" class="btn btn-sm btn-success start_chat" data-customer_id="'.$customer_id.'">Start Chat</button>
         ',
 		);
 $i++;
