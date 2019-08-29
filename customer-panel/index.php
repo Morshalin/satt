@@ -10,7 +10,7 @@
     Session::destroy('admin', $goto);
   }
   if (isset($_GET['action']) AND $_GET['action'] == 'lock') {
-    Session::destroy('admin', BASE_URL.'/lock.php?goto='.$goto);
+    Session::destroy('admin', CUSTOMER_URL.'/lock.php?goto='.$goto);
   }
   $data = array();
 

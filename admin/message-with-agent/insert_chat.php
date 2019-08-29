@@ -36,7 +36,7 @@ if ($chat_message !='') {
 			$output = '<ul class="list-unstyled">';
 			while ($row = $get_chat_history->fetch_assoc()) {
 				$user_name = '';
-				if ($row['from_user_id'] == $admin_id) {
+				if ($row['from_user_id'] == $admin_id &&  $row['from_whom']=='admin') {
 					$user_name = '<b class="text-success">You</b>';
 				}else{
 					$user_name = '<b class="text-danger" align="right">'.$agent_name.'</b>';
@@ -92,7 +92,7 @@ $query = "SELECT * FROM agent_admin_chat WHERE (from_user_id = '$admin_id_get_in
 		$output = '<ul class="list-unstyled">';
 				while ($row = $get_chat_history->fetch_assoc()) {
 					$user_name = '';
-					if ($row['from_user_id'] == $admin_id_get_info) {
+					if ($row['from_user_id'] == $admin_id_get_info &&  $row['from_whom']=='admin') {
 						$user_name = '<b class="text-success">You</b>';
 					}else{
 						$user_name = '<b class="text-danger">'.$agent_name.'</b>';

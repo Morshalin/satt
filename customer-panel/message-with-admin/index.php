@@ -1,16 +1,15 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('customer-panel', CUSTOMER_URL . '/confirm_product','Confirm Product');
+  Session::checkSession('agent-panel', AGENT_URL.'/message-with-admin', 'message-with-admin');
   $data = array();
-  $data['page_title'] = 'Confirmed Product';
+  $data['page_title'] = 'Admin List';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'confirm_product';
+  $data['page_index'] = 'message-with-admin';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/customer-panel/confirm_product'];
+  $data['page_js'] = ['assets/js/agent-panel/message-with-admin'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
-
 <div class="page-header page-header-light">
 
   <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -31,6 +30,7 @@
   <div class="card border-top-success rounded-top-0" id="table_card">
   	<div class="card-header header-elements-inline bg-light border-grey-300" >
   		<h5 class="card-title"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Dashboard'; ?>
+
   		</h5>
   		<div class="header-elements">
   			<div class="list-icons">
@@ -41,20 +41,17 @@
   		</div>
   	</div>
   	<div class="card-body">
-  		<!-- <div class="text-center">
-  			<img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
-  		</div> -->
+  		
+
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo CUSTOMER_URL; ?>/confirm_product/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo AGENT_URL; ?>/message-with-admin/table.php">
   				<thead>
   					<tr>
   						<th>#</th>
-              <th>Product Name</th>
-              <th>Pay Type</th>
-              <th>Installation Charge</th>
-              <th>Pay Amount</th>
-  						<th>Yearly Renew Charge</th>
-              <th>Action</th>
+  						<th>Admin Name</th>
+  						<th>Email</th>
+              <th>Unread</th>
+  						<th>Action</th>
   					</tr>
   				</thead>
   				<tbody>
@@ -64,9 +61,14 @@
   	</div>
   </div>
 </div>
+
+<div id="user_model_details"></div>
+
 <!-- /content area -->
 <?php include_once '../inc/footer.php'; ?>
 <script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/select.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/buttons.min.js"></script>
 <script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
 </body>
 </html>
