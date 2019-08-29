@@ -9,14 +9,14 @@ ajax();
        $product_id = $_GET['product_id'];
 ?>
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/customerdetails/ajax.php" id="content_form" method="post">
+<form class="form-validate-jquery" action="<?php echo CUSTOMER_URL; ?>/pending_product/ajax.php" id="content_form" method="post">
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Create Notes <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="course_description" class="col-form-label">Reasion for Product Delete</label>
-                <textarea name="note" id="note" rows="3" class="form-control" style="resize: none;" placeholder=" New Note Description Here" required=""></textarea>
+                <label for="reason" class="col-form-label">Reasion for Product Delete</label>
+                <textarea name="reason" id="reason" rows="3" class="form-control" style="resize: none;" placeholder=" New Note Description Here" required=""></textarea>
             </div>
         </div>
     </div>
