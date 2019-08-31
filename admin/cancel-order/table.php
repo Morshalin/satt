@@ -40,7 +40,7 @@ $totalRecordwithFilter = $records['allcount'];
 /*==============================================================================
 ## Fetch records
 =================================================================================*/
-$query = "SELECT * FROM satt_order_products WHERE status = '0' AND roll = '0' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$query = "SELECT * FROM satt_order_products WHERE status = '0' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $result = $db->select($query);
 $data = array();
 $i = 0;
@@ -66,23 +66,16 @@ if ($agent_id) {
       "agent_name" => '<strong>' . $agent_name . '</strong>',
       "product_name" => '<strong>' . $row['product_name'] . '</strong>',
       "pay_type" => '<strong>' . $row['pay_type'] . '</strong>',
-      "order_date" => '<strong>' . $row['order_date'] . '</strong>',
-	    "status" => '<span class="badge badge-warning ">Pending</span>',
-        "action" => '
-        <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
-        <div class="list-icons" id="action_menu_' . $row['id'] . '">
-          <div class="dropdown">
-            <a href="#" class="list-icons-item" data-toggle="dropdown">
-              <i class="icon-menu9"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right">
-              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/pending-order/show.php?pending_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
-              <span class="dropdown-item text-danger" id="content_managment" data-url="' . ADMIN_URL . '/pending-order/cancel-order.php?pending_order_id=' . $row['id'] . '"><i class="icon-cancel-circle2"></i> Cancel Order</span>
-              <span class="dropdown-item text-success" id="content_managment" data-url="' . ADMIN_URL . '/pending-order/confirm-order.php?pending_order_id=' . $row['id'] . '"><i class="icon-checkmark4"></i> Confirm Order</span>
-            </div>
-          </div>
-        </div>
+			"order_date" => '<strong>' . $row['order_date'] . '</strong>',
+			"action" => '
+        <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/pending-order/show.php?pending_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
         ',
+			"status" => '
+        <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="status_loading_' . $row['id'] . '"  style="display: none">
+        <label class="form-check-label" id="status_' . $row['id'] . '" title="' . ($row['status'] == 1 ? 'Active' : 'InActive') . '" data-popup="tooltip-custom" data-placement="bottom">
+        <input type="checkbox" class="form-check-status-switchery" id="change_status" data-id="' . $row['id'] . '" data-status="' . $row['status'] . '" data-url="' . ADMIN_URL . '/pending-order/ajax.php?pending_order_id=' . $row['id'] . '&action=status&status=' . $row['status'] . '"' . ($row['status'] == 1 ? 'checked' : '') . ' data-fouc >
+        </label>
+        	',
 		);
 		$i++;
 	}
