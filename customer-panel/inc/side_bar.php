@@ -13,13 +13,33 @@
 
 
 
-  <?php $nav_items_section_2 = ['available_product', 'pending-product','confirm-product']; ?>
+  <?php $nav_items_section_2 = ['available_product', 'pending_product','confirm_product']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_2, $data['page_index']) ?>">
-    <a href="#" class="nav-link"><i class="icon-cart"></i> <span>Our Products</span></a>
+    <a href="#" class="nav-link"><i class="icon-cart"></i> <span>Available Software Order & Confirmation</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_2, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
 
-      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/available_product" class="nav-link<?php active_page($data, 'available_product'); ?>">Available Products</a></li>
+      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/available_product" class="nav-link<?php active_page($data, 'available_product'); ?>">Available Softwares</a></li>
+
+      
+
+      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/pending_product" class="nav-link<?php active_page($data, 'pending_product'); ?>">Pending Orders</a></li>
+
+      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/confirm_product" class="nav-link<?php active_page($data, 'confirm_product'); ?>">Confirmed Orders</a></li>
+
+    </ul>
+  </li>
+
+
+  <?php $nav_items_section_5 = ['order-new-software', 'pending-new-software','confirm-new-software']; ?>
+  <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_5, $data['page_index']) ?>">
+    <a href="#" class="nav-link"><i class="icon-cart"></i> <span>New Software Order & Confirmation</span></a>
+
+    <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_5, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
+
+      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/order-new-software" class="nav-link<?php active_page($data, 'order-new-software'); ?>">Order New Software</a></li>
+
+      
 
       <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/pending_product" class="nav-link<?php active_page($data, 'pending_product'); ?>">Pending Orders</a></li>
 
