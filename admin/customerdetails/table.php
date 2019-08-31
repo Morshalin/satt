@@ -74,7 +74,10 @@ if ($result) {
           		<i class="icon-menu9"></i>
           	</a>
           	<div class="dropdown-menu dropdown-menu-right">
+
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/customerdetails/note.php?customerdetails_id=' . $row['id'] . '"><i class="icon-eye"></i> Note </span>
+
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/customerdetails/next_contacted.php?customerdetails_id=' . $row['id'] . '"><i class="icon-eye"></i> Next Contacted </span>
 
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/customerdetails/show.php?customerdetails_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
 

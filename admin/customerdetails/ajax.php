@@ -284,6 +284,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' and isset($_POST['action']) and $_POST[
 	}
 }
 
+
+/*================================================================
+		Next Contacted date information into Database
+===================================================================*/
+if ($_SERVER['REQUEST_METHOD'] == 'POST' and isset($_POST['contact']) and $_POST['contact']='next_contact') {
+	$admin_id = Session::get('admin_id');
+	$error = array();
+	$customer_id = $fm->validation($_POST['customerdetails_id']);
+	$note = $fm->validation($_POST['note']);
+	$next_contact = $_POST['next_contact'];
+
+
+	if (!$note) {
+		$error['note'] = 'Note  Field required';
+	}elseif (strlen($note) > 500) {
+		$error['note'] = 'Note Can Not Be More Than 500 Charecters';
+	}
+	if (!$next_contact) {
+		$error['next_contact'] = 'Date  Field required';
+	}
+
+	if ($error) {
+		http_response_code(500);
+		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+	} else {
+		$query = "INSERT INTO satt_next_contacted (admin_id, customer_id,next_contact, note) VALUES ('$admin_id', '$customer_id','$next_contact','$note')";
+		$result = $db->insert($query);
+		if ($result != false) {
+			die(json_encode(['message' => 'Note Added Successfull']));
+		} else {
+			http_response_code(500);
+			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+		}
+	}
+}
+
 /*================================================================
 		Insert Data into Database
 ===================================================================*/
@@ -322,9 +358,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 
 
-	if (!$facebook_name) {
-		$error['facebook_name'] = 'Facebook Name Field required';
-	}elseif (strlen($facebook_name) > 255) {
+	if (strlen($facebook_name) > 255) {
 		$error['facebook_name'] = 'Facebook Name Can Not Be More Than 255 Charecters';
 	}
 
@@ -333,12 +367,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}elseif ($number_check) {
 		$error['number_check'] = 'Number Already Exits';
 	}
-
-	if (!$email) {
-		$error['email'] = 'Email  Field required';
-	}elseif ($email_check) {
-		$error['email_check'] = 'Email Already Exits';
-	}elseif (strlen($email) > 50) {
+	if (strlen($email) > 50) {
 		$error['email'] = 'Email  Can Not Be More Than 20 Charecters';
 	}
 
@@ -354,9 +383,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$error['customer_reference'] = 'Customer reference  Can Not Be More Than 255 Charecters';
 	}
 
-	if (!$progressive_state) {
-		$error['progressive_state'] = 'Progressive state  Field required';
-	}elseif (strlen($progressive_state) > 255) {
+	if (strlen($progressive_state) > 255) {
 		$error['progressive_state'] = 'Progressive state  Can Not Be More Than 255 Charecters';
 	}
 
@@ -364,21 +391,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$error['interested_services'] = 'interested services  Field required';
 	}
 
-	if (!$institute_type) {
-		$error['institute_type'] = 'institute category Field required';
-	}elseif (strlen($institute_type) > 255) {
+	if (strlen($institute_type) > 255) {
 		$error['institute_type'] = 'institute Category Can Not Be More Than 255 Charecters';
 	}
 
-	if (!$institute_name) {
-		$error['institute_name'] = 'institute name  Field required';
-	}elseif (strlen($institute_name) > 255) {
+	if (strlen($institute_name) > 255) {
 		$error['institute_name'] = 'institute name Can Not Be More Than 255 Charecters';
 	}
 
-	if (!$institute_address) {
-		$error['institute_address'] = 'institute address  Field required';
-	}elseif (strlen($institute_address) > 255) {
+	if (strlen($institute_address) > 255) {
 		$error['institute_address'] = 'institute address Can Not Be More Than 255 Charecters';
 	}
 
@@ -478,6 +499,21 @@ if (isset($_GET['notedelid'])) {
 		}else {
 			http_response_code(500);
 			die(json_encode(['message' => 'Reasion Not Found']));
+		}
+	}
+}
+
+
+if (isset($_GET['contactnotedelid'])) {
+	$delid = $_GET['contactnotedelid'];
+	if ($delid) {
+		$delquery = "DELETE FROM  satt_next_contacted WHERE id ='$delid'";
+		$result = $db->delete($delquery);
+		if($result){
+           die(json_encode(['message' => 'Note Deleted Successfully']));
+		}else {
+			http_response_code(500);
+			die(json_encode(['message' => 'Note Not Found']));
 		}
 	}
 }

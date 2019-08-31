@@ -41,7 +41,7 @@ $totalRecordwithFilter = $records['allcount'];
 ## Fetch records
 =================================================================================*/
 $customer_id = $user['id'];
-$query = "select * from satt_order_products WHERE and status = 1 and customer_id='$customer_id' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$query = "select * from satt_order_products WHERE roll = 0 and status = 1 and customer_id='$customer_id' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $result = $db->select($query);
   $data = array();
   $i = 0;

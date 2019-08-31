@@ -8,6 +8,7 @@ if (isset($_GET['product_id'])) {
 		$query = "SELECT * FROM satt_order_products WHERE id = '$product_id'";
 		$result = $db->select($query);
 		if (!$result) {
+			$row = $result->fetch_assoc();
 			http_response_code(500);
 			die(json_encode(['message' => 'Software Details Not Found']));
 		}
@@ -15,34 +16,29 @@ if (isset($_GET['product_id'])) {
 }
 
 /*================================================================
-		Delate  Data into Database
-===================================================================*/
-// $error['software_language_name'] = 'Course Name Required';
-/*================================================================
 		Insert Data into Database
 ===================================================================*/
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$error = array();
-	
-	$yearly_renew_charge = $fm->validation($_POST['yearly_renew_charge']);
-
-
-
-		if (!$short_feature) {
-		$error['short_feature'] = 'Short Feature Field required';
+	$roll = $fm->validation($_POST['roll']);
+	$cancel_reason = $fm->validation($_POST['reason']);
+	if (!$cancel_reason) {
+		$error['cancel_reason'] = 'Order Cancel flied required';
 	}
-
 	if ($error) {
 		http_response_code(500);
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
-		$query = "INSERT INTO software_details (software_name,software_status_name,) VALUES ('$software_name','$software_status_name')";
-	
+		$query = "UPDATE satt_order_products SET 
+		roll = '$roll', 
+		cancel_reason='$cancel_reason'
+		WHERE id = '$product_id'";
+		$result = $db->update($query);
 			if ($result != false) {
-				die(json_encode(['message' => 'Software Added Successfull']));
+				die(json_encode(['message' => 'Order Cancel Successfuly']));
 			} else {
 				http_response_code(500);
 				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 			}
-	
-} 
+	} 
+}
