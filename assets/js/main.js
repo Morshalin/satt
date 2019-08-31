@@ -138,6 +138,9 @@ var _formValidation = function() {
                     type: 'success',
                     addclass: 'alert alert-styled-left',
                 });
+
+                $("#content_form")[0].reset();
+
                 $('#submit').show();
                 $('#submiting').hide();
                 if (data.goto) {

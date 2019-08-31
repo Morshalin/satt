@@ -41,7 +41,7 @@
 
       
 
-      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/pending_product" class="nav-link<?php active_page($data, 'pending_product'); ?>">Pending Orders</a></li>
+      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/pending-new-software" class="nav-link<?php active_page($data, 'pending-new-software'); ?>">Pending Orders</a></li>
 
       <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/confirm_product" class="nav-link<?php active_page($data, 'confirm_product'); ?>">Confirmed Orders</a></li>
 
