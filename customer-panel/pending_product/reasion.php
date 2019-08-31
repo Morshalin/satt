@@ -9,7 +9,7 @@ ajax();
        $product_id = $_GET['product_id'];
 ?>
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo CUSTOMER_URL; ?>/pending_product/ajax.php" id="content_form" method="post">
+<form class="form-validate-jquery" action="<?php echo CUSTOMER_URL; ?>/pending_product/ajax.php?product_id=<?php echo $product_id; ?>" id="content_form" method="post">
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Create Notes <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     <div class="row">
@@ -20,6 +20,7 @@ ajax();
             </div>
         </div>
     </div>
+    <input type="hidden" name="roll" id="roll" value="1">
     <div class="form-group row">
         <div class="col-lg-4 offset-lg-4">
             <button type="submit" name="create" class="btn btn-primary ml-31" id="submit">Submit</button>
