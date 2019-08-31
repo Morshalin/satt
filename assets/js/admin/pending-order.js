@@ -145,3 +145,31 @@ var DatatableButtonsHtml5 = function() {
 document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
 });
+
+
+
+    $(document).on('change','#payment_method', function(){
+        var payment_method = $("#payment_method").val();
+        if (payment_method == 'check') {
+            $("#check_method").show(500);
+        }else{
+            $("#check_method").hide(500);
+            $("#check_no").val("");
+            $("#check_no").attr("false");
+        }
+    });
+
+       $(document).on('change','#payment_method', function(){
+        var payment_method = $("#payment_method").val();
+        if (payment_method == 'mobile') {
+            $("#mobile_method").show(500);
+        }else{
+            $("#mobile_method").hide(500);
+            $("#mobile_banking_name").val("");
+            $("#received_phone_number").val("");
+            $("#tx_id").val("");
+            $("#mobile_banking_name").attr("false");
+            $("#received_phone_number").attr("false");
+            $("#tx_id").attr("false");
+        }
+    })
