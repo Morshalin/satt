@@ -79,8 +79,8 @@ if ($agent_id) {
             </a>
             <div class="dropdown-menu dropdown-menu-right">
         		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/confirm-order/show.php?confirm_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
-              <span class="dropdown-item text-danger" id="content_managment" data-url="' . ADMIN_URL . '/pending-order/cancel-order.php?pending_order_id=' . $row['id'] . '"><i class="icon-cancel-circle2"></i> Cancel Order</span>
-              <span class="dropdown-item text-success" id="content_managment" data-url="' . ADMIN_URL . '/pending-order/confirm-order.php?pending_order_id=' . $row['id'] . '"><i class="icon-checkmark4"></i> Confirm Order</span>
+              <span class="dropdown-item text-info" id="content_managment" data-url="' . ADMIN_URL . '/confirm-order/cancel-order.php?confirm_order_id=' . $row['id'] . '"><i class="icon-paypal2"></i> Pay</span>
+              <span class="dropdown-item text-success" id="content_managment" data-url="' . ADMIN_URL . '/pay-order/deliver-order.php?confirm_order_id=' . $row['id'] . '"><i class="icon-truck"></i> Deliver</span>
             </div>
           </div>
         </div>

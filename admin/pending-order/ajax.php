@@ -15,28 +15,6 @@ if (isset($_GET['pending_order_id'])) {
 }
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'PUT' AND isset($_GET['action']) AND $_GET['action'] == 'status') {
-	$pending_order_id = $_GET['pending_order_id'];
-	$status = $_GET['status'];
-	$status = $status ? 0 : 1;
-
-	if ($pending_order_id) {
-		$query = "UPDATE satt_order_products SET 
-		status = '$status',
-		confirm_date = now()
-		 WHERE id = '$pending_order_id'";
-		$result = $db->delete($query);
-		if ($result) {
-			die(json_encode(['message' => 'Order Confirmation Successfull']));
-		}
-	}
-	http_response_code(500);
-	die(json_encode(['message' => 'Something Happend Wrong. Please Try Again Later']));
-
-}
-
-
-
 // order cancel 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['action'] == 'update') {
