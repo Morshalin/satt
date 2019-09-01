@@ -21,17 +21,17 @@ if (isset($_GET['pending_order_id'])) {
 ?>
 
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/pending-order/ajax_confirm_order.php" id="content_form" method="post">
+<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/pending-order/ajax_confirm_order.php?pending_order_id=<?php echo $pending_order_id; ?>" id="content_form" method="post">
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Confirm Order <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
-    <div class="row">
+    <div class="row d-none" >
         <div class="col-lg-2"></div>
         <div class="col-lg-2">
                 <label for="total_price" class="col-form-label">Product Total Price <span class="text-danger">*</span></label>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <input type="text" name="total_price" id="total_price" class="form-control" readonly="" >
+                <input type="number" name="total_price" id="total_price" class="form-control" ="" >
             </div>
         </div>
     </div>
@@ -42,7 +42,7 @@ if (isset($_GET['pending_order_id'])) {
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <input type="text" name="seling_total_price" id="seling_total_price" class="form-control" >
+                <input type="number" name="seling_total_price" id="seling_total_price" class="form-control seling_total_price" >
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@ if (isset($_GET['pending_order_id'])) {
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <input type="text" name="pay_amount" id="pay_amount" class="form-control" required="">
+                <input type="number" name="pay_amount" id="pay_amount" class="form-control" required="">
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@ if (isset($_GET['pending_order_id'])) {
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <input type="text" name="due_amount" id="due_amount" class="form-control" required="">
+                <input type="number" name="due_amount" id="due_amount" class="form-control" required="" readonly="">
             </div>
         </div>
     </div>
@@ -92,7 +92,7 @@ if (isset($_GET['pending_order_id'])) {
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <input type="text" name="check_no" id="check_no" class="form-control" required="">
+                <input type="text" name="check_no" id="check_no" class="form-control" >
             </div>
         </div>
     </div>
@@ -105,7 +105,7 @@ if (isset($_GET['pending_order_id'])) {
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <input type="text" name="mobile_banking_name" id="mobile_banking_name" class="form-control" required="">
+                <input type="text" name="mobile_banking_name" id="mobile_banking_name" class="form-control" >
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@ if (isset($_GET['pending_order_id'])) {
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <input type="text" name="received_phone_number" id="received_phone_number" class="form-control" required="">
+                <input type="text" name="received_phone_number" id="received_phone_number" class="form-control" >
             </div>
         </div>
     </div>

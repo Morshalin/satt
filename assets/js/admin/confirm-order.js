@@ -145,3 +145,25 @@ var DatatableButtonsHtml5 = function() {
 document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
 });
+
+
+       $('#discount_ammount').keyup(function(){
+            var Totalamt = parseInt($('#Totalamt').val());
+            var discount_ammount = parseInt($('#discount_ammount').val());
+            var grandTotal = Totalamt - discount_ammount;
+            $('#grandTotal').val(grandTotal);
+            $('#dueAmmount').val(grandTotal);
+        });
+        $('#paidAmount').keyup(function(){
+            var grandTotal = parseInt($('#grandTotal').val());
+            var paidAmount = parseInt($('#paidAmount').val());
+            var dueAmmount = grandTotal - paidAmount;
+            $('#dueAmmount').val(dueAmmount);
+        });
+        $('#full_paid_tab').click(function(){
+            var grandTotal = parseInt($('#grandTotal').val());
+            var dueAmmount= parseInt($('#dueAmmount').val());
+            var due = grandTotal - dueAmmount;
+            $('#paidAmount').val(grandTotal);
+            $('#dueAmmount').val(due);
+        });
