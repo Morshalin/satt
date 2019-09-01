@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 		} else {
-			$query = "UPDATE satt_order_products SET cancel_reason = '$cancel_reason', roll = '1' WHERE id='$pending_order_id'";
+			$query = "UPDATE satt_order_products SET cancel_reason = '$cancel_reason', roll = '1', cancel_date = now() WHERE id='$pending_order_id'";
 			$result = $db->update($query);
 			if ($result != false) {
 				die(json_encode(['message' => ' Product Order Cancel Successfull']));

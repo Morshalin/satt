@@ -27,40 +27,51 @@ if (isset($_GET['pending_order_id'])) {
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-2">
-                <label for="course_name" class="col-form-label">Total Cost <span class="text-danger">*</span></label>
+                <label for="total_price" class="col-form-label">Product Total Price <span class="text-danger">*</span></label>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <input type="text" name="total_cost" id="total_cost" class="form-control" readonly="" >
-            </div>
-        </div>
-    </div>
-     <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-2">
-                <label for="course_name" class="col-form-label">Pay <span class="text-danger">*</span></label>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <input type="text" name="total_cost" id="total_cost" class="form-control" required="">
-            </div>
-        </div>
-    </div>
-     <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-2">
-                <label for="course_name" class="col-form-label">Due </label>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <input type="text" name="total_cost" id="total_cost" class="form-control" required="">
+                <input type="text" name="total_price" id="total_price" class="form-control" readonly="" >
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-2">
-                <label for="course_name" class="col-form-label">Payment Method <span class="text-danger">*</span></label>
+                <label for="seling_total_price" class="col-form-label">Selling Total Price <span class="text-danger">*</span></label>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input type="text" name="seling_total_price" id="seling_total_price" class="form-control" >
+            </div>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+                <label for="pay_amount" class="col-form-label">Pay <span class="text-danger">*</span></label>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input type="text" name="pay_amount" id="pay_amount" class="form-control" required="">
+            </div>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+                <label for="due_amount" class="col-form-label">Due </label>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input type="text" name="due_amount" id="due_amount" class="form-control" required="">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+                <label for="payment_method" class="col-form-label">Payment Method <span class="text-danger">*</span></label>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
@@ -116,7 +127,7 @@ if (isset($_GET['pending_order_id'])) {
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <input type="text" name="tx_id" id="tx_id" class="form-control" required="">
+                <input type="text" name="tx_id" id="tx_id" class="form-control" >
             </div>
         </div>
     </div>

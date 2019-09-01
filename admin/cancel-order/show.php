@@ -1,17 +1,17 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/pending-order', 'Pending Order');
-if (isset($_GET['pending_order_id'])) {
-    $pending_order_id = $_GET['pending_order_id'];
-    $query = "SELECT * FROM satt_order_products WHERE id='$pending_order_id'";
+Session::checkSession('admin', ADMIN_URL . '/cancel-order', 'Cancel Order');
+if (isset($_GET['cancel_order_id'])) {
+    $cancel_order_id = $_GET['cancel_order_id'];
+    $query = "SELECT * FROM satt_order_products WHERE id='$cancel_order_id'";
     $result = $db->select($query);
     if ($result) {
         $row = $result->fetch_assoc();
         $agent_id = $row['agent_id'];
     } else {
         http_response_code(500);
-        die(json_encode(['message' => 'Pending Order Not Found']));
+        die(json_encode(['message' => 'Cancel Order Not Found']));
     }
 
 } else {
@@ -55,13 +55,21 @@ if (isset($_GET['pending_order_id'])) {
                     <b class="col-md-4">Order Date :</b>
                     <h6 class="col-md-8"><?php echo $row['order_date']; ?></h6>
             </div>
+            <div class="row">
+                    <b class="col-md-4">Cancel Reason :</b>
+                    <h6 class="col-md-8"><?php echo $row['cancel_reason']; ?></h6>
+            </div>
+            <div class="row">
+                    <b class="col-md-4">Cancel Date :</b>
+                    <h6 class="col-md-8"><?php echo $row['cancel_date']; ?></h6>
+            </div>
         </div>
         <div class="col-lg-2"></div>
     </div>
 
 
 <?php 
-    if ($pending_order_id) {
+    if ($cancel_order_id) {
         $customer_id = $row['customer_id'];
         $query = "SELECT * FROM satt_customer_informations WHERE id='$customer_id'";
         $result = $db->select($query);

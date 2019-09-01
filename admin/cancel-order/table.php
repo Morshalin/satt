@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/pending-order');
+Session::checkSession('admin', ADMIN_URL . '/cancel-order');
 ## Read value
 $draw = $_GET['draw'];
 $row = $_GET['start'];
@@ -40,7 +40,7 @@ $totalRecordwithFilter = $records['allcount'];
 /*==============================================================================
 ## Fetch records
 =================================================================================*/
-$query = "SELECT * FROM satt_order_products WHERE status = '0' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$query = "SELECT * FROM satt_order_products WHERE status = '0' AND roll = '1' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $result = $db->select($query);
 $data = array();
 $i = 0;
@@ -58,24 +58,20 @@ if ($agent_id) {
     }
 }
 
-		$data[] = array(
-			"DT_RowIndex" => $i + 1,
-			"id" => $row['id'],
-      "customer_name" => '<strong>' . $row['customer_name'] . '</strong>',
-      "customer_number" => '<strong>' . $row['customer_number'] . '</strong>',
-      "agent_name" => '<strong>' . $agent_name . '</strong>',
-      "product_name" => '<strong>' . $row['product_name'] . '</strong>',
-      "pay_type" => '<strong>' . $row['pay_type'] . '</strong>',
-			"order_date" => '<strong>' . $row['order_date'] . '</strong>',
-			"action" => '
-        <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/pending-order/show.php?pending_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
+		    $data[] = array(
+			  "DT_RowIndex" => $i + 1,
+			  "id" => $row['id'],
+		      "customer_name" => '<strong>' . $row['customer_name'] . '</strong>',
+		      "customer_number" => '<strong>' . $row['customer_number'] . '</strong>',
+		      "agent_name" => '<strong>' . $agent_name . '</strong>',
+		      "product_name" => '<strong>' . $row['product_name'] . '</strong>',
+		      "pay_type" => '<strong>' . $row['pay_type'] . '</strong>',
+			  "order_date" => '<strong>' . $row['order_date'] . '</strong>',
+			  "cancel_reason" => '<strong>' . $fm->textShorten($row['cancel_reason'],15) . '</strong>',
+			  "cancel_date" => '<strong>' . $row['cancel_date'] . '</strong>',
+			  "action" => '
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/cancel-order/show.php?cancel_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
         ',
-			"status" => '
-        <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="status_loading_' . $row['id'] . '"  style="display: none">
-        <label class="form-check-label" id="status_' . $row['id'] . '" title="' . ($row['status'] == 1 ? 'Active' : 'InActive') . '" data-popup="tooltip-custom" data-placement="bottom">
-        <input type="checkbox" class="form-check-status-switchery" id="change_status" data-id="' . $row['id'] . '" data-status="' . $row['status'] . '" data-url="' . ADMIN_URL . '/pending-order/ajax.php?pending_order_id=' . $row['id'] . '&action=status&status=' . $row['status'] . '"' . ($row['status'] == 1 ? 'checked' : '') . ' data-fouc >
-        </label>
-        	',
 		);
 		$i++;
 	}
