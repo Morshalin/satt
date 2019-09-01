@@ -55,7 +55,7 @@ if (isset($_GET['software_details_id'])) {
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
-            <legend class="text-uppercase text-center font-size-m font-weight-bold  text-info">Software Basic Informantion </legend>
+            <legend class="text-uppercase font-weight-bold  text-info">Software Basic Informantion </legend>
             <div class="row">
                 <b class="col-md-4">Software Name :</b>
                 <h6 class="col-md-8"><?php echo ucwords($row['software_name']); ?></h6>
@@ -78,7 +78,15 @@ if (isset($_GET['software_details_id'])) {
 
                   <?php   } ?>
               </div><br/>
-              <div class="row">
+            <div class="row">
+                <b class="col-md-4">Create Date :</b>
+                <h6 class="col-md-8 text-primary"><?php echo $fm->formatDate($row['create_date']); ?></h6>
+            </div>
+             <div class="row">
+                <b class="col-md-4">Update Date :</b>
+                <h6 class="col-md-8 text-primary"><?php echo $fm->formatDate($row['update_date']); ?></h6>
+            </div>
+            <div class="row">
                 <b class="col-md-4">Short Features :</b>
                 <h6 class="col-md-8"><?php echo $row['short_feature']; ?></h6>
             </div>
@@ -100,7 +108,7 @@ if (isset($_GET['software_details_id'])) {
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-sm-8">
-        <legend class="text-uppercase text-center font-size-m font-weight-bold text-info">Software Price Details </legend>
+        <legend class="text-uppercase font-weight-bold text-info">Software Price Details </legend>
 
         <?php 
         // software price details section   
@@ -132,14 +140,8 @@ if (isset($_GET['software_details_id'])) {
                     <b class="col-md-8">Total Price :</b>
                     <h6 class="col-md-4"><?php echo $new_row_price['total_price']; ?> /=</h6>
                 </div>
-                <div class="row">
-                    <b class="col-md-8">Agent Commission (One Time Sell) :</b>
-                    <h6 class="col-md-4"><?php echo $new_row_price['agent_commission_one_time']; ?> /=</h6>
-                </div>
-                <div class="row">
-                    <b class="col-md-8">Agent Commission (Monthly) :</b>
-                    <h6 class="col-md-4"><?php echo $new_row_price['agent_commission_monthly']; ?> /=</h6>
-                </div>
+                
+                
                 <div class="row">
                     <b class="col-md-8">Maximum Discount Offer  :</b>
                     <h6 class="col-md-4"><?php echo $new_row_price['discount_offer']; ?> /=</h6>
