@@ -16,20 +16,20 @@
 
       <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/agents-customer" class="nav-link<?php active_page($data, 'agents-customer'); ?>"><i class="icon-users4"></i> Your Customer List</a></li>
 
-  <?php $nav_items_section_2 = ['available-products', 'sell-products', 'pending-orders']; ?>
+  <?php $nav_items_section_2 = ['available-products', 'available_product', 'pending_product','confirm_product']; ?>
 
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_2, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-cart5"></i> <span>Products Order And Confirmation</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_2, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
 
-      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/available-products" class="nav-link<?php active_page($data, 'available-products'); ?>">Available Products</a></li>
+    
 
-      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/sell-products" class="nav-link<?php active_page($data, 'sell-products'); ?>">Sell Products</a></li>
+      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/available_product" class="nav-link<?php active_page($data, 'available_product'); ?>">Sell Avaiable Software</a></li>
       
-      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/pending-orders" class="nav-link<?php active_page($data, 'pending-orders'); ?>">Pending Orders</a></li>
+      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/pending_product" class="nav-link<?php active_page($data, 'pending_product'); ?>">Pending Orders</a></li>
       
-      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/confirmed-orders" class="nav-link<?php active_page($data, 'confirmed-orders'); ?>">Confirmed Orders</a></li>
+      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/confirm_product" class="nav-link<?php active_page($data, 'confirm_product'); ?>">Confirmed Orders</a></li>
     </ul>
   </li>
 
