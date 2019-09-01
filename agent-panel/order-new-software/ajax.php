@@ -1,18 +1,8 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('customer-panel', CUSTOMER_URL . '/order-new-software', 'order-new-software');
-// if (isset($_GET['promote_product_id'])) {
-// 	$promote_product_id = $_GET['promote_product_id'];
-// 	if ($promote_product_id) {
-// 		$query = "SELECT * FROM promote_product WHERE id = '$promote_product_id'";
-// 		$result = $db->select($query);
-// 		if (!$result) {
-// 			http_response_code(500);
-// 			die(json_encode(['message' => 'Promote Products Not Found']));
-// 		}
-// 	}
-// }
+Session::checkSession('agent-panel', AGENT_URL . '/order-new-software', 'order-new-software');
+
 
 /*================================================================
 		Insert Data into Database
@@ -21,6 +11,8 @@ Session::checkSession('customer-panel', CUSTOMER_URL . '/order-new-software', 'o
 			$error = array();
 
 			$customer_id = $_POST['customer_id'];
+			$agent_id = $_POST['agent_id'];
+
 			$query = "SELECT * FROM satt_customer_informations WHERE id = '$customer_id'";
 			$get_customer = $db->select($query);
 			if ($get_customer) {
@@ -36,7 +28,10 @@ Session::checkSession('customer-panel', CUSTOMER_URL . '/order-new-software', 'o
 				$error['expected_name_software'] = 'Expected Name Field required';
 			}
 			if (!$documentation_note) {
-				$error['documentation_note'] = 'End Date Field required';
+				$error['documentation_note'] = 'Note Field required';
+			}
+			if (!$customer_id) {
+				$error['customer_id'] = 'Customer Field required';
 			}
 
 
@@ -51,6 +46,7 @@ Session::checkSession('customer-panel', CUSTOMER_URL . '/order-new-software', 'o
 			$unique_file = md5(time()); 
 			$unique_file= "feature-".substr($unique_file, 0,10).'.'.$file_extension;
 			$uploaded_file = 'software_feature/'.$unique_file;
+
 
 			$permitted = array('jpg','png','gif','jpeg','txt','doc','docx','ppt','pptx','csv','xls','xlsx','zip','rar','pdf');
 			if ($file_name) {
@@ -71,20 +67,11 @@ Session::checkSession('customer-panel', CUSTOMER_URL . '/order-new-software', 'o
 				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 			} else {
 
-				$query = "SELECT * FROM agent_client WHERE client_id = '$customer_id'";
-				$get_agent = $db->select($query);
-				if ($get_agent) {
-					$agent = $get_agent->fetch_assoc();
-					$agent_id = $agent['agent_id'];
-					$query = "SELECT * FROM agent_list WHERE id = '$agent_id'";
-					$get_agent_details = $db->select($query)->fetch_assoc();
-					$agent_name = $get_agent_details['name'];
-					$agent_phn = $get_agent_details['mobile_no'];
-				}else{
-					$agent_id = '';
-					$agent_name = '';
-					$agent_phn = '';
-				}
+
+				$query = "SELECT * FROM agent_list WHERE id = '$agent_id'";
+				$get_agent_details = $db->select($query)->fetch_assoc();
+				$agent_name = $get_agent_details['name'];
+				$agent_phn = $get_agent_details['mobile_no'];
 
 				$query = "INSERT INTO new_product_order 
 				(customer_id,customer_name,customer_phn,agent_id,agent_name,agent_phn,documentation_note,expected_name_software, order_date) 
@@ -94,7 +81,6 @@ Session::checkSession('customer-panel', CUSTOMER_URL . '/order-new-software', 'o
 				$last_id = $db->custom_insert($query);
 				if ($last_id) {
 			// multi Language insert
-
 					if ($file_name) {
 						if (move_uploaded_file($file_temp, '../../uploads/'.$uploaded_file)) {
 							$query  = "UPDATE new_product_order SET file_upload_documentation = '$uploaded_file' WHERE id = '$last_id'";

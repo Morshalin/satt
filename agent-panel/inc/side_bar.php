@@ -19,7 +19,7 @@
   <?php $nav_items_section_2 = ['available-products', 'available_product', 'pending_product','confirm_product']; ?>
 
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_2, $data['page_index']) ?>">
-    <a href="#" class="nav-link"><i class="icon-cart5"></i> <span>Products Order And Confirmation</span></a>
+    <a href="#" class="nav-link"><i class="icon-cart5"></i> <span>Exiating Software Order And Confirmation</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_2, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
 
@@ -30,6 +30,27 @@
       <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/pending_product" class="nav-link<?php active_page($data, 'pending_product'); ?>">Pending Orders</a></li>
       
       <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/confirm_product" class="nav-link<?php active_page($data, 'confirm_product'); ?>">Confirmed Orders</a></li>
+    </ul>
+  </li>
+
+
+
+
+
+  <?php $nav_items_section_5 = ['order-new-software', 'pending-new-software','confirm-new-software']; ?>
+  <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_5, $data['page_index']) ?>">
+    <a href="#" class="nav-link"><i class="icon-cart"></i> <span>New Software Order & Confirmation</span></a>
+
+    <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_5, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
+
+      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/order-new-software" class="nav-link<?php active_page($data, 'order-new-software'); ?>">Order New Software</a></li>
+
+      
+
+      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/pending-new-software" class="nav-link<?php active_page($data, 'pending-new-software'); ?>">Pending Orders</a></li>
+
+      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/confirm-new-softwaret" class="nav-link<?php active_page($data, 'confirm-new-software'); ?>">Confirmed Orders</a></li>
+
     </ul>
   </li>
 

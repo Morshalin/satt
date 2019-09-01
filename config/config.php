@@ -7,6 +7,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);*/
 
 //Default Function
+// DIE($_SERVER['DOCUMENT_ROOT']);
 
 function check_https() {
 	if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443) {
@@ -35,6 +36,7 @@ define('CUSTOMER_URL', BASE_URL . '/customer-panel');
 define('TITLE', 'Satt');
 define('FOOTER', 'Satt');
 define('TITLE_DIVIDER', ' | ');
+define('UPLOAD_PATH', $_SERVER['DOCUMENT_ROOT'].'/satt/uploads');
 
 //include Default_file
 include_once dirname(__FILE__) . '/../classes/Session.php';
