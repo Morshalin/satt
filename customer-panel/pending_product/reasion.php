@@ -5,11 +5,11 @@ ajax();
 
 
 <?php 
-    if (isset($_GET['product_id'])) {
-       $product_id = $_GET['product_id'];
+    if (isset($_GET['order_id'])) {
+       $order_id = $_GET['order_id'];
 ?>
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo CUSTOMER_URL; ?>/pending_product/ajax.php?product_id=<?php echo $product_id; ?>" id="content_form" method="post">
+<form class="form-validate-jquery" action="<?php echo CUSTOMER_URL; ?>/pending_product/ajax.php?order_id=<?php echo $order_id; ?>" id="content_form" method="post">
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Create Notes <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     <div class="row">

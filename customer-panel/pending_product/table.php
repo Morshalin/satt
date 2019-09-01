@@ -19,20 +19,20 @@ if ($columnName == 'DT_RowIndex') {
 =================================================================================*/
 $searchQuery = " ";
 if ($searchValue != '') {
-  $searchQuery = " and (id like '%" . $searchValue . "%' or software_name like '%" . $searchValue . "%' or software_status_name like '%" . $searchValue . "%' or create_date like '%" . $searchValue . "%' or end_date like '%" . $searchValue . "%') ";
+  $searchQuery = " and (id like '%" . $searchValue . "%' or product_name like '%" . $searchValue . "%')";
 }
 /*==============================================================================
 ## Total number of records without filtering
 =================================================================================*/
 
-$sel = $db->select("select count(*) as allcount from software_details");
+$sel = $db->select("select count(*) as allcount from satt_order_products");
 $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['allcount'];
 
 /*==============================================================================
 ## Total number of record with filtering
 =================================================================================*/
-$sel = $db->select("select count(*) as allcount from software_details WHERE 1 " . $searchQuery);
+$sel = $db->select("select count(*) as allcount from satt_order_products WHERE 1 " . $searchQuery);
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
@@ -67,10 +67,10 @@ if ($result) {
               <i class="icon-menu9"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-              <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/pending_product/show.php?product_id=' . $row['product_id'] . '"><i class="icon-eye"></i> View</span>
+              <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/pending_product/show.php?order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
 
 
-             <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/pending_product/reasion.php?product_id=' . $row['id'] . '"><i class="icon-trash"></i> Cancel Product</span>
+             <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/pending_product/reasion.php?order_id=' . $row['id'] . '"><i class="icon-cross"></i> Cancel Product</span>
             </div>
           </div>
         </div>

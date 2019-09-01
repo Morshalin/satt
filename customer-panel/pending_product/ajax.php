@@ -2,10 +2,10 @@
 require_once '../../config/config.php';
 ajax();
  Session::checkSession('customer-panel', CUSTOMER_URL . '/pending_product','Pending Product');
-if (isset($_GET['product_id'])) {
-	$product_id = $_GET['product_id'];
-	if ($product_id) {
-		$query = "SELECT * FROM satt_order_products WHERE id = '$product_id'";
+if (isset($_GET['order_id'])) {
+	$order_id = $_GET['order_id'];
+	if ($order_id) {
+		$query = "SELECT * FROM satt_order_products WHERE id = '$order_id'";
 		$result = $db->select($query);
 		if (!$result) {
 			$row = $result->fetch_assoc();
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$query = "UPDATE satt_order_products SET 
 		roll = '$roll', 
 		cancel_reason='$cancel_reason'
-		WHERE id = '$product_id'";
+		WHERE id = '$order_id'";
 		$result = $db->update($query);
 			if ($result != false) {
 				die(json_encode(['message' => 'Order Cancel Successfuly']));
