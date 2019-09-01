@@ -70,9 +70,6 @@ if ($result){
 
               <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/confirm_product/user_manual.php?product_id=' . $row['product_id'] . '"><i class="icon-tv"></i> user Manual </span>
 
-
-  
-
             </div>
           </div>
         </div>

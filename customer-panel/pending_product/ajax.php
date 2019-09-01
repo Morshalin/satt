@@ -30,8 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
 		$query = "UPDATE satt_order_products SET 
-		roll = '$roll', 
-		cancel_reason='$cancel_reason'
+		roll = '$roll',
+		cancel_reason='$cancel_reason',
+		cancel_date = now()
 		WHERE id = '$order_id'";
 		$result = $db->update($query);
 			if ($result != false) {
