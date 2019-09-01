@@ -58,7 +58,7 @@ if (isset($_GET['software_details_id'])) {
       <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-sm-8">
-        <legend class="text-uppercase text-center font-size-m font-weight-bold">Software Price Details </legend>
+        <legend class="text-uppercase text-center font-size-m font-weight-bold text-info">Software Price Details </legend>
 
         <?php 
         // software price details section   
@@ -168,20 +168,12 @@ if (isset($_GET['software_details_id'])) {
                     $query = "SELECT * FROM agent_list WHERE id = '$agent_id'";
                     $get_agent = $db->select($query);
                     if ($get_agent) {
-                        $get_agent_info = $get_agent->fetch_assoc();
-                        $agent_name = $get_agent_info['name'];
-                        $agent_up = $get_agent_info['interested_up'];
-                    }
-             ?>
-                <option value="<?php echo $agent_id; ?>"><?php echo 'Name: '.$agent_name.',  Area:'.$agent_up; ?></option>
-                <?php } }else{
+                        while ($get_agent_info = $get_agent->fetch_assoc()) { ?>
+                           <option value="<?php echo $agent_id; ?>"><?php echo 'Name: '.$get_agent_info['name'].',  Area:'.$get_agent_info['interested_up']; ?></option>
+                       <?php } }  } } else{
                     ?>
                      <option value="0">No Agent Assigned</option>
-                    <?php
-                }
-
-
-                 ?>
+                    <?php } ?>
             </select>
         </div>
     </div>

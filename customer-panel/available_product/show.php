@@ -55,7 +55,7 @@ if (isset($_GET['software_details_id'])) {
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
-            <legend class="text-uppercase text-center font-size-m font-weight-bold">Software Basic Informantion </legend>
+            <legend class="text-uppercase text-center font-size-m font-weight-bold  text-info">Software Basic Informantion </legend>
             <div class="row">
                 <b class="col-md-4">Software Name :</b>
                 <h6 class="col-md-8"><?php echo ucwords($row['software_name']); ?></h6>
@@ -100,7 +100,7 @@ if (isset($_GET['software_details_id'])) {
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-sm-8">
-        <legend class="text-uppercase text-center font-size-m font-weight-bold">Software Price Details </legend>
+        <legend class="text-uppercase text-center font-size-m font-weight-bold text-info">Software Price Details </legend>
 
         <?php 
         // software price details section   
