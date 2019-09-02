@@ -21,7 +21,7 @@ if (isset($_GET['new_order_id'])) {
 ?>
 
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/pending-order/ajax_confirm_order.php?new_order_id=<?php echo $new_order_id; ?>" id="content_form" method="post">
+<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/pending-new-software/ajax_confirm_order.php?new_order_id=<?php echo $new_order_id; ?>" id="content_form" method="post">
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Confirm Order <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
    
@@ -85,6 +85,20 @@ if (isset($_GET['new_order_id'])) {
   <div class="row">
     <div class="col-lg-2"></div>
     <div class="col-lg-2">
+        <label for="seling_total_price" class="col-form-label">Development Start Date <span class="text-danger">*</span></label>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <input type="text" name="development_start_date" id="development_start_date" class="form-control date" required="">
+        </div>
+    </div>
+</div>
+
+
+
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-2">
         <label for="seling_total_price" class="col-form-label">Expected Dead Line <span class="text-danger">*</span></label>
     </div>
     <div class="col-lg-6">
@@ -106,6 +120,9 @@ if (isset($_GET['new_order_id'])) {
         <div class="form-group">
             <select name="selling_method" id="selling_method" class="form-control" required="">
                 <option value="">Please Select A Method</option>
+                <option value="monthly_pay"> Monthly Pay</option>
+                <option value="yearly_pay">Yearly Pay</option>
+                <option value="direct_sell">Direct Sell</option>
             </select>
         </div>
     </div>
@@ -119,22 +136,36 @@ if (isset($_GET['new_order_id'])) {
     </div>
     <div class="col-lg-6">
         <div class="form-group">
-            <input type="number" min="0" name="installation_charge" id="installation_charge" placeholder="Provide Installation Charge" class="form-control">
+            <input type="number" min="0" name="installation_charge" id="installation_charge" placeholder="Provide Installation Charge" class="form-control" required="">
         </div>
     </div>
 </div>
 
-<div class="row">
+<?php 
+
+    if ($row['agent_id'] != '') {
+        $display_status = '';
+        $required = 'required';
+    }else{
+        $display_status = 'display: none';
+         $required = '';
+    }
+
+
+ ?>
+<div class="row" style="<?php echo $display_status ?>">
     <div class="col-lg-2"></div>
     <div class="col-lg-2">
         <label for="seling_total_price" class="col-form-label">Agent Comission <span class="text-danger">*</span></label>
     </div>
     <div class="col-lg-6">
         <div class="form-group">
-            <input type="number" min="0" name="agent_comission" id="agent_comission" placeholder="Provide Agent Comission" class="form-control">
+            <input type="number" min="0" name="agent_comission" id="agent_comission" placeholder="Provide Agent Comission" class="form-control" <?php echo $required; ?>>
         </div>
     </div>
 </div>
+
+
 
 <div class="row">
     <div class="col-lg-2"></div>
