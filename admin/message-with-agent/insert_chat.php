@@ -6,7 +6,7 @@ require_once '../../config/config.php';
 if (isset($_POST['to_user_id'])) {
 	$to_user_id = $_POST['to_user_id'];
 	$admin_id = $_POST['admin_id'];
-	$chat_message = $_POST['chat_message'];
+	$chat_message = $fm->validation($_POST['chat_message']);
 
 	$from_whom = 'admin';
 	$to_whom = 'agent';

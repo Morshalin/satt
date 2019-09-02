@@ -1,12 +1,12 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('admin', ADMIN_URL . '/pending-new-software','Pending Product');
+  Session::checkSession('agent-panel', AGENT_URL . '/your-goals','Your Goals');
   $data = array();
-  $data['page_title'] = 'Pending Product';
+  $data['page_title'] = 'Your Goals';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'pending-new-software';
+  $data['page_index'] = 'your-goals';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/admin/pending-new-software'];
+  $data['page_js'] = ['assets/js/agent-panel/your-goals'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
@@ -45,18 +45,12 @@
   			<img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
   		</div> -->
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/pending-new-software/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo AGENT_URL; ?>/your-goals/table.php">
   				<thead>
   					<tr>
   						<th>#</th>
-              <th>Software Name</th>
-              <th>Customer Name</th>
-              <th>Customer Phn No</th>
-              <th>Agent Name</th>
-  						<th>Agent Phn No</th>
-              <th>Order Date</th>
-  						<th>Status</th>
-              <th>Action</th>
+              <th>Month Name</th>
+              <th>Target Amount (taka)</th>
   					</tr>
   				</thead>
   				<tbody>

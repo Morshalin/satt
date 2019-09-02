@@ -31,7 +31,7 @@ if (isset($_GET['pending_order_id'])) {
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <input type="number" name="total_price" id="total_price" class="form-control" ="" >
+                <input type="number" name="total_price" id="total_price" class="form-control"  >
             </div>
         </div>
     </div>
