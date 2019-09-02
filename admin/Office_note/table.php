@@ -54,7 +54,6 @@ if ($result) {
 			"id" => $row['id'],
 			"name" => '<strong>'. $row['name'] . '</strong>',
 			"number" => $row['number'],
-			"note" => $row['note'],
       "introduction_date" => $fm->formatDate($row['introduction_date']),
       "last_contacted_date" => $fm->formatDate($row['last_contacted_date']),
 			"action" => '
@@ -66,9 +65,12 @@ if ($result) {
           	</a>
           	<div class="dropdown-menu dropdown-menu-right">
 
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/next_contacted.php?Office_note_id=' . $row['id'] . '"><i class="icon-eye"></i> Next Contacted</span>
+
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/show.php?Office_note_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
 
           		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/edit.php?Office_note_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
+
           		<span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/Office_note/ajax.php?Office_note_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
           	</div>
           </div>
