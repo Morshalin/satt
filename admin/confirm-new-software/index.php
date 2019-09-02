@@ -1,8 +1,8 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('admin', ADMIN_URL . '/confirm-new-software','Pending Product');
+  Session::checkSession('admin', ADMIN_URL . '/confirm-new-software','Confrimed Product');
   $data = array();
-  $data['page_title'] = 'Pending Product';
+  $data['page_title'] = 'Confrimed Product';
   $data['element'] = ['modal' => 'lg'];
   $data['page_index'] = 'confirm-new-software';
   $data['page_css'] = [];

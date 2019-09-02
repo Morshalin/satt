@@ -79,10 +79,8 @@ if ($result) {
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/confirm-new-software/show.php?new_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
 
 
-             <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL .'/confirm-new-software/confirm_order.php?new_order_id='.$row['id'].'" style = "color:green"><i class="icon-checkmark4"></i> Confirm Order</span>
+             <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL .'/confirm-new-software/deliver_order.php?new_order_id='.$row['id'].'" style = "color:green"><i class="icon-checkmark4"></i> Deliver Order</span>
 
-
-             <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL .'/confirm-new-software/cancel_order.php?new_order_id='.$row['id'].'" style = "color:red"><i class="icon-cancel-square"></i> Cancel Order</span>
             </div>
           </div>
         </div>

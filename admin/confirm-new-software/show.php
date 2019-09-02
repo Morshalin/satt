@@ -243,7 +243,7 @@ if (isset($_GET['new_order_id'])) {
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
-            <legend class="text-uppercase text-center font-size-m font-weight-bold">Software Cost & Pay Information</legend>
+            <legend class="text-uppercase text-center font-size-m font-weight-bold">Software Cost Information</legend>
             <div class="row">
                 <b class="col-md-4">Selling Method :</b>
                 <?php 
@@ -262,10 +262,72 @@ if (isset($_GET['new_order_id'])) {
                 <b class="col-md-4">Yearly Renew Charge :</b>
                 <h6 class="col-md-8"> <?php echo $row['yearly_renew_charge']; ?> /=</h6>
             </div>
+
+            <div class="row">
+                <b class="col-md-4">Software Sell Price :</b>
+                <h6 class="col-md-8"> <?php echo $row['sell_price']; ?> /=</h6>
+            </div>
               
 
         </div>
         <div class="col-lg-2"></div>
+    </div>
+   
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <hr>
+    <legend class="text-uppercase text-center font-size-m font-weight-bold text-danger">Payment History </legend>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Payment Method</th>
+                      <th scope="col">Check No</th>
+                      <th scope="col">Mobile banking Name</th>
+                      <th scope="col">Received Phone Number</th>
+                      <th scope="col">Tx ID</th>
+                      <th scope="col">Pay Amount</th>
+                      <th scope="col">Pay Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+<?php 
+    if ($order_id) {
+        $pay_query = "SELECT * FROM new_product_pay WHERE new_product_order_id='$order_id' order by id desc";
+        $pay_result = $db->select($pay_query);
+        if ($pay_result) {
+            $i = 0;
+            $total_pay = 0;
+            while ( $pay_row = $pay_result->fetch_assoc()) { 
+                $i++;
+                $total_pay +=  $pay_row['pay_amount'];
+                ?>
+                <tr>
+                      <th scope="row"><?php echo $i; ?></th>
+                      <td><?php echo $pay_row['payment_type']; ?></td>
+                      <td><?php echo $pay_row['check_numer']; ?></td>
+                      <td><?php echo $pay_row['mobile_banking_name']; ?></td>
+                      <td><?php echo $pay_row['received_phone_number']; ?></td>
+                      <td><?php echo $pay_row['tx_id']; ?></td>
+                      <td><?php echo $pay_row['pay_amount']; ?></td>
+                      <td><?php echo $pay_row['date']; ?></td>
+                    </tr>
+         <?php  }
+        }
+    }
+ ?>
+                   <tr>
+                      <th colspan="6" class="text-right" >Total Pay :</th>
+                      <th colspan="2" ><?php echo $total_pay; ?></th>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <br ><br />
 
