@@ -74,20 +74,20 @@ var DatatableButtonsHtml5 = function() {
                 // { data: 'checkbox', name: 'checkbox' },
                 {
                     data: 'DT_RowIndex'
-                }, {
+                },{
                     data: 'product_name'
-                },  {
+                }, {
                     data: 'customer_name'
                 }, {
                     data: 'customer_number'
                 }, {
                     data: 'agent_name'
-                },{
+                },  {
                     data: 'pay_type'
                 }, {
                     data: 'order_date'
                 }, {
-                    data: 'status'
+                    data: 'delivery_date'
                 },{
                     data: 'action'
                 }
@@ -179,23 +179,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 $(document).on('keyup','#pay_amount',function(){
-    var seling_total_price = parseInt($('#seling_total_price').val());
+    var total_due = parseInt($('#total_due').val());
     var pay_amount = parseInt($('#pay_amount').val());
-    var due_amount = seling_total_price - pay_amount;
+    var due_amount = total_due - pay_amount;
     $('#due_amount').val(due_amount);
 
-    if (pay_amount > seling_total_price) {
-        alert("Pay amount can't gatter then Selling price");
+    if (pay_amount > total_due) {
+        alert("New Pay amount can't gatter then Total Due");
        $('#pay_amount').val('');
        $('#due_amount').val('');
     }
 });
-
-$(document).on('keyup','#seling_total_price',function(){
-    var seling_total_price = parseInt($('#seling_total_price').val());
-    var pay_amount = parseInt($('#pay_amount').val());
-    var due_amount = seling_total_price - pay_amount;
-    $('#due_amount').val(due_amount);
-});
-
-
