@@ -75,13 +75,13 @@ var DatatableButtonsHtml5 = function() {
                 {
                     data: 'DT_RowIndex'
                 }, {
+                    data: 'product_name'
+                }, {
                     data: 'customer_name'
                 }, {
                     data: 'customer_number'
                 }, {
                     data: 'agent_name'
-                }, {
-                    data: 'product_name'
                 }, {
                     data: 'pay_type'
                 }, {
@@ -147,23 +147,46 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-       $('#discount_ammount').keyup(function(){
-            var Totalamt = parseInt($('#Totalamt').val());
-            var discount_ammount = parseInt($('#discount_ammount').val());
-            var grandTotal = Totalamt - discount_ammount;
-            $('#grandTotal').val(grandTotal);
-            $('#dueAmmount').val(grandTotal);
-        });
-        $('#paidAmount').keyup(function(){
-            var grandTotal = parseInt($('#grandTotal').val());
-            var paidAmount = parseInt($('#paidAmount').val());
-            var dueAmmount = grandTotal - paidAmount;
-            $('#dueAmmount').val(dueAmmount);
-        });
-        $('#full_paid_tab').click(function(){
-            var grandTotal = parseInt($('#grandTotal').val());
-            var dueAmmount= parseInt($('#dueAmmount').val());
-            var due = grandTotal - dueAmmount;
-            $('#paidAmount').val(grandTotal);
-            $('#dueAmmount').val(due);
-        });
+
+    $(document).on('change','#payment_method', function(){
+        var payment_method = $("#payment_method").val();
+        if (payment_method == 'check') {
+            $("#check_method").show(500);
+            $("#check_no").attr("required",true);
+        }else{
+            $("#check_method").hide(500);
+            $("#check_no").val("");
+            $("#check_no").attr("required",false);
+
+        }
+    });
+
+       $(document).on('change','#payment_method', function(){
+        var payment_method = $("#payment_method").val();
+        if (payment_method == 'mobile') {
+            $("#mobile_method").show(500);
+            $("#mobile_banking_name").attr("required",true);
+            $("#received_phone_number").attr("required",true);
+        }else{
+            $("#mobile_method").hide(500);
+            $("#mobile_banking_name").val("");
+            $("#received_phone_number").val("");
+            $("#tx_id").val("");
+            $("#mobile_banking_name").attr("required",false);
+            $("#received_phone_number").attr("required",false);
+        }
+    })
+
+
+$(document).on('keyup','#pay_amount',function(){
+    var total_due = parseInt($('#total_due').val());
+    var pay_amount = parseInt($('#pay_amount').val());
+    var due_amount = total_due - pay_amount;
+    $('#due_amount').val(due_amount);
+
+    if (pay_amount > total_due) {
+        alert("New Pay amount can't gatter then Total Due");
+       $('#pay_amount').val('');
+       $('#due_amount').val('');
+    }
+});

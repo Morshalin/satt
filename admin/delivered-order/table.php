@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/confirm-order');
+Session::checkSession('admin', ADMIN_URL . '/delivered-order');
 ## Read value
 $draw = $_GET['draw'];
 $row = $_GET['start'];
@@ -40,7 +40,7 @@ $totalRecordwithFilter = $records['allcount'];
 /*==============================================================================
 ## Fetch records
 =================================================================================*/
-$query = "SELECT * FROM satt_order_products WHERE status = '1' AND delivery_status = '0' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$query = "SELECT * FROM satt_order_products WHERE status = '1' AND delivery_status = '1' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 
 $result = $db->select($query);
 $data = array();
@@ -68,7 +68,7 @@ if ($agent_id) {
       "product_name" => '<strong>' . $row['product_name'] . '</strong>',
       "pay_type" => '<strong>' . $row['pay_type'] . '</strong>',
 			"order_date" => '<strong>' . $row['order_date'] . '</strong>',
-			"status" => '<span class="badge badge-success ">Confirmed</span>',
+			"delivery_date" => '<strong>' . $row['delivery_date'] . '</strong>',
 			"action" => '
 
 			        <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
@@ -78,9 +78,8 @@ if ($agent_id) {
               <i class="icon-menu9"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-        		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/confirm-order/show.php?confirm_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
-              <span class="dropdown-item text-info" id="content_managment" data-url="' . ADMIN_URL . '/confirm-order/pay-order.php?pay_order_id=' . $row['id'] . '"><i class="icon-paypal2"></i> Pay</span>
-              <span class="dropdown-item text-success" id="content_managment" data-url="' . ADMIN_URL . '/confirm-order/deliver-order.php?deliver_order_id=' . $row['id'] . '"><i class="icon-truck"></i> Deliver</span>
+        		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/delivered-order/show.php?confirm_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
+              <span class="dropdown-item text-info" id="content_managment" data-url="' . ADMIN_URL . '/delivered-order/pay-order.php?pay_order_id=' . $row['id'] . '"><i class="icon-paypal2"></i> Pay</span>
             </div>
           </div>
         </div>

@@ -59,6 +59,18 @@ if (isset($_GET['confirm_order_id'])) {
                     <b class="col-md-4">Order Confirm Date :</b>
                     <h6 class="col-md-8"><?php echo $row['confirm_date']; ?></h6>
             </div>
+            <div class="row">
+                    <b class="col-md-4">Order Delivered Date :</b>
+                    <h6 class="col-md-8"><?php echo $row['delivery_date']; ?></h6>
+            </div>
+            <div class="row">
+                    <b class="col-md-4">Cpanel Username :</b>
+                    <h6 class="col-md-8"><?php echo $row['cpanel_user']; ?></h6>
+            </div>
+            <div class="row">
+                    <b class="col-md-4">Cpanel Password :</b>
+                    <h6 class="col-md-8"><?php echo $row['cpanel_pass']; ?></h6>
+            </div>
         </div>
         <div class="col-lg-2"></div>
     </div>
@@ -145,5 +157,59 @@ if (isset($_GET['confirm_order_id'])) {
         <div class="col-lg-2"></div>
     </div>
     <?php } ?>
+
+        <div class="row">
+        <div class="col-lg-12">
+            <hr>
+    <legend class="text-uppercase text-center font-size-m font-weight-bold">Payment History </legend>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Payment Method</th>
+                      <th scope="col">Check No</th>
+                      <th scope="col">Mobile banking Name</th>
+                      <th scope="col">Received Phone Number</th>
+                      <th scope="col">Tx ID</th>
+                      <th scope="col">Pay Amount</th>
+                      <th scope="col">Pay Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+<?php 
+    if ($confirm_order_id) {
+        $pay_query = "SELECT * FROM existing_product_pay WHERE product_order_id='$confirm_order_id'";
+        $pay_result = $db->select($pay_query);
+        if ($pay_result) {
+            $i = 0;
+            $total_pay = 0;
+            while ( $pay_row = $pay_result->fetch_assoc()) { 
+                $i++;
+                $total_pay +=  $pay_row['pay_amount'];
+                ?>
+                <tr>
+                      <th scope="row"><?php echo $i; ?></th>
+                      <td><?php echo $pay_row['payment_method']; ?></td>
+                      <td><?php echo $pay_row['check_no']; ?></td>
+                      <td><?php echo $pay_row['mobile_banking_name']; ?></td>
+                      <td><?php echo $pay_row['received_phone_number']; ?></td>
+                      <td><?php echo $pay_row['tx_id']; ?></td>
+                      <td><?php echo $pay_row['pay_amount']; ?></td>
+                      <td><?php echo $pay_row['pay_date']; ?></td>
+                    </tr>
+         <?php  }
+        }
+    }
+ ?>
+                   <tr>
+                      <th colspan="6" class="text-right" >Total Pay :</th>
+                      <th colspan="2" ><?php echo $total_pay; ?></th>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </fieldset>
 <!-- /login form -->

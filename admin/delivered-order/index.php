@@ -48,13 +48,13 @@
   				<thead>
   					<tr>
   						<th>#</th>
+              <th>Product Name</th>
               <th>Customer Name</th>
               <th>Customer Number</th>
               <th>Agent Name</th>
-              <th>Product Name</th>
               <th>Pay Type</th>
               <th>Order Date</th>
-  						<th>Confirmation Status</th>
+  						<th>Delivered Date</th>
   						<th>Action</th>
   					</tr>
   				</thead>
