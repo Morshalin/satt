@@ -179,7 +179,7 @@ if (isset($_GET['confirm_order_id'])) {
                   <tbody>
 <?php 
     if ($confirm_order_id) {
-        $pay_query = "SELECT * FROM existing_product_pay WHERE product_order_id='$confirm_order_id'";
+        $pay_query = "SELECT * FROM existing_product_pay WHERE product_order_id='$confirm_order_id'  order by id desc";
         $pay_result = $db->select($pay_query);
         if ($pay_result) {
             $i = 0;

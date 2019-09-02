@@ -25,7 +25,7 @@ if (isset($_GET['agent_id'])) {
             <div class="form-group">
                 <label for="software_status" class="col-form-label">Type The Note Here  <span class="text-danger">*</span></label>
                
-                <textarea name="note" id="note"class="form-control" cols="30" rows="10"></textarea>
+                <textarea name="note" id="note" class="form-control" cols="30" rows="10"></textarea>
             </div>
         </div>
         <div class="col-lg-4"></div>

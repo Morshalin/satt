@@ -630,3 +630,19 @@ function makeSamePresent(permanent_id,present_id){
     console.log(permanent);
   }
 }
+
+$(document).ready(function(){
+  $(document).on("keyup","#content_form", function(){
+            var password = $("#password").val();
+            console.log(password);
+            var confirm_password = $("#confirm_password").val();
+        if (confirm_password) {
+            if (password == confirm_password) {
+            $("#success").html("<strong class='text-success'>Right Confirm password</strong>");
+            }else{
+            $("#success").html("<strong class='text-danger'>Wrong Confirm password</strong>");
+            }
+        }
+      });
+});
+        
