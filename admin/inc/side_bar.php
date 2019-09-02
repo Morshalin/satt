@@ -62,7 +62,11 @@
 
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/pending-new-software" class="nav-link<?php active_page($data, 'pending-new-software'); ?>">Pending Orders</a></li>
 
-      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/confirm-new-softwaret" class="nav-link<?php active_page($data, 'confirm-new-software'); ?>">Confirmed Orders</a></li>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/confirm-new-software" class="nav-link<?php active_page($data, 'confirm-new-software'); ?>">Confirmed Orders</a></li>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/delivered-new-order" class="nav-link<?php active_page($data, 'delivered-new-order'); ?>">Delivered Orders</a></li>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/cancel-new-order" class="nav-link<?php active_page($data, 'cancel-new-order'); ?>">Canceled Orders</a></li>
 
     </ul>
   </li>

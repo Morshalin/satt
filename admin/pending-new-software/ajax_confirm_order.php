@@ -75,6 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			SET 
 			sell_price = '$sell_price',
 			selling_method = '$selling_method',
+			installation_charge = '$installation_charge',
+			agent_comission = '$agent_comission',
+			yearly_renew_charge = '$yearly_renew_charge',
 			confirmation_status = '1',
 			confirm_date = now(),
 			development_start_date = '$development_start_date',
