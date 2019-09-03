@@ -28,13 +28,13 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="start_date" class="col-form-label">Promote Start Date <span class="text-danger">*</span></label>
-                <input type="text" name="start_date" id="start_date" class="form-control date" placeholder="Select Start Date" required autofocus value="">
+                <input type="text" name="start_date" id="start_date" class="form-control date">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="end_date" class="col-form-label">Promote End Date</label>
-                <input type="text" name="end_date" id="end_date" class="form-control date" placeholder="Select End Date " required autofocus value="">
+                <input type="text" name="end_date" id="end_date" class="form-control date">
             </div>
         </div>
         <div class="col-lg-4">
