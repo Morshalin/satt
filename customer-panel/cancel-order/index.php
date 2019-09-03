@@ -1,6 +1,6 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('admin', ADMIN_URL.'/cancel-order', 'Cancel Order');
+  Session::checkSession('customer-panel', CUSTOMER_URL.'/cancel-order', 'Cancel Order');
   $data = array();
   $data['page_title'] = 'Cancel Order';
   $data['element'] = ['modal' => 'lg'];
@@ -44,7 +44,7 @@
   			<img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
   		</div> -->
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/cancel-order/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo CUSTOMER_URL; ?>/cancel-order/table.php">
   				<thead>
   					<tr>
   						<th>#</th>

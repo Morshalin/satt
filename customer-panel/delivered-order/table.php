@@ -40,7 +40,8 @@ $totalRecordwithFilter = $records['allcount'];
 /*==============================================================================
 ## Fetch records
 =================================================================================*/
-$query = "SELECT * FROM satt_order_products WHERE status = '1' AND delivery_status = '1' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$customer_id = $user['id'];
+$query = "SELECT * FROM satt_order_products WHERE status = '1' AND delivery_status = '1' and customer_id = '$customer_id' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 
 $result = $db->select($query);
 $data = array();
@@ -79,7 +80,6 @@ if ($agent_id) {
             </a>
             <div class="dropdown-menu dropdown-menu-right">
         		<span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/delivered-order/show.php?confirm_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
-              <span class="dropdown-item text-info" id="content_managment" data-url="' . CUSTOMER_URL . '/delivered-order/pay-order.php?pay_order_id=' . $row['id'] . '"><i class="icon-paypal2"></i> Pay</span>
             </div>
           </div>
         </div>
