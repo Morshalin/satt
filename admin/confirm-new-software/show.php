@@ -158,6 +158,11 @@ if (isset($_GET['new_order_id'])) {
                     <b class="col-md-8">Agent Comission:</b>
                     <h6 class="col-md-4"><?php echo $row['agent_comission']; ?> /= </h6>
                 </div>
+
+                <div class="row text-danger">
+                    <b class="col-md-8">Agent Selling Point:</b>
+                    <h6 class="col-md-4"><?php echo $row['agent_point']; ?> </h6>
+                </div>
                 
                 
 
