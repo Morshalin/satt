@@ -101,10 +101,6 @@ if (isset($_GET['Office_note_id'])) {
         <td class="font-weight-bold">Last Contact Date</td>
         <td><?php echo $fm->formatDate($row['last_contacted_date']); ?></td>
     </tr>
-    <tr>
-        <td class="font-weight-bold">Customer Note</td>
-        <td><?php echo $row['note']?></td>
-    </tr>
 </table>
 <br >
 

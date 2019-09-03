@@ -16,7 +16,7 @@
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="facebook_name" class="col-form-label">Facebook Name<span class="text-danger">*</span></label>
+                <label for="facebook_name" class="col-form-label">Facebook Name<span class="text-danger"></span></label>
                 <input type="text" name="facebook_name" id="facebook_name" class="form-control" placeholder="Facebook Name">
 
             </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="email" class="col-form-label">Valid Email Address<span class="text-danger">*</span></label>
+                <label for="email" class="col-form-label">Valid Email Address<span class="text-danger"></span></label>
                 <input type="text" name="email" id="email" class="form-control" placeholder="Valid Email Address">
 
             </div>
@@ -58,10 +58,10 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-              <label for="customer_reference" class="col-form-label">Select Customer Reference<span class="text-danger">*</span></label>
+              <label for="customer_reference" class="col-form-label">Select Customer Type<span class="text-danger"></span></label>
               <select class="form-control form-control-lg select" id="customer_reference" name="customer_reference">
                  <option>Customer Reference</option>
-                <option value="Not Now">Not Now</option>
+                <option value="">Select One</option>
                 <?php 
                      $query = "SELECT * FROM satt_customer_type where status=1";
                     $result = $db->select($query);
@@ -82,8 +82,7 @@
             <div class="form-group">
               <label for="progressive_state">Select Progress State</label>
               <select class="form-control form-control-lg select" id="progressive_state" name="progressive_state">
-                 <option>Progress State</option>
-                <option value="Not Now">Not Now</option>
+                <option value="">Select One</option>
                 <?php 
                      $query = "SELECT * FROM satt_customer_progres where status=1";
                     $result = $db->select($query);
@@ -105,7 +104,7 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-              <label for="interested_services">Select Interested Service</label>
+              <label for="interested_services">Select Interested Service<span class="text-danger">*</span></label>
               <select multiple="multiple" class="form-control select" id="interested_services" name="interested_services[]">
                 <option value=""></option>
                 <?php 
@@ -126,7 +125,7 @@
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="institute_type" class="col-form-label">Institute Category<span class="text-danger">*</span></label>
+                <label for="institute_type" class="col-form-label">Institute Category<span class="text-danger"></span></label>
                 <input type="text" name="institute_type" id="institute_type" class="form-control" placeholder="Institute Category">
 
             </div>
@@ -138,7 +137,7 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="institute_name" class="col-form-label">Institute Name<span class="text-danger">*</span></label>
+                <label for="institute_name" class="col-form-label">Institute Name<span class="text-danger"></span></label>
                 <input type="text" name="institute_name" id="institute_name" class="form-control" placeholder="Interested Services">
             </div>
         </div>
@@ -152,14 +151,29 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <div class="form-group">
-                <label for="institute_district" class="col-form-label">Institute District<span class="text-danger">*</span></label>
-                <input type="text" name="institute_district" id="institute_district" class="form-control" placeholder="Institute District">
-            </div>
+        <div class="form-group">
+              <label for="institute_district">Select Districts </label>
+              <select class="form-control select" id="institute_district" name="institute_district">
+                <option value="">Select One</option>
+                <?php 
+                $query = "SELECT * FROM satt_districts";
+                $result = $db->select($query);
+                if ($result) {
+                    while ($row = $result->fetch_assoc()) { ?>
+                    <option value="<?php echo $row['name'] ?>"><?php echo $row['name']; ?> </option>
+                    <?php  }
+                    $row = $result->fetch_assoc();
+                } else {
+                    http_response_code(500);
+                    die(json_encode(['message' => 'Category  Not Found']));
+                }
+                ?>
+            </select>
         </div>
+    </div>
          <div class="col-lg-6">
             <div class="form-group">
-              <label for="software_category">Select Software Category</label>
+              <label for="software_category">Select Software Category<span class="text-danger">*</span></label>
               <select multiple="multiple" class="form-control select" id="software_category" name="software_category[]">
                 <?php 
                      $query = "SELECT * FROM software_details where status = 1";
@@ -179,14 +193,6 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="note" class="col-form-label">Notes</label>
-                <textarea name="note" id="note" rows="2" class="form-control" style="resize: none;" placeholder="Enter Institute Address"></textarea>
-            </div>
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-lg-12">

@@ -17,10 +17,12 @@
   $data['page_css'] = [];
   $data['page_js'] = [];
 ?>
-<?php include_once 'inc/header.php'; ?>
+<?php 
+include_once 'inc/header.php'; ?>
 <!-- /content area -->
 <div class="content">
   hello google mama
+  <input type="hidden" name="admin_id" id="admin_id" value="<?php echo($user['id']); ?>">
 </div>
 <!-- /content area -->
 <?php include_once 'inc/footer.php'; ?>

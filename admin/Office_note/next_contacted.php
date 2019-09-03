@@ -3,35 +3,20 @@ require_once '../../config/config.php';
 ajax();
 ?>
 <?php 
-  if (isset($_GET['delid'])) {
-   $delid = $_GET['delid'];
-   $delquery = "DELETE FROM  satt_official_notes WHERE id ='$delid'";
-   $delresult = $db->delete($delquery);
-   if ($delresult) {
-    die(json_encode(['message' => 'Note Delete Successfuly']));
-  } else {
-    http_response_code(500);
-    die(json_encode(['message' => 'Note Not Found']));
-  }
-
-}
-?>
-
-<?php 
-    if (isset($_GET['customerdetails_id'])) {
-       $customerdetails_id = $_GET['customerdetails_id'];
+    if (isset($_GET['Office_note_id'])) {
+       $Office_note_id = $_GET['Office_note_id'];
 ?>
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/customerdetails/ajax.php" id="content_form" method="post">
+<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/office_note/ajax.php" id="content_form" method="post">
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Create Notes <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-              <label for="customerdetails_id">Select Customer Name</label>
-              <select class="form-control" id="customerdetails_id" name="customerdetails_id">
+              <label for="Office_note_id">Select Customer Name</label>
+              <select class="form-control" id="Office_note_id" name="Office_note_id">
                 <?php 
-                     $query = "SELECT * FROM satt_customer_informations where id ='$customerdetails_id'";
+                     $query = "SELECT * FROM satt_extra_office_notes where id ='$Office_note_id'";
                     $result = $db->select($query);
                     if ($result) {
                         while ($row = $result->fetch_assoc()) { ?>
@@ -50,7 +35,7 @@ ajax();
         <div class="col-lg-6">
           <div class="form-group">
               <label for="next_contact" class="col-form-label">Next Contacted Date<span class="text-danger">*</span></label>
-              <input type="text" name="next_contact" id="next_contact" class="form-control date">
+              <input type="text" name="next_contact" id="next_contact" class="form-control date" placeholder="Select Start Date" required autofocus value="">
           </div>
       </div>
     </div>
@@ -96,8 +81,8 @@ ajax();
 $notequery = "SELECT *, a.user_name, c.name, n.id, n.note, n.next_contact, n.create_date
 from satt_next_contacted  n
 join satt_admins  a on a.id = n.admin_id 
-join satt_customer_informations  c on c.id = n.customer_id 
-and n.customer_id = '$customerdetails_id'";
+join satt_extra_office_notes  c on c.id = n.customer_id 
+and n.customer_id = '$Office_note_id'";
   $noteresult = $db->select($notequery);
   if ($noteresult) {
     while ($notedata = $noteresult->fetch_assoc()) { 

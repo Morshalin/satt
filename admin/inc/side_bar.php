@@ -73,7 +73,7 @@
 
 
 
-  <?php $nav_items_section_3 = ['customer-details','customer-type', 'progressive-state','interested-services','business-type','Office_note','leav_us']; ?>
+  <?php $nav_items_section_3 = ['customer-details','customer-type', 'progressive-state','interested-services','Office_note','leav_us']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_3, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-user-tie"></i> <span>Customer</span></a>
 
