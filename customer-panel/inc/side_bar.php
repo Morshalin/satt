@@ -13,7 +13,7 @@
 
 
 
-  <?php $nav_items_section_2 = ['available_product', 'pending_product','confirm_product']; ?>
+  <?php $nav_items_section_2 = ['available_product', 'pending_product','confirm_product','delivered-order','cancel-order']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_2, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-cart"></i> <span>Available Software Order & Confirmation</span></a>
 
@@ -26,6 +26,10 @@
       <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/pending_product" class="nav-link<?php active_page($data, 'pending_product'); ?>">Pending Orders</a></li>
 
       <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/confirm_product" class="nav-link<?php active_page($data, 'confirm_product'); ?>">Confirmed Orders</a></li>
+
+      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/delivered-order" class="nav-link<?php active_page($data, 'delivered-order'); ?>">Delivered Order</a></li>
+
+      <li class="nav-item"><a href="<?php echo CUSTOMER_URL; ?>/cancel-order" class="nav-link<?php active_page($data, 'cancel-order'); ?>">Cancel Order</a></li>
 
     </ul>
   </li>
@@ -47,6 +51,8 @@
 
     </ul>
   </li>
+
+
 
     <?php $nav_items_section_3 = ['available_services']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_3, $data['page_index']) ?>">

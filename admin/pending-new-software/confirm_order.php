@@ -166,6 +166,19 @@ if (isset($_GET['new_order_id'])) {
 </div>
 
 
+<div class="row" style="<?php echo $display_status ?>">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-2">
+        <label for="agent_point" class="col-form-label">Agent Point <span class="text-danger">*</span></label>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <input type="number" min="0" name="agent_point" id="agent_point" placeholder="Provide Agent Point On Sale" class="form-control" <?php echo $required; ?>>
+        </div>
+    </div>
+</div>
+
+
 
 <div class="row">
     <div class="col-lg-2"></div>

@@ -21,6 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if ($new_order_id) {
 		$error = array();
 
+		$query = "SELECT * FROM new_product_order WHERE id = '$new_order_id'";
+		$get_order = $db->select($query);
+		if ($get_order) {
+			$order_info = $get_order->fetch_assoc();
+			$agent_id = $order_info['agent_id'];
+		}
+
 		$developer_id = $_POST['developer_id'];
 		$language_id = $_POST['language_id'];
 		$development_start_date = $_POST['development_start_date'];
@@ -29,6 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$selling_method = $fm->validation($_POST['selling_method']);
 		$installation_charge = $fm->validation($_POST['installation_charge']);
 		$agent_comission = $fm->validation($_POST['agent_comission']);
+		$agent_point = $fm->validation($_POST['agent_point']);
+
+		if ($agent_point == '') {
+			$agent_point = 0;
+		}
+
 		$yearly_renew_charge = $fm->validation($_POST['yearly_renew_charge']);
 		$sell_price = $fm->validation($_POST['seling_total_price']);
 
@@ -77,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			selling_method = '$selling_method',
 			installation_charge = '$installation_charge',
 			agent_comission = '$agent_comission',
+			agent_point = '$agent_point',
 			yearly_renew_charge = '$yearly_renew_charge',
 			confirmation_status = '1',
 			confirm_date = now(),
@@ -84,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			expected_dead_line = '$expected_dead_line'
 			WHERE id = '$new_order_id'";
 			$order_update = $db->update($query);
+
 			if ($order_update) {
 				for ($i=0; $i <count($developer_id) ; $i++) { 
 					$dev_id = $developer_id[$i];
@@ -105,7 +120,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 							('$new_order_id','$payment_type','$check_numer','$mobile_banking_name','$received_phone_number','$tx_id','$pay_amount',now())";
 					$insert_pay = $db->insert($query);
 				}
+				if ($agent_id != '') {
+					$query = "SELECT * FROM agent_list WHERE id = '$agent_id'";
+					$get_agent = $db->select($query);
+					if ($get_agent) {
+						$agent = $get_agent->fetch_assoc();
+						
+						$new_point = (int)$agent['points'] + (int)$agent_point;
+						$query = "UPDATE agent_list set points = '$new_point' WHERE id = '$agent_id'";
+						$update_agent = $db->update($query);
+					}
+				}
 			}
+
+
 			if ($insert_pay != false) {
 				die(json_encode(['message' => ' Product Order Confirm Successfull']));
 			} else {

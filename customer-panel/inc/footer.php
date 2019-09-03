@@ -61,6 +61,51 @@
 	<script src="<?php echo CUSTOMER_URL; ?>/jquery-ui/jquery-ui.min.js"></script>
 
 
+
+
+
+
+	
+<script>
+	$(document).ready(function(){
+		var customer_id = $('#customer_id').val();
+		// console.log(customer_id);
+
+		setInterval(function(){
+            $.ajax({
+                url: CUSTOMER_URL+'/message_notification/count_new_message.php', 
+                data: {customer_id:customer_id },
+                type:"POST",
+    			dataType:'json',
+                success:function(data){
+                    // $('#chat_message_'+to_user_id).val('');
+                    $('#message').html(data);
+                    console.log(data);
+                },
+                error: function(data) {
+		            	console.log(data);
+		            }
+            })
+
+    	},500);
+
+	});
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 	<script type="text/javascript">
 	swal.setDefaults({
 				buttonsStyling: false,

@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('customer-panel', CUSTOMER_URL . '/message-with-admin');
+Session::checkSession('admin', ADMIN_URL . '/cancel-order');
 ## Read value
 $draw = $_GET['draw'];
 $row = $_GET['start'];
@@ -12,31 +12,27 @@ $columnSortOrder = $_GET['order'][0]['dir']; // asc or desc
 $searchValue = $_GET['search']['value']; // Search value
 if ($columnName == 'DT_RowIndex') {
 	$columnName = 'id';
-}else if($columnName == 'name'){
-  $columnName = 'first_name';
 }
-$customer_id  = $user['id']; 
 
 /*==============================================================================
 ## Search
 =================================================================================*/
 $searchQuery = " ";
 if ($searchValue != '') {
-	$searchQuery = " and (first_name like '%" . $searchValue . "%' or last_name like '%" . $searchValue . "%' or
-        email like '%" . $searchValue . "%' ) ";
+	$searchQuery = " and (id like '%" . $searchValue . "%' or customer_name like '%" . $searchValue . "%' or customer_number like '%" . $searchValue . "%' or product_name like '%" . $searchValue . "%' or pay_type like '%" . $searchValue . "%' or order_date like '%" . $searchValue . "%') ";
 }
 /*==============================================================================
 ## Total number of records without filtering
 =================================================================================*/
 
-$sel = $db->select("select count(*) as allcount from satt_admins");
+$sel = $db->select("select count(*) as allcount from satt_order_products");
 $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['allcount'];
 
 /*==============================================================================
 ## Total number of record with filtering
 =================================================================================*/
-$sel = $db->select("select count(*) as allcount from satt_admins WHERE 1 " . $searchQuery);
+$sel = $db->select("select count(*) as allcount from satt_order_products WHERE 1 " . $searchQuery);
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
@@ -44,37 +40,43 @@ $totalRecordwithFilter = $records['allcount'];
 /*==============================================================================
 ## Fetch records
 =================================================================================*/
-$query = "select * from satt_admins WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$query = "SELECT * FROM satt_order_products WHERE status = '0' AND roll = '1' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $result = $db->select($query);
 $data = array();
 $i = 0;
 if ($result) {
 	while ($row = mysqli_fetch_assoc($result)) {
 
+$agent_id = $row['agent_id'];
+$agent_name = '';
+if ($agent_id) {
+	$query1 = "SELECT * FROM agent_list WHERE id = '$agent_id' ";
+	$result1 = $db->select($query1);
+	if ($result1) {
+        $row1 = $result1->fetch_assoc();
+		$agent_name = $row1['name'];
+    }
+}
 
-      $to_user_id_get_info = $row['id'];
-		$get_chat = $db->select("select count(*) as all_count from admin_customer_chat WHERE to_whom ='client' and to_user_id = '$customer_id' and from_user_id = '$to_user_id_get_info' and seen_status_customer = '0';")->fetch_assoc();
-
-		if ($get_chat['all_count']>0) {
-			$badge_color = "badge-danger";
-		}else{
-			$badge_color = "badge-success";
-		}
-
-
-		$data[] = array(
-			"DT_RowIndex" => $i + 1,
-			"name" => $row['first_name'].' '.$row['last_name'],
-			"email" => $row['email'],
-			"unread" => '<badge class="badge '.$badge_color.'">'.$get_chat['all_count'].'</badge>',
-			"action" => '
-
-       <button id="" data-touserid="'.$row['id'].'" data-tousername="'.$row['first_name'].' '.$row['last_name'].'" class="btn btn-sm btn-success start_chat" data-customer_id="'.$customer_id.'">Start Chat</button>
+		    $data[] = array(
+			  "DT_RowIndex" => $i + 1,
+			  "id" => $row['id'],
+		      "customer_name" => '<strong>' . $row['customer_name'] . '</strong>',
+		      "customer_number" => '<strong>' . $row['customer_number'] . '</strong>',
+		      "agent_name" => '<strong>' . $agent_name . '</strong>',
+		      "product_name" => '<strong>' . $row['product_name'] . '</strong>',
+		      "pay_type" => '<strong>' . $row['pay_type'] . '</strong>',
+			  "order_date" => '<strong>' . $row['order_date'] . '</strong>',
+			  "cancel_reason" => '<strong>' . $fm->textShorten($row['cancel_reason'],15) . '</strong>',
+			  "cancel_date" => '<strong>' . $row['cancel_date'] . '</strong>',
+			  "action" => '
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/cancel-order/show.php?cancel_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
         ',
 		);
-$i++;
+		$i++;
+	}
 }
-}
+
 /*===========================================================
 ## Response
 =============================================================*/
