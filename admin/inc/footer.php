@@ -69,17 +69,17 @@
 
 		setInterval(function(){
             $.ajax({
-                url: 'message_notification/count_new_message.php', 
+                url: ADMIN_URL+'/message_notification/count_new_message.php', 
                 data: {admin_id:admin_id },
                 type:"POST",
-    			dataType:'text',
+    			dataType:'json',
                 success:function(data){
                     // $('#chat_message_'+to_user_id).val('');
                     $('#message').html(data);
                     console.log(data);
                 },
                 error: function(data) {
-		            	console.log("abul khair sohag");
+		            	console.log(data);
 		            }
             })
 

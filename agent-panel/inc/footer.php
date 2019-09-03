@@ -62,6 +62,42 @@
 
 
 
+	
+<script>
+	$(document).ready(function(){
+		var agent_id = $('#agent_id').val();
+		// console.log(agent_id);
+
+		setInterval(function(){
+            $.ajax({
+                url: AGENT_URL+'/message_notification/count_new_message.php', 
+                data: {agent_id:agent_id },
+                type:"POST",
+    			dataType:'json',
+                success:function(data){
+                    // $('#chat_message_'+to_user_id).val('');
+                    $('#message').html(data);
+                    console.log(data);
+                },
+                error: function(data) {
+		            	console.log(data);
+		            }
+            })
+
+    	},500);
+
+	});
+
+
+
+</script>
+
+
+
+
+
+
+
 
 	<script type="text/javascript">
 	swal.setDefaults({

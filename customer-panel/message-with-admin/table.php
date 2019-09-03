@@ -53,7 +53,7 @@ if ($result) {
 
 
       $to_user_id_get_info = $row['id'];
-		$get_chat = $db->select("select count(*) as all_count from admin_customer_chat WHERE to_whom ='customer' and to_user_id = '$customer_id' and from_user_id = '$to_user_id_get_info' and seen_status_customer = '0';")->fetch_assoc();
+		$get_chat = $db->select("select count(*) as all_count from admin_customer_chat WHERE to_whom ='client' and to_user_id = '$customer_id' and from_user_id = '$to_user_id_get_info' and seen_status_customer = '0';")->fetch_assoc();
 
 		if ($get_chat['all_count']>0) {
 			$badge_color = "badge-danger";

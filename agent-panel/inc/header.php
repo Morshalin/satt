@@ -34,6 +34,7 @@
 
 		const ADMIN_URL = '<?php echo BASE_URL; ?>/admin';
 		const BASE_URL = '<?php echo BASE_URL; ?>';
+		const AGENT_URL = '<?php echo BASE_URL; ?>/agent-panel';
 
   </script>
 
@@ -94,6 +95,14 @@
 			</span>
 
 			<ul class="navbar-nav">
+
+				<li class="nav-item dropdown">
+					<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown" aria-expanded="true">
+						<i class="icon-bubbles4"></i>
+						<span class="d-md-none ml-2">Messages</span>
+						<span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" id="message"></span>
+					</a>
+				</li>
 
 				<li class="nav-item dropdown dropdown-user">
 					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
@@ -173,6 +182,6 @@
 		<!-- /main sidebar -->
 		<?php
 		} ?>
-
+<input type="hidden" name="agent_id" id="agent_id" value="<?php echo($user['id']); ?>">
 		<!-- Main content -->
 		<div class="content-wrapper">
