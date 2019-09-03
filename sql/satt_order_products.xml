@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.8.4
+- https://www.phpmyadmin.net
+-
+- Host: 127.0.0.1
+- Generation Time: Sep 03, 2019 at 12:23 PM
+- Server version: 10.1.37-MariaDB
+- PHP Version: 7.3.1
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="satt" collation="utf8_general_ci" charset="utf8">
+            <pma:table name="satt_order_products">
+                CREATE TABLE `satt_order_products` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `customer_id` int(11) DEFAULT NULL,
+                  `customer_name` varchar(255) DEFAULT NULL,
+                  `customer_number` varchar(255) DEFAULT NULL,
+                  `agent_id` int(11) DEFAULT NULL,
+                  `product_id` int(11) DEFAULT NULL,
+                  `product_name` varchar(255) DEFAULT NULL,
+                  `pay_type` varchar(255) DEFAULT NULL,
+                  `installation_charge` varchar(255) DEFAULT NULL,
+                  `pay_amount` varchar(255) DEFAULT NULL,
+                  `agent_comission` varchar(255) DEFAULT NULL,
+                  `yearly_renew_charge` int(11) DEFAULT NULL,
+                  `status` int(11) NOT NULL DEFAULT '0',
+                  `order_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                  `confirm_date` timestamp NULL DEFAULT NULL,
+                  `seling_total_price` varchar(255) DEFAULT NULL,
+                  `roll` int(11) NOT NULL DEFAULT '0',
+                  `cancel_reason` text,
+                  `cancel_date` varchar(255) DEFAULT NULL,
+                  `delivery_status` int(11) NOT NULL DEFAULT '0',
+                  `delivery_date` varchar(255) DEFAULT NULL,
+                  `cpanel_user` varchar(255) DEFAULT NULL,
+                  `cpanel_pass` varchar(255) DEFAULT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'satt'
+    -->
+    <database name="satt">
+        <!-- Table satt_order_products -->
+        <table name="satt_order_products">
+            <column name="id">5</column>
+            <column name="customer_id">21</column>
+            <column name="customer_name">Morshalin</column>
+            <column name="customer_number">1792747486</column>
+            <column name="agent_id">16</column>
+            <column name="product_id">8</column>
+            <column name="product_name">Shop managment</column>
+            <column name="pay_type">monthly_pay</column>
+            <column name="installation_charge">5000</column>
+            <column name="pay_amount">2000</column>
+            <column name="agent_comission">1000</column>
+            <column name="yearly_renew_charge">5000</column>
+            <column name="status">1</column>
+            <column name="order_date">2019-08-29 11:12:39</column>
+            <column name="confirm_date">2019-09-01 17:07:06</column>
+            <column name="seling_total_price">50000</column>
+            <column name="roll">0</column>
+            <column name="cancel_reason">NULL</column>
+            <column name="cancel_date">NULL</column>
+            <column name="delivery_status">1</column>
+            <column name="delivery_date">2019-09-02 12:40:44</column>
+            <column name="cpanel_user">ds</column>
+            <column name="cpanel_pass">dfs</column>
+        </table>
+        <table name="satt_order_products">
+            <column name="id">4</column>
+            <column name="customer_id">21</column>
+            <column name="customer_name">Morshalin</column>
+            <column name="customer_number">1792747486</column>
+            <column name="agent_id">16</column>
+            <column name="product_id">9</column>
+            <column name="product_name">ffads</column>
+            <column name="pay_type">yearly_pay</column>
+            <column name="installation_charge">54</column>
+            <column name="pay_amount">5</column>
+            <column name="agent_comission">5000</column>
+            <column name="yearly_renew_charge">65645</column>
+            <column name="status">0</column>
+            <column name="order_date">2019-08-29 11:04:46</column>
+            <column name="confirm_date">NULL</column>
+            <column name="seling_total_price">NULL</column>
+            <column name="roll">1</column>
+            <column name="cancel_reason">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos sint eos quidem aspernatur, est quasi expedita reprehenderit, iste ipsum tenetur vero ut delectus aliquam a debitis qui. Quaerat doloremque hic labore veritatis qui, expedita exercitationem omnis atque voluptatibus eligendi aut dignissimos ipsa saepe tenetur quidem rem inventore quod delectus repellendus.</column>
+            <column name="cancel_date">2019-09-01 12:50:11</column>
+            <column name="delivery_status">0</column>
+            <column name="delivery_date">NULL</column>
+            <column name="cpanel_user">NULL</column>
+            <column name="cpanel_pass">NULL</column>
+        </table>
+        <table name="satt_order_products">
+            <column name="id">6</column>
+            <column name="customer_id">21</column>
+            <column name="customer_name">Morshalin</column>
+            <column name="customer_number">1792747486</column>
+            <column name="agent_id">16</column>
+            <column name="product_id">2</column>
+            <column name="product_name">school management</column>
+            <column name="pay_type">monthly_pay</column>
+            <column name="installation_charge">4562</column>
+            <column name="pay_amount">4652</column>
+            <column name="agent_comission">4652</column>
+            <column name="yearly_renew_charge">4265</column>
+            <column name="status">1</column>
+            <column name="order_date">2019-08-29 15:38:44</column>
+            <column name="confirm_date">2019-09-02 13:00:13</column>
+            <column name="seling_total_price">243</column>
+            <column name="roll">0</column>
+            <column name="cancel_reason">fdfdsfg</column>
+            <column name="cancel_date">NULL</column>
+            <column name="delivery_status">0</column>
+            <column name="delivery_date">NULL</column>
+            <column name="cpanel_user">NULL</column>
+            <column name="cpanel_pass">NULL</column>
+        </table>
+    </database>
+</pma_xml_export>

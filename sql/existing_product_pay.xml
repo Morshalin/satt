@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.8.4
+- https://www.phpmyadmin.net
+-
+- Host: 127.0.0.1
+- Generation Time: Sep 03, 2019 at 12:25 PM
+- Server version: 10.1.37-MariaDB
+- PHP Version: 7.3.1
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="satt" collation="utf8_general_ci" charset="utf8">
+            <pma:table name="existing_product_pay">
+                CREATE TABLE `existing_product_pay` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `product_order_id` int(11) DEFAULT NULL,
+                  `payment_method` varchar(255) DEFAULT NULL,
+                  `check_no` varchar(255) DEFAULT NULL,
+                  `mobile_banking_name` varchar(255) DEFAULT NULL,
+                  `received_phone_number` varchar(255) DEFAULT NULL,
+                  `tx_id` varchar(255) DEFAULT NULL,
+                  `pay_amount` varchar(255) DEFAULT NULL,
+                  `pay_date` varchar(255) DEFAULT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'satt'
+    -->
+    <database name="satt">
+        <!-- Table existing_product_pay -->
+        <table name="existing_product_pay">
+            <column name="id">3</column>
+            <column name="product_order_id">5</column>
+            <column name="payment_method">check</column>
+            <column name="check_no">45355424336556</column>
+            <column name="mobile_banking_name"></column>
+            <column name="received_phone_number"></column>
+            <column name="tx_id"></column>
+            <column name="pay_amount">40000</column>
+            <column name="pay_date">2019-09-01 17:07:06</column>
+        </table>
+        <table name="existing_product_pay">
+            <column name="id">4</column>
+            <column name="product_order_id">6</column>
+            <column name="payment_method">cash</column>
+            <column name="check_no"></column>
+            <column name="mobile_banking_name"></column>
+            <column name="received_phone_number"></column>
+            <column name="tx_id"></column>
+            <column name="pay_amount">234</column>
+            <column name="pay_date">2019-09-02 13:00:13</column>
+        </table>
+        <table name="existing_product_pay">
+            <column name="id">5</column>
+            <column name="product_order_id">6</column>
+            <column name="payment_method">cash</column>
+            <column name="check_no"></column>
+            <column name="mobile_banking_name"></column>
+            <column name="received_phone_number"></column>
+            <column name="tx_id"></column>
+            <column name="pay_amount">5</column>
+            <column name="pay_date">2019-09-02 14:48:37</column>
+        </table>
+        <table name="existing_product_pay">
+            <column name="id">6</column>
+            <column name="product_order_id">5</column>
+            <column name="payment_method">cash</column>
+            <column name="check_no"></column>
+            <column name="mobile_banking_name"></column>
+            <column name="received_phone_number"></column>
+            <column name="tx_id"></column>
+            <column name="pay_amount">5000</column>
+            <column name="pay_date">2019-09-02 14:51:42</column>
+        </table>
+        <table name="existing_product_pay">
+            <column name="id">7</column>
+            <column name="product_order_id">6</column>
+            <column name="payment_method">cash</column>
+            <column name="check_no"></column>
+            <column name="mobile_banking_name"></column>
+            <column name="received_phone_number"></column>
+            <column name="tx_id"></column>
+            <column name="pay_amount">2</column>
+            <column name="pay_date">2019-09-02 14:55:04</column>
+        </table>
+        <table name="existing_product_pay">
+            <column name="id">8</column>
+            <column name="product_order_id">5</column>
+            <column name="payment_method">cash</column>
+            <column name="check_no"></column>
+            <column name="mobile_banking_name"></column>
+            <column name="received_phone_number"></column>
+            <column name="tx_id"></column>
+            <column name="pay_amount">2000</column>
+            <column name="pay_date">2019-09-02 14:55:27</column>
+        </table>
+    </database>
+</pma_xml_export>
