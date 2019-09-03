@@ -53,7 +53,7 @@
 
 
 
-  <?php $nav_items_section_10 = ['order-new-software', 'pending-new-software','confirm-new-software','cancel-new-order']; ?>
+  <?php $nav_items_section_10 = ['order-new-software', 'pending-new-software','confirm-new-software','cancel-new-order','delivered-new-order']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_10, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-cart"></i> <span>New Software Order & Confirmation</span></a>
 

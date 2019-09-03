@@ -239,6 +239,25 @@ if (isset($_GET['new_order_id'])) {
                 <b class="col-md-4">Expected Dead Line :</b>
                 <h6 class="col-md-8"><?php echo $row['expected_dead_line']; ?></h6>
             </div>
+            <div class="row text-danger">
+                <b class="col-md-4">Delivery Date :</b>
+                <h6 class="col-md-8"><?php echo $row['delivery_date']; ?></h6>
+            </div>
+
+            <div class="row text-success">
+                <b class="col-md-4">Domain Link :</b>
+                <h6 class="col-md-8"><?php echo $row['domain_link']; ?></h6>
+            </div>
+
+            <div class="row text-success">
+                <b class="col-md-4">Cpanel User Name :</b>
+                <h6 class="col-md-8"><?php echo $row['cpanel_username']; ?></h6>
+            </div>
+
+            <div class="row text-success">
+                <b class="col-md-4">Password :</b>
+                <h6 class="col-md-8"><?php echo $row['password']; ?></h6>
+            </div>
 
         </div>
         <div class="col-lg-2"></div>

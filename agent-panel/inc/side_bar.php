@@ -37,7 +37,7 @@
 
 
 
-  <?php $nav_items_section_5 = ['order-new-software', 'pending-new-software','confirm-new-software']; ?>
+  <?php $nav_items_section_5 = ['order-new-software', 'pending-new-software','confirm-new-software','cancel-new-order','delivered-new-order']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_5, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-cart"></i> <span>New Software Order & Confirmation</span></a>
 
@@ -49,7 +49,13 @@
 
       <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/pending-new-software" class="nav-link<?php active_page($data, 'pending-new-software'); ?>">Pending Orders</a></li>
 
-      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/confirm-new-softwaret" class="nav-link<?php active_page($data, 'confirm-new-software'); ?>">Confirmed Orders</a></li>
+      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/confirm-new-software" class="nav-link<?php active_page($data, 'confirm-new-software'); ?>">Confirmed Orders</a></li>
+
+
+      
+      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/delivered-new-order" class="nav-link<?php active_page($data, 'delivered-new-order'); ?>">Delivered Orders</a></li>
+
+      <li class="nav-item"><a href="<?php echo AGENT_URL; ?>/cancel-new-order" class="nav-link<?php active_page($data, 'cancel-new-order'); ?>">Cancelled Orders</a></li>
 
     </ul>
   </li>
