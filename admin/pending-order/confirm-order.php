@@ -8,6 +8,8 @@ if (isset($_GET['pending_order_id'])) {
     $result = $db->select($query);
     if ($result) {
         $row = $result->fetch_assoc();
+        $product_id = $row['product_id'];
+        $agent_id = $row['agent_id'];
     } else {
         http_response_code(500);
         die(json_encode(['message' => 'Pending Order Not Found']));
@@ -32,6 +34,8 @@ if (isset($_GET['pending_order_id'])) {
         <div class="col-lg-6">
             <div class="form-group">
                 <input type="number" name="total_price" id="total_price" class="form-control"  >
+                <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                <input type="hidden" name="agent_id" value="<?php echo $agent_id; ?>">
             </div>
         </div>
     </div>

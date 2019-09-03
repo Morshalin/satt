@@ -24,6 +24,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if ($pending_order_id) {
 		$error = array();
 
+		$product_id = $_POST['product_id'];
+		$querys = "SELECT * FROM software_details WHERE id = '$product_id'";
+		$results = $db->select($querys);
+		if ($results) {
+			$rows = $results->fetch_assoc();
+			$selling_point = $rows['selling_point'];
+		}
+
+		$agent_id = $_POST['agent_id'];
+		$agent_querys = "SELECT * FROM agent_list WHERE id = '$agent_id'";
+		$agent_results = $db->select($agent_querys);
+		if ($agent_results) {
+			$agent_rows = $agent_results->fetch_assoc();
+			$point = $agent_rows['points'];
+			$new_point = $point + $selling_point;
+		}
+
 		$total_price = $fm->validation($_POST['total_price']);
 		$seling_total_price = $fm->validation($_POST['seling_total_price']);
 		$pay_amount = $fm->validation($_POST['pay_amount']);
@@ -55,6 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			if ($result) {
 				$query1 = "INSERT INTO existing_product_pay (product_order_id, payment_method, check_no, mobile_banking_name, received_phone_number, tx_id, pay_amount, pay_date) VALUES ('$pending_order_id','$payment_method','$check_no', '$mobile_banking_name', '$received_phone_number','$tx_id','$pay_amount', now())";
 				$result1 = $db->insert($query1);
+
+				if ($agent_id) {
+					$agentquery = "UPDATE agent_list SET points = '$new_point' WHERE id='$agent_id'";
+					$agentresult = $db->update($agentquery);
+				}
 			}
 			if ($result1 != false) {
 				die(json_encode(['message' => ' Product Order Confirm Successfull']));
