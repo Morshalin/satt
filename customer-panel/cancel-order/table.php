@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/cancel-order');
+Session::checkSession('customer-panel', CUSTOMER_URL . '/cancel-order');
 ## Read value
 $draw = $_GET['draw'];
 $row = $_GET['start'];
@@ -40,7 +40,8 @@ $totalRecordwithFilter = $records['allcount'];
 /*==============================================================================
 ## Fetch records
 =================================================================================*/
-$query = "SELECT * FROM satt_order_products WHERE status = '0' AND roll = '1' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$customer_id = $user['id'];
+$query = "SELECT * FROM satt_order_products WHERE status = '0' AND roll = '1' AND customer_id = '$customer_id' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $result = $db->select($query);
 $data = array();
 $i = 0;
@@ -70,7 +71,7 @@ if ($agent_id) {
 			  "cancel_reason" => '<strong>' . $fm->textShorten($row['cancel_reason'],15) . '</strong>',
 			  "cancel_date" => '<strong>' . $row['cancel_date'] . '</strong>',
 			  "action" => '
-              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/cancel-order/show.php?cancel_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
+              <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/cancel-order/show.php?cancel_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
         ',
 		);
 		$i++;
