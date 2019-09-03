@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('agent-panel', AGENT_URL . '/pending-new-software');
+Session::checkSession('admin', ADMIN_URL . '/pending-new-software');
 ## Read value
 $draw = $_GET['draw'];
 $row = $_GET['start'];
@@ -41,12 +41,21 @@ $totalRecordwithFilter = $records['allcount'];
 ## Fetch records
 =================================================================================*/
 $agent_id = $user['id'];
-$query = "select * from new_product_order WHERE  confirmation_status = '0' AND delivery_status = '0' AND cancel_status = '0' AND agent_id='$agent_id' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$query = "select * from new_product_order WHERE  confirmation_status = '0' AND delivery_status = '0' AND cancel_status = '0'" . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $result = $db->select($query);
 $data = array();
 $i = 0;
 if ($result) {
   while ($row = mysqli_fetch_assoc($result)) {
+
+    if ($row['agent_id']) {
+      $agent_name = $row['agent_name'];
+      $agent_phn = $row['agent_phn'];
+    }else{
+      $agent_name = 'N/A';
+      $agent_phn = 'N/A';
+
+    }
    
     $data[] = array(
       "DT_RowIndex" => $i + 1,
@@ -54,8 +63,9 @@ if ($result) {
       "expected_name_software" => '<strong>' . $row['expected_name_software'] . '</strong>',
       "customer_name" => '<strong>' .$row['customer_name'] . '</strong>',
       "customer_phn" => '<strong>' . $row['customer_phn'] . '</strong>',
-      "documentation_note" => '<strong>' . $row['documentation_note'] . '</strong>',
-      "order_date" => '<strong>' . $row['order_date'] . '</strong>',
+      "agent_name" => '<strong>' . $agent_name . '</strong>',
+      "agent_phn" => '<strong>' .$agent_phn . '</strong>',
+      "order_date" => '<strong>' .$row['order_date'] . '</strong>',
       "status" => '<strong class="bg-warning p-1">Pending</strong>',
       
       "action" => '
@@ -66,10 +76,13 @@ if ($result) {
               <i class="icon-menu9"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-              <span class="dropdown-item" id="content_managment" data-url="' . AGENT_URL . '/pending-new-software/show.php?new_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/pending-new-software/show.php?new_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
 
 
-             <span class="dropdown-item" id="content_managment" data-url="' . AGENT_URL .'/pending-new-software/cancel_order.php?new_order_id='.$row['id'].'" style = "color:red"><i class="icon-cross"></i> Cancel Order</span>
+             <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL .'/pending-new-software/confirm_order.php?new_order_id='.$row['id'].'" style = "color:green"><i class="icon-checkmark4"></i> Confirm Order</span>
+
+
+             <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL .'/pending-new-software/cancel_order.php?new_order_id='.$row['id'].'" style = "color:red"><i class="icon-cancel-square"></i> Cancel Order</span>
             </div>
           </div>
         </div>

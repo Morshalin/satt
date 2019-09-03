@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
- Session::checkSession('customer-panel', CUSTOMER_URL . '/pending-new-software','Pending Order');
+ Session::checkSession('admin', ADMIN_URL . '/pending-new-software','Pending Order');
 if (isset($_GET['new_order_id'])) {
 	$new_order_id = $_GET['new_order_id'];
 	if ($new_order_id) {

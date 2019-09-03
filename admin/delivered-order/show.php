@@ -59,6 +59,18 @@ if (isset($_GET['confirm_order_id'])) {
                     <b class="col-md-4">Order Confirm Date :</b>
                     <h6 class="col-md-8"><?php echo $row['confirm_date']; ?></h6>
             </div>
+            <div class="row">
+                    <b class="col-md-4">Order Delivered Date :</b>
+                    <h6 class="col-md-8"><?php echo $row['delivery_date']; ?></h6>
+            </div>
+            <div class="row">
+                    <b class="col-md-4">Cpanel Username :</b>
+                    <h6 class="col-md-8"><?php echo $row['cpanel_user']; ?></h6>
+            </div>
+            <div class="row">
+                    <b class="col-md-4">Cpanel Password :</b>
+                    <h6 class="col-md-8"><?php echo $row['cpanel_pass']; ?></h6>
+            </div>
         </div>
         <div class="col-lg-2"></div>
     </div>
@@ -146,7 +158,7 @@ if (isset($_GET['confirm_order_id'])) {
     </div>
     <?php } ?>
 
-    <div class="row">
+        <div class="row">
         <div class="col-lg-12">
             <hr>
     <legend class="text-uppercase text-center font-size-m font-weight-bold">Payment History </legend>
@@ -167,7 +179,7 @@ if (isset($_GET['confirm_order_id'])) {
                   <tbody>
 <?php 
     if ($confirm_order_id) {
-        $pay_query = "SELECT * FROM existing_product_pay WHERE product_order_id='$confirm_order_id' order by id desc";
+        $pay_query = "SELECT * FROM existing_product_pay WHERE product_order_id='$confirm_order_id'  order by id desc";
         $pay_result = $db->select($pay_query);
         if ($pay_result) {
             $i = 0;

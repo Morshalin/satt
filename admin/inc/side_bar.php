@@ -38,13 +38,14 @@
 
 
 
-    <?php $order_and_confirm = ['pending-order', 'confirm-order','cancel-order']; ?>
+    <?php $order_and_confirm = ['pending-order', 'confirm-order','cancel-order','delivered-order']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($order_and_confirm, $data['page_index']) ?>">
-    <a href="#" class="nav-link"><i class="icon-cart-add2"></i> <span>Order & Confirmation</span></a>
+    <a href="#" class="nav-link"><i class="icon-cart-add2"></i> <span>Existing Software Order & Confirmation</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($order_and_confirm, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/pending-order" class="nav-link<?php active_page($data, 'pending-order'); ?>">Pending Orders</a></li>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/confirm-order" class="nav-link<?php active_page($data, 'confirm-order'); ?>">Confirm Orders</a></li>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/delivered-order" class="nav-link<?php active_page($data, 'delivered-order'); ?>">Delivered Orders</a></li>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/cancel-order" class="nav-link<?php active_page($data, 'cancel-order'); ?>">Canceled Orders</a></li>
     </ul>
   </li>
@@ -52,7 +53,7 @@
 
 
 
-  <?php $nav_items_section_10 = ['order-new-software', 'pending-new-software','confirm-new-software']; ?>
+  <?php $nav_items_section_10 = ['order-new-software', 'pending-new-software','confirm-new-software','cancel-new-order']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_10, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-cart"></i> <span>New Software Order & Confirmation</span></a>
 
@@ -61,7 +62,11 @@
 
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/pending-new-software" class="nav-link<?php active_page($data, 'pending-new-software'); ?>">Pending Orders</a></li>
 
-      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/confirm-new-softwaret" class="nav-link<?php active_page($data, 'confirm-new-software'); ?>">Confirmed Orders</a></li>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/confirm-new-software" class="nav-link<?php active_page($data, 'confirm-new-software'); ?>">Confirmed Orders</a></li>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/delivered-new-order" class="nav-link<?php active_page($data, 'delivered-new-order'); ?>">Delivered Orders</a></li>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/cancel-new-order" class="nav-link<?php active_page($data, 'cancel-new-order'); ?>">Canceled Orders</a></li>
 
     </ul>
   </li>

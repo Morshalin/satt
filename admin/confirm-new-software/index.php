@@ -1,12 +1,12 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('customer-panel', CUSTOMER_URL . '/confirm_product','Confirm Product');
+  Session::checkSession('admin', ADMIN_URL . '/confirm-new-software','Confrimed Product');
   $data = array();
-  $data['page_title'] = 'Confirmed Product';
+  $data['page_title'] = 'Confrimed Product';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'confirm_product';
+  $data['page_index'] = 'confirm-new-software';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/customer-panel/confirm_product'];
+  $data['page_js'] = ['assets/js/admin/confirm-new-software'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
@@ -29,39 +29,41 @@
 <!-- Content area -->
 <div class="content">
   <div class="card border-top-success rounded-top-0" id="table_card">
-  	<div class="card-header header-elements-inline bg-light border-grey-300" >
-  		<h5 class="card-title"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Dashboard'; ?>
-  		</h5>
-  		<div class="header-elements">
-  			<div class="list-icons">
-  				<a class="list-icons-item" data-action="fullscreen" title="FullScreen" data-popup="tooltip" data-placement="bottom"></a>
-  				<a class="list-icons-item" data-action id="reload" title="Reload" data-popup="tooltip" data-placement="bottom"><i class="icon-reload-alt"></i></a>
-  				<a class="list-icons-item" data-action="collapse" title="Collapse" data-popup="tooltip" data-placement="bottom"></a>
-  			</div>
-  		</div>
-  	</div>
-  	<div class="card-body">
-  		<!-- <div class="text-center">
-  			<img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
-  		</div> -->
-  		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo CUSTOMER_URL; ?>/confirm_product/table.php">
-  				<thead>
-  					<tr>
-  						<th>#</th>
-              <th>Product Name</th>
-              <th>Pay Type</th>
-              <th>Installation Charge</th>
-              <th>Pay Amount</th>
-  						<th>Yearly Renew Charge</th>
+    <div class="card-header header-elements-inline bg-light border-grey-300" >
+      <h5 class="card-title"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Dashboard'; ?>
+      </h5>
+      <div class="header-elements">
+        <div class="list-icons">
+          <a class="list-icons-item" data-action="fullscreen" title="FullScreen" data-popup="tooltip" data-placement="bottom"></a>
+          <a class="list-icons-item" data-action id="reload" title="Reload" data-popup="tooltip" data-placement="bottom"><i class="icon-reload-alt"></i></a>
+          <a class="list-icons-item" data-action="collapse" title="Collapse" data-popup="tooltip" data-placement="bottom"></a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <!-- <div class="text-center">
+        <img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
+      </div> -->
+      <div id="table_display">
+        <table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/confirm-new-software/table.php">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Software Name</th>
+              <th>Customer Name</th>
+              <th>Customer Phn No</th>
+              <th>Agent Name</th>
+              <th>Agent Phn No</th>
+              <th>Order Date</th>
+              <th>Status</th>
               <th>Action</th>
-  					</tr>
-  				</thead>
-  				<tbody>
-  				</tbody>
-  			</table>
-  		</div>
-  	</div>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 <!-- /content area -->

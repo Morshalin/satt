@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/pending-new-software', 'Pending New Software');
+Session::checkSession('admin', ADMIN_URL . '/cancel-new-order', 'Cacelled New Order');
 if (isset($_GET['new_order_id'])) {
 	$order_id = $_GET['new_order_id'];
 	$query = "SELECT * FROM new_product_order WHERE id='$order_id'";
@@ -71,6 +71,14 @@ if (isset($_GET['new_order_id'])) {
             <div class="row">
                 <b class="col-md-4">Order Date & Time :</b>
                 <h6 class="col-md-8"><?php echo $row['order_date']; ?></h6>
+            </div>
+            <div class="row text-danger">
+                <b class="col-md-4">Cancel Date & Time :</b>
+                <h6 class="col-md-8"><?php echo $row['cancel_date']; ?></h6>
+            </div>
+            <div class="row text-danger">
+                <b class="col-md-4">Cancel Reason :</b>
+                <h6 class="col-md-8"><?php echo $row['cancel_reason']; ?></h6>
             </div>
 
         </div>

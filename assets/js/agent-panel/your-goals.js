@@ -58,15 +58,14 @@ var DatatableButtonsHtml5 = function() {
                     target: 'tr'
                 }
             },
-            select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 8]
+                targets: [0, 3]
             }, {
                 orderable: false,
-                targets: [7,8]
+                targets: [0]
             }],
-            order: [1, 'desc'],
+            order: [1, 'asc'],
             processing: true,
             serverSide: true,
             ajax: $('.content_managment_table').data('url'),
@@ -75,21 +74,11 @@ var DatatableButtonsHtml5 = function() {
                 {
                     data: 'DT_RowIndex'
                 }, {
-                    data: 'product_name'
-                },  {
-                    data: 'customer_name'
+                    data: 'month'
                 }, {
-                    data: 'customer_number'
-                }, {
-                    data: 'agent_name'
+                    data: 'target_amount'
                 },{
-                    data: 'pay_type'
-                }, {
-                    data: 'order_date'
-                }, {
-                    data: 'status'
-                },{
-                    data: 'action'
+                    data: 'sohag'
                 }
             ]
         });
@@ -115,7 +104,10 @@ var DatatableButtonsHtml5 = function() {
                     $('.modal-body').html(data).fadeIn(); // load response
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
+                     _componentSelect2Modal();
+                    _componentDatePicker();
                     _modalFormValidation();
+
                 })
                 .fail(function(data) {
                     $('.modal-body').html('<span style="color:red; font-weight: bold;"> Something Went Wrong. Please Try again later.......</span>');
@@ -135,7 +127,6 @@ var DatatableButtonsHtml5 = function() {
     return {
         init: function() {
             _componentDatatableButtonsHtml5();
-            _componentSelect2Normal();
             _componentRemoteModalLoad();
         }
     }
@@ -146,56 +137,6 @@ document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
 });
 
-
-
-    $(document).on('change','#payment_method', function(){
-        var payment_method = $("#payment_method").val();
-        if (payment_method == 'check') {
-            $("#check_method").show(500);
-            $("#check_no").attr("required",true);
-        }else{
-            $("#check_method").hide(500);
-            $("#check_no").val("");
-            $("#check_no").attr("required",false);
-
-        }
-    });
-
-       $(document).on('change','#payment_method', function(){
-        var payment_method = $("#payment_method").val();
-        if (payment_method == 'mobile') {
-            $("#mobile_method").show(500);
-            $("#mobile_banking_name").attr("required",true);
-            $("#received_phone_number").attr("required",true);
-        }else{
-            $("#mobile_method").hide(500);
-            $("#mobile_banking_name").val("");
-            $("#received_phone_number").val("");
-            $("#tx_id").val("");
-            $("#mobile_banking_name").attr("required",false);
-            $("#received_phone_number").attr("required",false);
-        }
-    })
-
-
-$(document).on('keyup','#pay_amount',function(){
-    var seling_total_price = parseInt($('#seling_total_price').val());
-    var pay_amount = parseInt($('#pay_amount').val());
-    var due_amount = seling_total_price - pay_amount;
-    $('#due_amount').val(due_amount);
-
-    if (pay_amount > seling_total_price) {
-        alert("Pay amount can't gatter then Selling price");
-       $('#pay_amount').val('');
-       $('#due_amount').val('');
-    }
+$(document).ready(function(){
+ 
 });
-
-$(document).on('keyup','#seling_total_price',function(){
-    var seling_total_price = parseInt($('#seling_total_price').val());
-    var pay_amount = parseInt($('#pay_amount').val());
-    var due_amount = seling_total_price - pay_amount;
-    $('#due_amount').val(due_amount);
-});
-
-

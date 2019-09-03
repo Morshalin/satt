@@ -109,6 +109,8 @@ if ($result) {
 
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/add_contact.php?agent_id=' . $row['id'] . '"><i class="icon-phone"></i> Add Last Contact Info</span>
 
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/agent/create_agent_account.php?agent_id=' . $row['id'] . '"><i class="icon-user-plus"></i> Create Agent Account</span>
+
                <span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/agent/ajax.php?agent_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete Agent</button></span>
             </div>
           </div>

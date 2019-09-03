@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('customer-panel', CUSTOMER_URL . '/confirm_product');
+Session::checkSession('admin', ADMIN_URL . '/confirm-new-software');
 ## Read value
 $draw = $_GET['draw'];
 $row = $_GET['start'];
@@ -19,20 +19,20 @@ if ($columnName == 'DT_RowIndex') {
 =================================================================================*/
 $searchQuery = " ";
 if ($searchValue != '') {
-  $searchQuery = " and (id like '%" . $searchValue . "%' or product_name like '%" . $searchValue . "%') ";
+  $searchQuery = " and (id like '%" . $searchValue . "%' or customer_name like '%" . $searchValue . "%' or customer_phn like '%" . $searchValue . "%' or order_date like '%" . $searchValue . "%') ";
 }
 /*==============================================================================
 ## Total number of records without filtering
 =================================================================================*/
 
-$sel = $db->select("select count(*) as allcount from satt_order_products");
+$sel = $db->select("select count(*) as allcount from new_product_order");
 $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['allcount'];
 
 /*==============================================================================
 ## Total number of record with filtering
 =================================================================================*/
-$sel = $db->select("select count(*) as allcount from satt_order_products WHERE 1 " . $searchQuery);
+$sel = $db->select("select count(*) as allcount from new_product_order WHERE 1 " . $searchQuery);
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
@@ -40,23 +40,33 @@ $totalRecordwithFilter = $records['allcount'];
 /*==============================================================================
 ## Fetch records
 =================================================================================*/
-$customer_id = $user['id'];
-$query = "select * from satt_order_products WHERE roll = 0 and status = 1 and customer_id='$customer_id' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$agent_id = $user['id'];
+$query = "select * from new_product_order WHERE  confirmation_status = '1' AND delivery_status = '0' AND cancel_status = '0'" . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $result = $db->select($query);
-  $data = array();
-  $i = 0;
-if ($result){
+$data = array();
+$i = 0;
+if ($result) {
   while ($row = mysqli_fetch_assoc($result)) {
-    $pay = explode("_", $row['pay_type']);
-    $pay_type = implode(" ", $pay);
+
+    if ($row['agent_id']) {
+      $agent_name = $row['agent_name'];
+      $agent_phn = $row['agent_phn'];
+    }else{
+      $agent_name = 'N/A';
+      $agent_phn = 'N/A';
+
+    }
+   
     $data[] = array(
       "DT_RowIndex" => $i + 1,
       "id" => $row['id'],
-      "product_name" => '<strong>' . $row['product_name'] . '</strong>',
-      "pay_type" => '<strong>' . $pay_type . '</strong>',
-      "installation_charge" => '<strong>' . $row['installation_charge'] . '</strong>',
-      "pay_amount" => '<strong>' . $row['pay_amount'] . '</strong>',
-      "yearly_renew_charge" => '<strong>' . $row['yearly_renew_charge'] . '</strong>',
+      "expected_name_software" => '<strong>' . $row['expected_name_software'] . '</strong>',
+      "customer_name" => '<strong>' .$row['customer_name'] . '</strong>',
+      "customer_phn" => '<strong>' . $row['customer_phn'] . '</strong>',
+      "agent_name" => '<strong>' . $agent_name . '</strong>',
+      "agent_phn" => '<strong>' .$agent_phn . '</strong>',
+      "order_date" => '<strong>' .$row['order_date'] . '</strong>',
+      "status" => '<strong class="bg-success p-1">Confirmed</strong>',
       
       "action" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
@@ -66,12 +76,10 @@ if ($result){
               <i class="icon-menu9"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-              <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/confirm_product/show.php?order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
-
-              <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/confirm_product/user_manual.php?product_id=' . $row['product_id'] . '"><i class="icon-tv"></i> user Manual </span>
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/confirm-new-software/show.php?new_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
 
 
-  
+             <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL .'/confirm-new-software/deliver_order.php?new_order_id='.$row['id'].'" style = "color:green"><i class="icon-checkmark4"></i> Deliver Order</span>
 
             </div>
           </div>
@@ -81,7 +89,6 @@ if ($result){
     $i++;
   }
 }
-
 
 /*===========================================================
 ## Response

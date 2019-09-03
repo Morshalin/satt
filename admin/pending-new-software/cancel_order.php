@@ -10,7 +10,7 @@ ajax();
        // die($order_id);
 ?>
 <!-- Login form -->
-<form class="form-validate-jquery" action='<?php echo CUSTOMER_URL; ?>/pending-new-software/ajax.php?new_order_id=<?php echo $order_id; ?>' id="content_form" method="post">
+<form class="form-validate-jquery" action='<?php echo ADMIN_URL; ?>/pending-new-software/ajax.php?new_order_id=<?php echo $order_id; ?>' id="content_form" method="post">
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Cancel Order <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     <div class="row">

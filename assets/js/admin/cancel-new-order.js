@@ -61,10 +61,10 @@ var DatatableButtonsHtml5 = function() {
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 8]
+                targets: [0, 9]
             }, {
                 orderable: false,
-                targets: [7,8]
+                targets: [9]
             }],
             order: [1, 'desc'],
             processing: true,
@@ -74,20 +74,22 @@ var DatatableButtonsHtml5 = function() {
                 // { data: 'checkbox', name: 'checkbox' },
                 {
                     data: 'DT_RowIndex'
+                },{
+                    data: 'expected_name_software'
                 }, {
-                    data: 'product_name'
-                },  {
                     data: 'customer_name'
                 }, {
-                    data: 'customer_number'
+                    data: 'customer_phn'
                 }, {
                     data: 'agent_name'
-                },{
-                    data: 'pay_type'
+                },  {
+                    data: 'agent_phn'
                 }, {
                     data: 'order_date'
                 }, {
-                    data: 'status'
+                    data: 'cancel_reason'
+                },{
+                    data: 'cancel_date'
                 },{
                     data: 'action'
                 }
@@ -145,57 +147,3 @@ var DatatableButtonsHtml5 = function() {
 document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
 });
-
-
-
-    $(document).on('change','#payment_method', function(){
-        var payment_method = $("#payment_method").val();
-        if (payment_method == 'check') {
-            $("#check_method").show(500);
-            $("#check_no").attr("required",true);
-        }else{
-            $("#check_method").hide(500);
-            $("#check_no").val("");
-            $("#check_no").attr("required",false);
-
-        }
-    });
-
-       $(document).on('change','#payment_method', function(){
-        var payment_method = $("#payment_method").val();
-        if (payment_method == 'mobile') {
-            $("#mobile_method").show(500);
-            $("#mobile_banking_name").attr("required",true);
-            $("#received_phone_number").attr("required",true);
-        }else{
-            $("#mobile_method").hide(500);
-            $("#mobile_banking_name").val("");
-            $("#received_phone_number").val("");
-            $("#tx_id").val("");
-            $("#mobile_banking_name").attr("required",false);
-            $("#received_phone_number").attr("required",false);
-        }
-    })
-
-
-$(document).on('keyup','#pay_amount',function(){
-    var seling_total_price = parseInt($('#seling_total_price').val());
-    var pay_amount = parseInt($('#pay_amount').val());
-    var due_amount = seling_total_price - pay_amount;
-    $('#due_amount').val(due_amount);
-
-    if (pay_amount > seling_total_price) {
-        alert("Pay amount can't gatter then Selling price");
-       $('#pay_amount').val('');
-       $('#due_amount').val('');
-    }
-});
-
-$(document).on('keyup','#seling_total_price',function(){
-    var seling_total_price = parseInt($('#seling_total_price').val());
-    var pay_amount = parseInt($('#pay_amount').val());
-    var due_amount = seling_total_price - pay_amount;
-    $('#due_amount').val(due_amount);
-});
-
-

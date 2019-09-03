@@ -1,15 +1,16 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('admin', ADMIN_URL.'/pending-order', 'Pending Order');
+  Session::checkSession('agent-panel', AGENT_URL . '/your-goals','Your Goals');
   $data = array();
-  $data['page_title'] = 'Pending Order';
+  $data['page_title'] = 'Your Goals';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'pending-order';
+  $data['page_index'] = 'your-goals';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/admin/pending-order'];
+  $data['page_js'] = ['assets/js/agent-panel/your-goals'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
+
 <div class="page-header page-header-light">
 
   <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -44,18 +45,12 @@
   			<img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
   		</div> -->
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/pending-order/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo AGENT_URL; ?>/your-goals/table.php">
   				<thead>
   					<tr>
   						<th>#</th>
-              <th>Product Name</th>
-              <th>Customer Name</th>
-              <th>Customer Number</th>
-              <th>Agent Name</th>
-              <th>Pay Type</th>
-              <th>Order Date</th>
-  						<th>Confirmation Status</th>
-  						<th>Action</th>
+              <th>Month Name</th>
+              <th>Target Amount (taka)</th>
   					</tr>
   				</thead>
   				<tbody>
@@ -68,8 +63,6 @@
 <!-- /content area -->
 <?php include_once '../inc/footer.php'; ?>
 <script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
-<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/select.min.js"></script>
-<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/buttons.min.js"></script>
 <script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
 </body>
 </html>

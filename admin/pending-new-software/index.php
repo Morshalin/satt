@@ -52,8 +52,9 @@
               <th>Software Name</th>
               <th>Customer Name</th>
               <th>Customer Phn No</th>
-              <th>Feature Note</th>
-  						<th>Order Date</th>
+              <th>Agent Name</th>
+  						<th>Agent Phn No</th>
+              <th>Order Date</th>
   						<th>Status</th>
               <th>Action</th>
   					</tr>

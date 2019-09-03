@@ -74,15 +74,15 @@ var DatatableButtonsHtml5 = function() {
                 // { data: 'checkbox', name: 'checkbox' },
                 {
                     data: 'DT_RowIndex'
+                },{
+                    data: 'product_name'
                 }, {
                     data: 'customer_name'
                 }, {
                     data: 'customer_number'
                 }, {
                     data: 'agent_name'
-                }, {
-                    data: 'product_name'
-                }, {
+                },  {
                     data: 'pay_type'
                 }, {
                     data: 'order_date'

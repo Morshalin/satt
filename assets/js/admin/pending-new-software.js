@@ -82,7 +82,7 @@ var DatatableButtonsHtml5 = function() {
                 }, {
                     data: 'agent_name'
                 },{
-                    data: 'agent_phone_no'
+                    data: 'agent_phn'
                 }, {
                     data: 'order_date'
                 }, {
@@ -149,4 +149,54 @@ document.addEventListener('DOMContentLoaded', function() {
 
 $(document).ready(function(){
   
+    $(document).on('change','#payment_method', function(){
+        var payment_method = $("#payment_method").val();
+        if (payment_method == 'check') {
+            $("#check_method").show(500);
+            $("#check_no").attr("required",true);
+        }else{
+            $("#check_method").hide(500);
+            $("#check_no").val("");
+            $("#check_no").attr("required",false);
+
+        }
+    });
+
+       $(document).on('change','#payment_method', function(){
+        var payment_method = $("#payment_method").val();
+        if (payment_method == 'mobile') {
+            $("#mobile_method").show(500);
+            $("#mobile_banking_name").attr("required",true);
+            $("#received_phone_number").attr("required",true);
+        }else{
+            $("#mobile_method").hide(500);
+            $("#mobile_banking_name").val("");
+            $("#received_phone_number").val("");
+            $("#tx_id").val("");
+            $("#mobile_banking_name").attr("required",false);
+            $("#received_phone_number").attr("required",false);
+        }
+    })
+
+
+$(document).on('keyup','#pay_amount',function(){
+    var seling_total_price = parseInt($('#seling_total_price').val());
+    var pay_amount = parseInt($('#pay_amount').val());
+    var due_amount = seling_total_price - pay_amount;
+    $('#due_amount').val(due_amount);
+
+    if (pay_amount > seling_total_price) {
+        alert("Pay amount can't gatter then Selling price");
+       $('#pay_amount').val('');
+       $('#due_amount').val('');
+    }
+});
+
+$(document).on('keyup','#seling_total_price',function(){
+    var seling_total_price = parseInt($('#seling_total_price').val());
+    var pay_amount = parseInt($('#pay_amount').val());
+    var due_amount = seling_total_price - pay_amount;
+    $('#due_amount').val(due_amount);
+});
+
 });

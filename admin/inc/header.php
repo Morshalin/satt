@@ -115,6 +115,7 @@
 						<div class="dropdown-divider"></div>
 						<a href="<?php echo BASE_URL; ?>/lock.php?goto=<?php echo app_url().$_SERVER['REQUEST_URI']; ?>" class="dropdown-item" id="lock"><i class="icon-user-lock"></i> Lock User</a>
 						<a href="<?php echo BASE_URL; ?>/logout.php" class="dropdown-item" id="logout"><i class="icon-switch2"></i> Logout</a>
+						<a href="<?php echo BASE_URL; ?>/change-password.php?userid=<?php echo $user['id']; ?>" class="dropdown-item" id="logout"><i class="icon-key"></i> Change Password</a>
 					</div>
 				</li>
 			</ul>
