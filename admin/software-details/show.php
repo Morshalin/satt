@@ -97,7 +97,7 @@ if (isset($_GET['software_details_id'])) {
             </div>
             <div class="row">
                     <b class="col-md-4">End Date :</b>
-                    <h6 class="col-md-8"><?php echo $new_end_date; ?></h6>
+                    <h6 class="col-md-8" ><?php echo $new_end_date; ?></h6>
             </div>
             <div class="row">
                     <b class="col-md-4">Short Features :</b>
@@ -110,6 +110,10 @@ if (isset($_GET['software_details_id'])) {
             <div class="row">
                     <b class="col-md-4">Software User Manual :</b>
                     <h6 class="col-md-8"><?php echo $row['user_manual']; ?></h6>
+            </div>
+            <div class="row">
+                    <b class="col-md-4">Project End Time remaining  :</b>
+                    <h6 class="col-md-8"><span class="mr-1" id="expired"><span class="mr-1" id="days"> </span><span class="mr-1" id="hours"> </span><span class="mr-1" id="minutes"> </span><span class="mr-1" id="seconds"> </span></h6>
             </div>
         </div>
         <div class="col-lg-2"></div>
@@ -158,6 +162,7 @@ if (isset($_GET['software_details_id'])) {
                     <b class="col-md-8">Yearly Renew Charge  :</b>
                     <h6 class="col-md-4"><?php echo $row_price['yearly_renew_charge']; ?> /=</h6>
             </div>
+            
 
         </div>
 
@@ -229,3 +234,81 @@ if (isset($_GET['software_details_id'])) {
     </div>
 </fieldset>
 <!-- /login form -->
+<!-- Display the countdown timer in an element -->
+
+<script>
+    
+   function makeTimer() {
+
+    //      var endTime = new Date("29 April 2018 9:56:00 GMT+01:00");  
+        var endTime = new Date("<?php echo $end_date ?>");         
+            endTime = (Date.parse(endTime) / 1000);
+
+            var now = new Date();
+            now = (Date.parse(now) / 1000);
+
+            var timeLeft = endTime - now;
+
+            var days = Math.floor(timeLeft / 86400); 
+            var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+            var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
+            var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+  
+            if (hours < "10") { hours = "0" + hours; }
+            if (minutes < "10") { minutes = "0" + minutes; }
+            if (seconds < "10") { seconds = "0" + seconds; }
+                if (days < 1) {
+                    var badge='badge badge-danger';
+                  }else{
+                    var badge='badge badge-success';
+
+                  }
+            $("#days").html('<span class="'+badge+'">'+days+' Days</span>');
+            $("#hours").html('<span class="'+badge+'">'+hours+' Hours</span>');
+            $("#minutes").html('<span class="'+badge+'">'+minutes+' Minutes</span>');
+            $("#seconds").html('<span class="'+badge+'">'+seconds+' Seconds</span>');
+
+      
+
+    }    
+   function makeTimer2() {
+
+    //      var endTime = new Date("29 April 2018 9:56:00 GMT+01:00");  
+        var endTime = new Date("<?php echo $end_date ?>");         
+            endTime = (Date.parse(endTime) / 1000);
+
+            var now = new Date();
+            now = (Date.parse(now) / 1000);
+
+            var timeLeft = endTime - now;
+
+            var days = Math.floor(timeLeft / 86400); 
+            var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+            var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
+            var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+  
+
+
+              // If the count down is finished, write some text 
+            return days;
+      
+
+    }
+
+var x = setInterval(function() { makeTimer(); }, 1000);
+
+
+setInterval(function() { 
+    var days = makeTimer2(); 
+    console.log(days);
+    if (days <= -1 ) {
+                clearInterval(x);
+                $("#expired").html('<span class="badge badge-danger">DATE EXPIRED</span>');
+            }
+}, 1000);
+
+          
+</script>
+
+
+

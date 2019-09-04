@@ -159,7 +159,7 @@ if (isset($_GET['$user_id'])) {
 						}else{
 							json_encode(['message' => 'Admin Profile Updated Successfull']);
 						}
-					// die(json_encode(['message' => 'Admin Profile Updated Successfully']));
+					die(json_encode(['message' => 'Admin Profile Updated Successfully']));
 					}else{
 						http_response_code(500);
 						die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
