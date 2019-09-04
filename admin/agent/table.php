@@ -92,6 +92,10 @@ if ($result) {
               
               <span  class="dropdown-item " id="send_mail" style="display:'.$display_send_mail.'"  data-url="' . ADMIN_URL . '/agent/ajax_send_mail.php?agent_id=' . $row['id'] . '"><i class="icon-envelope"></i> Send Confirmation Mail</span>
 
+
+              
+              <span  class="dropdown-item " id="send_bulk_mail" data-url="' . ADMIN_URL . '/agent/ajax_send_bulk_mail.php?agent_id=' . $row['id'] . '"><i class="icon-envelope"></i> Send Mail</span>
+
               
               <span  class="dropdown-item " id="content_managment" style="display:'.$display_send_mail.'"  data-url="' . ADMIN_URL . '/agent/add_gift_on_point.php?agent_id=' . $row['id'] . '"><i class="icon-gift"></i>Add Gift On Points</span>
 
