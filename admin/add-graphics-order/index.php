@@ -138,8 +138,14 @@ $customer_id =  $user['id'];
         </div>
         <div class="col-lg-4">
             <div class="form-group">
+                <label for="profit" class="col-form-label">Profit</label>
+                <input type="text" name="profit" id="profit" class="form-control" placeholder="Type Other Cost"  autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group pt-2">
                 <label for="order_status" class="form-check-label">Order Status</label>
-                  <select class="select form-control" name="order_status" required="" id="order_status">
+                  <select class="form-control mt-1" name="order_status" required="" id="order_status">
                           <option value="">Select Order Status</option>
                           <option value="" >a</option>
                           <option value="" >b</option>
@@ -150,7 +156,7 @@ $customer_id =  $user['id'];
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="notes" class="col-form-label">Notes</label>
-                <input type="text" name="notes" id="notes" class="form-control" placeholder="Type Order Note"  autofocus value="">
+                <textarea name="notes" id="notes" class="form-control" placeholder="Type Order Note"  autofocus></textarea>
             </div>
         </div>
         <div class="col-lg-4">
