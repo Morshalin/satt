@@ -37,64 +37,124 @@ $customer_id =  $user['id'];
           <legend class="text-uppercase font-size-sm font-weight-bold">Add New Graphics Order <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
 
 
-          <section class="fromarea">
-            <div class="container py-5 bg-white" style="width: 100%; padding-right: 5%; padding-left: 5%; margin-top: -20px">
+    <div class="row">
 
 
-
-              <div class="row">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8">
-                  <div class="form-group">
-                    <label for="name" class="col-form-label">Expected Name of Software: <span class="text-danger">*</span></label>
-                    <input type="text" name="expected_name_software" id="expected_name_software" class="form-control" placeholder="Provide a name" required="">
-                  </div>
-                </div>
-                
-                <input type="hidden" name="customer_id" id="customer_id" value="<?php echo $customer_id ?>">
-
-              </div>
-
-              <div class="row">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8">
-                  <div class="form-group">
-                    <label for="name" class="col-form-label">Note For Software Feature: <span class="text-danger">*</span></label>
-                    <textarea class="form-control" name="documentation_note" id="documentation_note" cols="30" rows="10" required=""></textarea>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8" style=" margin-top: 40px;">
-                  <div class="form-group">
-                    <label for="name" class="col-form-label"><span>Upload Documnt Of Feature</span> </label>
-                    <input type="file" name="file_upload_documentation" id="file_upload_documentation" class="form-control"  autofocus>
-                  </div>
-                </div>
-
-              </div>
-
-
-
-
-              <div class="row">
-                <div class="col-lg-12 ">
-                  <div class="form-group" align="center">
-
-                    <input type="submit"   name="submit" style="width: 40%;" id="submit" class="btn btn-success"  value="Submit" >
-                    <input type="button"   name="submiting" style="width: 40%; display: none;" id="submiting" class="btn btn-success"  value="Submitting" disabled="">
-                  </div>
-                </div>
-              </div>
-
-
-
-
-
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="client_name" class="col-form-label">Client Name<span class="text-danger">*</span></label>
+                <input type="text" name="client_name" id="client_name" class="form-control" placeholder="Type Client Name" required autofocus value="">
             </div>
-          </section>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="mobile_no" class="col-form-label">Mobile No<span class="text-danger">*</span></label>
+                <input type="text" name="mobile_no" id="mobile_no" class="form-control" placeholder="Type Mobile No" required autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="shipping_address" class="col-form-label">Shipping Address<span class="text-danger">*</span></label>
+                <input type="text" name="shipping_address" id="shipping_address" class="form-control" placeholder="Type Shipping Address" required autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="currier_name" class="col-form-label">Currier Name<span class="text-danger">*</span></label>
+                <input type="text" name="currier_name" id="currier_name" class="form-control" placeholder="Type Currier Name" required autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="order_name" class="col-form-label">Order Name<span class="text-danger">*</span></label>
+                <input type="text" name="order_name" id="order_name" class="form-control" placeholder="Type Order Name" required autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="order_date" class="col-form-label">Order Date<span class="text-danger">*</span></label>
+                <input type="text" name="order_date" id="order_date" class="form-control date" placeholder="Select Order Date" required autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="qty" class="col-form-label">Quantity<span class="text-danger">*</span></label>
+                <input type="text" name="qty" id="qty" class="form-control" placeholder="Select Start" required autofocus value="Type Quantity">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="received_mobile_no" class="col-form-label">Received Mobile No</label>
+                <input type="text" name="received_mobile_no" id="received_mobile_no" class="form-control" placeholder="Select Start" autofocus value="Type Received Mobile No">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="probable_delivery_date" class="col-form-label">Probable Delivery Date</label>
+                <input type="text" name="probable_delivery_date" id="probable_delivery_date" class="form-control date" placeholder="Select Probable Delivery Date" autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="price" class="col-form-label">Price<span class="text-danger">*</span></label>
+                <input type="text" name="price" id="price" class="form-control date" placeholder="Type Product Price" required autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="advance" class="col-form-label">Advance</label>
+                <input type="text" name="advance" id="advance" class="form-control date" placeholder="Type Advance Price" autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="due" class="col-form-label">Due</label>
+                <input type="text" name="due" id="due" class="form-control date" readonly="" autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="printing_cost" class="col-form-label">Printing Cost<span class="text-danger">*</span></label>
+                <input type="text" name="printing_cost" id="printing_cost" class="form-control" placeholder="Type Printing Cost" required autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="other_cost" class="col-form-label">Other Cost</label>
+                <input type="text" name="other_cost" id="other_cost" class="form-control" placeholder="Type Other Cost"  autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="order_status" class="form-check-label">Order Status</label>
+                  <select class="select form-control" name="order_status" required="" id="order_status">
+                          <option value="">Select Order Status</option>
+                          <option value="" >a</option>
+                          <option value="" >b</option>
+                          <option value="" >c</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="notes" class="col-form-label">Notes</label>
+                <input type="text" name="notes" id="notes" class="form-control" placeholder="Type Order Note"  autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="order_taken_by" class="col-form-label">Order Taken By</label>
+                <input type="text" name="order_taken_by" id="order_taken_by" class="form-control" placeholder="Order Taken By"  autofocus value="">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-lg-4 offset-lg-4">
+            <button type="submit" name="create" class="btn btn-primary ml-31" id="submit">Submit</button>
+            <button type="button" class="btn btn-link" id="submiting" style="display: none;" disabled="">Submiting <img src="<?php echo BASE_URL; ?>/assets/ajaxloader.gif"></button>
+        </div>
+    </div>
 
         </fieldset>
       </form>
