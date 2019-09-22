@@ -212,6 +212,46 @@ var DatatableButtonsHtml5 = function() {
 
 
 
+     var _componentSendBulkMail = function() {
+        $(document).on('click', '#send_bulk_mail', function(e) {
+            e.preventDefault();
+            // it will get action url
+           
+            var url = $(this).data('url');
+            $.ajax({
+                    url: url,
+                    type: 'Get',
+                    dataType: 'json'
+                })
+                .done(function(data) { 
+                      new PNotify({
+                          title: "Success",
+                          text: data.message,
+                          type: "success",
+                          addclass: 'alert alert-styled-left',
+                      });
+                      tariq.ajax.reload();
+                })
+                .fail(function(data) {
+                    
+                    if (data.responseText) {
+                      new PNotify({
+                          title: 'Opps!',
+                          text: data,
+                          type: 'error',
+                          addclass: 'alert alert-styled-left',
+                      });
+                    }
+                    $('#modal-loader').hide();
+                });
+        });
+    };
+
+
+
+
+
+
      var _componentGenerateAppointment = function() {
         $(document).on('click', '#generate_appoint_letter', function(e) {
             e.preventDefault();
@@ -487,6 +527,7 @@ var DatatableButtonsHtml5 = function() {
             _componentDeleteAgentProduct();
             _componentAddClient();
             _componentSendMail();
+            _componentSendBulkMail();
             _componentDeleteNote();
             _componentDeleteAgentClient();
             _componentDletGift();
