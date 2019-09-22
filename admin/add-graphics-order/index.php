@@ -79,13 +79,25 @@ $customer_id =  $user['id'];
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="qty" class="col-form-label">Quantity<span class="text-danger">*</span></label>
-                <input type="text" name="qty" id="qty" class="form-control" placeholder="Select Start" required autofocus value="Type Quantity">
+                <input type="text" name="qty" id="qty" class="form-control" placeholder="Type Quantity" required autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="payment_method" class="col-form-label">Payment Method</label>
+                <input type="text" name="payment_method" id="payment_method" class="form-control" placeholder="Type Payment Method" autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="qty" class="col-form-label">Tx ID/Account No</label>
+                <input type="text" name="qty" id="qty" class="form-control" placeholder="Type Tx ID/Account No" autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="received_mobile_no" class="col-form-label">Received Mobile No</label>
-                <input type="text" name="received_mobile_no" id="received_mobile_no" class="form-control" placeholder="Select Start" autofocus value="Type Received Mobile No">
+                <input type="text" name="received_mobile_no" id="received_mobile_no" class="form-control" placeholder="Type Received Mobile No" autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
