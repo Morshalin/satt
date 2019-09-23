@@ -133,33 +133,7 @@ if (isset($_GET['pending_graphics_order_id'])) {
 
 
 
-        <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8">
-    <legend class="text-uppercase text-center font-size-m font-weight-bold">Pay Informantion </legend>
-            <div class="row">
-                    <b class="col-md-4">Printing Cost :</b>
-                    <h6 class="col-md-8"><?php echo ucwords($row['printing_cost']); ?></h6>
-            </div>
-            <div class="row">
-                    <b class="col-md-4">Currier Cost :</b>
-                    <h6 class="col-md-8"><?php echo ucwords($row['currier_cost']); ?></h6>
-            </div>
-            <div class="row">
-                    <b class="col-md-4">Other Cost :</b>
-                    <h6 class="col-md-8"><?php echo ucwords($row['others_cost']); ?></h6>
-            </div>
-            <div class="row">
-                    <b class="col-md-4">Profit :</b>
-                    <?php 
-                        $profit = '0';
-                        $profit = (int)$row['price'] - (int)$row['printing_cost'] - (int)$row['currier_cost'] - (int)$row['others_cost'];
-                     ?>
-                    <h6 class="col-md-8"><?php echo $profit; ?></h6>
-            </div>
-        </div>
-        <div class="col-lg-2"></div>
-    </div>
+        
 
     <div class="row">
         <div class="col-lg-12">
