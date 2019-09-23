@@ -116,6 +116,7 @@ $(document).ready(function(){
         calculation();
    });
 
+
    $(document).on('keyup blur','#currier_cost',function(){
         calculation();
    });
@@ -163,3 +164,4 @@ function calculation(){
     $('#profit').val(profit);
    }
 });
+
