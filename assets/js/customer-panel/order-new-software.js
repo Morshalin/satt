@@ -48,47 +48,10 @@ var DatatableButtonsHtml5 = function() {
             }
         });
         // Basic initialization
-        // tariq = $('.content_managment_table').DataTable({
-        //     fnDrawCallback: function(oSettings) {
-        //         dataTableReload();
-        //     },
-        //     responsive: {
-        //         details: {
-        //             type: 'column',
-        //             target: 'tr'
-        //         }
-        //     },
-        //     columnDefs: [{
-        //         width: "100px",
-        //         targets: [0, 6]
-        //     }, {
-        //         orderable: false,
-        //         targets: [6]
-        //     }],
-        //     order: [1, 'asc'],
-        //     processing: true,
-        //     serverSide: true,
-        //     // ajax: $('.content_managment_table').data('url'),
-        //     // columns: [
-        //     //     // { data: 'checkbox', name: 'checkbox' },
-        //     //     {
-        //     //         data: 'DT_RowIndex'
-        //     //     }, {
-        //     //         data: 'product_name'
-        //     //     }, {
-        //     //         data: 'pay_type'
-        //     //     }, {
-        //     //         data: 'installation_charge'
-        //     //     }, {
-        //     //         data: 'pay_amount'
-        //     //     }, {
-        //     //         data: 'yearly_renew_charge'
-        //     //     },{
-        //     //         data: 'action'
-        //     //     }
-        //     // ]
-        // });
+      
+
     };
+
 
     var _componentRemoteModalLoad = function() {
         $(document).on('click', '#content_managment', function(e) {

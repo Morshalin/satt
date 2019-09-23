@@ -48,51 +48,6 @@ var DatatableButtonsHtml5 = function() {
             }
         });
         // Basic initialization
-        tariq = $('.content_managment_table').DataTable({
-            fnDrawCallback: function(oSettings) {
-                dataTableReload();
-            },
-            responsive: {
-                details: {
-                    type: 'column',
-                    target: 'tr'
-                }
-            },
-            select: true,
-            columnDefs: [{
-                width: "100px",
-                targets: [0, 8]
-            }, {
-                orderable: false,
-                targets: [7,8]
-            }],
-            order: [1, 'desc'],
-            processing: true,
-            serverSide: true,
-            ajax: $('.content_managment_table').data('url'),
-            columns: [
-                // { data: 'checkbox', name: 'checkbox' },
-                {
-                    data: 'DT_RowIndex'
-                }, {
-                    data: 'product_name'
-                }, {
-                    data: 'customer_name'
-                }, {
-                    data: 'customer_number'
-                }, {
-                    data: 'agent_name'
-                }, {
-                    data: 'pay_type'
-                }, {
-                    data: 'order_date'
-                }, {
-                    data: 'status'
-                },{
-                    data: 'action'
-                }
-            ]
-        });
     };
 
     var _componentRemoteModalLoad = function() {
@@ -115,8 +70,10 @@ var DatatableButtonsHtml5 = function() {
                     $('.modal-body').html(data).fadeIn(); // load response
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
+                     _componentSelect2Modal();
                     _componentDatePicker();
                     _modalFormValidation();
+
                 })
                 .fail(function(data) {
                     $('.modal-body').html('<span style="color:red; font-weight: bold;"> Something Went Wrong. Please Try again later.......</span>');
@@ -136,9 +93,8 @@ var DatatableButtonsHtml5 = function() {
     return {
         init: function() {
             _componentDatatableButtonsHtml5();
-            _componentSelect2Normal();
             _componentRemoteModalLoad();
-            _componentDatePicker();
+                    _componentDatePicker();
         }
     }
 }();
@@ -148,47 +104,62 @@ document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
 });
 
+$(document).ready(function(){
+  
+   $(document).on('keyup blur','#price',function(){
+        calculation();
+   });
+   $(document).on('keyup blur','#advance',function(){
+        calculation();
+   });
+   $(document).on('keyup blur','#printing_cost',function(){
+        calculation();
+   });
+
+   $(document).on('keyup blur','#currier_cost',function(){
+        calculation();
+   });
+
+   $(document).on('keyup blur','#others_cost',function(){
+        calculation();
+   });
 
 
-    $(document).on('change','#payment_method', function(){
-        var payment_method = $("#payment_method").val();
-        if (payment_method == 'check') {
-            $("#check_method").show(500);
-            $("#check_no").attr("required",true);
-        }else{
-            $("#check_method").hide(500);
-            $("#check_no").val("");
-            $("#check_no").attr("required",false);
-
-        }
-    });
-
-       $(document).on('change','#payment_method', function(){
-        var payment_method = $("#payment_method").val();
-        if (payment_method == 'mobile') {
-            $("#mobile_method").show(500);
-            $("#mobile_banking_name").attr("required",true);
-            $("#received_phone_number").attr("required",true);
-        }else{
-            $("#mobile_method").hide(500);
-            $("#mobile_banking_name").val("");
-            $("#received_phone_number").val("");
-            $("#tx_id").val("");
-            $("#mobile_banking_name").attr("required",false);
-            $("#received_phone_number").attr("required",false);
-        }
-    })
-
-
-$(document).on('keyup','#pay_amount',function(){
-    var total_due = parseInt($('#total_due').val());
-    var pay_amount = parseInt($('#pay_amount').val());
-    var due_amount = total_due - pay_amount;
-    $('#due_amount').val(due_amount);
-
-    if (pay_amount > total_due) {
-        alert("New Pay amount can't gatter then Total Due");
-       $('#pay_amount').val('');
-       $('#due_amount').val('');
+function calculation(){
+    var price = $('#price').val();
+    var advance = $('#advance').val();
+    var printing_cost = $('#printing_cost').val();
+    var currier_cost = $('#currier_cost').val();
+    var others_cost = $('#others_cost').val();
+    if (price == "") {
+        price = 0;
     }
+    if (advance == "") {
+        advance = 0;
+    }
+    if (printing_cost == "") {
+        printing_cost = 0;
+    }
+    if (currier_cost == "") {
+        currier_cost = 0;
+    }
+    if (others_cost == "") {
+        others_cost = 0;
+    }
+
+    var profit = parseInt(price) - parseInt(printing_cost) - parseInt(currier_cost) - parseInt(others_cost);
+    var due = parseInt(price) - parseInt(advance);
+
+    if (advance > price) {
+        alert("Advance Payment Cannot Be Greater Than The Price...");
+        $("#advance").val("0");
+         advance = 0;
+        $("#due").val(price);
+    }else{
+
+        $('#due').val(due);
+    }
+    
+    $('#profit').val(profit);
+   }
 });

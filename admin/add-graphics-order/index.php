@@ -74,7 +74,7 @@ $customer_id =  $user['id'];
             <div class="form-group">
                 <label for="order_date" class="col-form-label">Order Date<span class="text-danger">*</span></label>
                 <input type="text" name="order_date" id="order_date" class="form-control date" placeholder="Select Order Date" required autofocus value="">
-            </div>c
+            </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group">
@@ -138,14 +138,14 @@ $customer_id =  $user['id'];
         </div>
         <div class="col-lg-4">
             <div class="form-group">
-                <label for="other_cost" class="col-form-label">Other Cost</label>
-                <input type="text" name="other_cost" id="other_cost" class="form-control" placeholder="Type Other Cost"  autofocus value="">
+                <label for="others_cost" class="col-form-label">Other Cost</label>
+                <input type="text" name="others_cost" id="others_cost" class="form-control" placeholder="Type Other Cost"  autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="profit" class="col-form-label">Profit</label>
-                <input type="text" name="profit" id="profit" class="form-control" placeholder="Type Other Cost"  autofocus value="">
+                <input type="text" name="profit" id="profit" class="form-control" placeholder=""  autofocus value="" readonly="">
             </div>
         </div>
         <div class="col-lg-4">
