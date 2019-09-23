@@ -66,15 +66,15 @@ $customer_id =  $user['id'];
         </div>
         <div class="col-lg-4">
             <div class="form-group">
-                <label for="order_name" class="col-form-label">Order Name<span class="text-danger">*</span></label>
-                <input type="text" name="order_name" id="order_name" class="form-control" placeholder="Type Order Name" required autofocus value="">
+                <label for="product_name" class="col-form-label">Product Name<span class="text-danger">*</span></label>
+                <input type="text" name="product_name" id="product_name" class="form-control" placeholder="Type Order Name" required autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="order_date" class="col-form-label">Order Date<span class="text-danger">*</span></label>
                 <input type="text" name="order_date" id="order_date" class="form-control date" placeholder="Select Order Date" required autofocus value="">
-            </div>
+            </div>c
         </div>
         <div class="col-lg-4">
             <div class="form-group">
@@ -90,8 +90,8 @@ $customer_id =  $user['id'];
         </div>
         <div class="col-lg-4">
             <div class="form-group">
-                <label for="qty" class="col-form-label">Tx ID/Account No</label>
-                <input type="text" name="qty" id="qty" class="form-control" placeholder="Type Tx ID/Account No" autofocus value="">
+                <label for="tx_id_account_no" class="col-form-label">Tx ID/Account No</label>
+                <input type="text" name="tx_id_account_no" id="tx_id_account_no" class="form-control" placeholder="Type Tx ID/Account No" autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
@@ -109,25 +109,31 @@ $customer_id =  $user['id'];
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="price" class="col-form-label">Price<span class="text-danger">*</span></label>
-                <input type="text" name="price" id="price" class="form-control date" placeholder="Type Product Price" required autofocus value="">
+                <input type="text" name="price" id="price" class="form-control " placeholder="Type Product Price" required autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="advance" class="col-form-label">Advance</label>
-                <input type="text" name="advance" id="advance" class="form-control date" placeholder="Type Advance Price" autofocus value="">
+                <input type="text" name="advance" id="advance" class="form-control" placeholder="Type Advance Price" autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="due" class="col-form-label">Due</label>
-                <input type="text" name="due" id="due" class="form-control date" readonly="" autofocus value="">
+                <input type="text" name="due" id="due" class="form-control " readonly="" autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="printing_cost" class="col-form-label">Printing Cost<span class="text-danger">*</span></label>
                 <input type="text" name="printing_cost" id="printing_cost" class="form-control" placeholder="Type Printing Cost" required autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="currier_cost" class="col-form-label">Currier Cost<span class="text-danger">*</span></label>
+                <input type="text" name="currier_cost" id="currier_cost" class="form-control" placeholder="Type Currier Cost" required autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
@@ -147,9 +153,11 @@ $customer_id =  $user['id'];
                 <label for="order_status" class="form-check-label">Order Status</label>
                   <select class="form-control mt-1" name="order_status" required="" id="order_status">
                           <option value="">Select Order Status</option>
-                          <option value="" >a</option>
-                          <option value="" >b</option>
-                          <option value="" >c</option>
+                          <option value="Pending" >Pending</option>
+                          <option value="Developing" >Developing</option>
+                          <option value="Printing" >Printing</option>
+                          <option value="Sent To Currier" >Sent To Currier</option>
+                          <option value="Delivered" >Delivered</option>
                 </select>
             </div>
         </div>

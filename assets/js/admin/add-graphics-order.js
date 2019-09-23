@@ -137,6 +137,7 @@ var DatatableButtonsHtml5 = function() {
             _componentDatatableButtonsHtml5();
             _componentSelect2Normal();
             _componentRemoteModalLoad();
+            _componentDatePicker();
         }
     }
 }();

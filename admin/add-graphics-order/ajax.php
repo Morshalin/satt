@@ -20,23 +20,65 @@ Session::checkSession('admin', ADMIN_URL . '/add-graphics-order', 'add-graphics-
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$error = array();
 
-			$customer_id = $_POST['customer_id'];
-			$query = "SELECT * FROM satt_customer_informations WHERE id = '$customer_id'";
-			$get_customer = $db->select($query);
-			if ($get_customer) {
-				$customer = $get_customer->fetch_assoc();
-				$customer_name = $customer['name'];
-				$customer_phn = $customer['number'];
-			}
-			$expected_name_software = $fm->validation($_POST['expected_name_software']);
-			$documentation_note = $fm->validation($_POST['documentation_note']);
+			$client_name = $fm->validation($_POST['client_name']);
+			$mobile_no = $fm->validation($_POST['mobile_no']);
+			$shipping_address = $fm->validation($_POST['shipping_address']);
+			$currier_name = $fm->validation($_POST['currier_name']);
+			$product_name = $fm->validation($_POST['product_name']);
+			$order_date = $fm->validation($_POST['order_date']);
+			$qty = $fm->validation($_POST['qty']);
+			$payment_method = $fm->validation($_POST['payment_method']);
+			$probable_delivery_date = $fm->validation($_POST['probable_delivery_date']);
+			$price = $fm->validation($_POST['price']);
+			$printing_cost = $fm->validation($_POST['printing_cost']);
+			$currier_cost = $fm->validation($_POST['currier_cost']);
+			$other_cost = $fm->validation($_POST['other_cost']);
+			$order_status = $fm->validation($_POST['order_status']);
+			$notes = $fm->validation($_POST['notes']);
+			$order_taken_by = $fm->validation($_POST['order_taken_by']);
+			
+			
+			$payment_method = $fm->validation($_POST['payment_method']);
+			$tx_id_account_no = $fm->validation($_POST['tx_id_account_no']);
+			$received_mobile_no = $fm->validation($_POST['received_mobile_no']);
+			$advance = $fm->validation($_POST['advance']);
 			// $file_upload_documentation = $fm->validation($_POST['file_upload_documentation']);
 
-			if (!$expected_name_software) {
-				$error['expected_name_software'] = 'Expected Name Field required';
+			if (!$client_name) {
+				$error['client_name'] = 'Client Name Field required';
 			}
-			if (!$documentation_note) {
-				$error['documentation_note'] = 'End Date Field required';
+			if (!$mobile_no) {
+				$error['documentation_note'] = 'Mobile Number Field required';
+			}
+			if (!$client_name) {
+				$error['client_name'] = 'Client Name Field required';
+			}
+			if (!$mobile_no) {
+				$error['documentation_note'] = 'Mobile Number Field required';
+			}
+			if (!$client_name) {
+				$error['client_name'] = 'Client Name Field required';
+			}
+			if (!$mobile_no) {
+				$error['documentation_note'] = 'Mobile Number Field required';
+			}
+			if (!$client_name) {
+				$error['client_name'] = 'Client Name Field required';
+			}
+			if (!$mobile_no) {
+				$error['documentation_note'] = 'Mobile Number Field required';
+			}
+			if (!$client_name) {
+				$error['client_name'] = 'Client Name Field required';
+			}
+			if (!$mobile_no) {
+				$error['documentation_note'] = 'Mobile Number Field required';
+			}
+			if (!$client_name) {
+				$error['client_name'] = 'Client Name Field required';
+			}
+			if (!$mobile_no) {
+				$error['documentation_note'] = 'Mobile Number Field required';
 			}
 
 
