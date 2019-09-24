@@ -15,7 +15,7 @@ if (isset($_GET['pay_order_id'])) {
 }
 
 
-
+ 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$pay_order_id = $_GET['pay_order_id'];
@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$tx_id_account_no = $fm->validation($_POST['tx_id_account_no']);
 		$received_mobile_no = $fm->validation($_POST['received_mobile_no']);
 		$received_by = $fm->validation($_POST['received_by']);
+
 
 		if (!$pay_amount) {
 			$error['pay_amount'] = 'Pay Field required';

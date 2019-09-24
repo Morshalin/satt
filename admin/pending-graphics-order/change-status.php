@@ -46,6 +46,17 @@ if (isset($_GET['pending_graphics_order_id'])) {
             </div>
         </div>
     </div>
+    <div class="row" style="display: none;" id="card_photo">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+                <label for="photo" class="col-form-label">Photo <span class="text-danger">*</span></label>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input type="file" name="photo" id="photo" class="form-control" >
+            </div>
+        </div>
+    </div>
 
     <div class="form-group row">
         <div class="col-lg-4 offset-lg-4">
@@ -57,3 +68,17 @@ if (isset($_GET['pending_graphics_order_id'])) {
 </fieldset>
 </form>
 <!-- /login form -->
+<script>
+      $(document).on('change','#order_status', function(){
+        var order_status = $("#order_status").val();
+        if (order_status == 'Printing') {
+            $("#card_photo").show(500);
+            $("#photo").attr("required",true);
+        }else{
+            $("#card_photo").hide(500);
+            $("#photo").val("");
+            $("#photo").attr("required",false);
+
+        }
+    });
+</script>
