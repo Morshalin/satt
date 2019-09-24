@@ -17,7 +17,7 @@ Session::checkSession('admin', ADMIN_URL . '/add-graphics-order', 'add-graphics-
 /*================================================================
 		Insert Data into Database
 		===================================================================*/
-		if (isset($_POST['submit'])) {
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$error = array();
 
 			$client_name = $fm->validation($_POST['client_name']);
