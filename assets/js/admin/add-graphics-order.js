@@ -107,10 +107,56 @@ document.addEventListener('DOMContentLoaded', function() {
 $(document).ready(function(){
   
    $(document).on('keyup blur','#price',function(){
+         var price = $('#price').val();
+
+         if (!price) {
+            price = 0;
+         }
+
+         var advance = $('#advance').val();
+         if (!advance) {
+            advance = 0;
+         }
+         var due = parseInt(price) - parseInt(advance);
+
+        if (advance > price) {
+            alert("Advance Payment Cannot Be Greater Than The Price...");
+            $("#advance").val("0");
+             advance = 0;
+            $("#due").val(price);
+        }else{
+
+            $('#due').val(due);
+        }
         calculation();
+
+
+
    });
    $(document).on('keyup blur','#advance',function(){
-        calculation();
+         var price = $('#price').val();
+
+         if (!price) {
+            price = 0;
+         }
+
+         var advance = $('#advance').val();
+         if (!advance) {
+            advance = 0;
+         }
+         var due = parseInt(price) - parseInt(advance);
+
+        if (parseInt(advance) > parseInt(price)) {
+            alert("Advance Payment Cannot Be Greater Than The Price...");
+            $("#advance").val("0");
+             advance = 0;
+            $("#due").val(price);
+        }else{
+
+            $('#due').val(due);
+        }
+
+
    });
    $(document).on('keyup blur','#printing_cost',function(){
         calculation();
@@ -128,7 +174,6 @@ $(document).ready(function(){
 
 function calculation(){
     var price = $('#price').val();
-    var advance = $('#advance').val();
     var printing_cost = $('#printing_cost').val();
     var currier_cost = $('#currier_cost').val();
     var others_cost = $('#others_cost').val();
@@ -149,17 +194,7 @@ function calculation(){
     }
 
     var profit = parseInt(price) - parseInt(printing_cost) - parseInt(currier_cost) - parseInt(others_cost);
-    var due = parseInt(price) - parseInt(advance);
-
-    if (advance > price) {
-        alert("Advance Payment Cannot Be Greater Than The Price...");
-        $("#advance").val("0");
-         advance = 0;
-        $("#due").val(price);
-    }else{
-
-        $('#due').val(due);
-    }
+    
     
     $('#profit').val(profit);
    }

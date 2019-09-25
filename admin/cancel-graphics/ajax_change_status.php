@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL.'/pending-graphics-order', 'Pending Graphics Order');
+Session::checkSession('admin', ADMIN_URL.'/cancel-graphics', 'Cancel Graphics Order');
 if (isset($_GET['change_order_id'])) {
 	$change_order_id = $_GET['change_order_id'];
 	if ($change_order_id) {

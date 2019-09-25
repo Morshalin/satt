@@ -1,10 +1,10 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL.'/pending-graphics-order', 'Pending Graphics Order');
-if (isset($_GET['pending_graphics_order_id'])) {
-    $pending_graphics_order_id = $_GET['pending_graphics_order_id'];
-    $query = "SELECT * FROM graphics_info WHERE id='$pending_graphics_order_id'";
+Session::checkSession('admin', ADMIN_URL.'/paid-delivered-graphics', 'Pending Graphics Order');
+if (isset($_GET['delivered_graphics_order_id'])) {
+    $delivered_graphics_order_id = $_GET['delivered_graphics_order_id'];
+    $query = "SELECT * FROM graphics_info WHERE id='$delivered_graphics_order_id'";
     $result = $db->select($query);
     if ($result) {
         $row = $result->fetch_assoc();
@@ -23,7 +23,7 @@ if (isset($_GET['pending_graphics_order_id'])) {
 ?>
 
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/pending-graphics-order/ajax_change_status.php?change_order_id=<?php echo $pending_graphics_order_id; ?>" id="content_form" method="post">
+<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/paid-delivered-graphics/ajax_change_status.php?change_order_id=<?php echo $delivered_graphics_order_id; ?>" id="content_form" method="post">
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Change Order Status <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
 
@@ -42,7 +42,6 @@ if (isset($_GET['pending_graphics_order_id'])) {
                           <option value="Printing" <?php if ($status == 'Printing') {echo 'selected'; } ?>>Printing</option>
                           <option value="Sent To Currier" <?php if ($status == 'Sent To Currier') {echo 'selected'; } ?>>Sent To Currier</option>
                           <option value="Delivered" <?php if ($status == 'Delivered') {echo 'selected'; } ?>>Delivered</option>
-                          <option value="Cancelled" <?php if ($status == 'Cancelled') {echo 'selected'; } ?>>Cancel Order</option>
                 </select>
             </div>
         </div>

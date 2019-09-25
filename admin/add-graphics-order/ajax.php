@@ -31,6 +31,18 @@ Session::checkSession('admin', ADMIN_URL . '/add-graphics-order', 'add-graphics-
 			$price = $fm->validation($_POST['price']);
 			$advance = $fm->validation($_POST['advance']);
 			$printing_cost = $fm->validation($_POST['printing_cost']);
+
+			$image = $_FILES['demo_photo'];
+		    $file_name = $image['name'];
+		    $file_size = $image['size'];
+		    $file_temp = $image['tmp_name'];
+		    $div = explode(".", $file_name);
+		    $file_extension = strtolower(end($div));
+		    $unique_image = md5(time()); 
+		    $unique_image= substr($unique_image, 0,10).'.'.$file_extension;
+		    $uploaded_image = '../image/'.$unique_image;
+
+
 			if ($printing_cost == "") {
 				$printing_cost = 0;
 			}
@@ -50,50 +62,14 @@ Session::checkSession('admin', ADMIN_URL . '/add-graphics-order', 'add-graphics-
 			$payment_method = $fm->validation($_POST['payment_method']);
 			$tx_id_account_no = $fm->validation($_POST['tx_id_account_no']);
 			$received_mobile_no = $fm->validation($_POST['received_mobile_no']);
-			// $file_upload_documentation = $fm->validation($_POST['file_upload_documentation']);
-
-			// if (!$client_name) {
-			// 	$error['client_name'] = 'Client Name Field required';
-			// }
-			// if (!$mobile_no) {
-			// 	$error['documentation_note'] = 'Mobile Number Field required';
-			// }
-			// if (!$client_name) {
-			// 	$error['client_name'] = 'Client Name Field required';
-			// }
-			// if (!$mobile_no) {
-			// 	$error['documentation_note'] = 'Mobile Number Field required';
-			// }
-			// if (!$client_name) {
-			// 	$error['client_name'] = 'Client Name Field required';
-			// }
-			// if (!$mobile_no) {
-			// 	$error['documentation_note'] = 'Mobile Number Field required';
-			// }
-			// if (!$client_name) {
-			// 	$error['client_name'] = 'Client Name Field required';
-			// }
-			// if (!$mobile_no) {
-			// 	$error['documentation_note'] = 'Mobile Number Field required';
-			// }
-			// if (!$client_name) {
-			// 	$error['client_name'] = 'Client Name Field required';
-			// }
-			// if (!$mobile_no) {
-			// 	$error['documentation_note'] = 'Mobile Number Field required';
-			// }
-			// if (!$client_name) {
-			// 	$error['client_name'] = 'Client Name Field required';
-			// }
-			// if (!$mobile_no) {
-			// 	$error['documentation_note'] = 'Mobile Number Field required';
-			// }
 
 
 			if ($error) {
 				http_response_code(500);
 				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 			} else {
+
+
 				
 				$query = "INSERT INTO graphics_info 
 						(client_name, mobile_no, shipping_address, currier_name, product_name, order_date, qty, probable_delivery_date, price, advance, printing_cost, currier_cost, others_cost, status, notes, order_taken_by) 
@@ -108,6 +84,14 @@ Session::checkSession('admin', ADMIN_URL . '/add-graphics-order', 'add-graphics-
 						VALUES 
 						('$order_id', '$advance', '$payment_method', '$tx_id_account_no', '$received_mobile_no', '$order_taken_by')";
 					$insert_pay = $db->insert($query);
+
+
+					if ($file_name) {
+						if (move_uploaded_file($file_temp, $uploaded_image)) {
+							$query1 = "UPDATE graphics_info SET demo_photo = '$uploaded_image' where id = '$order_id'";
+							$update1 = $db->update($query1);
+						}
+					}
 
 					if ($insert_pay) {
 						die(json_encode(['message' => 'Order Taken Successfully']));

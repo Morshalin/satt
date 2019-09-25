@@ -1,12 +1,12 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('admin', ADMIN_URL.'/paid-delivered-graphics', 'Delivered Graphics Order');
+  Session::checkSession('admin', ADMIN_URL.'/cancel-graphics', 'Cancel Graphics Order');
   $data = array();
-  $data['page_title'] = 'Delivered Graphics Order';
+  $data['page_title'] = 'Cancel Graphics Order';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'paid-delivered-graphics';
+  $data['page_index'] = 'cancel-graphics';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/admin/paid-delivered-graphics'];
+  $data['page_js'] = ['assets/js/admin/cancel-graphics'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
@@ -45,7 +45,7 @@
   			<img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
   		</div> -->
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/paid-delivered-graphics/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/cancel-graphics/table.php">
   				<thead>
   					<tr>
   						<th>#</th>

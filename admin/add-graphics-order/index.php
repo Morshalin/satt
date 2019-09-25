@@ -32,7 +32,7 @@ $customer_id =  $user['id'];
   	
   	<div class="card-body">
   		
-      <form class="form-validate-jquery" action="<?php echo(ADMIN_URL) ?>/add-graphics-order/ajax.php" id="content_form" method="post">
+      <form enctype='multipart/form-data' class="form-validate-jquery" action="<?php echo(ADMIN_URL) ?>/add-graphics-order/ajax.php" id="content_form" method="post">
         <fieldset class="mb-3">
           <legend class="text-uppercase font-size-sm font-weight-bold">Add New Graphics Order <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
 
@@ -109,43 +109,43 @@ $customer_id =  $user['id'];
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="price" class="col-form-label">Price<span class="text-danger">*</span></label>
-                <input type="text" name="price" id="price" class="form-control " placeholder="Type Product Price" required autofocus value="">
+                <input type="number" name="price" id="price" class="form-control " placeholder="Type Product Price" required autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="advance" class="col-form-label">Advance</label>
-                <input type="text" name="advance" id="advance" class="form-control" placeholder="Type Advance Price" autofocus value="">
+                <input type="number" name="advance" id="advance" class="form-control" placeholder="Type Advance Price" autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="due" class="col-form-label">Due</label>
-                <input type="text" name="due" id="due" class="form-control " readonly="" autofocus value="">
+                <input type="number" name="due" id="due" class="form-control " readonly="" autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="printing_cost" class="col-form-label">Printing Cost<span class="text-danger">*</span></label>
-                <input type="text" name="printing_cost" id="printing_cost" class="form-control" placeholder="Type Printing Cost" required autofocus value="">
+                <input type="number" name="printing_cost" id="printing_cost" class="form-control" placeholder="Type Printing Cost" required autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="currier_cost" class="col-form-label">Currier Cost<span class="text-danger">*</span></label>
-                <input type="text" name="currier_cost" id="currier_cost" class="form-control" placeholder="Type Currier Cost" required autofocus value="">
+                <input type="number" name="currier_cost" id="currier_cost" class="form-control" placeholder="Type Currier Cost" required autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="others_cost" class="col-form-label">Other Cost</label>
-                <input type="text" name="others_cost" id="others_cost" class="form-control" placeholder="Type Other Cost"  autofocus value="">
+                <input type="number" name="others_cost" id="others_cost" class="form-control" placeholder="Type Other Cost"  autofocus value="">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="profit" class="col-form-label">Profit</label>
-                <input type="text" name="profit" id="profit" class="form-control" placeholder=""  autofocus value="" readonly="">
+                <input type="number" name="profit" id="profit" class="form-control" placeholder=""  autofocus value="" readonly="">
             </div>
         </div>
         <div class="col-lg-4">
@@ -171,6 +171,12 @@ $customer_id =  $user['id'];
             <div class="form-group">
                 <label for="order_taken_by" class="col-form-label">Order Taken By</label>
                 <input type="text" name="order_taken_by" id="order_taken_by" class="form-control" placeholder="Order Taken By"  autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="demo_photo" class="col-form-label">Demo Photo Upload</label>
+                <input type="file" name="demo_photo" id="demo_photo" class="form-control" placeholder="Order Taken By"  autofocus value="">
             </div>
         </div>
     </div>

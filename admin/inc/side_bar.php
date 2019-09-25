@@ -73,7 +73,7 @@
 
 
 
-  <?php $nav_items_section_15 = ['add-graphics-order', 'unpaid-delivered-graphics','pending-graphics-order','paid-delivered-graphics']; ?>
+  <?php $nav_items_section_15 = ['add-graphics-order', 'unpaid-delivered-graphics','pending-graphics-order','paid-delivered-graphics', 'cancel-graphics']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_15, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-camera"></i> <span>Graphics Details</span></a>
 
@@ -87,6 +87,8 @@
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/unpaid-delivered-graphics" class="nav-link<?php active_page($data, 'unpaid-delivered-graphics'); ?>">Unpaid But Delivered</a></li>
 
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/paid-delivered-graphics" class="nav-link<?php active_page($data, 'paid-delivered-graphics'); ?>">Paid & Delivered</a></li>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/cancel-graphics" class="nav-link<?php active_page($data, 'cancel-graphics'); ?>">Cancelled Orders</a></li>
     </ul>
   </li>
 
