@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/pending-graphics-order');
+Session::checkSession('admin', ADMIN_URL . '/cancel-graphics');
 ## Read value
 $draw = $_GET['draw'];
 $row = $_GET['start'];
@@ -40,7 +40,7 @@ $totalRecordwithFilter = $records['allcount'];
 /*==============================================================================
 ## Fetch records
 =================================================================================*/
-$query = "SELECT * FROM graphics_info WHERE status != 'Delivered' && status != 'Cancelled' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$query = "SELECT * FROM graphics_info WHERE status = 'Cancelled' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $result = $db->select($query);
 $data = array();
 $i = 0;
@@ -65,10 +65,8 @@ if ($result) {
               <i class="icon-menu9"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/pending-graphics-order/show.php?pending_graphics_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
-              <span class="dropdown-item text-success" id="content_managment" data-url="' . ADMIN_URL . '/pending-graphics-order/pay.php?pending_graphics_order_id=' . $row['id'] . '"><i class="icon-checkmark4"></i> Pay</span>
-              <span class="dropdown-item text-warning" id="content_managment" data-url="' . ADMIN_URL . '/pending-graphics-order/change-status.php?pending_graphics_order_id=' . $row['id'] . '"><i class="icon-magic-wand"></i> Change Status</span>
-              <span class="dropdown-item text-info" id="content_managment" data-url="' . ADMIN_URL . '/pending-graphics-order/print-cost.php?pending_graphics_order_id=' . $row['id'] . '"><i class="icon-coins"></i> Print Cost</span>
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/cancel-graphics/show.php?cancel_graphics_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
+              <span class="dropdown-item text-warning" id="content_managment" data-url="' . ADMIN_URL . '/cancel-graphics/change-status.php?cancel_graphics_order_id=' . $row['id'] . '"><i class="icon-magic-wand"></i> Change Status</span>
             </div>
           </div>
         </div>

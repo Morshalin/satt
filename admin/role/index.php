@@ -1,12 +1,12 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('admin', ADMIN_URL.'/Office_note', 'Introduced Customers');
+Session::checkSession('admin', ADMIN_URL . '/role', 'Role');
   $data = array();
-  $data['page_title'] = 'Introduced Customers';
+  $data['page_title'] = 'Role';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'Office_note';
+  $data['page_index'] = 'role';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/admin/Office_note'];
+  $data['page_js'] = ['assets/js/admin/role'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
@@ -30,7 +30,7 @@
   <div class="card border-top-success rounded-top-0" id="table_card">
   	<div class="card-header header-elements-inline bg-light border-grey-300" >
   		<h5 class="card-title"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Dashboard'; ?>
-  		<button type="button" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/Office_note/create.php"><i class="icon-stack-plus mr-1"></i>Add Introduced Customers</button>
+  		<button type="button" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/role/create.php"><i class="icon-stack-plus mr-1"></i>Add New Role</button>
   		</h5>
   		<div class="header-elements">
   			<div class="list-icons">
@@ -45,15 +45,12 @@
   			<img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
   		</div> -->
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/Office_note/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/role/table.php">
   				<thead>
   					<tr>
   						<th>#</th>
-  						<th>Customer Name</th>
-              <th>Customer Number</th>
-  						<th>introduction Date</th>
-              <th>Last Contacted Date</th>
-              <th>Status</th>
+              <th>Role Name</th>
+              <th>Provided Permissions</th>
   						<th>Action</th>
   					</tr>
   				</thead>

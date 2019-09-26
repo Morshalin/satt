@@ -133,7 +133,7 @@ if (isset($_GET['$user_id'])) {
 				if ($result) {
 
 					if ($new_pass) {
-						$user_query = "UPDATE satt_users SET user_name = '$user_name', password = '$new_pass2' where id = '$admin_user_id'";
+						$user_query = "UPDATE satt_users SET user_name = '$user_name', email = '$email', password = '$new_pass2' where id = '$admin_user_id'";
 						$user_update = $db->update($user_query);
 					}else{
 

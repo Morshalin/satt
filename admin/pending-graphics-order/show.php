@@ -15,6 +15,9 @@ if (isset($_GET['pending_graphics_order_id'])) {
         $probable_delivery_date = date("d-M-Y", strtotime($probable_delivery_date));
         $price = $row['price'];
 
+        $delivery_date = $row['delivery_date'];
+        $delivery_date = date("d-M-Y", strtotime($delivery_date));
+
 
         if ($pending_graphics_order_id) {
           $query_graphics_pay = "select * from graphics_pay WHERE order_id = '$pending_graphics_order_id' ";
@@ -39,7 +42,7 @@ if (isset($_GET['pending_graphics_order_id'])) {
   <fieldset class="mb-3">
     <div class="row">
         <div class="col-lg-2"></div>
-        <div class="col-lg-8">
+        <div class="col-lg-6">
     <legend class="text-uppercase text-center font-size-m font-weight-bold">Customer Informantion </legend>
             <div class="row">
                     <b class="col-md-4">Customer Name :</b>
@@ -58,12 +61,16 @@ if (isset($_GET['pending_graphics_order_id'])) {
                     <h6 class="col-md-8"><?php echo ucwords($row['currier_name']); ?></h6>
             </div>
         </div>
-        <div class="col-lg-2"></div>
+
+        <div class="col-lg-4">
+          <legend class="text-uppercase text-center font-size-m font-weight-bold">Demo Image </legend>
+          <a target="blank" href="<?php echo $row['demo_photo']; ?>"><img style="width: 120px" src="<?php echo $row['demo_photo']; ?>" alt="Demo Image Not Upload"></a>
+        </div>
     </div>
 
     <div class="row">
         <div class="col-lg-2"></div>
-        <div class="col-lg-8">
+        <div class="col-lg-6">
     <legend class="text-uppercase text-center font-size-m font-weight-bold">Order Informantion </legend>
             <div class="row">
                     <b class="col-md-4">Product Name :</b>
@@ -98,7 +105,10 @@ if (isset($_GET['pending_graphics_order_id'])) {
                     <h6 class="col-md-8"><?php echo $row['order_taken_by']; ?></h6>
             </div>
         </div>
-        <div class="col-lg-2"></div>
+        <div class="col-lg-4 ">
+          <legend class="text-uppercase text-center font-size-m font-weight-bold">Completed Order Image </legend>
+          <a target="blank" href="<?php echo $row['image']; ?>"><img style="width: 120px" src="<?php echo $row['image']; ?>" alt="Image Not Upload Yet"></a>
+        </div>
     </div>
 
 

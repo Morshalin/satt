@@ -58,15 +58,51 @@ var DatatableButtonsHtml5 = function() {
                     target: 'tr'
                 }
             },
+            buttons: [{
+                extend: 'selectAll',
+                className: 'btn bg-indigo-800'
+            }, {
+                extend: 'selectNone',
+                className: 'btn bg-blue-800',
+                text: 'Unselect All'
+            }, {
+                extend: 'selected',
+                className: 'btn btn-danger',
+                text: 'Delete',
+                action: function(e, dt, node, config) {
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/role/action.php', action = 'delete', msg = 'Once deleted, it will deleted all related Data!');
+                }
+            },{
+                extend: 'selected',
+                className: 'btn bg-success',
+                text: 'Online',
+                action: function(e, dt, node, config) {
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/role/action.php', action = 'active', msg = 'Change Status To Online');
+                }
+            }, {
+                extend: 'selected',
+                className: 'btn bg-secondary',
+                text: 'Offline',
+                action: function(e, dt, node, config) {
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/role/action.php', action = 'inactive', msg = 'Change Status To Offline');
+                }
+            }, {
+                extend: 'selected',
+                className: 'btn bg-warning',
+                text: 'Toggle Status',
+                action: function(e, dt, node, config) {
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/role/action.php', action = 'toggle', msg = 'Toggle Status');
+                }
+            }],
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 8]
+                targets: [0, 3]
             }, {
                 orderable: false,
-                targets: [7,8]
+                targets: [2,3]
             }],
-            order: [1, 'desc'],
+            order: [1, 'asc'],
             processing: true,
             serverSide: true,
             ajax: $('.content_managment_table').data('url'),
@@ -75,19 +111,9 @@ var DatatableButtonsHtml5 = function() {
                 {
                     data: 'DT_RowIndex'
                 }, {
-                    data: 'client_name'
-                },  {
-                    data: 'mobile_no'
+                    data: 'role_name'
                 }, {
-                    data: 'shipping_address'
-                }, {
-                    data: 'product_name'
-                },{
-                    data: 'order_date'
-                }, {
-                    data: 'price'
-                }, {
-                    data: 'status'
+                    data: 'permission_name'
                 },{
                     data: 'action'
                 }
@@ -115,7 +141,10 @@ var DatatableButtonsHtml5 = function() {
                     $('.modal-body').html(data).fadeIn(); // load response
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
+                     _componentSelect2Modal();
+                    _componentDatePicker();
                     _modalFormValidation();
+
                 })
                 .fail(function(data) {
                     $('.modal-body').html('<span style="color:red; font-weight: bold;"> Something Went Wrong. Please Try again later.......</span>');
@@ -135,7 +164,6 @@ var DatatableButtonsHtml5 = function() {
     return {
         init: function() {
             _componentDatatableButtonsHtml5();
-            _componentSelect2Normal();
             _componentRemoteModalLoad();
         }
     }
@@ -145,5 +173,6 @@ var DatatableButtonsHtml5 = function() {
 document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
 });
+
 
 

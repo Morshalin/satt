@@ -1,11 +1,11 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL.'/unpaid-delivered-graphics', 'Unpaid Graphics Order');
-if (isset($_GET['unpaid_graphics_order_id'])) {
+Session::checkSession('admin', ADMIN_URL.'/cancel-graphics', 'Cancel Graphics Order');
+if (isset($_GET['cancel_graphics_order_id'])) {
     $price = '';
-    $unpaid_graphics_order_id = $_GET['unpaid_graphics_order_id'];
-    $query = "SELECT * FROM graphics_info WHERE id='$unpaid_graphics_order_id'";
+    $cancel_graphics_order_id = $_GET['cancel_graphics_order_id'];
+    $query = "SELECT * FROM graphics_info WHERE id='$cancel_graphics_order_id'";
     $result = $db->select($query);
     if ($result) {
         $row = $result->fetch_assoc();
@@ -19,8 +19,8 @@ if (isset($_GET['unpaid_graphics_order_id'])) {
         $delivery_date = date("d-M-Y", strtotime($delivery_date));
 
 
-        if ($unpaid_graphics_order_id) {
-          $query_graphics_pay = "select * from graphics_pay WHERE order_id = '$unpaid_graphics_order_id' ";
+        if ($cancel_graphics_order_id) {
+          $query_graphics_pay = "select * from graphics_pay WHERE order_id = '$cancel_graphics_order_id' ";
           $result_graphics_pay = $db->select($query_graphics_pay);
 
     }
@@ -61,6 +61,7 @@ if (isset($_GET['unpaid_graphics_order_id'])) {
                     <h6 class="col-md-8"><?php echo ucwords($row['currier_name']); ?></h6>
             </div>
         </div>
+
         <div class="col-lg-4">
           <legend class="text-uppercase text-center font-size-m font-weight-bold">Demo Image </legend>
           <a target="blank" href="<?php echo $row['demo_photo']; ?>"><img style="width: 120px" src="<?php echo $row['demo_photo']; ?>" alt="Demo Image Not Upload"></a>
@@ -93,7 +94,7 @@ if (isset($_GET['unpaid_graphics_order_id'])) {
             </div>
             <div class="row">
                     <b class="col-md-4">Status :</b>
-                    <h6 class="col-md-8 text-success"><?php echo $row['status']; ?></h6>
+                    <h6 class="col-md-8"><?php echo $row['status']; ?></h6>
             </div>
             <div class="row">
                     <b class="col-md-4">Notes :</b>
@@ -103,12 +104,8 @@ if (isset($_GET['unpaid_graphics_order_id'])) {
                     <b class="col-md-4">Order Taken By :</b>
                     <h6 class="col-md-8"><?php echo $row['order_taken_by']; ?></h6>
             </div>
-            <div class="row" style="color: red">
-                    <b class="col-md-4">Delivery Date :</b>
-                    <h6 class="col-md-8"><?php echo $delivery_date; ?></h6>
-            </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 ">
           <legend class="text-uppercase text-center font-size-m font-weight-bold">Completed Order Image </legend>
           <a target="blank" href="<?php echo $row['image']; ?>"><img style="width: 120px" src="<?php echo $row['image']; ?>" alt="Image Not Upload Yet"></a>
         </div>
@@ -168,8 +165,8 @@ if (isset($_GET['unpaid_graphics_order_id'])) {
                   <tbody>
 <?php 
 
-        if ($unpaid_graphics_order_id) {
-          $query_graphics_pay = "SELECT * FROM graphics_pay WHERE order_id = '$unpaid_graphics_order_id' order by id desc ";
+        if ($cancel_graphics_order_id) {
+          $query_graphics_pay = "SELECT * FROM graphics_pay WHERE order_id = '$cancel_graphics_order_id' order by id desc ";
           $result_graphics_pay = $db->select($query_graphics_pay);
 
         if ($result_graphics_pay) {
