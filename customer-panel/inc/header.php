@@ -116,7 +116,7 @@
 					</a>
 
 					<div class="dropdown-menu dropdown-menu-right">
-						<a href="<?php echo ADMIN_URL; ?>/profile" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
+						<a href="<?php echo CUSTOMER_URL; ?>/profile" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
 
 						<div class="dropdown-divider"></div>
 						<a href="<?php echo BASE_URL; ?>/lock.php?goto=<?php echo app_url().$_SERVER['REQUEST_URI']; ?>" class="dropdown-item" id="lock"><i class="icon-user-lock"></i> Lock User</a>

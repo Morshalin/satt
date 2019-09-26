@@ -64,27 +64,14 @@ if ($result) {
   }
     $data[] = array(
       "DT_RowIndex" => $i + 1,
-      "id" => $row['id'],
+      //"id" => $row['id'],
       "software_name" => '<strong>' . $row['software_name'] . '</strong>',
-      "software_status_name" => '<strong>' . $row['software_status_name'] . '</strong>',
       "language_name" => $a,
-      "short_feature" => '<strong>' . $short_feature . '</strong>',
-      "condition_details" => '<strong>' . $condition_details . '</strong>',
+
+
       "action" => '
-        <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
-        <div class="list-icons" id="action_menu_' . $row['id'] . '">
-          <div class="dropdown">
-            <a href="#" class="list-icons-item" data-toggle="dropdown">
-              <i class="icon-menu9"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right">
-              <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/available_product/show.php?software_details_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
-
-
-             <span class="dropdown-item" id="content_managment" data-url="' . CUSTOMER_URL . '/available_product/cart.php?software_details_id=' . $row['id'] . '"><i class="icon-cart"></i> Add To Cart</span>
-            </div>
-          </div>
-        </div>
+              <span class="btn btn-success mb-2" id="content_managment" data-url="' . CUSTOMER_URL . '/available_product/show.php?software_details_id=' . $row['id'] . '"><i class="icon-eye"></i>View</span>
+              <span class="btn btn-info " id="content_managment" data-url="' . CUSTOMER_URL . '/available_product/cart.php?software_details_id=' . $row['id'] . '"><i class="icon-cart"></i> Order</span>
         ',
     );
     $i++;

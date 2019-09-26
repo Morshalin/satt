@@ -52,6 +52,10 @@ if (isset($_GET['confirm_order_id'])) {
                     <h6 class="col-md-8"><?php echo $row['yearly_renew_charge']; ?></h6>
             </div>
             <div class="row">
+                    <b class="col-md-4">Extra Feature:</b>
+                    <h6 class="col-md-8"><?php echo $row['feature']; ?></h6>
+            </div>
+            <div class="row">
                     <b class="col-md-4">Order Date :</b>
                     <h6 class="col-md-8"><?php echo $row['order_date']; ?></h6>
             </div>

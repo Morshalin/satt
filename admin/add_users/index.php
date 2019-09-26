@@ -1,16 +1,15 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('customer-panel', CUSTOMER_URL . '/available_product','Available Product');
+Session::checkSession('admin', ADMIN_URL . '/add_users', 'Add Users');
   $data = array();
-  $data['page_title'] = 'Available Product';
+  $data['page_title'] = 'Add Users';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'available_product';
+  $data['page_index'] = 'Add Users';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/customer-panel/available_product'];
+  $data['page_js'] = ['assets/js/admin/add_users'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
-
 <div class="page-header page-header-light">
 
   <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -31,6 +30,7 @@
   <div class="card border-top-success rounded-top-0" id="table_card">
   	<div class="card-header header-elements-inline bg-light border-grey-300" >
   		<h5 class="card-title"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Dashboard'; ?>
+  		<button type="button" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/add_users/create.php"><i class="icon-stack-plus mr-1"></i>Add New Users</button>
   		</h5>
   		<div class="header-elements">
   			<div class="list-icons">
@@ -45,12 +45,16 @@
   			<img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
   		</div> -->
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo CUSTOMER_URL; ?>/available_product/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/add_users/table.php">
   				<thead>
   					<tr>
   						<th>#</th>
-              <th>Software Name</th>
-              <th>Language</th>
+  						<th>Name</th>
+  						<th>Email</th>
+              <th>Mobile No</th>
+              <th>Image</th>
+              <th>Address</th>
+              <th>Status</th>
   						<th>Action</th>
   					</tr>
   				</thead>
@@ -64,6 +68,8 @@
 <!-- /content area -->
 <?php include_once '../inc/footer.php'; ?>
 <script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/select.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/buttons.min.js"></script>
 <script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
 </body>
 </html>

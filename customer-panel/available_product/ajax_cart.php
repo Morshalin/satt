@@ -5,6 +5,7 @@ if (isset($_POST['customer_id'])) {
 	$software_id = $_POST['software_id'];
 	$pay_type = $_POST['pay_type'];
 	$agent_id = $_POST['agent_id'];
+	$feature = $_POST['feature'];
 
 	
 	if ($agent_id==0) {
@@ -55,9 +56,9 @@ if (isset($_POST['customer_id'])) {
 
 
 	$query = "INSERT INTO satt_order_products 
-			  (customer_id,customer_name,customer_number,agent_id,product_id,product_name,pay_type,installation_charge,pay_amount,agent_comission,yearly_renew_charge,order_date)
+			  (customer_id,customer_name,customer_number,agent_id,product_id,product_name,pay_type,installation_charge,pay_amount,agent_comission,yearly_renew_charge,feature,order_date)
 			  VALUES 
-			  ('$customer_id','$customer_name','$customer_number','$agent_id','$software_id','$product_name','$pay_type','$installation_charge','$pay_amount','$agent_comission','$yearly_renew_charge',now())";
+			  ('$customer_id','$customer_name','$customer_number','$agent_id','$software_id','$product_name','$pay_type','$installation_charge','$pay_amount','$agent_comission','$yearly_renew_charge','$feature',now())";
 
 	$insert = $db->insert($query);
 

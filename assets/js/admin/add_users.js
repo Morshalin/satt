@@ -58,12 +58,49 @@ var DatatableButtonsHtml5 = function() {
                     target: 'tr'
                 }
             },
+            buttons: [{
+                extend: 'selectAll',
+                className: 'btn bg-indigo-800'
+            }, {
+                extend: 'selectNone',
+                className: 'btn bg-blue-800',
+                text: 'Unselect All'
+            }, {
+                extend: 'selected',
+                className: 'btn btn-danger',
+                text: 'Delete',
+                action: function(e, dt, node, config) {
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/add_users/action.php', action = 'delete', msg = 'Once deleted, it will deleted all related Data!');
+                }
+            },{
+                extend: 'selected',
+                className: 'btn bg-success',
+                text: 'Online',
+                action: function(e, dt, node, config) {
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/add_users/action.php', action = 'active', msg = 'Change Status To Online');
+                }
+            }, {
+                extend: 'selected',
+                className: 'btn bg-secondary',
+                text: 'Offline',
+                action: function(e, dt, node, config) {
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/add_users/action.php', action = 'inactive', msg = 'Change Status To Offline');
+                }
+            }, {
+                extend: 'selected',
+                className: 'btn bg-warning',
+                text: 'Toggle Status',
+                action: function(e, dt, node, config) {
+                    datatableSelectedRowsAction(dt, ADMIN_URL+'/add_users/action.php', action = 'toggle', msg = 'Toggle Status');
+                }
+            }],
+            select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0,3]
+                targets: [0, 7]
             }, {
                 orderable: false,
-                targets: [0,3]
+                targets: [6, 7]
             }],
             order: [1, 'asc'],
             processing: true,
@@ -74,9 +111,17 @@ var DatatableButtonsHtml5 = function() {
                 {
                     data: 'DT_RowIndex'
                 }, {
-                    data: 'software_name'
-                },{
-                    data: 'language_name'
+                    data: 'name'
+                }, {
+                    data: 'email'
+                }, {
+                    data: 'mobile_no'
+                }, {
+                    data: 'image'
+                }, {
+                    data: 'address'
+                }, {
+                    data: 'status'
                 },{
                     data: 'action'
                 }
@@ -104,10 +149,7 @@ var DatatableButtonsHtml5 = function() {
                     $('.modal-body').html(data).fadeIn(); // load response
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
-                     _componentSelect2Modal();
-                    _componentDatePicker();
                     _modalFormValidation();
-
                 })
                 .fail(function(data) {
                     $('.modal-body').html('<span style="color:red; font-weight: bold;"> Something Went Wrong. Please Try again later.......</span>');
@@ -127,6 +169,7 @@ var DatatableButtonsHtml5 = function() {
     return {
         init: function() {
             _componentDatatableButtonsHtml5();
+            _componentSelect2Normal();
             _componentRemoteModalLoad();
         }
     }
@@ -138,30 +181,18 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 $(document).ready(function(){
-    $(document).on('submit','#cart_form',function(e){
-        e.preventDefault();
-        var software_id = $('#software_id').val();
-        var customer_id = $('#customer_id').val();
-        var pay_type = $('#pay_type').val();
-        var agent_id = $('#agent_id').val();
-        var feature = $('#feature').val();
-        // console.log(agent_id);
-        $.ajax({
-            url: './ajax_cart.php',
-            data:{
-                software_id : software_id,
-                customer_id : customer_id,
-                pay_type : pay_type,
-                agent_id: agent_id,
-                feature:feature
-                
-            },
-            type: 'post',
-            dataType: 'json',
-            success: function(data){
-                p_notify(data.message, data.type, jsUcfirst(data.type));
-                $('#modal_remote').modal('hide');
-            }
-        });
-    });
+
+   $(document).on("keyup","#content_form", function(){
+           var password = $("#password").val();
+           var confirm_password = $("#confirm_password").val();
+           if (confirm_password) {
+               if (password == confirm_password) {
+               $("#success").html("<strong class='text-success h3'>Confirm password is  correct</strong>");
+               }else{
+               $("#success").html("<strong class='text-danger h3'>Confirm password is not correct</strong>");
+               }
+           }
+           
+   });
+
 });
