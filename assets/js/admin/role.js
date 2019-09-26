@@ -72,27 +72,6 @@ var DatatableButtonsHtml5 = function() {
                 action: function(e, dt, node, config) {
                     datatableSelectedRowsAction(dt, ADMIN_URL+'/role/action.php', action = 'delete', msg = 'Once deleted, it will deleted all related Data!');
                 }
-            },{
-                extend: 'selected',
-                className: 'btn bg-success',
-                text: 'Online',
-                action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/role/action.php', action = 'active', msg = 'Change Status To Online');
-                }
-            }, {
-                extend: 'selected',
-                className: 'btn bg-secondary',
-                text: 'Offline',
-                action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/role/action.php', action = 'inactive', msg = 'Change Status To Offline');
-                }
-            }, {
-                extend: 'selected',
-                className: 'btn bg-warning',
-                text: 'Toggle Status',
-                action: function(e, dt, node, config) {
-                    datatableSelectedRowsAction(dt, ADMIN_URL+'/role/action.php', action = 'toggle', msg = 'Toggle Status');
-                }
             }],
             select: true,
             columnDefs: [{

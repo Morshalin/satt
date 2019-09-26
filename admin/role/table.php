@@ -65,6 +65,7 @@ if ($result) {
 
     $data[] = array(
       "DT_RowIndex" => $i + 1,
+      "id" => $id,
       "role_name" => '<strong>' . $row['role_name'] . '</strong>',
       "permission_name" => $permissions,
                           
@@ -79,7 +80,7 @@ if ($result) {
             <div class="dropdown-menu dropdown-menu-right">
              
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/role/edit.php?id=' . $row['serial_no'] . '"><i class="icon-pencil7"></i> Edit</span>
-              <span class="dropdown-item" id="delete_item" data-id="' . $row['serial_no'] . '" data-url="' . ADMIN_URL . '/role/ajax.php?id=' . $row['serial_no'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
+              <span class="dropdown-item" id="delete_item" data-id="' . $row['serial_no'] . '" data-url="' . ADMIN_URL . '/role/ajax.php?del_id=' . $row['serial_no'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
             </div>
           </div>
         </div>
