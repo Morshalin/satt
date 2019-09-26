@@ -46,15 +46,23 @@ $data = array();
 $i = 0;
 if ($result) {
   while ($row = mysqli_fetch_assoc($result)) {
+    $user_serial_no = $row['id'];
+
+$query1 = "SELECT user_has_role.user_serial_no, user_has_role.role_serial_no, `role`.role_name
+FROM user_has_role
+INNER JOIN `role` ON user_has_role.role_serial_no=`role`.serial_no WHERE user_has_role.user_serial_no = '$user_serial_no' ";
+$result1 = $db->select($query1)->fetch_assoc();
+
+$role_name = $result1['role_name'];
+
     $data[] = array(
       "DT_RowIndex" => $i + 1,
       "id" => $row['id'],
       "name" => '<strong>' . $row['name'] . '</strong>',
-      "email" => '<strong>' . $row['email'] . '</strong>',
       "mobile_no" => '<strong>' . $row['mobile_no'] . '</strong>',
       "image" => '<img src="' . $row["image"] .'" style="width: 90px; height:60px;" alt="Image not found">',
 
-      "address" => '<strong>' . $row['address'] . '</strong>',
+      "address" => '<span class="badge badge-success p-1">' . $role_name . '</span>',
       "action" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
         <div class="list-icons" id="action_menu_' . $row['id'] . '">
@@ -64,8 +72,16 @@ if ($result) {
             </a>
             <div class="dropdown-menu dropdown-menu-right">
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/add_users/show.php?users_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
+             
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/add_users/edit.php?users_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
+
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/add_users/add_role.php?users_id=' . $row['id'] . '"><i class="icon-user"></i> Add Role</span>
+
+             
+
               <span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/add_users/ajax.php?users_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
+              
+              
             </div>
           </div>
         </div>

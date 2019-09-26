@@ -101,10 +101,28 @@ class Format {
 
 	//emailcheak
 	public function user($table, $username_or_email, $password) {
-		$query = "SELECT * FROM $table WHERE password = '$password' AND user_name = '$username_or_email' OR password = '$password' AND email = '$username_or_email'";
+		$query = "SELECT * FROM $table WHERE password = '$password' AND user_name = '$username_or_email' OR password = '$password' AND email = '$username_or_email' limit 1";
 		$result = $this->db->select($query);
 		if ($result) {
-			return $result;
+			$user = $result->fetch_assoc();
+			if ($user['user_type'] == 'system_user') {
+				$user_id = $user['systems_user_id'];
+				$query = "SELECT * FROM users WHERE id = '$user_id'";
+				$get_info = $this->db->select($query);
+				if ($get_info) {
+					$user_status = $get_info->fetch_assoc()['status'];
+					if ($user_status == '0') {
+						return false;
+					}else{
+						$query = "SELECT * FROM $table WHERE password = '$password' AND user_name = '$username_or_email' OR password = '$password' AND email = '$username_or_email' limit 1";
+					    return $result = $this->db->select($query);
+					}
+				}
+			}else{
+				$query = "SELECT * FROM $table WHERE password = '$password' AND user_name = '$username_or_email' OR password = '$password' AND email = '$username_or_email' limit 1";
+				return $result = $this->db->select($query);
+			}
+			
 		} else {
 			$query = "SELECT * FROM $table WHERE user_name = '$username_or_email' AND  password = '$password'";
 			$result = $this->db->select($query);

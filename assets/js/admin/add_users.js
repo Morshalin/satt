@@ -97,10 +97,10 @@ var DatatableButtonsHtml5 = function() {
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 7]
+                targets: [0, 6]
             }, {
                 orderable: false,
-                targets: [6, 7]
+                targets: [4,5,6]
             }],
             order: [1, 'asc'],
             processing: true,
@@ -112,8 +112,6 @@ var DatatableButtonsHtml5 = function() {
                     data: 'DT_RowIndex'
                 }, {
                     data: 'name'
-                }, {
-                    data: 'email'
                 }, {
                     data: 'mobile_no'
                 }, {

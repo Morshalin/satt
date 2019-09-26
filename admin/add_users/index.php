@@ -50,10 +50,9 @@ Session::checkSession('admin', ADMIN_URL . '/add_users', 'Add Users');
   					<tr>
   						<th>#</th>
   						<th>Name</th>
-  						<th>Email</th>
               <th>Mobile No</th>
               <th>Image</th>
-              <th>Address</th>
+              <th>Role</th>
               <th>Status</th>
   						<th>Action</th>
   					</tr>
