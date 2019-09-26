@@ -180,11 +180,22 @@ if (isset($_GET['software_details_id'])) {
     <div class="col-lg-2"></div>
 </div>
 
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <div class="form-group">
+            <label for="pay_types" class="col-form-label"><strong>Add Extra Feature</strong></label>
+            <textarea name="feature" id="feature" class="form-control"></textarea>
+        </div>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
 
 
     <div class="form-group row">
         <div class="col-lg-4 offset-lg-4">
-            <button type="submit" name="create" class="btn btn-primary ml-31" id="add_to_cart"><i class="icon-cart"></i> Add To Cart </button>
+            <button type="submit" name="create" class="btn btn-primary ml-31" id="add_to_cart"><i class="icon-cart"></i> Oreder Now</button>
 
             <button type="button" class="btn btn-link" id="submiting" style="display: none;" disabled="">Submiting <img src="<?php echo BASE_URL; ?>/assets/ajaxloader.gif"></button>
             <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
