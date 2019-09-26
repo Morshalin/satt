@@ -61,3 +61,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 }
 
+/*================================================================
+		Delate  Data into Database
+================================================================*/
+if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET['action'] == 'delete') {
+			$del_id = $_GET['del_id'];
+			if ($del_id) {
+				$query = "DELETE FROM role WHERE serial_no = '$del_id'";
+				$result = $db->delete($query);
+				$query1 = "DELETE FROM role_has_permission WHERE role_serial_no = '$del_id'";
+				$result1 = $db->delete($query1);
+				if ($result) {
+					die(json_encode(['message' => 'Role Deleted Successfull']));
+				}
+			}
+			http_response_code(500);
+			die(json_encode(['message' => 'Something Happend Wrong. Please Try Again Later']));
+		}
+
