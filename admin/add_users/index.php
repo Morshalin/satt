@@ -2,9 +2,9 @@
   require_once '../../config/config.php';
 Session::checkSession('admin', ADMIN_URL . '/add_users', 'Add Users');
   $data = array();
-  $data['page_title'] = 'Add Users';
+  $data['page_title'] = 'System User List ';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'Add Users';
+  $data['page_index'] = 'System User List';
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/add_users'];
 ?>
