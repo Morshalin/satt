@@ -476,7 +476,7 @@ function getUserImage($user) {
 	function permission_check($permission){
 		global $db;
 		$role_name = Session::get("role");
-		$user_serial_no = Session::get("user_id");
+		$user_serial_no = Session::get("systems_user_id");
 		$user_type = Session::get("user_type");
 
 		if ($role_name == 'admin') {
@@ -485,6 +485,9 @@ function getUserImage($user) {
 
 		$query = "SELECT * FROM role WHERE role_name = '$role_name'";
 		$role_info = $db->select($query);
+		if ($role_info) {
+			$role_info = $role_info->fetch_assoc();
+		}
 		$role_serial_no = $role_info['serial_no'];
 
 		$query = "SELECT * FROM user_has_role WHERE user_type = '$user_type' AND user_serial_no ='$user_serial_no' AND role_serial_no = '$role_serial_no'";
