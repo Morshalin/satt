@@ -706,7 +706,8 @@ function noty(msg= 'Something Wrong', type='error', title="Opps!!", layout='topR
 //       }
 //   });
 // }
-
+  
+  
 
 
 var _componentDatePicker = function() {
