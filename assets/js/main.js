@@ -653,59 +653,59 @@ function noty(msg= 'Something Wrong', type='error', title="Opps!!", layout='topR
         layout: 'center'
     }).show();
 }
-if ($('#lock').length > 0) {
-  var idleTime = 0;
-  $(document).ready(function () {
-      //Increment the idle time counter every minute.
-      var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+// if ($('#lock').length > 0) {
+//   var idleTime = 0;
+//   $(document).ready(function () {
+//       //Increment the idle time counter every minute.
+//       var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
 
-      //Zero the idle timer on mouse movement.
-      $(this).mousemove(function (e) {
-          idleTime = 0;
-      });
-      $(this).keypress(function (e) {
-          idleTime = 0;
-      });
-  });
+//       //Zero the idle timer on mouse movement.
+//       $(this).mousemove(function (e) {
+//           idleTime = 0;
+//       });
+//       $(this).keypress(function (e) {
+//           idleTime = 0;
+//       });
+//   });
 
-  function timerIncrement() {
-      idleTime = idleTime + 1;
-      if (idleTime > 20) { // 20 minutes
-        lock_user('inactivity');
-      }
-  }
-}
+//   function timerIncrement() {
+//       idleTime = idleTime + 1;
+//       if (idleTime > 20) { // 20 minutes
+//         lock_user('inactivity');
+//       }
+//   }
+// }
 
-function lock_user(type){
-  var url = $('#lock').attr('href');
-  $.ajax({
-      url: url+'&type='+type,
-      method: 'Post',
-      contentType: false, // The content type used when sending data to the server.
-      cache: false, // To unable request pages to be cached
-      processData: false,
-      dataType: 'JSON',
-      success: function(data) {
-          p_notify(data.message, 'success', 'Success');
-          noty('Be Patient. We are redirecting you to your destination.', 'success', 'Welcome', 'center');
+// function lock_user(type){
+//   var url = $('#lock').attr('href');
+//   $.ajax({
+//       url: url+'&type='+type,
+//       method: 'Post',
+//       contentType: false, // The content type used when sending data to the server.
+//       cache: false, // To unable request pages to be cached
+//       processData: false,
+//       dataType: 'JSON',
+//       success: function(data) {
+//           p_notify(data.message, 'success', 'Success');
+//           noty('Be Patient. We are redirecting you to your destination.', 'success', 'Welcome', 'center');
 
-          setTimeout(function() {
-              window.location.href = data.goto;
-          }, 2000);
-      },
-      error: function(data) {
-        var jsonValue = data.responseJSON;
-        if (jsonValue) {
-        const errors = jsonValue.errors;
-            $.each(errors, function(key, value) {
-                p_notify(value, 'error', 'Something Wrong!');
-            });
-        } else {
-          p_notify(data.responseText);
-        }
-      }
-  });
-}
+//           setTimeout(function() {
+//               window.location.href = data.goto;
+//           }, 2000);
+//       },
+//       error: function(data) {
+//         var jsonValue = data.responseJSON;
+//         if (jsonValue) {
+//         const errors = jsonValue.errors;
+//             $.each(errors, function(key, value) {
+//                 p_notify(value, 'error', 'Something Wrong!');
+//             });
+//         } else {
+//           p_notify(data.responseText);
+//         }
+//       }
+//   });
+// }
 
 
 

@@ -107,7 +107,11 @@
 
 					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
 						<img src="<?php echo getUserImage($user); ?>" class="rounded-circle" alt="<?php echo gv($user, 'first_name') ?>">
-						<span><?php echo gv($user, 'first_name').' ' .gv($user, 'last_name'); ?></span>
+						<span><?php if (gv($user, 'first_name')) {
+							echo gv($user, 'first_name').' ' .gv($user, 'last_name');
+						}else{
+							echo gv($user, 'name');
+						} ?></span>
 					</a>
 
 					<div class="dropdown-menu dropdown-menu-right">
@@ -157,7 +161,11 @@
 							</div>
 
 							<div class="media-body">
-								<div class="media-title font-weight-semibold"><?php echo gv($user, 'first_name').' ' .gv($user, 'last_name'); ?></div>
+								<div class="media-title font-weight-semibold"><?php if (gv($user, 'first_name')) {
+							echo gv($user, 'first_name').' ' .gv($user, 'last_name');
+						}else{
+							echo gv($user, 'name');
+						} ?></div>
 								<div class="font-size-xs opacity-50">
 									<i class="icon-address-book font-size-sm"></i> &nbsp;<?php echo gv($user, 'email'); ?>
 								</div>

@@ -508,7 +508,7 @@ function getUserImage($user) {
 			while ($row = $get_permission->fetch_assoc()) {
 				$get_permission_serial_no =  $row['permission_serial_no'];
 				$query = "SELECT * FROM permission WHERE serial_no = '$get_permission_serial_no'";
-				$permissions[] = $db->find($query)['permission_name'];
+				$permissions[] = $db->select($query)->fetch_assoc()['permission_name'];
 			}
 		}
 		if (in_array($permission, $permissions)) {
