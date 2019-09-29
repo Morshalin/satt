@@ -46,9 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST['login'])) {
 				$db->insert($query);
 				$userRole = $user['role'];
 				$admin_id = $user['admin_id'];
+
 				$role = $user['system_user_role'];
 				$user_type = $user['user_type'];
 				$systems_user_id = $user['systems_user_id'];
+
 				Session::set('login', true);
 				Session::set($userRole, true);
 				Session::set('userRole', $userRole);
@@ -57,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST['login'])) {
 				Session::set('userData', $login_user);
 				Session::set($userRole . 'Id', $userId);
 
-				Session::set('role', $login_user);
+				Session::set('role', $role);
 				Session::set('user_type', $user_type);
 				Session::set('systems_user_id', $systems_user_id);
 
