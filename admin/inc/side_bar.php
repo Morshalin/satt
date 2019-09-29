@@ -25,7 +25,6 @@
     </ul>
   </li>
 
-
   <li class="nav-item">
     <a href="<?php echo ADMIN_URL; ?>/add_users" class="nav-link<?php active_page($data, 'add_users'); ?>"><i  class="icon-user-tie"></i> <span>System Users</span></a>
   </li>

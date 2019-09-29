@@ -30,6 +30,12 @@
     </ul>
   </li>
 
+<?php if (permission_check('System_Users')) { ?>
+  <li class="nav-item">
+    <a href="<?php echo ADMIN_URL; ?>/add_users" class="nav-link<?php active_page($data, 'add_users'); ?>"><i  class="icon-user-tie"></i> <span>System Users</span></a>
+  </li>
+  <?php } ?>
+
 <?php } if (permission_check('Promote_Product')) { ?>
 
     <?php $promote_product = ['promote-product']; ?>
@@ -193,7 +199,7 @@
     </ul>
   </li>
 
-<?php } if (permission_check('Role')) { ?>
+<?php if (permission_check('Role')) { ?>
 
     <li class="nav-item">
     <a href="<?php echo ADMIN_URL; ?>/role" class="nav-link<?php active_page($data, 'role'); ?>">
