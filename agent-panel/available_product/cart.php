@@ -176,6 +176,16 @@ if (isset($_GET['software_details_id'])) {
     </div>
     <div class="col-lg-2"></div>
 </div>
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <div class="form-group">
+            <label for="pay_types" class="col-form-label"><strong>Add Extra Feature</strong></label>
+            <textarea name="feature" id="feature" class="form-control"></textarea>
+        </div>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
 
 
 

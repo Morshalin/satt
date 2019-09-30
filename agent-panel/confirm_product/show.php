@@ -73,6 +73,14 @@ if (isset($_GET['order_id'])) {
             <b class="col-md-4">Software User Manual :</b>
             <h6 class="col-md-8"><?php echo $software_info['user_manual']; ?></h6>
         </div>
+        <div class="row">
+            <b class="col-md-4">Software User Video :</b>
+            <h6 class="col-md-8"><?php echo $software_info['feature_video']; ?></h6>
+        </div>
+        <div class="row">
+            <b class="col-md-4">Extra Features:</b>
+            <h6 class="col-md-8"><?php echo $order['feature']; ?></h6>
+        </div>
     </div>
     <div class="col-lg-2"></div>
 </div>
