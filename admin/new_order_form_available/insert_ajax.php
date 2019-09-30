@@ -1,14 +1,15 @@
 <?php
 require_once '../../config/config.php';
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_POST['customer_id'])) {
 	$customer_id = $_POST['customer_id'];
 	$software_id = $_POST['software_id'];
 	$pay_type = $_POST['pay_type'];
 	$agent_id = $_POST['agent_id'];
-	$feature = $_POST['feature'];
-
+	$documentation_note = $_POST['documentation_note'];
+	
+	if ($agent_id==0) {
+		$agent_id='';
+	}
 
 	$querys = "SELECT * FROM software_price WHERE software_id ='$software_id'";
 	$get_soft_info = $db->select($querys);
@@ -44,19 +45,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$agent_comission = '';
 		}
 	}
-
-
-	$customer_name = $customer_info['name'];
-	$customer_number = $customer_info['number'];
-	$product_name = $soft_info['software_name'];
-	$installation_charge = $soft_info['installation_charge'];
-	$yearly_renew_charge = $soft_info['yearly_renew_charge'];
+	
+		$customer_name = $customer_info['name'];
+		$customer_number = $customer_info['number'];
+		$product_name = $soft_info['software_name'];
+		$installation_charge = $soft_info['installation_charge'];
+		$yearly_renew_charge = $soft_info['yearly_renew_charge'];
+	
+	
 
 
 	$query = "INSERT INTO satt_order_products 
 			  (customer_id,customer_name,customer_number,agent_id,product_id,product_name,pay_type,installation_charge,pay_amount,agent_comission,yearly_renew_charge,feature,order_date)
 			  VALUES 
-			  ('$customer_id','$customer_name','$customer_number','$agent_id','$software_id','$product_name','$pay_type','$installation_charge','$pay_amount','$agent_comission','$yearly_renew_charge','$feature',now())";
+			  ('$customer_id','$customer_name','$customer_number','$agent_id','$software_id','$product_name','$pay_type','$installation_charge','$pay_amount','$agent_comission','$yearly_renew_charge','$documentation_note',now())";
 
 	$insert = $db->insert($query);
 

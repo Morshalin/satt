@@ -32,6 +32,10 @@ if (isset($_GET['confirm_order_id'])) {
                     <h6 class="col-md-8"><?php echo ucwords($row['product_name']); ?></h6>
             </div>
             <div class="row">
+                <b class="col-md-4">Extra Features :</b>
+                <h6 class="col-md-8"><?php echo $row['feature']; ?></h6>
+            </div>
+            <div class="row">
                     <b class="col-md-4">Pay Type :</b>
                     <h6 class="col-md-8"><?php echo $row['pay_type']; ?></h6>
             </div>

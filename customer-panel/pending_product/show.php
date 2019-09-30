@@ -97,6 +97,10 @@ if ($software_id) {
                 <b class="col-md-4">Software User Manual :</b>
                 <h6 class="col-md-8"><?php echo $soft_info['user_manual']; ?></h6>
             </div>
+            <div class="row">
+                <b class="col-md-4">Extra Features :</b>
+                <h6 class="col-md-8"><?php echo $row['feature']; ?></h6>
+            </div>
         </div>
         <div class="col-lg-2"></div>
     </div>

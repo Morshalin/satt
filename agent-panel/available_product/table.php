@@ -81,7 +81,7 @@ if ($result) {
               <span class="dropdown-item" id="content_managment" data-url="' . AGENT_URL . '/available_product/show.php?software_details_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
 
 
-             <span class="dropdown-item" id="content_managment" data-url="' . AGENT_URL . '/available_product/cart.php?software_details_id=' . $row['id'] . '"><i class="icon-cart"></i> Add To Cart</span>
+             <span class="dropdown-item" id="content_managment" data-url="' . AGENT_URL . '/available_product/cart.php?software_details_id=' . $row['id'] . '"><i class="icon-cart"></i>Order</span>
             </div>
           </div>
         </div>

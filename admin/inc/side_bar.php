@@ -38,7 +38,7 @@
 
 <?php } if (permission_check('Promote_Product')) { ?>
 
-    <?php $promote_product = ['promote-product']; ?>
+  <?php $promote_product = ['promote-product']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($promote_product, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-list"></i> <span>Promote Product</span></a>
 
@@ -49,7 +49,7 @@
 
 <?php } if (permission_check('Existing_Software')) { ?>
 
-    <?php $order_and_confirm = ['pending-order', 'confirm-order','cancel-order','delivered-order']; ?>
+    <?php $order_and_confirm = ['new_order_form_available','pending-order', 'confirm-order','cancel-order','delivered-order']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($order_and_confirm, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-cart-add2"></i> <span>Existing Software Order & Confirmation</span></a>
 
@@ -57,6 +57,11 @@
 <?php if (permission_check('Existing_Software_Pending_Orders')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/pending-order" class="nav-link<?php active_page($data, 'pending-order'); ?>">Pending Orders</a></li>
 <?php } if (permission_check('Existing_Software_Confirm_Orders')) { ?>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/new_order_form_available" class="nav-link<?php active_page($data, 'new_order_form_available'); ?>">New Orders</a></li>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/pending-order" class="nav-link<?php active_page($data, 'pending-order'); ?>">Pending Orders</a></li>
+
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/confirm-order" class="nav-link<?php active_page($data, 'confirm-order'); ?>">Confirm Orders</a></li>
 <?php } if (permission_check('Existing_Software_Delivered_Orders')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/delivered-order" class="nav-link<?php active_page($data, 'delivered-order'); ?>">Delivered Orders</a></li>
@@ -69,13 +74,16 @@
 <?php } if (permission_check('New_Software')) { ?>
 
 
-  <?php $nav_items_section_10 = ['order-new-software', 'pending-new-software','confirm-new-software','cancel-new-order','delivered-new-order']; ?>
+  <?php $nav_items_section_10 = ['order-new-software', 'pending-new-software','confirm-new-software','cancel-new-order','delivered-new-order','new_orders']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_10, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-cart"></i> <span>New Software Order & Confirmation</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_10, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
     
 <?php if (permission_check('New_Software_Pending_Orders')) { ?>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/new_orders" class="nav-link<?php active_page($data, 'new_orders'); ?>">New Orders</a></li>
+
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/pending-new-software" class="nav-link<?php active_page($data, 'pending-new-software'); ?>">Pending Orders</a></li>
 <?php } if (permission_check('New_Software_Confirmd_Orders')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/confirm-new-software" class="nav-link<?php active_page($data, 'confirm-new-software'); ?>">Confirmed Orders</a></li>
@@ -98,6 +106,7 @@
 <?php if (permission_check('Graphics_Add_Order')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/add-graphics-order" class="nav-link<?php active_page($data, 'add-graphics-order'); ?>">Add New Order</a></li>
 <?php } if (permission_check('Graphic_ Pendin_ Orders')) { ?>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/add-graphics-order" class="nav-link<?php active_page($data, 'add-graphics-order'); ?>">Add New Order</a></li>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/pending-graphics-order" class="nav-link<?php active_page($data, 'pending-graphics-order'); ?>">Pending Orders</a></li>
 <?php } if (permission_check('Graphics_Unpaid_Delivered_Orders')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/unpaid-delivered-graphics" class="nav-link<?php active_page($data, 'unpaid-delivered-graphics'); ?>">Unpaid But Delivered</a></li>
