@@ -47,13 +47,13 @@
     <div class="col-lg-6">
             <div class="form-group">
                 <label for="skill" class="col-form-label">Skill  <span class="text-danger">*</span></label>
-                <input type="text" name="skill" id="skill" class="form-control" placeholder="Type Skill" required autofocus value="">
+                <input type="text" name="skill" id="skill" class="form-control tokenfield" placeholder="Type Skill" required autofocus value="">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="projects" class="col-form-label">Projects  <span class="text-danger">*</span></label>
-                <input type="text" name="projects" id="projects" class="form-control" placeholder="Type Projects" required autofocus value="">
+                <input type="text" name="projects" id="projects" class="form-control tokenfield" placeholder="Type Projects" required autofocus value="">
             </div>
         </div>
     </div>

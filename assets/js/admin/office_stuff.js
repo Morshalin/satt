@@ -151,6 +151,7 @@ var DatatableButtonsHtml5 = function() {
                     _componentInputSwitchery();
                     _modalFormValidation();
                     _componentDatePicker();
+                    _componentTokenfield();
                 })
                 .fail(function(data) {
                     $('.modal-body').html('<span style="color:red; font-weight: bold;"> Something Went Wrong. Please Try again later.......</span>');
@@ -199,3 +200,24 @@ $(document).on('keyup','#present_address',function(){
         $("#permanent_address").val(present_address);
     }
 });
+
+    // Tokenfield
+    var _componentTokenfield = function() {
+        if (!$().tokenfield) {
+            console.warn('Warning - tokenfield.min.js is not loaded.');
+            return;
+        }
+
+        // Basic initialization
+        $('.tokenfield').tokenfield();
+
+        // Create token on blur
+        $('.tokenfield-blur').tokenfield({
+            createTokensOnBlur: true
+        });
+
+        // Custom delimiter
+        $('.tokenfield-delimiter').tokenfield({
+            delimiter: ';'
+        });
+    }

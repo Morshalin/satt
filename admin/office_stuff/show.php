@@ -105,7 +105,7 @@ if (isset($_GET['office_stuff_id'])) {
             </div>
             <div class="row">
                     <b class="col-md-4">Active Status :</b>
-                    <h6 class="col-md-8"><?php  $row['linked_in']==1?'Active':"Inactive" ;?></h6>
+                    <h6 class="col-md-8"><?php  echo $row['status']=='1'?'Active':"Inactive" ;?></h6>
             </div>
 
         </div>

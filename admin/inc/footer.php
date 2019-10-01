@@ -59,6 +59,10 @@
 	<!-- Theme JS files -->
 	<script src="<?php echo BASE_URL; ?>/assets/js/app.js"></script>
 
+	
+	<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/forms/tags/tagsinput.min.js"></script>
+	<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/forms/tags/tokenfield.min.js"></script>
+
 
 	<script src="<?php echo ADMIN_URL; ?>/jquery-ui/jquery-ui.min.js"></script>
 
