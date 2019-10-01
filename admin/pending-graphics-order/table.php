@@ -66,9 +66,11 @@ if ($result) {
             </a>
             <div class="dropdown-menu dropdown-menu-right">
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/pending-graphics-order/show.php?pending_graphics_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/pending-graphics-order/edit.php?pending_graphics_order_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
               <span class="dropdown-item text-success" id="content_managment" data-url="' . ADMIN_URL . '/pending-graphics-order/pay.php?pending_graphics_order_id=' . $row['id'] . '"><i class="icon-checkmark4"></i> Pay</span>
               <span class="dropdown-item text-warning" id="content_managment" data-url="' . ADMIN_URL . '/pending-graphics-order/change-status.php?pending_graphics_order_id=' . $row['id'] . '"><i class="icon-magic-wand"></i> Change Status</span>
               <span class="dropdown-item text-info" id="content_managment" data-url="' . ADMIN_URL . '/pending-graphics-order/print-cost.php?pending_graphics_order_id=' . $row['id'] . '"><i class="icon-coins"></i> Print Cost</span>
+              <span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/pending-graphics-order/ajax.php?pending_graphics_order_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
             </div>
           </div>
         </div>

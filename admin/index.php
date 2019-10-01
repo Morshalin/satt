@@ -315,7 +315,7 @@ $cancel_order = $count + $count1;
             <div class="card-header header-elements-inline">
                 <h6 class="card-title"><button type="button" class="btn btn-light" id="spinner-light-6">
                 <i class="icon-spinner9 spinner mr-2"></i>
-                Active Agent
+                Agent
                 </button>
                 <button type="button" class="btn btn-light" id="spinner-light-6">
                   <?php echo $count ?>
@@ -368,7 +368,7 @@ $cancel_order = $count + $count1;
                      <i class="icon-cancel-circle2
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
-                <div><a href="<?php echo ADMIN_URL; ?>/agent/" class="btn btn-light text-dark ">See All Users <i class="icon-circle-right2"></i></a></div>
+                <div><a href="<?php echo ADMIN_URL; ?>/add_user/" class="btn btn-light text-dark ">See All Users <i class="icon-circle-right2"></i></a></div>
             </div>
         </div>
       </div>
@@ -385,12 +385,8 @@ $cancel_order = $count + $count1;
             <div class="card">
             <div class="card-header header-elements-inline">
                 <h6 class="card-title"><button type="button" class="btn btn-light" id="spinner-light-6">
-                <i class="icon-spinner9 spinner mr-2"></i>
-                Developer
-                </button>
-                <button type="button" class="btn btn-light" id="spinner-light-6">
-                  <?php echo $count ?>
-                </button>
+                <i class="icon-spinner9 spinner mr-1"></i>Developer</button>
+                <button type="button" class="btn btn-light" id="spinner-light-6"><?php echo $count ?></button>
                 </h6>
                 <div class="header-elements">
                     <div class="list-icons">
@@ -403,27 +399,45 @@ $cancel_order = $count + $count1;
                      <i class="icon-cancel-circle2
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
-                <div><a href="<?php echo ADMIN_URL; ?>/agent/" class="btn btn-light text-dark ">See All Developer <i class="icon-circle-right2"></i></a></div>
+                <div><a href="<?php echo ADMIN_URL; ?>/developer/" class="btn btn-light text-dark ">See All Developer <i class="icon-circle-right2"></i></a></div>
             </div>
         </div>
       </div>
+<?php 
+    $query = "SELECT * FROM office_stuff WHERE status = '1' ";
+    $result = $db->select($query);
+    if ($result) {
+      $count = mysqli_num_rows($result);
+    }else{
+      $count = 0;
+    }
+ ?>
           <div class="col-md-3">
-            <div class="card bg-dark">
-              <div class="card-header header-elements-inline">
-                <h6 class="card-title">Total Stuff</h6>
+            <div class="card">
+            <div class="card-header header-elements-inline">
+                <h6 class="card-title"><button type="button" class="btn btn-light" id="spinner-light-6">
+                <i class="icon-spinner9 spinner mr-2"></i>
+                Stuff
+                </button>
+                <button type="button" class="btn btn-light" id="spinner-light-6">
+                  <?php echo $count ?>
+                </button>
+                </h6>
                 <div class="header-elements">
-                  <div class="list-icons">
-                            <a class="list-icons-item" data-action="collapse"></a>
-                            <a class="list-icons-item" data-action="remove"></a>
-                          </div>
-                        </div>
-              </div>
-
-              <div class="card-body">
-                Card with light background color using <code>.bg-light</code> class
-              </div>
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="card-body text-center">
+                 <a href="" id="content_managment" title="Total Stuff" data-popup="tooltip" data-placement="bottom">
+                     <i class="icon-cancel-circle2
+                ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
+                 </a>
+                <div><a href="<?php echo ADMIN_URL; ?>/office_stuff/" class="btn btn-light text-dark ">See All Stuff <i class="icon-circle-right2"></i></a></div>
+            </div>
+        </div>
+      </div>
 </div>
   </div>
   <div class="col-md-3" style="border-left: 3px solid #26A69A">
