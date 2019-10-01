@@ -1,18 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('customer-panel', CUSTOMER_URL . '/order-new-software', 'order-new-software');
-// if (isset($_GET['promote_product_id'])) {
-// 	$promote_product_id = $_GET['promote_product_id'];
-// 	if ($promote_product_id) {
-// 		$query = "SELECT * FROM promote_product WHERE id = '$promote_product_id'";
-// 		$result = $db->select($query);
-// 		if (!$result) {
-// 			http_response_code(500);
-// 			die(json_encode(['message' => 'Promote Products Not Found']));
-// 		}
-// 	}
-// }
+Session::checkSession('admin', ADMIN_URL . '/new_orders', 'Order New Software');
 
 /*================================================================
 		Insert Data into Database
@@ -86,10 +75,7 @@ Session::checkSession('customer-panel', CUSTOMER_URL . '/order-new-software', 'o
 					$agent_phn = '';
 				}
 
-				$query = "INSERT INTO new_product_order 
-				(customer_id,customer_name,customer_phn,agent_id,agent_name,agent_phn,documentation_note,expected_name_software, order_date) 
-				VALUES 
-				('$customer_id','$customer_name','$customer_phn','$agent_id','$agent_name','$agent_phn','$documentation_note','$expected_name_software', now())";
+				$query = "INSERT INTO new_product_order(customer_id,customer_name,customer_phn,agent_id,agent_name,agent_phn,documentation_note,expected_name_software, order_date) VALUES ('$customer_id','$customer_name','$customer_phn','$agent_id','$agent_name','$agent_phn','$documentation_note','$expected_name_software', now())";
 
 				$last_id = $db->custom_insert($query);
 				if ($last_id) {
