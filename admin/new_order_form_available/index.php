@@ -32,7 +32,7 @@ $data['page_js'] = ['assets/js/admin/new_order_form_available'];
   		
       <form class="form-validate-jquery" id="cart_form" action="" method="post">
         <fieldset class="mb-3">
-          <legend class="text-uppercase font-size-sm font-weight-bold">Add New Software Order <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
+          <legend class="text-uppercase font-size-sm font-weight-bold">Existing Software Order <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
 
 
           <section class="fromarea">
@@ -115,7 +115,7 @@ $data['page_js'] = ['assets/js/admin/new_order_form_available'];
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8">
                   <div class="form-group">
-                    <label for="name" class="col-form-label">Note For Software Feature: <span class="text-danger">*</span></label>
+                    <label for="name" class="col-form-label">Extra Software Feature: <span class="text-danger">*</span></label>
                     <textarea class="form-control" name="documentation_note" id="documentation_note" cols="30" rows="10"></textarea>
                   </div>
                 </div>

@@ -6,8 +6,7 @@ $data['page_title'] = 'Order New Software';
 $data['element'] = ['modal' => 'lg'];
 $data['page_index'] = 'new_orders';
 $data['page_css'] = [];
-$data['page_js'] = ['assets/js/customer-panel/new_orders'];
-$customer_id =  $user['id'];
+$data['page_js'] = ['assets/js/admin/new_orders'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
@@ -25,8 +24,7 @@ $customer_id =  $user['id'];
 
   </div>
 </div>
-<!-- /page header -->
-<!-- Content area -->
+
 <div class="content">
   <div class="card border-top-success rounded-top-0" id="table_card">
   	
@@ -40,8 +38,6 @@ $customer_id =  $user['id'];
           <section class="fromarea">
             <div class="container py-5 bg-white" style="width: 100%; padding-right: 5%; padding-left: 5%; margin-top: -20px">
 
-
-
               <div class="row">
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8">
@@ -50,9 +46,58 @@ $customer_id =  $user['id'];
                     <input type="text" name="expected_name_software" id="expected_name_software" class="form-control" placeholder="Provide a name" required="">
                   </div>
                 </div>
-                
-                <input type="hidden" name="customer_id" id="customer_id" value="<?php echo $customer_id ?>">
+              </div>
 
+
+              <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                  <div class="form-group">
+                    <label for="name" class="col-form-label">Expected Name of Agent:<span class="text-danger">*</span></label>
+                        <select name="agent_id" id="agent_id" class="form-control select">
+                          <option value="">Please Select One</option>
+                           <option value="0">No Agent</option>
+                      <?php 
+                      $query = "SELECT * FROM agent_list";
+                      $result = $db->select($query);
+                      if ($result) {
+                        while ($row = $result->fetch_assoc()) {  ?>
+                          <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                           <?php } } ?>
+                        </select>
+                  </div>
+                </div>
+                <div class="col-lg-2"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                  <div class="form-group">
+                    <label for="name" class="col-form-label">Expected Name of Customer: <span class="text-danger">*</span></label>
+                      <select name="customer_id" id="customer_id" class="form-control select">
+                        <option value="">Please Select Agent</option>
+                        </select>
+                  </div>
+                </div>
+                <div class="col-lg-2"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="form-group">
+                        <label for="pay_types" class="col-form-label"><strong>Select Pay Type </strong><span class="text-danger">*</span></label>
+
+                        <select class="select form-control"  name="pay_type" id="pay_type">
+                          <option value="">Please Select one</option>
+                            <option value="monthly_pay"> Monthly Pay</option>
+                            <option value="yearly_pay">Yearly Pay</option>
+                            <option value="direct_sell">Direct Sell</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
               </div>
 
               <div class="row">
@@ -107,5 +152,28 @@ $customer_id =  $user['id'];
 <script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/select.min.js"></script>
 <script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/buttons.min.js"></script>
 <script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $(document).on('change','#agent_id', function(e){
+            e.preventDefault();
+            var agent_id = $("#agent_id").val();
+            if (agent_id) {
+              $.ajax({
+                url: './custome_ajax.php',
+                data:{agent_name:agent_id},
+                type: 'post',
+                dataType: 'json',
+                success: function(data){
+                    //console.log(data);
+                    $("#customer_id").html(data);
+                }
+            });
+          } 
+        });
+
+    });
+  </script>
+
 </body>
 </html>

@@ -106,24 +106,3 @@ var DatatableButtonsHtml5 = function() {
 document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
 });
-
-// $(document).ready(function(){
-
-//     $(document).on('submit','#content_form',function(e){
-//         e.preventDefault();
-       
-//       var formData = new FormData($("#content_form")[0]);
-//       formData.append('submit','submit');
-
-//         $.ajax({
-//             url: './ajax.php',
-//             data:formData,
-//             type: 'post',
-//             dataType: 'json',
-//             success: function(data){
-//                 p_notify(data.message, data.type, jsUcfirst(data.type));
-//                 $('#modal_remote').modal('hide');
-//             }
-//         });
-//     });
-// });
