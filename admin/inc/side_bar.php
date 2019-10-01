@@ -54,14 +54,12 @@
     <a href="#" class="nav-link"><i class="icon-cart-add2"></i> <span>Existing Software Order & Confirmation</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($order_and_confirm, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
+    
+    <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/new_order_form_available" class="nav-link<?php active_page($data, 'new_order_form_available'); ?>">New Orders</a></li>
+
 <?php if (permission_check('Existing_Software_Pending_Orders')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/pending-order" class="nav-link<?php active_page($data, 'pending-order'); ?>">Pending Orders</a></li>
 <?php } if (permission_check('Existing_Software_Confirm_Orders')) { ?>
-
-      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/new_order_form_available" class="nav-link<?php active_page($data, 'new_order_form_available'); ?>">New Orders</a></li>
-
-      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/pending-order" class="nav-link<?php active_page($data, 'pending-order'); ?>">Pending Orders</a></li>
-
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/confirm-order" class="nav-link<?php active_page($data, 'confirm-order'); ?>">Confirm Orders</a></li>
 <?php } if (permission_check('Existing_Software_Delivered_Orders')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/delivered-order" class="nav-link<?php active_page($data, 'delivered-order'); ?>">Delivered Orders</a></li>
@@ -79,10 +77,9 @@
     <a href="#" class="nav-link"><i class="icon-cart"></i> <span>New Software Order & Confirmation</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_10, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
-    
+      
+       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/new_orders" class="nav-link<?php active_page($data, 'new_orders'); ?>">New Orders</a></li>
 <?php if (permission_check('New_Software_Pending_Orders')) { ?>
-
-      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/new_orders" class="nav-link<?php active_page($data, 'new_orders'); ?>">New Orders</a></li>
 
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/pending-new-software" class="nav-link<?php active_page($data, 'pending-new-software'); ?>">Pending Orders</a></li>
 <?php } if (permission_check('New_Software_Confirmd_Orders')) { ?>
@@ -180,12 +177,13 @@
 <?php } if (permission_check('Developer_List')) { ?>
 
 
-    <?php $nav_items_section_5 = ['developer']; ?>
+    <?php $nav_items_section_5 = ['developer','office_stuff']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_5, $data['page_index']) ?>">
-    <a href="#" class="nav-link"><i class="icon-user-lock"></i> <span>Developer Setup</span></a>
+    <a href="#" class="nav-link"><i class="icon-user-lock"></i> <span>Office Stuff</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_5, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
-      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/developer" class="nav-link<?php active_page($data, 'developer'); ?>">Developer List</a></li>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/developer" class="nav-link<?php active_page($data, 'developer'); ?>">Software Developer List</a></li>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/office_stuff" class="nav-link<?php active_page($data, 'office_stuff'); ?>">Office Stuff List</a></li>
     </ul>
   </li>
 
