@@ -51,7 +51,10 @@ if ($result) {
 $query1 = "SELECT user_has_role.user_serial_no, user_has_role.role_serial_no, `role`.role_name
 FROM user_has_role
 INNER JOIN `role` ON user_has_role.role_serial_no=`role`.serial_no WHERE user_has_role.user_serial_no = '$user_serial_no' ";
-$result1 = $db->select($query1)->fetch_assoc();
+$result1 = $db->select($query1);
+if ($result1) {
+  $result1 = $result1->fetch_assoc();
+}
 
 $role_name = $result1['role_name'];
 
