@@ -150,6 +150,7 @@ var DatatableButtonsHtml5 = function() {
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
                     _modalFormValidation();
+                    _componentDatePicker();
                 })
                 .fail(function(data) {
                     $('.modal-body').html('<span style="color:red; font-weight: bold;"> Something Went Wrong. Please Try again later.......</span>');
@@ -171,6 +172,7 @@ var DatatableButtonsHtml5 = function() {
             _componentDatatableButtonsHtml5();
             _componentSelect2Normal();
             _componentRemoteModalLoad();
+            _componentDatePicker();
         }
     }
 }();

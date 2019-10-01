@@ -19,20 +19,20 @@ if ($columnName == 'DT_RowIndex') {
 =================================================================================*/
 $searchQuery = " ";
 if ($searchValue != '') {
-  $searchQuery = " and (id like '%" . $searchValue . "%' or name like '%" . $searchValue . "%' or email like '%" . $searchValue . "%' or mobile_no like '%" . $searchValue . "%' or address like '%" . $searchValue . "%') ";
+  $searchQuery = " and (id like '%" . $searchValue . "%' or name like '%" . $searchValue . "%' or email like '%" . $searchValue . "%' or mobile_no_personal like '%" . $searchValue . "%' or present_address like '%" . $searchValue . "%') ";
 }
 /*==============================================================================
 ## Total number of records without filtering
 =================================================================================*/
 
-$sel = $db->select("select count(*) as allcount from developer");
+$sel = $db->select("select count(*) as allcount from office_stuff");
 $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['allcount'];
 
 /*==============================================================================
 ## Total number of record with filtering
 =================================================================================*/
-$sel = $db->select("select count(*) as allcount from developer WHERE 1 " . $searchQuery);
+$sel = $db->select("select count(*) as allcount from office_stuff WHERE 1 " . $searchQuery);
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
@@ -40,7 +40,7 @@ $totalRecordwithFilter = $records['allcount'];
 /*==============================================================================
 ## Fetch records
 =================================================================================*/
-$query = "select * from developer WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$query = "select * from office_stuff WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $result = $db->select($query);
 $data = array();
 $i = 0;
@@ -51,10 +51,10 @@ if ($result) {
       "id" => $row['id'],
       "name" => '<strong>' . $row['name'] . '</strong>',
       "email" => '<strong>' . $row['email'] . '</strong>',
-      "mobile_no" => '<strong>' . $row['mobile_no'] . '</strong>',
+      "mobile_no" => '<strong>' . $row['mobile_no_personal'] . '</strong>',
       "image" => '<img src="' . $row["image"] .'" style="width: 90px; height:60px;" alt="Image not found">',
 
-      "address" => '<strong>' . $row['address'] . '</strong>',
+      "address" => '<strong>' . $row['present_address'] . '</strong>',
       "action" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
         <div class="list-icons" id="action_menu_' . $row['id'] . '">
@@ -73,7 +73,7 @@ if ($result) {
       "status" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="status_loading_' . $row['id'] . '"  style="display: none">
         <label class="form-check-label" id="status_' . $row['id'] . '" title="' . ($row['status'] == 1 ? 'Active' : 'InActive') . '" data-popup="tooltip-custom" data-placement="bottom">
-        <input type="checkbox" class="form-check-status-switchery" id="change_status" data-id="' . $row['id'] . '" data-status="' . $row['status'] . '" data-url="' . ADMIN_URL . '/developer/ajax.php?developer_id=' . $row['id'] . '&action=status&status=' . $row['status'] . '"' . ($row['status'] == 1 ? 'checked' : '') . ' data-fouc >
+        <input type="checkbox" class="form-check-status-switchery" id="change_status" data-id="' . $row['id'] . '" data-status="' . $row['status'] . '" data-url="' . ADMIN_URL . '/office_stuff/ajax.php?office_stuff_id=' . $row['id'] . '&action=status&status=' . $row['status'] . '"' . ($row['status'] == 1 ? 'checked' : '') . ' data-fouc >
         </label>
           ',
     );

@@ -118,6 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 	http_response_code(500);
 	die(json_encode(['message' => 'Something Happend Wrong. Please Try Again Later']));
 }
+
 /*================================================================
 		Insert Data into Database
 ===================================================================*/
