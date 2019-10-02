@@ -73,6 +73,49 @@
                         </div>
                       </div>
                     </div><hr>
+<!-- System User section -->
+
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="checkbox">
+                          <label class="text-uppercase">
+                            <input type="checkbox"  id="system_user"> <b style="margin-top: 0px; font-sixe:18px;color: red">System User :</b>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="row">
+
+                          <?php 
+                          $query = "SELECT * FROM `permission` limit 42,1";
+
+                          $get_permission = $db->select($query);
+
+                          if ($get_permission) {
+                            while ($row = $get_permission->fetch_assoc()) {
+                              $name = $row['permission_name'];
+                              $name1 = explode("_",$name);
+                              $final_name = implode(" ",$name1);
+
+                              ?>
+
+                              <div class="col-md-4">
+                                <div class="checkbox">
+                                  <label>
+                                    <input type="checkbox" class="system_user" value="<?php echo $row['serial_no'] ?>" id="checkbox_<?php echo $row['serial_no'] ?>" name="permission[]"> <?php echo ucwords($final_name); ?>
+                                  </label>
+                                </div>
+                              </div>
+
+                              <?php
+                            }
+                          }
+
+                          ?>
+
+                        </div>
+                      </div>
+                    </div><hr>
 
 <!-- Company section -->
                   <div class="row">
@@ -153,6 +196,28 @@
                               <?php
                             }
                           }
+                          $query = "SELECT * FROM `permission` LIMIT 45, 1";
+
+                          $get_permission = $db->select($query);
+
+                          if ($get_permission) {
+                            while ($row = $get_permission->fetch_assoc()) {
+                              $name = $row['permission_name'];
+                              $name1 = explode("_",$name);
+                              $final_name = implode(" ",$name1);
+                              ?>
+
+                              <div class="col-md-4">
+                                <div class="checkbox">
+                                  <label>
+                                    <input type="checkbox" class="existing_software" value="<?php echo $row['serial_no'] ?>" id="checkbox_<?php echo $row['serial_no'] ?>" name="permission[]"> <?php echo ucwords($final_name); ?>
+                                  </label>
+                                </div>
+                              </div>
+
+                              <?php
+                            }
+                          }
 
                           ?>
 
@@ -175,6 +240,31 @@
 
                           <?php 
                           $query = "SELECT * FROM `permission` LIMIT 11, 5";
+
+                          $get_permission = $db->select($query);
+
+                          if ($get_permission) {
+                            while ($row = $get_permission->fetch_assoc()) {
+                              $name = $row['permission_name'];
+                              $name1 = explode("_",$name);
+                              $final_name = implode(" ",$name1);
+                              ?>
+
+                              <div class="col-md-4">
+                                <div class="checkbox">
+                                  <label>
+                                    <input type="checkbox" class="new_software" value="<?php echo $row['serial_no'] ?>" id="checkbox_<?php echo $row['serial_no'] ?>" name="permission[]"> <?php echo ucwords($final_name); ?>
+                                  </label>
+                                </div>
+                              </div>
+
+                              <?php
+                            }
+                          }
+
+                          ?>
+                          <?php 
+                          $query = "SELECT * FROM `permission` LIMIT 46, 1";
 
                           $get_permission = $db->select($query);
 
@@ -386,7 +476,7 @@
                       <div class="col-md-2">
                         <div class="checkbox">
                           <label class="text-uppercase">
-                            <input type="checkbox" id="developer_setup"> <b style="margin-top: 0px; font-sixe:18px;color: red">Developer Setup :</b>
+                            <input type="checkbox" id="developer_setup"> <b style="margin-top: 0px; font-sixe:18px;color: red">Office Stuff :</b>
                           </label>
                         </div>
                       </div>
@@ -394,7 +484,7 @@
                         <div class="row">
 
                           <?php 
-                          $query = "SELECT * FROM `permission` LIMIT 35, 1";
+                          $query = "SELECT * FROM `permission` LIMIT 43, 2";
 
                           $get_permission = $db->select($query);
 
@@ -417,6 +507,29 @@
                             }
                           }
 
+                          $query = "SELECT * FROM `permission` LIMIT 35, 1";
+
+                          $get_permission = $db->select($query);
+
+                          if ($get_permission) {
+                            while ($row = $get_permission->fetch_assoc()) {
+                              $name = $row['permission_name'];
+                              $name1 = explode("_",$name);
+                              $final_name = implode(" ",$name1);
+                              ?>
+
+                              <div class="col-md-4">
+                                <div class="checkbox">
+                                  <label>
+                                    <input type="checkbox" class="developer_setup" value="<?php echo $row['serial_no'] ?>" id="checkbox_<?php echo $row['serial_no'] ?>" name="permission[]"> <?php echo ucwords($final_name); ?>
+                                  </label>
+                                </div>
+                              </div>
+
+                              <?php
+                            }
+                          }
+                        
                           ?>
 
                         </div>
@@ -542,6 +655,17 @@ $(document).on('change','#software_setup',function(){
 
 });
 
+  // system_user checkbox
+$(document).on('change','#system_user',function(){
+
+  if (this.checked) {
+    $('.system_user').prop('checked', true);
+  }else{
+    $('.system_user').prop('checked', false);
+  }
+
+});
+
 // promote_product checkbox
 $(document).on('change','#promote_product',function(){
 
@@ -658,6 +782,8 @@ $(document).on('change','#all_checked',function(){
   if (this.checked) {
     $('.software_setup').prop('checked', true);
     $('#software_setup').prop('checked', true);
+    $('.system_user').prop('checked', true);
+    $('#system_user').prop('checked', true);
     $('.promote_product').prop('checked', true);
     $('#promote_product').prop('checked', true);
     $('.existing_software').prop('checked', true);
@@ -681,6 +807,8 @@ $(document).on('change','#all_checked',function(){
   }else{
     $('.software_setup').prop('checked', false);
     $('#software_setup').prop('checked', false);
+    $('.system_user').prop('checked', false);
+    $('#system_user').prop('checked', false);
     $('.promote_product').prop('checked', false);
     $('#promote_product').prop('checked', false);
     $('.existing_software').prop('checked', false);
