@@ -19,6 +19,7 @@ Session::checkSession('admin', ADMIN_URL . '/new_orders', 'Order New Software');
 			}
 			$expected_name_software = $fm->validation($_POST['expected_name_software']);
 			$documentation_note = $fm->validation($_POST['documentation_note']);
+			$expected_delevery_date = $_POST['expected_delevery_date'];
 			// $file_upload_documentation = $fm->validation($_POST['file_upload_documentation']);
 
 			if (!$expected_name_software) {
@@ -75,7 +76,7 @@ Session::checkSession('admin', ADMIN_URL . '/new_orders', 'Order New Software');
 					$agent_phn = '';
 				}
 
-				$query = "INSERT INTO new_product_order(customer_id,customer_name,customer_phn,agent_id,agent_name,agent_phn,documentation_note,expected_name_software, order_date) VALUES ('$customer_id','$customer_name','$customer_phn','$agent_id','$agent_name','$agent_phn','$documentation_note','$expected_name_software', now())";
+				$query = "INSERT INTO new_product_order(customer_id,customer_name,customer_phn,agent_id,agent_name,agent_phn,documentation_note,expected_name_software, order_date,expected_delevery_date) VALUES ('$customer_id','$customer_name','$customer_phn','$agent_id','$agent_name','$agent_phn','$documentation_note','$expected_name_software', now(),'$expected_delevery_date')";
 
 				$last_id = $db->custom_insert($query);
 				if ($last_id) {

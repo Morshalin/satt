@@ -180,13 +180,14 @@ var DatatableButtonsHtml5 = function() {
                     dataType: 'json'
                 })
                 .done(function(data) { 
-                     $(id).remove();
                     new PNotify({
                           title: 'Well Done!',
                           text: data.message,
                           type: 'success',
                           addclass: 'alert alert-styled-left',
                       });
+                    $('#modal_remote').modal('hide');
+                    $(id).remove();
                 })
                 .fail(function(data) {
                     

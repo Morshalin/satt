@@ -6,6 +6,7 @@ if (isset($_POST['customer_id'])) {
 	$pay_type = $_POST['pay_type'];
 	$agent_id = $_POST['agent_id'];
 	$documentation_note = $_POST['documentation_note'];
+	$expected_delevery_date = $_POST['expected_delevery_date'];
 	
 	if ($agent_id==0) {
 		$agent_id='';
@@ -56,9 +57,9 @@ if (isset($_POST['customer_id'])) {
 
 
 	$query = "INSERT INTO satt_order_products 
-			  (customer_id,customer_name,customer_number,agent_id,product_id,product_name,pay_type,installation_charge,pay_amount,agent_comission,yearly_renew_charge,feature,order_date)
+			  (customer_id,customer_name,customer_number,agent_id,product_id,product_name,pay_type,installation_charge,pay_amount,agent_comission,yearly_renew_charge,feature,order_date,expected_delevery_date)
 			  VALUES 
-			  ('$customer_id','$customer_name','$customer_number','$agent_id','$software_id','$product_name','$pay_type','$installation_charge','$pay_amount','$agent_comission','$yearly_renew_charge','$documentation_note',now())";
+			  ('$customer_id','$customer_name','$customer_number','$agent_id','$software_id','$product_name','$pay_type','$installation_charge','$pay_amount','$agent_comission','$yearly_renew_charge','$documentation_note',now(),'$expected_delevery_date')";
 
 	$insert = $db->insert($query);
 
