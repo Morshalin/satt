@@ -61,19 +61,19 @@ if (isset($_GET['developer_id'])) {
             <legend class="text-uppercase font-size-m font-weight-bold">Contact Informantion </legend>
             <div class="row">
                     <b class="col-md-3">Facebook :</b>
-                    <h6 class="col-md-9"><?php echo $row['facebook']; ?></h6>
+                    <a target='_blank' href="<?php echo $row['facebook']; ?>" ><h6 class="col-md-9"><?php echo $row['facebook']; ?></h6></a>
             </div>
             <div class="row">
                     <b class="col-md-3">Twitter :</b>
-                    <h6 class="col-md-9"><?php echo $row['twitter']; ?></h6>
+                    <a target='_blank' href="<?php echo $row['twitter']; ?>" ><h6 class="col-md-9"><?php echo $row['twitter']; ?></h6></a>
             </div>
             <div class="row">
                     <b class="col-md-3">Instagram :</b>
-                    <h6 class="col-md-9"><?php echo $row['instagram']; ?></h6>
+                    <a target='_blank' href="<?php echo $row['instagram']; ?>" ><h6 class="col-md-9"><?php echo $row['instagram']; ?></h6></a>
             </div>
             <div class="row">
                     <b class="col-md-3">Linkedin :</b>
-                    <h6 class="col-md-9"><?php echo $row['linkedin']; ?></h6>
+                    <a target='_blank' href="<?php echo $row['linkedin']; ?>" ><h6 class="col-md-9"><?php echo $row['linkedin']; ?></h6></a>
             </div>
 
         </div>

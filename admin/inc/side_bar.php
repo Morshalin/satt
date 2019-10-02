@@ -102,8 +102,7 @@
     
 <?php if (permission_check('Graphics_Add_Order')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/add-graphics-order" class="nav-link<?php active_page($data, 'add-graphics-order'); ?>">Add New Order</a></li>
-<?php } if (permission_check('Graphic_ Pendin_ Orders')) { ?>
-      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/add-graphics-order" class="nav-link<?php active_page($data, 'add-graphics-order'); ?>">Add New Order</a></li>
+<?php } if (permission_check('Graphic_Pending_Orders')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/pending-graphics-order" class="nav-link<?php active_page($data, 'pending-graphics-order'); ?>">Pending Orders</a></li>
 <?php } if (permission_check('Graphics_Unpaid_Delivered_Orders')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/unpaid-delivered-graphics" class="nav-link<?php active_page($data, 'unpaid-delivered-graphics'); ?>">Unpaid But Delivered</a></li>
