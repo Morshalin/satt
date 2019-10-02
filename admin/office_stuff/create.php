@@ -4,7 +4,7 @@
 ?>
 
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/office_stuff/ajax.php" id="content_form" method="post" enctype="multipart/form-data">
+<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/office_stuff/ajax.php?" id="content_form" method="post" enctype="multipart/form-data">
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">ADD NEW OFFICE STUFF <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     
@@ -164,12 +164,7 @@
                 <input type="text" name="email" id="email" class="form-control" placeholder="Type  Email Address" autofocus value="">
             </div>
         </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <label for="linkedin" class="col-form-label">Linkedin link</label>
-                <input type="text" name="linkedin" id="linkedin" class="form-control" placeholder="Type  Linkedin link" autofocus value="">
-            </div>
-        </div>
+        
     </div>
     <div class="row">
         <div class="col-lg-12">

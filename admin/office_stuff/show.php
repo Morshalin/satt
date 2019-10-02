@@ -15,7 +15,7 @@ if (isset($_GET['office_stuff_id'])) {
 
 } else {
 	http_response_code(500);
-	die(json_encode(['message' => 'UnAthorized']));
+	die(json_encode(['message' => 'UnAuthorized']));
 }
 
 ?>
@@ -89,19 +89,60 @@ if (isset($_GET['office_stuff_id'])) {
             <legend class="text-uppercase font-size-m font-weight-bold">Contact Information </legend>
             <div class="row">
                     <b class="col-md-4">Facebook :</b>
-                    <h6 class="col-md-8"><?php echo $row['facebook']; ?></h6>
+                    <h6 class="col-md-8"> 
+                    <?php 
+                        if ($row['facebook']) {
+                                ?>
+                                <a href="<?php echo $row['facebook']; ?>" target="_blank" rel="noopener noreferrer">Click To Visite Facebook Profile</a>
+                                <?php
+                        }else{
+                                echo "Link Not Assigned";
+                        }
+                        ?>
+                            
+                    </h6>
             </div>
             <div class="row">
                     <b class="col-md-4">Twitter :</b>
-                    <h6 class="col-md-8"><?php echo $row['twitter']; ?></h6>
+                    <h6 class="col-md-8">
+                    <?php 
+                        if ($row['twitter']) {
+                                ?>
+                                <a href="<?php echo $row['twitter']; ?>" target="_blank" rel="noopener noreferrer">Click To Visite Twitter Profile</a>
+                                <?php
+                        }else{
+                                echo "Link Not Assigned";
+                        }
+                        ?>
+                        </h6>
             </div>
             <div class="row">
                     <b class="col-md-4">Instagram :</b>
-                    <h6 class="col-md-8"><?php echo $row['instagram']; ?></h6>
+                    <h6 class="col-md-8">
+                    <?php 
+                        if ($row['instagram']) {
+                                ?>
+                                <a href="<?php echo $row['instagram']; ?>" target="_blank" rel="noopener noreferrer">Click To Visite Instagram Profile</a>
+                                <?php
+                        }else{
+                                echo "Link Not Assigned";
+                        }
+                        ?>
+                    </h6>
             </div>
             <div class="row">
-                    <b class="col-md-4">Linkedin :</b>
-                    <h6 class="col-md-8"><?php echo $row['linked_in']; ?></h6>
+                    <b class="col-md-4">LinkedIn :</b>
+                    <h6 class="col-md-8">
+                     <?php 
+                        if ($row['linked_in']) {
+                                ?>
+                                <a href="<?php echo $row['linked_in']; ?>" target="_blank" rel="noopener noreferrer">Click To Visite LinkedIn Profile</a>
+                                <?php
+                        }else{
+                                echo "Link Not Assigned";
+                        }
+                     ?>
+                    </h6>
             </div>
             <div class="row">
                     <b class="col-md-4">Active Status :</b>
