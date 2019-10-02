@@ -11,6 +11,8 @@ if (isset($_GET['change_order_id'])) {
 			http_response_code(500);
 			die(json_encode(['message' => 'Graphics Order Not Found']));
 		}
+	}else{
+		$result = $result->fetch_assoc();
 	}
 }
 /*================================================================
@@ -18,96 +20,104 @@ if (isset($_GET['change_order_id'])) {
 ===================================================================*/
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['action'] == 'update') {
-	$developer_id = $_GET['developer_id'];
-	if ($developer_id) {
-
-	$query = "SELECT * FROM developer WHERE id = '$developer_id'";
-	$result = $db->select($query);
-	if ($result) {
-	$img = $result->fetch_assoc()['image'];
-	}
-
 	$error = array();
-	$name = $fm->validation($_POST['name']);
-	$email = $fm->validation($_POST['email']);
-	$mobile_no = $fm->validation($_POST['mobile_no']);
-	$address = $fm->validation($_POST['address']);
-	$bio = $fm->validation($_POST['bio']);
-	$facebook = $fm->validation($_POST['facebook']);
-	$twitter = $fm->validation($_POST['twitter']);
-	$linkedin = $fm->validation($_POST['linkedin']);
-	$instagram = $fm->validation($_POST['instagram']);
+	$order_id = $_GET['order_id'];
+	if ($order_id) {
 
-	$courseCheck = $fm->dublicateCheck('developer', 'email', $email);
-	$courseCheck = $fm->dublicateCheck('developer', 'mobile_no', $mobile_no);
+			$client_name = $fm->validation($_POST['client_name']);
+			$mobile_no = $fm->validation($_POST['mobile_no']);
+			$shipping_address = $fm->validation($_POST['shipping_address']);
+			$currier_name = $fm->validation($_POST['currier_name']);
+			$product_name = $fm->validation($_POST['product_name']);
+			$order_date = $fm->validation($_POST['order_date']);
+			$qty = $fm->validation($_POST['qty']);
+			$probable_delivery_date = $fm->validation($_POST['probable_delivery_date']);
+			$price = $fm->validation($_POST['price']);
+			$advance = $fm->validation($_POST['advance']);
+			$printing_cost = $fm->validation($_POST['printing_cost']);
 
-	$image = $_FILES['image'];
-    $file_name = $image['name'];
-    $file_size = $image['size'];
-    $file_temp = $image['tmp_name'];
-    $div = explode(".", $file_name);
-    $file_extension = strtolower(end($div));
-    $unique_image = md5(time()); 
-    $unique_image= substr($unique_image, 0,10).'.'.$file_extension;
-    $uploaded_image = 'image/'.$unique_image;
+			$image = $_FILES['demo_photo'];
+		    $file_name = $image['name'];
+		    $file_size = $image['size'];
+		    $file_temp = $image['tmp_name'];
+		    $div = explode(".", $file_name);
+		    $file_extension = strtolower(end($div));
+		    $unique_image = md5(time()); 
+		    $unique_image= substr($unique_image, 0,10).'.'.$file_extension;
+		    $uploaded_image = '../image/'.$unique_image;
 
 
+			if ($printing_cost == "") {
+				$printing_cost = 0;
+			}
+			$currier_cost = $fm->validation($_POST['currier_cost']);
+			if ($currier_cost == "") {
+				$currier_cost = 0;
+			}
+			$others_cost = $fm->validation($_POST['others_cost']);
+			if ($others_cost == "") {
+				$others_cost = 0;
+			}
+			$order_status = $fm->validation($_POST['order_status']);
+			$notes = $fm->validation($_POST['notes']);
+			$order_taken_by = $fm->validation($_POST['order_taken_by']);
+			
+			
+			$payment_method = $fm->validation($_POST['payment_method']);
+			$tx_id_account_no = $fm->validation($_POST['tx_id_account_no']);
+			$received_mobile_no = $fm->validation($_POST['received_mobile_no']);
 
-		if (isset($_POST['status'])) {
-			$status = 1;
-		} else {
-			$status = 0;
-		}
 
-	if (!$name) {
-		$error['name'] = 'Developer Name Field required';
-	}elseif (strlen($name) > 255) {
-		$error['name'] = 'Developer Name Can Not Be More Than 255 Charecters';
-	}
+			if ($error) {
+				http_response_code(500);
+				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+			} else {
 
-	if (!$email) {
-		$error['email'] = 'Email Field required';
-	}elseif (strlen($email) > 255) {
-		$error['email'] = 'Email Can Not Be More Than 255 Charecters';
-	}
-
-	if (!$mobile_no) {
-		$error['mobile_no'] = 'Mobile No Field required';
-	}
-
-		if ($error) {
-			http_response_code(500);
-			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
-		} else {
-			$query = "UPDATE developer SET 
-			name = '$name',
-			email = '$email',
+			$query = "UPDATE graphics_info SET 
+			client_name = '$client_name',
 			mobile_no = '$mobile_no',
-			address = '$address',
-			bio = '$bio',
-			facebook = '$facebook',
-			twitter = '$twitter',
-			linkedin = '$linkedin',
-			instagram = '$instagram',
-			 status = '$status' WHERE id='$developer_id'";
+			shipping_address = '$shipping_address',
+			currier_name = '$currier_name',
+			product_name = '$product_name',
+			order_date = '$order_date',
+			probable_delivery_date = '$probable_delivery_date',
+			price = '$price',
+			advance = '$advance',
+			printing_cost = '$printing_cost',
+			currier_cost = '$currier_cost',
+			others_cost = '$others_cost',
+			status = '$order_status',
+			notes = '$notes',
+			order_taken_by = '$order_taken_by' WHERE id='$order_id'";
 			$result = $db->update($query);
 			$update = "";
 
 			if ($result) {
+
+				$query1 = "UPDATE graphics_pay SET 
+				pay = '$advance',
+				payment_method = '$payment_method',
+				tx_id_account_no = '$tx_id_account_no',
+				received_mobile_no = '$received_mobile_no',
+				received_by = '$order_taken_by' WHERE order_id='$order_id' limit 1";
+				$result1 = $db->update($query1);
+				$update = "";
+
+
 				if ($file_name) {
-					if ($img) {
-						unlink($img);
+					if ($result['demo_photo']) {
+						unlink($result['demo_photo']);
 					}
 					if (move_uploaded_file($file_temp, $uploaded_image)) {
-						$query = "UPDATE developer SET image = '$uploaded_image' where id = '$developer_id'";
+						$query = "UPDATE graphics_info SET demo_photo = '$uploaded_image' where id = '$order_id'";
 						$update = $db->update($query);
 					}
 				}else{
-					die(json_encode(['message' => 'Developer Updated Successfull']));
+					die(json_encode(['message' => 'Order Updated Successfull']));
 				}
 				
 				if ($update) {
-					die(json_encode(['message' => 'Developer Updated Successfull']));
+					die(json_encode(['message' => 'Order Updated Successfull']));
 				}else{
 					http_response_code(500);
 					die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
@@ -122,12 +132,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 		Delate  Data from Database
 ===================================================================*/
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET['action'] == 'delete') {
-	$developer_id = $_GET['developer_id'];
-	if ($developer_id) {
-		$query = "DELETE FROM developer WHERE id = '$developer_id'";
+	$pending_graphics_order_id = $_GET['pending_graphics_order_id'];
+	if ($pending_graphics_order_id) {
+		$query = "DELETE FROM graphics_info WHERE id = '$pending_graphics_order_id'";
 		$result = $db->delete($query);
 		if ($result) {
-			die(json_encode(['message' => 'Developer Deleted Successfull']));
+			$query1 = "DELETE FROM graphics_pay WHERE order_id = '$pending_graphics_order_id'";
+			$result1 = $db->delete($query1);
+			die(json_encode(['message' => 'Order Deleted Successfull']));
 		}
 	}
 	http_response_code(500);

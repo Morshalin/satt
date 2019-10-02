@@ -115,6 +115,8 @@ var DatatableButtonsHtml5 = function() {
                     $('.modal-body').html(data).fadeIn(); // load response
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
+                     _componentSelect2Modal();
+                    _componentDatePicker();
                     _modalFormValidation();
                 })
                 .fail(function(data) {
@@ -135,8 +137,9 @@ var DatatableButtonsHtml5 = function() {
     return {
         init: function() {
             _componentDatatableButtonsHtml5();
-            _componentSelect2Normal();
             _componentRemoteModalLoad();
+            _componentDatePicker();
+            _formValidation();
         }
     }
 }();
@@ -144,6 +147,104 @@ var DatatableButtonsHtml5 = function() {
 // ------------------------------
 document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
+});
+
+
+
+$(document).ready(function(){
+  
+   $(document).on('keyup blur','#price',function(){
+         var price = $('#price').val();
+
+         if (!price) {
+            price = 0;
+         }
+
+         var advance = $('#advance').val();
+         if (!advance) {
+            advance = 0;
+         }
+         var due = parseInt(price) - parseInt(advance);
+
+        if (advance > price) {
+            alert("Advance Payment Cannot Be Greater Than The Price...");
+            $("#advance").val("0");
+             advance = 0;
+            $("#due").val(price);
+        }else{
+
+            $('#due').val(due);
+        }
+        calculation();
+
+
+
+   });
+   $(document).on('keyup blur','#advance',function(){
+         var price = $('#price').val();
+
+         if (!price) {
+            price = 0;
+         }
+
+         var advance = $('#advance').val();
+         if (!advance) {
+            advance = 0;
+         }
+         var due = parseInt(price) - parseInt(advance);
+
+        if (parseInt(advance) > parseInt(price)) {
+            alert("Advance Payment Cannot Be Greater Than The Price...");
+            $("#advance").val("0");
+             advance = 0;
+            $("#due").val(price);
+        }else{
+
+            $('#due').val(due);
+        }
+
+
+   });
+   $(document).on('keyup blur','#printing_cost',function(){
+        calculation();
+   });
+
+
+   $(document).on('keyup blur','#currier_cost',function(){
+        calculation();
+   });
+
+   $(document).on('keyup blur','#others_cost',function(){
+        calculation();
+   });
+
+
+function calculation(){
+    var price = $('#price').val();
+    var printing_cost = $('#printing_cost').val();
+    var currier_cost = $('#currier_cost').val();
+    var others_cost = $('#others_cost').val();
+    if (price == "") {
+        price = 0;
+    }
+    if (advance == "") {
+        advance = 0;
+    }
+    if (printing_cost == "") {
+        printing_cost = 0;
+    }
+    if (currier_cost == "") {
+        currier_cost = 0;
+    }
+    if (others_cost == "") {
+        others_cost = 0;
+    }
+
+    var profit = parseInt(price) - parseInt(printing_cost) - parseInt(currier_cost) - parseInt(others_cost);
+    
+    
+    $('#profit').val(profit);
+   }
 });
 
 
