@@ -42,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST['login'])) {
 			$getLoginUser = getLoginUser($user['from_table'], $userId);
 			if ($getLoginUser) {
 				$login_user = $getLoginUser->fetch_assoc();
-				$query = "INSERT INTO satt_user_logs (user_id, status, ip_address, details, created_at) VALUES ('$userId', true, '$ip_address', '$details', now());";
-				$db->insert($query);
+				// $query = "INSERT INTO satt_user_logs (user_id, status, ip_address, details, created_at) VALUES ('$userId', true, '$ip_address', '$details', now());";
+				// $db->insert($query);
 				$userRole = $user['role'];
 				$admin_id = $user['admin_id'];
 
