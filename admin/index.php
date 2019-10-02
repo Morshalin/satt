@@ -1,5 +1,6 @@
 <?php
   require_once '../config/config.php';
+  //ajax();
   Session::checkSession('admin', ADMIN_URL);
   $goto = '';
   if (isset($_GET['goto'])) {
@@ -13,9 +14,11 @@
   }
   $data = array();
   $data['page_title'] = 'Admin Dashboard';
+  $data['element'] = ['modal' => 'lg'];
   $data['page_index'] = 'dashboard';
   $data['page_css'] = [];
-  $data['page_js'] = [];
+  $data['page_js'] =  ['assets/js/admin/dashboard'];
+
 ?>
 <?php 
 include_once 'inc/header.php'; ?>
@@ -438,11 +441,57 @@ $cancel_order = $count + $count1;
             </div>
         </div>
       </div>
+
+
 </div>
   </div>
   <div class="col-md-3" style="border-left: 3px solid #26A69A">
   <legend class="text-uppercase font-size-sm font-weight-bold">Notification </legend>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas reiciendis, non quis iste dolore nesciunt accusamus delectus sint quaerat similique id debitis optio enim quam quidem hic, asperiores culpa fuga distinctio. Minima nemo doloribus distinctio, adipisci voluptatem voluptate odit dignissimos sed totam porro error nisi necessitatibus sapiente sunt praesentium placeat, repudiandae veritatis optio, vero quaerat. Voluptate totam itaque minus repellat officiis, quae omnis tempora quidem. Velit sint itaque rem saepe aspernatur soluta eum vitae ipsa incidunt iure aliquid quidem cupiditate nemo maxime recusandae adipisci cumque dicta autem placeat, neque qui, laboriosam nesciunt eos voluptate in? Quas dignissimos consectetur voluptate dolorum.
+    <div class="row">
+       <legend class="text-uppercase font-size-sm font-weight-bold text-center">All Notification</legend>
+
+       <div class="col-sm-12">
+        <?php 
+          $date =  date('Y-m-d');
+          $prev_date = date('Y-m-d', strtotime($date .' -1 day'));
+          $next_date = date('Y-m-d', strtotime($date .' +1 day'));
+
+          $query = "SELECT * FROM satt_next_contacted where (status = 0) AND (next_contact = '$next_date' or next_contact='$date' or next_contact='$prev_date')";
+          $notices_result = $db->select($query);
+          if ($notices_result) {
+            $notification = mysqli_num_rows($notices_result);
+  
+        ?>
+        <legend class="text-uppercase font-size-sm  text-center">Customer Notification <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0"><?php echo $notification; ?></span> </legend> <?php } ?>
+        <div style="height: 300px; overflow: scroll;">
+        <?php
+
+          $query = "SELECT cn.id, cn.admin_id, cn.customer_id, cn.next_contact, cn.note, c.name FROM satt_next_contacted cn inner join satt_customer_informations c on cn.customer_id = c.id where (cn.status = 0) AND (cn.next_contact = '$next_date' or cn.next_contact= '$date' or cn.next_contact='$prev_date')";
+          $result = $db->select($query);
+          if ($result) {
+          while ($notice_data = $result->fetch_assoc()) {  ?>
+        <div class="card">
+          <div class="card-body">
+            <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+              <div>
+                <h6><?php echo $notice_data['name']; ?></h6>
+                <span class="text-muted"><?php echo $notice_data['next_contact']; ?></span>
+                <p class="text-justify"><?php echo $fm->textShorten($notice_data['note'], 70); ?>
+
+                <a href="" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/next_contacted.php?customerdetails_id=<?php echo $notice_data['id']; ?>">Show</a>
+
+
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+     <?php } } ?>
+     </div>
+
+       </div>
+
+    </div>
   </div>
 </div>
 
