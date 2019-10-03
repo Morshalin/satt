@@ -470,7 +470,7 @@ $cancel_order = $count + $count1;
           $result = $db->select($query);
           if ($result) {
           while ($notice_data = $result->fetch_assoc()) {  ?>
-        <div class="card">
+        <div class="card" id="tr_<?php echo $notice_data['id']; ?>">
           <div class="card-body">
             <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
               <div>
@@ -488,8 +488,90 @@ $cancel_order = $count + $count1;
         </div>
      <?php } } ?>
      </div>
+    </div>
 
-       </div>
+
+
+       <div class="col-sm-12 mt-3">
+        <?php 
+          $date =  date('Y-m-d');
+          $prev_date = date('Y-m-d', strtotime($date .' -1 day'));
+          $next_date = date('Y-m-d', strtotime($date .' +1 day'));
+
+          $query = "SELECT * FROM satt_order_products where (msg_status = 0) AND (expected_delevery_date  = '$next_date' or expected_delevery_date = '$date' or expected_delevery_date ='$prev_date')";
+          $notices_result = $db->select($query);
+          if ($notices_result) {
+            $notification = mysqli_num_rows($notices_result);
+    
+        ?>
+        <legend class="text-uppercase font-size-sm  text-center">Existing Software Delivery<span class="badge badge-pill bg-warning-400 ml-auto ml-md-0"><?php echo $notification; ?></span> </legend> <?php } ?>
+        <div style="height: 300px; overflow: scroll;">
+        <?php
+
+          $query = "SELECT cn.id, cn.customer_id, cn.expected_delevery_date, cn.product_name, c.name FROM satt_order_products cn inner join satt_customer_informations c on cn.customer_id = c.id where (cn.msg_status = 0) AND (cn.expected_delevery_date = '$next_date' or cn.expected_delevery_date= '$date' or cn.expected_delevery_date='$prev_date')";
+          $delever_result = $db->select($query);
+          if ($delever_result) {
+          while ($delever_data = $delever_result->fetch_assoc()) {  ?>
+        <div class="card" id="del_<?php echo $delever_data['id']; ?>">
+          <div class="card-body">
+            <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+              <div>
+                <h6><?php echo $delever_data['name']; ?></h6>
+                <span class="text-muted"><?php echo $delever_data['expected_delevery_date']; ?></span>
+                <p class="text-justify"><?php echo $delever_data['product_name']; ?></p>
+
+                <strong>
+                  <a href="" onclick="return confirm('Are You Sure Remove Notification');" class="del_notification" id="<?php echo $delever_data['id'];?>"  data-url="<?php echo ADMIN_URL; ?>/software_notification.php?soft_avaliable_id=<?php echo $delever_data['id']; ?>">Remove</a>
+                </strong>
+
+              </div>
+            </div>
+          </div>
+        </div>
+     <?php } } ?>
+     </div>
+    </div>
+
+       <div class="col-sm-12 mt-3">
+        <?php 
+          $date =  date('Y-m-d');
+          $prev_date = date('Y-m-d', strtotime($date .' -1 day'));
+          $next_date = date('Y-m-d', strtotime($date .' +1 day'));
+
+          $query = "SELECT * FROM new_product_order where (msg_status = 0) AND (expected_delevery_date  = '$next_date' or expected_delevery_date = '$date' or expected_delevery_date ='$prev_date')";
+          $notices_result = $db->select($query);
+          if ($notices_result) {
+            $notification = mysqli_num_rows($notices_result);
+    
+        ?>
+        <legend class="text-uppercase font-size-sm  text-center"> New Software Delivery <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0"><?php echo $notification; ?></span> </legend> <?php } ?>
+        <div style="height: 300px; overflow: scroll;">
+        <?php
+
+          $new_del_query = "SELECT np.id, np.customer_id, np.expected_delevery_date, np.expected_name_software, c.name FROM new_product_order np inner join satt_customer_informations c on np.customer_id = c.id where (np.msg_status = 0) AND (np.expected_delevery_date = '$next_date' or np.expected_delevery_date= '$date' or np.expected_delevery_date='$prev_date')";
+          $new_delever_result = $db->select($new_del_query);
+          if ($new_delever_result) {
+          while ($new_delever_data = $new_delever_result->fetch_assoc()) {  ?>
+        <div class="card" id="update_<?php echo $new_delever_data['id']; ?>">
+          <div class="card-body">
+            <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+              <div>
+                <h6><?php echo $new_delever_data['name']; ?></h6>
+                <span class="text-muted"><?php echo $new_delever_data['expected_delevery_date']; ?></span>
+                <p class="text-justify"><?php echo $new_delever_data['expected_name_software']; ?></p>
+                <strong>
+                  <a href="" onclick="return confirm('Are You Sure Remove Notification');" class="update_notification" id="<?php echo $new_delever_data['id'];?>"  data-url="<?php echo ADMIN_URL; ?>/software_notification.php?soft_id=<?php echo $new_delever_data['id']; ?>">Remove</a>
+                </strong>
+              </div>
+            </div>
+          </div>
+        </div>
+     <?php } } ?>
+     </div>
+    </div>
+
+
+
 
     </div>
   </div>
@@ -497,5 +579,40 @@ $cancel_order = $count + $count1;
 
 <!-- /content area -->
 <?php include_once 'inc/footer.php'; ?>
+
+<script type="text/javascript">
+
+  $(document).on("click",".del_notification",function(e){
+    e.preventDefault();
+    var url = $(this).data('url');
+    var id = '#del_'+$(this).attr('id');
+    
+    $.ajax({
+      url:url,
+      type:'post',
+      dataType:'text',
+      success:function(data){
+        $(id).remove();
+      }
+    });
+    
+  });
+
+  $(document).on("click",".update_notification",function(e){
+    e.preventDefault();
+    var url = $(this).data('url');
+    var id = '#update_'+$(this).attr('id');
+    
+    $.ajax({
+      url:url,
+      type:'post',
+      dataType:'text',
+      success:function(data){
+        $(id).remove();
+      }
+    });
+    
+  });
+</script>
 </body>
 </html>

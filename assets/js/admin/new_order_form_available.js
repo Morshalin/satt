@@ -105,7 +105,7 @@ var DatatableButtonsHtml5 = function() {
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
                      _componentSelect2Modal();
-                    _componentDatePicker();
+                    //_componentDatePicker();
                     _modalFormValidation();
 
                 })
@@ -128,6 +128,7 @@ var DatatableButtonsHtml5 = function() {
         init: function() {
             _componentDatatableButtonsHtml5();
             _componentRemoteModalLoad();
+            _componentDatePicker();
         }
     }
 }();
@@ -136,54 +137,3 @@ var DatatableButtonsHtml5 = function() {
 document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
 });
-
-<script type="text/javascript">
-  $(document).ready(function(){
-
-      /*$(document).on('change','#agent_id', function(e){
-          e.preventDefault();
-          var agent_id = $("#agent_id").val();
-          if (agent_id) {
-            $.ajax({
-              url: './custome_ajax.php',
-              data:{agent_name:agent_id},
-              type: 'post',
-              dataType: 'json',
-              success: function(data){
-                  //console.log(data);
-                  $("#customer_id").html(data);
-              }
-          });
-        } 
-      });
-*/
-
-
-        /*$(document).on('submit','#cart_form',function(e){
-            e.preventDefault();
-            console.log("Hello");
-            var software_id = $('#software_id').val();
-            var customer_id = $('#customer_id').val();
-            var pay_type = $('#pay_type').val();
-            var agent_id = $('#agent_id').val();
-            var feature = $('#feature').val();
-            // console.log(agent_id);
-            $.ajax({
-                url: './ajax.php',
-                data:{
-                    software_id : software_id,
-                    customer_id : customer_id,
-                    pay_type : pay_type,
-                    agent_id: agent_id,
-                    documentation_note:documentation_note 
-                },
-                type: 'post',
-                dataType: 'json',
-                success: function(data){
-                    p_notify(data.message, data.type, jsUcfirst(data.type));
-                    //$('#modal_remote').modal('hide');
-                }
-            });
-        });*/
-      
-  });

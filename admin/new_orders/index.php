@@ -103,6 +103,17 @@ $data['page_js'] = ['assets/js/admin/new_orders'];
               <div class="row">
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8">
+                    <div class="form-group">
+                        <label for="pay_types" class="col-form-label"><strong>Expected Delivery Date:</strong><span class="text-danger">*</span></label>
+                        <input type="text" class="form-control date" name="expected_delevery_date" id="expected_delevery_date">
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
                   <div class="form-group">
                     <label for="name" class="col-form-label">Note For Software Feature: <span class="text-danger">*</span></label>
                     <textarea class="form-control" name="documentation_note" id="documentation_note" cols="30" rows="10" required=""></textarea>

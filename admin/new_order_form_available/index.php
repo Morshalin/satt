@@ -53,8 +53,8 @@ $data['page_js'] = ['assets/js/admin/new_order_form_available'];
                       $query = "SELECT * FROM software_details";
                       $result = $db->select($query);
                       if ($result) {
-                        while ($data = $result->fetch_assoc()) {  ?>
-                          <option value="<?php echo $data['id']; ?>"><?php echo $data['software_name']; ?></option>
+                        while ($soft_data = $result->fetch_assoc()) {  ?>
+                          <option value="<?php echo $soft_data['id']; ?>"><?php echo $soft_data['software_name']; ?></option>
                            <?php } } ?>
                         </select>
                   </div>
@@ -72,8 +72,8 @@ $data['page_js'] = ['assets/js/admin/new_order_form_available'];
                       $query = "SELECT * FROM agent_list";
                       $result = $db->select($query);
                       if ($result) {
-                        while ($data = $result->fetch_assoc()) {  ?>
-                          <option value="<?php echo $data['id']; ?>"><?php echo $data['name']; ?></option>
+                        while ($agent_data = $result->fetch_assoc()) {  ?>
+                          <option value="<?php echo $agent_data['id']; ?>"><?php echo $agent_data['name']; ?></option>
                            <?php } } ?>
                         </select>
                   </div>
@@ -102,6 +102,15 @@ $data['page_js'] = ['assets/js/admin/new_order_form_available'];
                               <option value="yearly_pay">Yearly Pay</option>
                               <option value="direct_sell">Direct Sell</option>
                           </select>
+                      </div>
+                  </div>
+                  <div class="col-lg-2"></div>
+
+                  <div class="col-lg-2"></div>
+                  <div class="col-lg-8">
+                      <div class="form-group">
+                          <label for="pay_types" class="col-form-label"><strong>Expected Delivery Date:</strong><span class="text-danger">*</span></label>
+                          <input type="text" class="form-control date" name="expected_delevery_date" id="expected_delevery_date">
                       </div>
                   </div>
                   <div class="col-lg-2"></div>
@@ -180,7 +189,7 @@ $data['page_js'] = ['assets/js/admin/new_order_form_available'];
             var pay_type = $('#pay_type').val();
             var agent_id = $('#agent_id').val();
             var documentation_note = $('#documentation_note').val();
-            console.log(agent_id);
+            var expected_delevery_date = $('#expected_delevery_date').val();
             $.ajax({
                 //url: './admin/new_order_form_available/insert_ajax.php',
                 url: './insert_ajax.php',
@@ -189,7 +198,8 @@ $data['page_js'] = ['assets/js/admin/new_order_form_available'];
                     customer_id : customer_id,
                     pay_type : pay_type,
                     agent_id: agent_id,
-                    documentation_note:documentation_note 
+                    documentation_note:documentation_note,
+                    expected_delevery_date:expected_delevery_date 
                 },
                 type: 'post',
                 dataType: 'json',
@@ -197,7 +207,6 @@ $data['page_js'] = ['assets/js/admin/new_order_form_available'];
                    $("option:selected").prop("selected", false);
                    $('#documentation_note').val('');
                     p_notify(data.message, data.type, jsUcfirst(data.type));
-                  
                 }
             });
         });
