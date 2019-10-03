@@ -332,7 +332,7 @@ $cancel_order = $count + $count1;
             </div>
             <div class="card-body text-center">
                  <a href="" id="content_managment" title="Active Agent" data-popup="tooltip" data-placement="bottom">
-                     <i class="icon-cancel-circle2
+                     <i class="icon-user-check
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
                 <div><a href="<?php echo ADMIN_URL; ?>/agent/" class="btn btn-light text-dark ">See Active Agent <i class="icon-circle-right2"></i></a></div>
@@ -368,7 +368,7 @@ $cancel_order = $count + $count1;
             </div>
             <div class="card-body text-center">
                  <a href="" id="content_managment" title="Ststem Users" data-popup="tooltip" data-placement="bottom">
-                     <i class="icon-cancel-circle2
+                     <i class="icon-users4
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
                 <div><a href="<?php echo ADMIN_URL; ?>/add_user/" class="btn btn-light text-dark ">See All Users <i class="icon-circle-right2"></i></a></div>
@@ -399,7 +399,7 @@ $cancel_order = $count + $count1;
             </div>
             <div class="card-body text-center">
                  <a href="" id="content_managment" title="Total Developer" data-popup="tooltip" data-placement="bottom">
-                     <i class="icon-cancel-circle2
+                     <i class="icon-collaboration
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
                 <div><a href="<?php echo ADMIN_URL; ?>/developer/" class="btn btn-light text-dark ">See All Developer <i class="icon-circle-right2"></i></a></div>
@@ -434,7 +434,7 @@ $cancel_order = $count + $count1;
             </div>
             <div class="card-body text-center">
                  <a href="" id="content_managment" title="Total Stuff" data-popup="tooltip" data-placement="bottom">
-                     <i class="icon-cancel-circle2
+                     <i class="icon-users2
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
                 <div><a href="<?php echo ADMIN_URL; ?>/office_stuff/" class="btn btn-light text-dark ">See All Stuff <i class="icon-circle-right2"></i></a></div>
