@@ -1,0 +1,124 @@
+<?php
+require_once '../../config/config.php';
+Session::checkSession('admin', ADMIN_URL . '/graphics-report', 'Graphics Report');
+$data = array();
+$data['page_title'] = 'Graphics Report';
+$data['element'] = ['modal' => 'lg'];
+$data['page_index'] = 'graphics-report';
+$data['page_css'] = [];
+$data['page_js'] = ['assets/js/admin/graphics-report'];
+$customer_id =  $user['id'];
+?>
+<?php include_once '../inc/header.php'; ?>
+<!-- Page header -->
+<div class="page-header page-header-light">
+
+  <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+    <div class="d-flex">
+      <div class="breadcrumb">
+        <a href="<?php echo BASE_URL; ?>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+        <span class="breadcrumb-item active"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Dashboard'; ?></span>
+      </div>
+
+      <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+    </div>
+
+  </div>
+</div>
+<!-- /page header -->
+<!-- Content area -->
+<div class="content">
+  <div class="card border-top-success rounded-top-0" id="table_card">
+  	
+  	<div class="card-body">
+  		
+      <form class="form-validate-jquery report_form" id="content_form" method="post">
+        <fieldset class="mb-3">
+    
+    <div class="row">
+        
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        
+            <div class="form-group">
+                <label for="from_date" class="col-form-label">From Date<span class="text-danger">*</span></label>
+                <input type="text" name="from_date" id="from_date" class="form-control date" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="to_date" class="col-form-label">To Date<span class="text-danger">*</span></label>
+                <input type="text" name="to_date" id="to_date" class="form-control date" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="report_type" class="col-form-label">Report Type<span class="text-danger">*</span></label>
+                <select name="report_type" id="report_type"  class="form-control" required>
+                    <option value="">Please Select One...</option>
+                    <option value="all">All Report</option>
+                    <option value="cost">Cost Report</option>
+                    <option value="profit">Profit Report</option>
+                    <option value="status">Status Report</option>
+                </select>
+            </div>
+        
+            <div class="form-group status_div" style="display:none" >
+                <label for="status" class="col-form-label">Please Select A Status<span class="text-danger">*</span></label>
+                <select name="status" id="status"  class="form-control">
+                    <option value="">Please Select One...</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Developing">Developing</option>
+                    <option value="Printing">Printing</option>
+                    <option value="Sent To Currier">Sent To Currier</option>
+                    <option value="Delivered">Delivered</option>
+                    <option value="Cancelled">Cancel Order</option>
+                </select>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-lg-4 offset-lg-4">
+                    <button type="submit" name="create" class="btn btn-primary ml-31" id="submit">View Report</button>
+                    <button type="button" class="btn btn-link" id="submiting" style="display: none;" disabled="">Submitting <img src="<?php echo BASE_URL; ?>/assets/ajaxloader.gif"></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div> 
+    </div>
+
+
+
+
+
+    <div class="div pt-3 " style="border-top: 3px solid #bbb;" id="show_report">
+           
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- /content area -->
+<?php include_once '../inc/footer.php'; ?>
+<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/select.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/buttons.min.js"></script>
+<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
+</body>
+</html>

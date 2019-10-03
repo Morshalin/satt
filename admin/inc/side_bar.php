@@ -30,11 +30,6 @@
     </ul>
   </li>
 
-<?php if (permission_check('System_Users')) { ?>
-  <li class="nav-item">
-    <a href="<?php echo ADMIN_URL; ?>/add_users" class="nav-link<?php active_page($data, 'add_users'); ?>"><i  class="icon-user-tie"></i> <span>System Users</span></a>
-  </li>
-  <?php } ?>
 
 <?php } if (permission_check('Promote_Product')) { ?>
 
@@ -112,11 +107,33 @@
     </ul>
   </li>
 
-<?php } if (permission_check('Customer')) { ?>
+<?php } ?>
+
+
+
+
+
+
+<?php $nav_items_section_25 = ['graphics-report','existing-software-report','new-software-report', 'cancel-graphics']; ?>
+  <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_25, $data['page_index']) ?>">
+    <a href="#" class="nav-link"><i class="icon-coins"></i> <span>Reports</span></a>
+
+    <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_25, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
+    
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/graphics-report" class="nav-link<?php active_page($data, 'graphics-report'); ?>">Graphics</a></li>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/existing-software-report" class="nav-link<?php active_page($data, 'existing-software-report'); ?>">Existing Software</a></li>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/new-software-report" class="nav-link<?php active_page($data, 'new-software-report'); ?>">New Software</a></li>
+    </ul>
+  </li>
+
+
+
+<?php if (permission_check('Customer')) { ?>
 
   <?php $nav_items_section_3 = ['customer-details','customer-type', 'progressive-state','interested-services','Office_note','leav_us']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_3, $data['page_index']) ?>">
-    <a href="#" class="nav-link"><i class="icon-user-tie"></i> <span>Customer</span></a>
+    <a href="#" class="nav-link"><i class="icon-users2"></i> <span>Customer</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_3, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
 <?php  if (permission_check('Existing_Customers')) { ?>
@@ -170,7 +187,16 @@
  </ul>
 </li>
 
-<?php } if (permission_check('Office_Stuff')) { ?>
+<?php } ?>
+
+<?php if (permission_check('System_Users')) { ?>
+  <li class="nav-item">
+    <a href="<?php echo ADMIN_URL; ?>/add_users" class="nav-link<?php active_page($data, 'add_users'); ?>"><i  class="icon-users"></i> <span>System Users</span></a>
+  </li>
+  <?php } ?>
+
+
+<?php if (permission_check('Office_Stuff')) { ?>
 
     <?php $nav_items_section_5 = ['developer','office_stuff']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_5, $data['page_index']) ?>">
