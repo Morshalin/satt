@@ -85,7 +85,26 @@
     </ul>
   </li>
 
-<?php } if (permission_check('Graphics_Details')) { ?>
+<?php } ?>
+
+
+
+
+<?php $nav_items_section_26 = ['existing-software-due','new-software-due', 'cancel-graphics','existing-software-report']; ?>
+  <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_26, $data['page_index']) ?>">
+    <a href="#" class="nav-link"><i class="icon-coins"></i> <span>Collect Software Due </span></a>
+
+    <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_26, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
+    
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/existing-software-due" class="nav-link<?php active_page($data, 'existing-software-due'); ?>">Existing Software Due</a></li>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/new-software-due" class="nav-link<?php active_page($data, 'new-software-due'); ?>">New Software Due</a></li>
+    </ul>
+  </li>
+
+
+
+<?php if (permission_check('Graphics_Details')) { ?>
 
   <?php $nav_items_section_15 = ['add-graphics-order', 'unpaid-delivered-graphics','pending-graphics-order','paid-delivered-graphics', 'cancel-graphics']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_15, $data['page_index']) ?>">
