@@ -183,7 +183,7 @@ $data['page_js'] = ['assets/js/admin/new_order_form_available'];
 
         $(document).on('submit','#cart_form',function(e){
             e.preventDefault();
-            console.log("Hello");
+            //console.log("Hello");
             var software_id = $('#software_id').val();
             var customer_id = $('#customer_id').val();
             var pay_type = $('#pay_type').val();

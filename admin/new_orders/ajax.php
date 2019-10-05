@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/new_orders', 'Order New Software');
+Session::checkSession('admin', ADMIN_URL . '/new_orders', 'new_orders');
 
 /*================================================================
 		Insert Data into Database
@@ -20,14 +20,8 @@ Session::checkSession('admin', ADMIN_URL . '/new_orders', 'Order New Software');
 			$expected_name_software = $fm->validation($_POST['expected_name_software']);
 			$documentation_note = $fm->validation($_POST['documentation_note']);
 			$expected_delevery_date = $_POST['expected_delevery_date'];
-			// $file_upload_documentation = $fm->validation($_POST['file_upload_documentation']);
 
-			if (!$expected_name_software) {
-				$error['expected_name_software'] = 'Expected Name Field required';
-			}
-			if (!$documentation_note) {
-				$error['documentation_note'] = 'End Date Field required';
-			}
+
 
 
 
