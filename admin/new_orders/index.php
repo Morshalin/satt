@@ -89,7 +89,7 @@ $data['page_js'] = ['assets/js/admin/new_orders'];
                     <div class="form-group">
                         <label for="pay_types" class="col-form-label"><strong>Select Pay Type </strong><span class="text-danger">*</span></label>
 
-                        <select class="select form-control"  name="pay_type" id="pay_type">
+                        <select class="select form-control" required="" name="pay_type" id="pay_type">
                           <option value="">Please Select one</option>
                             <option value="monthly_pay"> Monthly Pay</option>
                             <option value="yearly_pay">Yearly Pay</option>
@@ -105,7 +105,7 @@ $data['page_js'] = ['assets/js/admin/new_orders'];
                 <div class="col-lg-8">
                     <div class="form-group">
                         <label for="pay_types" class="col-form-label"><strong>Expected Delivery Date:</strong><span class="text-danger">*</span></label>
-                        <input type="text" class="form-control date" name="expected_delevery_date" id="expected_delevery_date">
+                        <input type="text" class="form-control date" required="" name="expected_delevery_date" id="expected_delevery_date">
                     </div>
                 </div>
                 <div class="col-lg-2"></div>
@@ -132,9 +132,6 @@ $data['page_js'] = ['assets/js/admin/new_orders'];
 
               </div>
 
-
-
-
               <div class="row">
                 <div class="col-lg-12 ">
                   <div class="form-group" align="center">
@@ -144,11 +141,6 @@ $data['page_js'] = ['assets/js/admin/new_orders'];
                   </div>
                 </div>
               </div>
-
-
-
-
-
             </div>
           </section>
 
