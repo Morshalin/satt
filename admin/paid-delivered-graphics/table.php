@@ -62,6 +62,7 @@ if ($price == $paid) {
       "id" => $row['id'],
       "client_name" => '<strong>' . $row['client_name'] . '</strong>',
       "mobile_no" => '<strong>' . $row['mobile_no'] . '</strong>',
+      "facebook_link" => '<a target="_blank" href='. $row['facebook_link'] .'>Facebook Profile</a>',
       "shipping_address" => '<strong>' . $row['shipping_address'] . '</strong>',
       "product_name" => '<strong>' . $row['product_name'] . '</strong>',
       "order_date" => '<strong>' . $row['order_date'] . '</strong>',

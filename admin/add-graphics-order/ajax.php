@@ -22,6 +22,7 @@ Session::checkSession('admin', ADMIN_URL . '/add-graphics-order', 'add-graphics-
 
 			$client_name = $fm->validation($_POST['client_name']);
 			$mobile_no = $fm->validation($_POST['mobile_no']);
+			$facebook_link = $fm->validation($_POST['facebook_link']);
 			$shipping_address = $fm->validation($_POST['shipping_address']);
 			$currier_name = $fm->validation($_POST['currier_name']);
 			$product_name = $fm->validation($_POST['product_name']);
@@ -72,9 +73,9 @@ Session::checkSession('admin', ADMIN_URL . '/add-graphics-order', 'add-graphics-
 
 				
 				$query = "INSERT INTO graphics_info 
-						(client_name, mobile_no, shipping_address, currier_name, product_name, order_date, qty, probable_delivery_date, price, advance, printing_cost, currier_cost, others_cost, status, notes, order_taken_by) 
+						(client_name, mobile_no, facebook_link, shipping_address, currier_name, product_name, order_date, qty, probable_delivery_date, price, advance, printing_cost, currier_cost, others_cost, status, notes, order_taken_by) 
 						VALUES 
-						('$client_name','$mobile_no','$shipping_address','$currier_name','$product_name','$order_date','$qty','$probable_delivery_date','$price','$advance','$printing_cost','$currier_cost','$others_cost','$order_status','$notes','$order_taken_by')";
+						('$client_name','$mobile_no','$facebook_link','$shipping_address','$currier_name','$product_name','$order_date','$qty','$probable_delivery_date','$price','$advance','$printing_cost','$currier_cost','$others_cost','$order_status','$notes','$order_taken_by')";
 
 				$order_id = $db->custom_insert($query);
 				if ($order_id) {

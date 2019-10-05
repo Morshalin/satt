@@ -61,10 +61,10 @@ var DatatableButtonsHtml5 = function() {
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 8]
+                targets: [0, 9]
             }, {
                 orderable: false,
-                targets: [7,8]
+                targets: [8,9]
             }],
             order: [1, 'desc'],
             processing: true,
@@ -78,6 +78,8 @@ var DatatableButtonsHtml5 = function() {
                     data: 'client_name'
                 },  {
                     data: 'mobile_no'
+                },  {
+                    data: 'facebook_link'
                 }, {
                     data: 'shipping_address'
                 }, {

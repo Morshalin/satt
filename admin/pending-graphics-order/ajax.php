@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 
 			$client_name = $fm->validation($_POST['client_name']);
 			$mobile_no = $fm->validation($_POST['mobile_no']);
+			$facebook_link = $fm->validation($_POST['facebook_link']);
 			$shipping_address = $fm->validation($_POST['shipping_address']);
 			$currier_name = $fm->validation($_POST['currier_name']);
 			$product_name = $fm->validation($_POST['product_name']);
@@ -76,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			$query = "UPDATE graphics_info SET 
 			client_name = '$client_name',
 			mobile_no = '$mobile_no',
+			facebook_link = '$facebook_link',
 			shipping_address = '$shipping_address',
 			currier_name = '$currier_name',
 			product_name = '$product_name',
