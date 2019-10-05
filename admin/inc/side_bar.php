@@ -133,7 +133,7 @@
 
 
 
-<?php $nav_items_section_25 = ['graphics-report','new-software-report', 'cancel-graphics','existing-software-report']; ?>
+<?php $nav_items_section_25 = ['graphics-report','existing-software-report','new-software-report']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_25, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-coins"></i> <span>Reports</span></a>
 
