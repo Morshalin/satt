@@ -128,7 +128,17 @@
 
 <?php } ?>
 
+<?php $nav_items_section_expense = ['office-expense','office-report']; ?>
+  <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_expense, $data['page_index']) ?>">
+    <a href="#" class="nav-link"><i class="icon-coins"></i> <span>Office Account</span></a>
 
+    <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_expense, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/office-expense" class="nav-link<?php active_page($data, 'office-expense'); ?>">Convince Bill</a></li>
+      
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/office-report" class="nav-link<?php active_page($data, 'office-report'); ?>">Report</a></li>
+    </ul>
+  </li>
 
 
 
