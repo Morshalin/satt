@@ -9,6 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	$agent_id = $_POST['agent_name'];
 
+	/*if (!$documentation_note) {
+		$error = 'Agent Flied Requred';
+		die(json_encode($error));
+	}
+*/
 	if($agent_id == 0 ){
 		$query1 = "SELECT * FROM satt_customer_informations";
 		$result1 = $db->select($query1);
@@ -20,8 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		die(json_encode($option));
 
 	}else{
-		
-
 		$query = "SELECT * FROM agent_client WHERE agent_id = '$agent_id'";
 		$get_customer = $db->select($query);
 		if ($get_customer) {

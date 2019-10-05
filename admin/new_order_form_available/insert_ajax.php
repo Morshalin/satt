@@ -12,6 +12,36 @@ if (isset($_POST['customer_id'])) {
 		$agent_id='';
 	}
 
+	if (!$software_id) {
+		$message = 'software Field required';
+		$type = "error";
+		die(json_encode(['message'=>$message,'type'=>$type]));
+	}
+	/*if (!$agent_id) {
+		$message = 'Agent Field required';
+		$type = "error";
+		die(json_encode(['message'=>$message,'type'=>$type]));
+	}*/
+
+	if (!$customer_id) {
+		$message = 'Customer Field required';
+		$type = "error";
+		die(json_encode(['message'=>$message,'type'=>$type]));
+	}
+
+
+	if (!$pay_type) {
+		$message = 'Pay Type Field required';
+		$type = "error";
+		die(json_encode(['message'=>$message,'type'=>$type]));
+	}
+	
+	if (!$expected_delevery_date) {
+		$message = 'Expected Delevery Date Field required';
+		$type = "error";
+		die(json_encode(['message'=>$message,'type'=>$type]));
+	}
+
 	$querys = "SELECT * FROM software_price WHERE software_id ='$software_id'";
 	$get_soft_info = $db->select($querys);
 	if ($get_soft_info) {
