@@ -61,10 +61,10 @@ var DatatableButtonsHtml5 = function() {
             select: true,
             columnDefs: [{
                 width: "100px",
-                targets: [0, 9]
+                targets: [0, 7]
             }, {
                 orderable: false,
-                targets: [8,9]
+                targets: [6, 7]
             }],
             order: [1, 'desc'],
             processing: true,
@@ -75,21 +75,17 @@ var DatatableButtonsHtml5 = function() {
                 {
                     data: 'DT_RowIndex'
                 }, {
-                    data: 'client_name'
-                },  {
-                    data: 'mobile_no'
-                },  {
-                    data: 'facebook_link'
+                    data: 'invoice_id'
                 }, {
-                    data: 'shipping_address'
+                    data: 'name'
                 }, {
-                    data: 'product_name'
-                },{
-                    data: 'order_date'
+                    data: 'designation'
                 }, {
-                    data: 'price'
+                    data: 'invoice_type'
                 }, {
-                    data: 'status'
+                    data: 'date'
+                }, {
+                    data: 'total'
                 },{
                     data: 'action'
                 }
@@ -117,6 +113,8 @@ var DatatableButtonsHtml5 = function() {
                     $('.modal-body').html(data).fadeIn(); // load response
                     $('#modal-loader').hide();
                     _componentInputSwitchery();
+                     _componentSelect2Modal();
+                    _componentDatePicker();
                     _modalFormValidation();
                 })
                 .fail(function(data) {
@@ -137,8 +135,8 @@ var DatatableButtonsHtml5 = function() {
     return {
         init: function() {
             _componentDatatableButtonsHtml5();
-            _componentSelect2Normal();
             _componentRemoteModalLoad();
+            _componentDatePicker();
         }
     }
 }();
@@ -149,3 +147,30 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+    $(document).on('click','#add_more',function(){
+      $('#invoice_details').append(' <tr><td><input type="text" class="form-control main_products_name description"  name="description[]" required=""></td><td><input type="text" class="form-control main_category perpose" name="perpose[]" required="" ></td><td><input type="number" min="0" step="1" class="form-control main_quantity amount" required id="amount" name="amount[]"  ></td><td><button type="button" class="btn btn-danger remove_button"><i class="icon-cross3"></i></button></td></tr>');     });
+
+    $(document).on('click','.remove_button', function(e) {   var remove_row =
+    $(this).closest("tr");   remove_row.remove();   cal(); });
+
+
+
+
+
+    $(document).on('keyup blur','.amount', function() {
+        var tr=$(this).parent().parent();
+        var amt =tr.find(this).val();
+        cal();
+
+    });
+
+function cal(){
+var net_total=0;
+ $(".amount").each(function(){
+    net_total=net_total+($(this).val()*1);
+  });
+
+  $(".total").val(net_total);
+  $("#total").html(net_total);
+}

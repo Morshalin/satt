@@ -445,6 +445,10 @@ $cancel_order = $count + $count1;
 
 </div>
   </div>
+
+
+
+  
   <div class="col-md-3" style="border-left: 3px solid #26A69A">
   <legend class="text-uppercase font-size-sm font-weight-bold">Notification </legend>
     <div class="row">

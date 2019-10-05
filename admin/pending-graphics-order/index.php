@@ -51,6 +51,7 @@
   						<th>#</th>
               <th>Customer Name</th>
               <th>Number</th>
+              <th>Facebook</th>
               <th>Shipping Address</th>
               <th>Product Name</th>
               <th>Order Date</th>

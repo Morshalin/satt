@@ -1,12 +1,12 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('admin', ADMIN_URL.'/cancel-graphics', 'Cancel Graphics Order');
+Session::checkSession('admin', ADMIN_URL . '/office-expense', 'office-expense');
   $data = array();
-  $data['page_title'] = 'Cancel Graphics Order';
+  $data['page_title'] = 'Office Expense';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'cancel-graphics';
+  $data['page_index'] = 'office-expense';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/admin/cancel-graphics'];
+  $data['page_js'] = ['assets/js/admin/office-expense'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
@@ -30,7 +30,7 @@
   <div class="card border-top-success rounded-top-0" id="table_card">
   	<div class="card-header header-elements-inline bg-light border-grey-300" >
   		<h5 class="card-title"><?php echo isset($data['page_title']) ? $data['page_title'] : 'Dashboard'; ?>
-        <a class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round" href="<?php echo ADMIN_URL; ?>/add-graphics-order/index.php"><i class="icon-stack-plus mr-1"></i>Add Cutomers Details</a>
+  		<button type="button" class="btn btn-outline alpha-info text-info-800 border-info-600 rounded-round" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/office-expense/create.php"><i class="icon-stack-plus mr-1"></i>Add Expense</button>
   		</h5>
   		<div class="header-elements">
   			<div class="list-icons">
@@ -45,18 +45,16 @@
   			<img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
   		</div> -->
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/cancel-graphics/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/office-expense/table.php">
   				<thead>
   					<tr>
-  						<th>#</th>
-              <th>Customer Name</th>
-              <th>Number</th>
-              <th>Facebook</th>
-              <th>Shipping Address</th>
-              <th>Product Name</th>
-              <th>Order Date</th>
-              <th>Price</th>
-  						<th>Status</th>
+              <th>#</th>
+  						<th>Invoice No</th>
+  						<th>Name</th>
+  						<th>Designation</th>
+              <th>Invoice Type</th>
+              <th>Date</th>
+              <th>Total</th>
   						<th>Action</th>
   					</tr>
   				</thead>

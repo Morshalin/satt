@@ -52,6 +52,12 @@ if ($order_id) {
         </div>
         <div class="col-lg-4">
             <div class="form-group">
+                <label for="facebook_link" class="col-form-label">Facebook Link<span class="text-danger">*</span></label>
+                <input type="text" name="facebook_link" id="facebook_link" class="form-control" placeholder="Type Facebook Link" autofocus value="<?php echo $row['facebook_link']; ?>">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
                 <label for="shipping_address" class="col-form-label">Shipping Address<span class="text-danger">*</span></label>
                 <input type="text" name="shipping_address" id="shipping_address" class="form-control" placeholder="Type Shipping Address" required autofocus value="<?php echo $row['shipping_address']; ?>">
             </div>
