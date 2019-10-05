@@ -102,7 +102,7 @@ if (isset($_GET['developer_id'])) {
 <div class="text-righ">
     
     <a class=" text-light btn-success btn" onclick="printContent('print_table')"><i class="icon-printer"></i> Print</span> </a>
-</div>
+</div> 
 
 </fieldset>
 <!-- /login form -->
