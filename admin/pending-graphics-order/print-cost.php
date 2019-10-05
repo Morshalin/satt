@@ -131,6 +131,8 @@ if (isset($_GET['pending_graphics_order_id'])) {
       document.body.innerHTML = b;
       window.print();
       document.body.innerHTML = a;
+      
+    return window.location.reload(true);
 
     }
 

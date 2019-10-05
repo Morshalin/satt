@@ -32,7 +32,7 @@ $customer_id =  $user['id'];
   	
   	<div class="card-body">
   		
-      <form class="form-validate-jquery report_form" id="content_form" method="post">
+      <form class="form-validate-jquery report_form" method="post">
         <fieldset class="mb-3">
     
     <div class="row">
@@ -54,10 +54,10 @@ $customer_id =  $user['id'];
                 <label for="report_type" class="col-form-label">Report Type<span class="text-danger">*</span></label>
                 <select name="report_type" id="report_type"  class="form-control" required>
                     <option value="">Please Select One...</option>
-                    <option value="all">All Report</option>
-                    <option value="cost">Cost Report</option>
-                    <option value="profit">Profit Report</option>
+                    <option value="all">All Orders</option>
+                    <option value="cost_profit">Cost & Profit Report</option>
                     <option value="status">Status Report</option>
+                    <option value="transaction">Transaction Report</option>
                 </select>
             </div>
         
@@ -73,11 +73,32 @@ $customer_id =  $user['id'];
                     <option value="Cancelled">Cancel Order</option>
                 </select>
             </div>
+        
+            <div class="form-group transaction_type_div" style="display:none" >
+                <label for="transaction_type" class="col-form-label">Transaction Type<span class="text-danger">*</span></label>
+                <select name="transaction_type" id="transaction_type"  class="form-control">
+                    <option value="">Please Select One...</option>
+                    <?php 
+
+                      $query = "SELECT DISTINCT(payment_method) from graphics_pay";
+                      $get_payment_method = $db->select($query);
+                      if ($get_payment_method) {
+                        while ($row = $get_payment_method->fetch_assoc()) {
+                          ?>
+                            <option value="<?php echo $row['payment_method'] ?>"><?php echo $row['payment_method'] ?></option>
+                          <?php
+                        }
+                      }
+                    
+                    
+                    ?>
+                </select>
+            </div>
 
             <div class="form-group row">
                 <div class="col-lg-4 offset-lg-4">
-                    <button type="submit" name="create" class="btn btn-primary ml-31" id="submit">View Report</button>
-                    <button type="button" class="btn btn-link" id="submiting" style="display: none;" disabled="">Submitting <img src="<?php echo BASE_URL; ?>/assets/ajaxloader.gif"></button>
+                    <button type="submit" name="submit" class="btn btn-primary ml-31" id="view">View Report</button>
+                    
                 </div>
             </div>
         </div>
@@ -85,29 +106,9 @@ $customer_id =  $user['id'];
     </div>
 
 
-
-
-
     <div class="div pt-3 " style="border-top: 3px solid #bbb;" id="show_report">
            
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         </fieldset>
       </form>
@@ -116,9 +117,6 @@ $customer_id =  $user['id'];
 </div>
 <!-- /content area -->
 <?php include_once '../inc/footer.php'; ?>
-<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
-<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/select.min.js"></script>
-<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/buttons.min.js"></script>
-<script src="<?php echo BASE_URL; ?>/global_assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
+
 </body>
 </html>

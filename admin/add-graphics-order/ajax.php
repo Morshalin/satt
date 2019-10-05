@@ -60,7 +60,7 @@ Session::checkSession('admin', ADMIN_URL . '/add-graphics-order', 'add-graphics-
 			$order_taken_by = $fm->validation($_POST['order_taken_by']);
 			
 			
-			$payment_method = $fm->validation($_POST['payment_method']);
+			$payment_method = strtolower($fm->validation($_POST['payment_method']));
 			$tx_id_account_no = $fm->validation($_POST['tx_id_account_no']);
 			$received_mobile_no = $fm->validation($_POST['received_mobile_no']);
 
