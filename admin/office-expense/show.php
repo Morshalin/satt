@@ -1,21 +1,23 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/developer', 'View Developer Profile');
-if (isset($_GET['developer_id'])) {
-	$developer_id = $_GET['developer_id'];
-	$query = "SELECT * FROM developer WHERE id='$developer_id'";
-	$result = $db->select($query);
-	if ($result) {
-		$row = $result->fetch_assoc();
-	} else {
-		http_response_code(500);
-		die(json_encode(['message' => 'Developer Not Found']));
-	}
+Session::checkSession('admin', ADMIN_URL . '/office-expense', 'office-expense');
+if (isset($_GET['office_expense_id'])) {
+    $office_expense_id = $_GET['office_expense_id'];
+    $query = "SELECT * FROM office_expense WHERE id='$office_expense_id'";
+    $result = $db->select($query);
+    if ($result) {
+        $row = $result->fetch_assoc();
+        $date = $row['date'];
+        $date = date("d-M-Y", strtotime($date));
+    } else {
+        http_response_code(500);
+        die(json_encode(['message' => 'Invoice Not Found']));
+    }
 
 } else {
-	http_response_code(500);
-	die(json_encode(['message' => 'UnAthorized']));
+    http_response_code(500);
+    die(json_encode(['message' => 'UnAthorized']));
 }
 
 ?>
@@ -28,28 +30,28 @@ if (isset($_GET['developer_id'])) {
         <div class="col-lg-12">
           <!-- <div class="col-lg-4"></div> -->
             <div class="row">
-                    <b class="col-md-4">Customer Name :</b>
-                    <h6 class="col-md-8 text-right"><?php echo ucwords($row['client_name']); ?></h6>
+                    <b class="col-md-4">Invoice Type :</b>
+                    <h6 class="col-md-8 text-right"><?php echo ucwords($row['invoice_type']); ?></h6>
             </div>
             <div class="row">
-                    <b class="col-md-4">Mobile NO :</b>
-                    <h6 class="col-md-8 text-right"><?php echo ucwords($row['mobile_no']); ?></h6>
+                    <b class="col-md-4">Invoice No :</b>
+                    <h6 class="col-md-8 text-right"><?php echo $row['invoice_id']; ?></h6>
             </div>
             <div class="row">
-                    <b class="col-md-4">Shipping Address :</b>
-                    <h6 class="col-md-8 text-right"><?php echo ucwords($row['shipping_address']); ?></h6>
+                    <b class="col-md-4">Name :</b>
+                    <h6 class="col-md-8 text-right"><?php echo ucwords($row['name']); ?></h6>
             </div>
             <div class="row">
-                    <b class="col-md-4">Shipping Currier :</b>
-                    <h6 class="col-md-8 text-right"><?php echo ucwords($row['currier_name']); ?></h6>
+                    <b class="col-md-4">Designation :</b>
+                    <h6 class="col-md-8 text-right"><?php echo ucwords($row['designation']); ?></h6>
             </div>
             <div class="row">
-                    <b class="col-md-4">Product Name :</b>
-                    <h6 class="col-md-8 text-right"><?php echo ucwords($row['product_name']); ?></h6>
+                    <b class="col-md-4">Phone No :</b>
+                    <h6 class="col-md-8 text-right"><?php echo $row['phone']; ?></h6>
             </div>
             <div class="row">
-                    <b class="col-md-4">Order Date :</b>
-                    <h6 class="col-md-8 text-right"><?php echo $order_date; ?></h6>
+                    <b class="col-md-4">Date :</b>
+                    <h6 class="col-md-8 text-right"><?php echo $date; ?></h6>
             </div>
         </div>
         <div class="col-lg-2"></div>
@@ -58,39 +60,36 @@ if (isset($_GET['developer_id'])) {
     <div class="row">
         <div class="col-lg-12">
             <hr>
-    <legend class="text-uppercase text-center font-size-m font-weight-bold">Cost History (<?php echo date('d-M-Y'); ?>)</legend>
+    <legend class="text-uppercase text-center font-size-m font-weight-bold">Invoice History (<?php echo date('d-M-Y'); ?>)</legend>
             <div class="table-responsive">
               <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th scope="col"> </th>
                       <th scope="col">#</th>
-                      <th scope="col">Cost Type</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Purpose</th>
                       <th scope="col">Amount(Tk)</th>
                     </tr>
                   </thead>
                   <tbody>
+<?php 
+$query1 = "SELECT * FROM office_expense_info WHERE office_expense_id='$office_expense_id'";
+    $result1 = $db->select($query1);
+    if ($result1) {
+        $i = 0;
+        while ($row1 = $result1->fetch_assoc()) { 
+            $i++;
+            ?>
                     <tr>
-                      <th scope="row"> </th>
-                      <th scope="row"><?php echo '1'; ?></th>
-                      <td><?php echo 'Printing'; ?></td>
-                      <td><?php echo ucwords($row['printing_cost']); ?></td>
+                      <th scope="row"><?php echo $i; ?></th>
+                      <td><?php echo ucwords($row1['description']); ?></td>
+                      <td><?php echo ucwords($row1['perpose']); ?></td>
+                      <td><?php echo $row1['amount']; ?></td>
                     </tr>
-                    <tr>
-                      <th scope="row"> </th>
-                      <th scope="row"><?php echo '2'; ?></th>
-                      <td><?php echo 'Currier'; ?></td>
-                      <td><?php echo ucwords($row['currier_cost']); ?></td>
-                    </tr>
-                    <tr>                      
-                      <th scope="row"> </th>
-                      <th scope="row"><?php echo '3'; ?></th>
-                      <td><?php echo 'Others'; ?></td>
-                      <td><?php echo ucwords($row['others_cost']); ?></td>
-                    </tr>
+    <?php   } } ?>
                    <tr>
                       <th colspan="3" class="text-right" >Total Cost :</th>
-                      <th colspan="1" ><?php echo (int)$row['printing_cost'] + (int)$row['currier_cost'] + (int)$row['others_cost']; ?> /=</th>
+                      <th colspan="1" ><?php echo $row['total']; ?> /=</th>
                     </tr>
                   
                   </tbody>

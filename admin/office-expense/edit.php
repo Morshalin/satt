@@ -38,8 +38,12 @@ if (isset($_GET['office_expense_id'])) {
                 <label for="invoice_type" class="col-form-label">Invoice Type </label>
                 <select name="invoice_type" id="invoice_type" required="" class="form-control">
                     <option value="">Select Inoice Type</option>
-                    <option value="Expense">Expense</option>
-                    <option value="Income">Income</option>
+                    <option <?php if ($row['invoice_type'] == "Expense") {
+                       echo 'selected';
+                    } ?> value="Expense">Expense</option>
+                    <option <?php if ($row['invoice_type'] == "Income") {
+                        echo 'selected';
+                    } ?> value="Income">Income</option>
                 </select>
         </div>
             </div>
