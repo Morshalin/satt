@@ -90,15 +90,32 @@
 
 
 
-<?php $nav_items_section_26 = ['existing-software-due','new-software-due', 'cancel-graphics','existing-software-report']; ?>
+<?php $nav_items_section_26 = ['existing-software-monthly-pay','existing-software-yearly-pay','existing-software-one-time-sell','existing-software-monthly-pay','existing-software-yearly-pay','existing-software-one-time-sell']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_26, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-coins"></i> <span>Collect Software Due </span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_26, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
     
-      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/existing-software-due" class="nav-link<?php active_page($data, 'existing-software-due'); ?>">Existing Software Due</a></li>
+      <li class="nav-item nav-item-submenu">
+          <a  class="nav-link<?php active_page($data, 'existing-software-due'); ?>">Existing Software Due</a>
+									<ul class="nav nav-group-sub">
+                  <a href="<?php echo ADMIN_URL; ?>/existing-software-monthly-pay" class="nav-link<?php active_page($data, 'existing-software-monthly-pay'); ?>">Monthly Pay <span class="text-danger"> (Existing)</span></a>
 
-      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/new-software-due" class="nav-link<?php active_page($data, 'new-software-due'); ?>">New Software Due</a></li>
+                  <a href="<?php echo ADMIN_URL; ?>/existing-software-yearly-pay" class="nav-link<?php active_page($data, 'existing-software-yearly-pay'); ?>">Yearly Pay <span class="text-danger"> (Existing)</span></a>
+
+                  <a href="<?php echo ADMIN_URL; ?>/existing-software-one-time-sell" class="nav-link<?php active_page($data, 'existing-software-one-time-sell'); ?>">One Time Sell <span class="text-danger"> (Existing)</span></a>
+									</ul>
+				</li>
+      <li class="nav-item nav-item-submenu">
+            <a  class="nav-link<?php active_page($data, 'new-software-due'); ?>">New Software Due</a>
+									<ul class="nav nav-group-sub">
+                  <a href="<?php echo ADMIN_URL; ?>/new-software-monthly-pay" class="nav-link<?php active_page($data, 'new-software-monthly-pay'); ?>">Monthly Pay <span class="text-danger"> (New)</span></a>
+
+                  <a href="<?php echo ADMIN_URL; ?>/new-software-yearly-pay" class="nav-link<?php active_page($data, 'new-software-yearly-pay'); ?>">Yearly Pay <span class="text-danger"> (New)</span></a>
+
+                  <a href="<?php echo ADMIN_URL; ?>/new-software-one-time-sell" class="nav-link<?php active_page($data, 'new-software-one-time-sell'); ?>">One Time Sell <span class="text-danger"> (New)</span></a>
+									</ul>
+				</li>
     </ul>
   </li>
 
