@@ -160,11 +160,13 @@
 
 
 
-<?php $nav_items_section_25 = ['graphics-report','existing-software-report','new-software-report']; ?>
+<?php $nav_items_section_25 = ['office-expenses','graphics-report','existing-software-report','new-software-report']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_25, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-coins"></i> <span>Reports</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_25, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
+
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/office-expenses" class="nav-link<?php active_page($data, 'office-expenses'); ?>">Convince Bill</a></li>
     
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/graphics-report" class="nav-link<?php active_page($data, 'graphics-report'); ?>">Graphics</a></li>
 
