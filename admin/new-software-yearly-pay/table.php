@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/new-software-monthly-pay');
+Session::checkSession('admin', ADMIN_URL . '/new-software-yearly-pay');
 ## Read value
 $draw = $_GET['draw'];
 $row = $_GET['start'];
@@ -50,8 +50,7 @@ $data = array();
 $i = 0;
 if ($result) {
   while ($row = mysqli_fetch_assoc($result)) {
-    if ($row['selling_method'] == 'monthly_pay') {
-      // die($row['selling_method']);
+    if ($row['selling_method'] == 'yearly_pay') {
         $delivery_date = date("Y-m-d", strtotime($row['delivery_date']));
         $today = date("Y-m-d");
 
@@ -60,33 +59,27 @@ if ($result) {
         // Formulate the Difference between two dates 
         $diff = abs($today - $delivery_date);  
         $years = floor($diff / (365*60*60*24));  
-        $months = floor(($diff - $years * 365*60*60*24)  / (30*60*60*24)); 
+        // $years = 2;
         
-        $total_amount = 0;
-        // die($total_amount);
-      // die($years);
-      $months = 12*$years + $months;
-        // die($months);
-        if ($months >= 1 ) {
+        // $months = floor(($diff - $years * 365*60*60*24)    / (30*60*60*24)); 
+        // die($years);
+        if ($years >= 1 ) {
           $order_id = $row['id'];
           $sell_price = $row['sell_price'];
-          $total_amount = $months * $sell_price;
-
+          $total_amount = (int)$years * (int)$sell_price + (int)$years * (int)$row['yearly_renew_charge'];
           
           $query = "SELECT * FROM new_product_pay WHERE new_product_order_id = '$order_id'";
           $get_pay = $db->select($query);
           $total_pay = 0 ;
-          // die($total_pay);
           $due = 0;
           if ($get_pay) {
             while ($pay = $get_pay->fetch_assoc()) {
               $total_pay += (int)$pay['pay_amount'];
             }
           }
-          
           if ($total_pay < $total_amount) {
             $due = $total_amount - $total_pay ;  
-            
+
 
             
         if ($row['agent_id']) {
@@ -98,7 +91,7 @@ if ($result) {
     
         }
         $deliv_date = date("Y-m-d", strtotime($row['delivery_date']));
-      // die($deliv_date);
+      
         $data[] = array(
           "DT_RowIndex" => $i + 1,
           "id" => $row['id'],
@@ -119,9 +112,9 @@ if ($result) {
                   <i class="icon-menu9"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                  <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/new-software-monthly-pay/show.php?new_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
+                  <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/new-software-yearly-pay/show.php?new_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
     
-                <span class="dropdown-item text-info" id="content_managment" data-url="' . ADMIN_URL . '/new-software-monthly-pay/pay-order.php?pay_order_id=' . $row['id'] . '&due='.$due.'"><i class="icon-paypal2"></i> Pay</span>
+                <span class="dropdown-item text-info" id="content_managment" data-url="' . ADMIN_URL . '/new-software-yearly-pay/pay-order.php?pay_order_id=' . $row['id'] . '&due='.$due.'"><i class="icon-paypal2"></i> Pay</span>
                 </div>
               </div>
             </div>

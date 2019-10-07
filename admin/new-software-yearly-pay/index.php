@@ -1,12 +1,12 @@
 <?php
   require_once '../../config/config.php';
-  Session::checkSession('admin', ADMIN_URL . '/new-software-monthly-pay','New Software Monthly Pay');
+  Session::checkSession('admin', ADMIN_URL . '/new-software-yearly-pay','New Software Yearly Pay');
   $data = array();
-  $data['page_title'] = 'New Software Monthly Pay';
+  $data['page_title'] = 'New Software Yearly Pay';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'new-software-monthly-pay';
+  $data['page_index'] = 'new-software-yearly-pay';
   $data['page_css'] = [];
-  $data['page_js'] = ['assets/js/admin/new-software-monthly-pay'];
+  $data['page_js'] = ['assets/js/admin/new-software-yearly-pay'];
 ?>
 <?php include_once '../inc/header.php'; ?>
 <!-- Page header -->
@@ -45,7 +45,7 @@
   			<img src="<?php echo BASE_URL; ?>/assets/preloader.gif" id="table_loading" width="100px">
   		</div> -->
   		<div id="table_display">
-  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/new-software-monthly-pay/table.php">
+  			<table class="table content_managment_table" data-url="<?php echo ADMIN_URL; ?>/new-software-yearly-pay/table.php">
   				<thead>
   					<tr>
   						<th>#</th>

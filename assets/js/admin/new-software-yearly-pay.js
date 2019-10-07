@@ -195,11 +195,5 @@ $(document).on('keyup','#pay_amount',function(){
     }
 });
 
-// $(document).on('keyup','#seling_total_price',function(){
-//     var seling_total_price = parseInt($('#seling_total_price').val());
-//     var pay_amount = parseInt($('#pay_amount').val());
-//     var due_amount = seling_total_price - pay_amount;
-//     $('#due_amount').val(due_amount);
-// });
 
 });
