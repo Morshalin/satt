@@ -21,10 +21,6 @@ Session::checkSession('admin', ADMIN_URL . '/new_orders', 'new_orders');
 			$documentation_note = $fm->validation($_POST['documentation_note']);
 			$expected_delevery_date = $_POST['expected_delevery_date'];
 
-
-
-
-
 			$documentation_file = $_FILES['file_upload_documentation'];
 			$file_name = $documentation_file['name'];
 			$file_size = $documentation_file['size'];
