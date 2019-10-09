@@ -195,5 +195,29 @@ $(document).on('keyup','#pay_amount',function(){
     }
 });
 
+$(document).on('blur','#pay_renew',function(){
+    var pay_renew = parseFloat($('#pay_renew').val());
+    var yearly_renew_charge = parseFloat($('#yearly_renew_charge').val());
+
+    if (pay_renew > yearly_renew_charge) {
+        alert("Pay Amount Must Not be Greater Than The Yearly Renew Charge");
+       $('#pay_renew').val('');
+    }else if ( yearly_renew_charge > pay_renew) {
+        alert("Please Pay Total Renew Charge..");
+        $('#pay_renew').val('');
+    }
+});
+
+$(document).on('click','#submit',function(){
+    var pay_renew = parseFloat($('#pay_renew').val());
+    var yearly_renew_charge = parseFloat($('#yearly_renew_charge').val());
+
+    if (yearly_renew_charge > 0 ) {
+        if (pay_renew != yearly_renew_charge) {
+            alert("Pay The Yearly Renew Charge First..");
+           $('#pay_renew').val('');
+        }
+    }
+});
 
 });

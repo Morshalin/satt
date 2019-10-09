@@ -1,11 +1,11 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/new-software-monthly-pay', 'Pay Order');
+Session::checkSession('admin', ADMIN_URL . '/existing-software-monthly-pay', 'existing-software-monthly-pay');
 if (isset($_GET['pay_order_id'])) {
 	$pay_order_id = $_GET['pay_order_id'];
 	if ($pay_order_id) {
-		$query = "select * from new_product_order WHERE delivery_status = '1' and id = '$pay_order_id'";
+		$query = "select * from satt_order_products WHERE  id = '$pay_order_id'";
 		$result = $db->select($query);
 		if (!$result) {
 			http_response_code(500);
@@ -50,15 +50,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 		} else {
-				$query1 = "INSERT INTO new_product_pay (new_product_order_id, payment_type, check_numer, mobile_banking_name, received_phone_number, tx_id, pay_amount, date) VALUES ('$pay_order_id','$payment_method','$check_no', '$mobile_banking_name', '$received_phone_number','$tx_id','$pay_amount', now())";
+				$query1 = "INSERT INTO existing_product_pay (product_order_id, payment_method, check_no, mobile_banking_name, received_phone_number, tx_id, pay_amount, pay_date) VALUES ('$pay_order_id','$payment_method','$check_no', '$mobile_banking_name', '$received_phone_number','$tx_id','$pay_amount', now())";
 				$result1 = $db->insert($query1);
 			if ($result1 != false) {
 				if ($years > $result['years']) {
-					$query1 = "INSERT INTO new_product_yearly_charge_pay (new_product_order_id, payment_type, check_numer, mobile_banking_name, received_phone_number, tx_id, pay_amount, date) VALUES ('$pay_order_id','$payment_method','$check_no', '$mobile_banking_name', '$received_phone_number','$tx_id','$pay_renew', now())";
+					$query1 = "INSERT INTO existing_product_yearly_charge_pay (new_product_order_id, payment_type, check_numer, mobile_banking_name, received_phone_number, tx_id, pay_amount, date) VALUES ('$pay_order_id','$payment_method','$check_no', '$mobile_banking_name', '$received_phone_number','$tx_id','$pay_renew', now())";
 
 					$insert_renew_charge = $db->insert($query1);
 					if ($insert_renew_charge) {
-						$query = "UPDATE new_product_order SET years = '$years' WHERE id = '$pay_order_id'";
+						$query = "UPDATE satt_order_products SET years = '$years' WHERE id = '$pay_order_id'";
 						$update_order_tbl = $db->update($query);
 					}
 				}

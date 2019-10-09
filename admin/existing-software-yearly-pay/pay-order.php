@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-  Session::checkSession('admin', ADMIN_URL.'/new-software-yearly-pay', 'New Software Yearly Pay');
+  Session::checkSession('admin', ADMIN_URL.'/existing-software-yearly-pay', 'Existing Software Yearly Pay');
 if (isset($_GET['pay_order_id'])) {
     $pay_order_id = $_GET['pay_order_id'];
     $query = "select * from new_product_order WHERE delivery_status = '1' and id = '$pay_order_id'";
@@ -22,6 +22,7 @@ if ($result) {
 
     $delivery_date = date("Y-m-d", strtotime($row['delivery_date']));
     $today = date("Y-m-d");
+    
     $delivery_date = strtotime($delivery_date);  
     $today = strtotime($today);  
     // Formulate the Difference between two dates 
@@ -32,10 +33,10 @@ if ($result) {
     $total_amount = 0;
     
     $order_id = $row['id'];
-    $sell_price = $row['sell_price'];
+    $sell_price = $row['seling_total_price'];
     $total_amount =  $sell_price;
         
-    $query = "SELECT * FROM new_product_pay WHERE new_product_order_id = '$order_id'";
+    $query = "SELECT * FROM existing_product_pay WHERE product_order_id = '$order_id'";
     $get_pay = $db->select($query);
     $total_pay = 0 ;
     // die($total_pay);
@@ -54,14 +55,13 @@ if ($result) {
     if ($row['years'] < $years) {
         $yearly_renew_charge = ($years - $row['years'])*$row['yearly_renew_charge'];
     }
-    // die($yearly_renew_charge);
 
 }
 
 ?>
 
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/new-software-yearly-pay/ajax_pay.php?pay_order_id=<?php echo $pay_order_id; ?>" id="content_form" method="post">
+<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/existing-software-yearly-pay/ajax_pay.php?pay_order_id=<?php echo $pay_order_id; ?>" id="content_form" method="post">
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Pay Order <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
 
@@ -98,11 +98,7 @@ if ($result) {
                         <input type="number" name="due_amount" id="due_amount" class="form-control" readonly="">
                     </div>
                 </div>
-            </div>
-
-
-
-            
+            </div>       
     </div>
 
 

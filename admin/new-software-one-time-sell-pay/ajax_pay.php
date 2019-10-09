@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/new-software-monthly-pay', 'Pay Order');
+Session::checkSession('admin', ADMIN_URL . '/new-software-one-time-sell-pay', 'Pay Order');
 if (isset($_GET['pay_order_id'])) {
 	$pay_order_id = $_GET['pay_order_id'];
 	if ($pay_order_id) {

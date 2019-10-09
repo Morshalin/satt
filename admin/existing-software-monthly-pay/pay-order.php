@@ -1,10 +1,10 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-  Session::checkSession('admin', ADMIN_URL.'/new-software-yearly-pay', 'New Software Yearly Pay');
+  Session::checkSession('admin', ADMIN_URL.'/existing-software-monthly-pay', 'Existing Software Monthly Pay');
 if (isset($_GET['pay_order_id'])) {
     $pay_order_id = $_GET['pay_order_id'];
-    $query = "select * from new_product_order WHERE delivery_status = '1' and id = '$pay_order_id'";
+    $query = "select * from satt_order_products WHERE  id = '$pay_order_id'";
 
     $result = $db->select($query);
     if (!$result) {
@@ -24,44 +24,61 @@ if ($result) {
     $today = date("Y-m-d");
     $delivery_date = strtotime($delivery_date);  
     $today = strtotime($today);  
-    // Formulate the Difference between two dates 
+
     $diff = abs($today - $delivery_date);  
     $years = floor($diff / (365*60*60*24));  
-    $months = floor(($diff - $years * 365*60*60*24)  / (30*60*60*24)); 
-    
-    $total_amount = 0;
-    
+    $months = floor(($diff - $years * 365*60*60*24) 
+                            / (30*60*60*24)); 
+    $months = 12*$years + $months;
     $order_id = $row['id'];
-    $sell_price = $row['sell_price'];
-    $total_amount =  $sell_price;
+    $sell_price = $row['seling_total_price'];
+    if ($months >= 1 ) {
         
-    $query = "SELECT * FROM new_product_pay WHERE new_product_order_id = '$order_id'";
-    $get_pay = $db->select($query);
-    $total_pay = 0 ;
-    // die($total_pay);
-    $due = 0;
-    if ($get_pay) {
-      while ($pay = $get_pay->fetch_assoc()) {
-        $total_pay += (int)$pay['pay_amount'];
-      }
+        $total_amount = (int)$months * (int)$sell_price;
+        
+        $query = "SELECT * FROM existing_product_pay WHERE product_order_id = '$order_id'";
+        $get_pay = $db->select($query);
+        $total_pay = 0 ;
+        $due = 0;
+        if ($get_pay) {
+        while ($pay = $get_pay->fetch_assoc()) {
+            $total_pay += (int)$pay['pay_amount'];
+        }
+        }
+        if ($total_pay < $total_amount) {
+        $due = $total_amount - $total_pay ;  
+
+        }
+    }else{
+         
+        $total_amount = $sell_price;
+        
+        $query = "SELECT * FROM existing_product_pay WHERE product_order_id = '$order_id'";
+        $get_pay = $db->select($query);
+        $total_pay = 0 ;
+        $due = 0;
+        if ($get_pay) {
+        while ($pay = $get_pay->fetch_assoc()) {
+            $total_pay += (int)$pay['pay_amount'];
+        }
+        }
+        if ($total_pay < $total_amount) {
+        $due = $total_amount - $total_pay ;  
+
+        }
     }
-          
-    if ($total_pay < $total_amount) {
-        $due = $total_amount - $total_pay ; 
-      }
 
     $yearly_renew_charge = 0;
     if ($row['years'] < $years) {
         $yearly_renew_charge = ($years - $row['years'])*$row['yearly_renew_charge'];
     }
     // die($yearly_renew_charge);
-
 }
 
 ?>
 
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/new-software-yearly-pay/ajax_pay.php?pay_order_id=<?php echo $pay_order_id; ?>" id="content_form" method="post">
+<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/existing-software-monthly-pay/ajax_pay.php?pay_order_id=<?php echo $pay_order_id; ?>" id="content_form" method="post">
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Pay Order <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
 
@@ -83,9 +100,7 @@ if ($result) {
                 </div>
                 <div class="col-lg-9">
                     <div class="form-group">
-                        <input type="number" name="pay_amount" id="pay_amount" class="form-control" <?php if ($due > 0) {
-                           echo 'required';
-                        }?> >
+                        <input type="number" name="pay_amount" id="pay_amount" class="form-control" required="">
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/pending-new-software', 'Pending New Software');
+Session::checkSession('admin', ADMIN_URL . '/existing-software-onetime-sell-pay', 'New Software One Time Sell Pay');
 if (isset($_GET['new_order_id'])) {
 	$order_id = $_GET['new_order_id'];
 	$query = "SELECT * FROM new_product_order WHERE id='$order_id'";

@@ -90,7 +90,7 @@
 
 
 
-<?php $nav_items_section_26 = ['existing-software-monthly-pay','existing-software-yearly-pay','existing-software-one-time-sell','existing-software-monthly-pay','existing-software-yearly-pay','existing-software-one-time-sell']; ?>
+<?php $nav_items_section_26 = ['existing-software-monthly-pay','existing-software-yearly-pay','existing-software-onetime-sell-pay','existing-software-monthly-pay','existing-software-yearly-pay','new-software-one-time-sell-pay']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_26, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-coins"></i> <span>Collect Software Due </span></a>
 
@@ -103,7 +103,7 @@
 
                   <a href="<?php echo ADMIN_URL; ?>/existing-software-yearly-pay" class="nav-link<?php active_page($data, 'existing-software-yearly-pay'); ?>">Yearly Pay <span class="text-danger"> (Existing)</span></a>
 
-                  <a href="<?php echo ADMIN_URL; ?>/existing-software-one-time-sell" class="nav-link<?php active_page($data, 'existing-software-one-time-sell'); ?>">One Time Sell <span class="text-danger"> (Existing)</span></a>
+                  <a href="<?php echo ADMIN_URL; ?>/existing-software-onetime-sell-pay" class="nav-link<?php active_page($data, 'existing-software-onetime-sell-pay'); ?>">One Time Sell <span class="text-danger"> (Existing)</span></a>
 									</ul>
 				</li>
       <li class="nav-item nav-item-submenu">
@@ -113,7 +113,7 @@
 
                   <a href="<?php echo ADMIN_URL; ?>/new-software-yearly-pay" class="nav-link<?php active_page($data, 'new-software-yearly-pay'); ?>">Yearly Pay <span class="text-danger"> (New)</span></a>
 
-                  <a href="<?php echo ADMIN_URL; ?>/new-software-one-time-sell" class="nav-link<?php active_page($data, 'new-software-one-time-sell'); ?>">One Time Sell <span class="text-danger"> (New)</span></a>
+                  <a href="<?php echo ADMIN_URL; ?>/new-software-one-time-sell-pay" class="nav-link<?php active_page($data, 'new-software-one-time-sell-pay'); ?>">One Time Sell <span class="text-danger"> (New)</span></a>
 									</ul>
 				</li>
     </ul>
