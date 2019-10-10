@@ -53,48 +53,24 @@ $customer_id =  $user['id'];
             <div class="form-group">
                 <label for="report_type" class="col-form-label">Report Type<span class="text-danger">*</span></label>
                 <select name="report_type" id="report_type"  class="form-control" required>
-                    <option value="">Please Select One...</option>
-                    <option value="all">All Orders</option>
-                    <option value="cost_profit">Cost & Profit Report</option>
-                    <option value="status">Status Report</option>
-                    <option value="transaction">Transaction Report</option>
+                    <!-- <option value="">Please Select One...</option> -->
+                    <option value="payment">Payment History</option>
+                    <!-- <option value="status">Status Report</option> -->
                 </select>
             </div>
         
-            <div class="form-group status_div" style="display:none" >
+            <!-- <div class="form-group status_div" style="display:none" >
                 <label for="status" class="col-form-label">Please Select A Status<span class="text-danger">*</span></label>
                 <select name="status" id="status"  class="form-control">
                     <option value="">Please Select One...</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Developing">Developing</option>
-                    <option value="Printing">Printing</option>
-                    <option value="Sent To Currier">Sent To Currier</option>
-                    <option value="Delivered">Delivered</option>
-                    <option value="Cancelled">Cancel Order</option>
+                    <option value="Pending">Pending Orders</option>
+                    <option value="Confirmed">Confirmed Orders</option>
+                    <option value="Delivered">Delivered Orders</option>
+                    <option value="Cancelled">Cancel Orders</option>
                 </select>
-            </div>
-        
-            <div class="form-group transaction_type_div" style="display:none" >
-                <label for="transaction_type" class="col-form-label">Transaction Type<span class="text-danger">*</span></label>
-                <select name="transaction_type" id="transaction_type"  class="form-control">
-                    <option value="">Please Select One...</option>
-                    <?php 
+            </div> -->
 
-                      $query = "SELECT DISTINCT(payment_method) from graphics_pay";
-                      $get_payment_method = $db->select($query);
-                      if ($get_payment_method) {
-                        while ($row = $get_payment_method->fetch_assoc()) {
-                          ?>
-                            <option value="<?php echo $row['payment_method'] ?>"><?php echo $row['payment_method'] ?></option>
-                          <?php
-                        }
-                      }
-                    
-                    
-                    ?>
-                </select>
-            </div>
-
+            
             <div class="form-group row">
                 <div class="col-lg-4 offset-lg-4">
                     <button type="submit" name="submit" class="btn btn-primary ml-31" id="view">View Report</button>
