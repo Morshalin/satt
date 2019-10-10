@@ -2,7 +2,7 @@
 require_once '../../config/config.php';
 Session::checkSession('admin', ADMIN_URL . '/new-software-report', 'Report Of New Software');
 $data = array();
-$data['page_title'] = 'Report Of New Software';
+$data['page_title'] = 'Report Of Existing Software';
 $data['element'] = ['modal' => 'lg'];
 $data['page_index'] = 'new-software-report';
 $data['page_css'] = [];
@@ -53,45 +53,7 @@ $customer_id =  $user['id'];
             <div class="form-group">
                 <label for="report_type" class="col-form-label">Report Type<span class="text-danger">*</span></label>
                 <select name="report_type" id="report_type"  class="form-control" required>
-                    <option value="">Please Select One...</option>
-                    <option value="all">All Orders</option>
-                    <option value="cost_profit">Cost & Profit Report</option>
-                    <option value="status">Status Report</option>
-                    <option value="transaction">Transaction Report</option>
-                </select>
-            </div>
-        
-            <div class="form-group status_div" style="display:none" >
-                <label for="status" class="col-form-label">Please Select A Status<span class="text-danger">*</span></label>
-                <select name="status" id="status"  class="form-control">
-                    <option value="">Please Select One...</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Developing">Developing</option>
-                    <option value="Printing">Printing</option>
-                    <option value="Sent To Currier">Sent To Currier</option>
-                    <option value="Delivered">Delivered</option>
-                    <option value="Cancelled">Cancel Order</option>
-                </select>
-            </div>
-        
-            <div class="form-group transaction_type_div" style="display:none" >
-                <label for="transaction_type" class="col-form-label">Transaction Type<span class="text-danger">*</span></label>
-                <select name="transaction_type" id="transaction_type"  class="form-control">
-                    <option value="">Please Select One...</option>
-                    <?php 
-
-                      $query = "SELECT DISTINCT(payment_method) from graphics_pay";
-                      $get_payment_method = $db->select($query);
-                      if ($get_payment_method) {
-                        while ($row = $get_payment_method->fetch_assoc()) {
-                          ?>
-                            <option value="<?php echo $row['payment_method'] ?>"><?php echo $row['payment_method'] ?></option>
-                          <?php
-                        }
-                      }
-                    
-                    
-                    ?>
+                    <option value="payment">Payment History</option>
                 </select>
             </div>
 
@@ -104,12 +66,8 @@ $customer_id =  $user['id'];
         </div>
         <div class="col-md-3"></div> 
     </div>
-
-
     <div class="div pt-3 " style="border-top: 3px solid #bbb;" id="show_report">
-           
         </div>
-
         </fieldset>
       </form>
     </div>
