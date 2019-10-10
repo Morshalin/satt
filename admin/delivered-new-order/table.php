@@ -79,9 +79,6 @@ if ($result) {
             <div class="dropdown-menu dropdown-menu-right">
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/delivered-new-order/show.php?new_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
 
-
-             <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL .'/delivered-new-order/pay.php?new_order_id='.$row['id'].'" style = "color:green"><i class="icon-checkmark4"></i> Pay</span>
-
             </div>
           </div>
         </div>

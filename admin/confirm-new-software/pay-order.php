@@ -1,18 +1,17 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-  Session::checkSession('admin', ADMIN_URL.'/pending-order', 'Confirm Order');
-if (isset($_GET['pending_order_id'])) {
-    $pending_order_id = $_GET['pending_order_id'];
-    $query = "SELECT * FROM satt_order_products WHERE id='$pending_order_id'";
+Session::checkSession('admin', ADMIN_URL . '/confirm-new-software', 'Pay Order');
+if (isset($_GET['new_order_id'])) {
+    $new_order_id = $_GET['new_order_id'];
+    $query = "SELECT * FROM new_product_order WHERE id='$new_order_id'";
     $result = $db->select($query);
     if ($result) {
         $row = $result->fetch_assoc();
-        $product_id = $row['product_id'];
-        $agent_id = $row['agent_id'];
+        $sell_price = $row['sell_price'];
     } else {
         http_response_code(500);
-        die(json_encode(['message' => 'Pending Order Not Found']));
+        die(json_encode(['message' => 'Confirm Order Not Found']));
     }
 
 } else {
@@ -20,10 +19,24 @@ if (isset($_GET['pending_order_id'])) {
     die(json_encode(['message' => 'UnAthorized']));
 }
 
+if ($new_order_id) {
+
+    $pay_query = "SELECT * FROM new_product_pay WHERE new_product_order_id ='$new_order_id'";
+    $pay_result = $db->select($pay_query);
+    if ($pay_result) {
+        $total_pay = 0;
+        while ($pay_row = mysqli_fetch_assoc($pay_result)){
+             $total_pay += $pay_row['pay_amount'];
+             $total_due = $sell_price - $total_pay;
+        }
+    }
+    
+}
+
 ?>
 
 <!-- Login form -->
-<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/pending-order/ajax_confirm_order.php?pending_order_id=<?php echo $pending_order_id; ?>" id="content_form" method="post">
+<form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/confirm-new-software/ajax_pay.php?new_order_id=<?php echo $new_order_id; ?>" id="content_form" method="post">
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Confirm Order <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     <div class="row d-none" >
@@ -34,30 +47,6 @@ if (isset($_GET['pending_order_id'])) {
         <div class="col-lg-6">
             <div class="form-group">
                 <input type="number" name="total_price" id="total_price" class="form-control"  >
-                <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
-                <input type="hidden" name="agent_id" value="<?php echo $agent_id; ?>">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-2">
-                <label for="yearly_renew_charge" class="col-form-label">Yearly Renew Charge <span class="text-danger">*</span></label>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <input type="number" name="yearly_renew_charge" id="yearly_renew_charge" class="form-control yearly_renew_charge" required value="<?php echo $row['yearly_renew_charge']; ?>">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-2">
-                <label for="installation_charge" class="col-form-label">Installation Charge <span class="text-danger">*</span></label>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <input type="number" name="installation_charge" id="installation_charge" class="form-control installation_charge" required value="<?php echo $row['installation_charge']; ?>">
             </div>
         </div>
     </div>
@@ -68,14 +57,36 @@ if (isset($_GET['pending_order_id'])) {
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <input type="number" name="seling_total_price" id="seling_total_price" class="form-control seling_total_price" required >
+                <input type="number" name="seling_total_price" id="seling_total_price" class="form-control seling_total_price" readonly value="<?php echo $sell_price; ?>">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+                <label for="total_pay" class="col-form-label">Total Pay <span class="text-danger">*</span></label>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input type="number" name="total_pay" id="total_pay" class="form-control total_pay" readonly value="<?php echo $total_pay; ?>">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+                <label for="total_due" class="col-form-label">Total Due <span class="text-danger">*</span></label>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input type="number" name="total_due" id="total_due" class="form-control total_pay" readonly value="<?php echo $total_due; ?>">
             </div>
         </div>
     </div>
      <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-2">
-                <label for="pay_amount" class="col-form-label">Pay <span class="text-danger">*</span></label>
+                <label for="pay_amount" class="col-form-label">New Pay <span class="text-danger">*</span></label>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
@@ -86,7 +97,7 @@ if (isset($_GET['pending_order_id'])) {
      <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-2">
-                <label for="due_amount" class="col-form-label">Due </label>
+                <label for="due_amount" class="col-form-label">Current Due </label>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
@@ -101,7 +112,7 @@ if (isset($_GET['pending_order_id'])) {
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <select class="select form-control"  name="payment_method" id="payment_method">
+                <select class="form-control"  name="payment_method" id="payment_method">
                     <option value="">Select Payment Method</option>
                           <option id="cash" value="cash" >Cash</option>
                           <option id="mobile" value="mobile" >Mobile Banking</option>

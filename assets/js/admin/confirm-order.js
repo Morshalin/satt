@@ -190,3 +190,13 @@ $(document).on('keyup','#pay_amount',function(){
        $('#due_amount').val('');
     }
 });
+
+$(document).on('blur','#installation_charge_pay',function(){
+    var installation_charge = parseInt($('#installation_charge').val());
+    var installation_charge_pay = parseInt($('#installation_charge_pay').val());
+
+    if (installation_charge != installation_charge_pay) {
+        alert("Installation Charge Doesn't match");
+       $('#installation_charge_pay').val('');
+    }
+});

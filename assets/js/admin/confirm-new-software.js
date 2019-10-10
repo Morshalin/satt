@@ -147,8 +147,55 @@ document.addEventListener('DOMContentLoaded', function() {
     DatatableButtonsHtml5.init();
 });
 
-$(document).ready(function(){
-  
-   
+   $(document).on('change','#payment_method', function(){
+        var payment_method = $("#payment_method").val();
+        if (payment_method == 'check') {
+            $("#check_method").show(500);
+            $("#check_no").attr("required",true);
+        }else{
+            $("#check_method").hide(500);
+            $("#check_no").val("");
+            $("#check_no").attr("required",false);
 
+        }
+    });
+
+       $(document).on('change','#payment_method', function(){
+        var payment_method = $("#payment_method").val();
+        if (payment_method == 'mobile') {
+            $("#mobile_method").show(500);
+            $("#mobile_banking_name").attr("required",true);
+            $("#received_phone_number").attr("required",true);
+        }else{
+            $("#mobile_method").hide(500);
+            $("#mobile_banking_name").val("");
+            $("#received_phone_number").val("");
+            $("#tx_id").val("");
+            $("#mobile_banking_name").attr("required",false);
+            $("#received_phone_number").attr("required",false);
+        }
+    })
+
+
+$(document).on('keyup','#pay_amount',function(){
+    var total_due = parseInt($('#total_due').val());
+    var pay_amount = parseInt($('#pay_amount').val());
+    var due_amount = total_due - pay_amount;
+    $('#due_amount').val(due_amount);
+
+    if (pay_amount > total_due) {
+        alert("New Pay amount can't gatter then Total Due");
+       $('#pay_amount').val('');
+       $('#due_amount').val('');
+    }
+});
+
+$(document).on('blur','#installation_charge_pay',function(){
+    var installation_charge = parseInt($('#installation_charge').val());
+    var installation_charge_pay = parseInt($('#installation_charge_pay').val());
+
+    if (installation_charge != installation_charge_pay) {
+        alert("Installation Charge Doesn't match");
+       $('#installation_charge_pay').val('');
+    }
 });
