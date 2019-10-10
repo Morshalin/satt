@@ -84,6 +84,8 @@ if ($result) {
 
     <div class="row">
     <div class="col-lg-6">
+    <div class="text-center text-danger"><h5>Due Of Monthly Charge</h5>
+        <hr></div>
             <div class="row">
                 <div class="col-lg-3">
                         <label for="total_due" class="col-form-label text-danger">Due <span class="text-danger">*</span></label>
@@ -124,9 +126,11 @@ if ($result) {
 
 
     <div class="col-lg-6">
+    <div class="text-center text-danger"><h5>Due Of Yearly Renew Charge</h5>
+        <hr></div>
             <div class="row">
                 <div class="col-lg-3">
-                        <label for="yearly_renew_charge" class="col-form-label text-danger">Yearly Renew Charge <span class="text-danger">*</span></label>
+                        <label for="yearly_renew_charge" class="col-form-label text-danger">Due <span class="text-danger">*</span></label>
                 </div>
                 <div class="col-lg-9">
                     <div class="form-group">

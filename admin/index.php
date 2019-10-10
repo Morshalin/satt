@@ -31,7 +31,11 @@ include_once 'inc/header.php'; ?>
 <?php 
 $query = "SELECT * FROM satt_order_products WHERE status = '1' AND delivery_status = '0' ";
 $result = $db->select($query);
-$count = mysqli_num_rows($result);
+if ($result) {
+  $count = mysqli_num_rows($result);
+}else{
+  $count = 0;
+}
 
 $query1 = "SELECT * FROM new_product_order WHERE confirmation_status = '1' AND delivery_status = '0' AND cancel_status = '0'";
 $result1 = $db->select($query1);
@@ -66,7 +70,7 @@ $confirm_order = $count + $count1;
                      <i class="icon-cart-add2
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
-                <div><a href="<?php echo ADMIN_URL; ?>/confirm-order/" class="btn btn-light text-dark ">See Confirm Orders <i class="icon-circle-right2"></i></a></div>
+                <div><a href="<?php echo ADMIN_URL; ?>/confirm-order/" class="btn btn-light text-dark ">View Orders <i class="icon-circle-right2"></i></a></div>
             </div>
         </div>
           </div>
@@ -108,7 +112,7 @@ $deliver_order = $count + $count1;
                      <i class="icon-database-check
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
-                <div><a href="<?php echo ADMIN_URL; ?>/delivered-order/" class="btn btn-light text-dark ">See Deliver Orders <i class="icon-circle-right2"></i></a></div>
+                <div><a href="<?php echo ADMIN_URL; ?>/delivered-order/" class="btn btn-light text-dark ">View Orders <i class="icon-circle-right2"></i></a></div>
             </div>
         </div>
           </div>
@@ -117,7 +121,12 @@ $deliver_order = $count + $count1;
       <?php 
 $query = "SELECT * FROM satt_order_products WHERE status = '0' AND roll = '1' ";
 $result = $db->select($query);
-$count = mysqli_num_rows($result);
+if ($result) {
+  # code...
+  $count = mysqli_num_rows($result);
+}else{
+  $count = 0 ;
+}
 
 $query1 = "SELECT * FROM new_product_order WHERE confirmation_status = '0' AND delivery_status = '0' AND cancel_status = '1'";
 $result1 = $db->select($query1);
@@ -152,7 +161,7 @@ $cancel_order = $count + $count1;
                      <i class="icon-cancel-circle2
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
-                <div><a href="<?php echo ADMIN_URL; ?>/cancel-order/" class="btn btn-light text-dark ">See Cancel Orders <i class="icon-circle-right2"></i></a></div>
+                <div><a href="<?php echo ADMIN_URL; ?>/cancel-order/" class="btn btn-light text-dark ">View Orders <i class="icon-circle-right2"></i></a></div>
             </div>
         </div>
           </div>
@@ -191,7 +200,7 @@ $cancel_order = $count + $count1;
                      <i class="icon-home5
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
-                <div><a href="<?php echo ADMIN_URL; ?>/pending-graphics-order/" class="btn btn-light text-dark ">See Orders <i class="icon-circle-right2"></i></a></div>
+                <div><a href="<?php echo ADMIN_URL; ?>/pending-graphics-order/" class="btn btn-light text-dark ">View Orders <i class="icon-circle-right2"></i></a></div>
             </div>
         </div>
       </div>
@@ -226,7 +235,7 @@ $cancel_order = $count + $count1;
                      <i class="icon-file-download
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
-                <div><a href="<?php echo ADMIN_URL; ?>/pending-graphics-order/" class="btn btn-light text-dark ">See Pending Orders <i class="icon-circle-right2"></i></a></div>
+                <div><a href="<?php echo ADMIN_URL; ?>/pending-graphics-order/" class="btn btn-light text-dark">View Orders <i class="icon-circle-right2"></i></a></div>
             </div>
         </div>
       </div>
@@ -261,7 +270,7 @@ $cancel_order = $count + $count1;
                      <i class="icon-database-check
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
-                <div><a href="<?php echo ADMIN_URL; ?>/deliverd-graphics-order/" class="btn btn-light text-dark ">See Deliver Orders <i class="icon-circle-right2"></i></a></div>
+                <div><a href="<?php echo ADMIN_URL; ?>/deliverd-graphics-order/" class="btn btn-light text-dark ">View Orders <i class="icon-circle-right2"></i></a></div>
             </div>
         </div>
       </div>
@@ -296,7 +305,7 @@ $cancel_order = $count + $count1;
                      <i class="icon-cancel-circle2
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
-                <div><a href="<?php echo ADMIN_URL; ?>/cancel-graphics/" class="btn btn-light text-dark ">See Cancel Orders <i class="icon-circle-right2"></i></a></div>
+                <div><a href="<?php echo ADMIN_URL; ?>/cancel-graphics/" class="btn btn-light text-dark ">View Orders <i class="icon-circle-right2"></i></a></div>
             </div>
         </div>
       </div>
@@ -335,7 +344,7 @@ $cancel_order = $count + $count1;
                      <i class="icon-user-check
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
-                <div><a href="<?php echo ADMIN_URL; ?>/agent/" class="btn btn-light text-dark ">See Active Agent <i class="icon-circle-right2"></i></a></div>
+                <div><a href="<?php echo ADMIN_URL; ?>/agent/" class="btn btn-light text-dark "> View List <i class="icon-circle-right2"></i></a></div>
             </div>
         </div>
       </div>
@@ -371,7 +380,7 @@ $cancel_order = $count + $count1;
                      <i class="icon-users4
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
-                <div><a href="<?php echo ADMIN_URL; ?>/add_user/" class="btn btn-light text-dark ">See All Users <i class="icon-circle-right2"></i></a></div>
+                <div><a href="<?php echo ADMIN_URL; ?>/add_user/" class="btn btn-light text-dark ">View List <i class="icon-circle-right2"></i></a></div>
             </div>
         </div>
       </div>
@@ -402,7 +411,7 @@ $cancel_order = $count + $count1;
                      <i class="icon-collaboration
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
-                <div><a href="<?php echo ADMIN_URL; ?>/developer/" class="btn btn-light text-dark ">See All Developer <i class="icon-circle-right2"></i></a></div>
+                <div><a href="<?php echo ADMIN_URL; ?>/developer/" class="btn btn-light text-dark ">View List <i class="icon-circle-right2"></i></a></div>
             </div>
         </div>
       </div>
@@ -437,7 +446,7 @@ $cancel_order = $count + $count1;
                      <i class="icon-users2
                 ec01 icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
                  </a>
-                <div><a href="<?php echo ADMIN_URL; ?>/office_stuff/" class="btn btn-light text-dark ">See All Stuff <i class="icon-circle-right2"></i></a></div>
+                <div><a href="<?php echo ADMIN_URL; ?>/office_stuff/" class="btn btn-light text-dark ">View List <i class="icon-circle-right2"></i></a></div>
             </div>
         </div>
       </div>

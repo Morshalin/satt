@@ -76,6 +76,8 @@ if ($result) {
 
     <div class="row">
     <div class="col-lg-6">
+    <div class="text-center text-danger"><h5>Due Of One Time Payment</h5>
+        <hr></div>
             <div class="row">
                 <div class="col-lg-3">
                         <label for="total_due" class="col-form-label text-danger">Due <span class="text-danger">*</span></label>
@@ -116,21 +118,24 @@ if ($result) {
 
 
     <div class="col-lg-6">
+    <div class="text-center text-danger"><h5>Due Of Yearly Renew Charge</h5>
+        <hr></div>
             <div class="row">
-                <div class="col-lg-3">
-                        <label for="yearly_renew_charge" class="col-form-label text-danger">Yearly Renew Charge <span class="text-danger">*</span></label>
+                
+                <div class="col-lg-2">
+                        <label for="yearly_renew_charge" class="col-form-label text-danger">Due <span class="text-danger">*</span></label>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-10">
                     <div class="form-group">
                         <input type="number" name="yearly_renew_charge" id="yearly_renew_charge" class="form-control total_pay" readonly value="<?php echo $yearly_renew_charge; ?>">
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                         <label for="pay_renew" class="col-form-label">Pay <span class="text-danger">*</span></label>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-10">
                     <div class="form-group">
                         <input type="number" name="pay_renew" id="pay_renew" class="form-control" <?php if ($yearly_renew_charge > 0) {
                             echo 'required';

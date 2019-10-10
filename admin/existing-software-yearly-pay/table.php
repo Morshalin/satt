@@ -133,9 +133,9 @@ if ($result) {
                     <i class="icon-menu9"></i>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right">
-                    <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/existing-software-onetime-sell-pay/show.php?new_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
+                    <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/existing-software-yearly-pay/show.php?new_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
       
-                  <span class="dropdown-item text-info" id="content_managment" data-url="' . ADMIN_URL . '/existing-software-onetime-sell-pay/pay-order.php?pay_order_id=' . $row['id'] . '&due='.$total_due.'"><i class="icon-paypal2"></i> Pay</span>
+                  <span class="dropdown-item text-info" id="content_managment" data-url="' . ADMIN_URL . '/existing-software-yearly-pay/pay-order.php?pay_order_id=' . $row['id'] . '&due='.$total_due.'"><i class="icon-paypal2"></i> Pay</span>
                   </div>
                 </div>
               </div>
