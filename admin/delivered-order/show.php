@@ -1,22 +1,22 @@
 <?php
 require_once '../../config/config.php';
 ajax();
-Session::checkSession('admin', ADMIN_URL . '/confirm-order', 'Software Status');
-if (isset($_GET['confirm_order_id'])) {
-	$confirm_order_id = $_GET['confirm_order_id'];
-	$query = "SELECT * FROM satt_order_products WHERE id='$confirm_order_id'";
-	$result = $db->select($query);
-	if ($result) {
-		$row = $result->fetch_assoc();
+Session::checkSession('admin', ADMIN_URL . '/delivered-order', 'delivered-order');
+if (isset($_GET['new_order_id'])) {
+    $new_order_id = $_GET['new_order_id'];
+    $query = "SELECT * FROM satt_order_products WHERE id='$new_order_id'";
+    $result = $db->select($query);
+    if ($result) {
+        $row = $result->fetch_assoc();
         $agent_id = $row['agent_id'];
-	} else {
-		http_response_code(500);
-		die(json_encode(['message' => 'Confirm Order Not Found']));
-	}
+    } else {
+        http_response_code(500);
+        die(json_encode(['message' => 'Delivered Order Order Not Found']));
+    }
 
 } else {
-	http_response_code(500);
-	die(json_encode(['message' => 'UnAthorized']));
+    http_response_code(500);
+    die(json_encode(['message' => 'UnAthorized']));
 }
 
 ?>
@@ -81,7 +81,7 @@ if (isset($_GET['confirm_order_id'])) {
 
 
 <?php 
-    if ($confirm_order_id) {
+    if ($new_order_id) {
         $customer_id = $row['customer_id'];
         $query = "SELECT * FROM satt_customer_informations WHERE id='$customer_id'";
         $result = $db->select($query);
@@ -162,32 +162,38 @@ if (isset($_GET['confirm_order_id'])) {
     </div>
     <?php } ?>
 
-        <div class="row">
+    <div class="row">
         <div class="col-lg-12">
             <hr>
     <legend class="text-uppercase text-center font-size-m font-weight-bold">Payment History </legend>
-            <div class="table-responsive">
-              <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Payment Method</th>
-                      <th scope="col">Check No</th>
-                      <th scope="col">Mobile banking Name</th>
-                      <th scope="col">Received Phone Number</th>
-                      <th scope="col">Tx ID</th>
-                      <th scope="col">Pay Amount</th>
-                      <th scope="col">Pay Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+
+
+
+            
 <?php 
-    if ($confirm_order_id) {
-        $pay_query = "SELECT * FROM existing_product_pay WHERE product_order_id='$confirm_order_id'  order by id desc";
+    if ($new_order_id) {
+        $pay_query = "SELECT * FROM existing_product_pay WHERE product_order_id='$new_order_id'  order by id desc";
         $pay_result = $db->select($pay_query);
-        if ($pay_result) {
+        $total_pay = 0;
+        if ($pay_result) { ?>
+                <div class="table-responsive">
+                    <h4 class="text-danger">Monthly Pay</h4>
+                  <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Payment Method</th>
+                          <th scope="col">Check No</th>
+                          <th scope="col">Mobile banking Name</th>
+                          <th scope="col">Received Phone Number</th>
+                          <th scope="col">Tx ID</th>
+                          <th scope="col">Pay Amount</th>
+                          <th scope="col">Pay Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+            <?php
             $i = 0;
-            $total_pay = 0;
             while ( $pay_row = $pay_result->fetch_assoc()) { 
                 $i++;
                 $total_pay +=  $pay_row['pay_amount'];
@@ -200,20 +206,137 @@ if (isset($_GET['confirm_order_id'])) {
                       <td><?php echo $pay_row['received_phone_number']; ?></td>
                       <td><?php echo $pay_row['tx_id']; ?></td>
                       <td><?php echo $pay_row['pay_amount']; ?></td>
-                      <td><?php echo $pay_row['pay_date']; ?></td>
+                      <td><?php echo date('Y-m-d', strtotime($pay_row['pay_date'])); ?></td>
                     </tr>
-         <?php  }
-        }
-    }
- ?>
+         <?php  } ?>
                    <tr>
-                      <th colspan="6" class="text-right" >Total Pay :</th>
+                      <th colspan="6" class="text-right" >Total :</th>
                       <th colspan="2" ><?php echo $total_pay; ?></th>
                     </tr>
+                     <?php } } ?>
                   </tbody>
                 </table>
             </div>
+
+
+
+                        
+            <?php 
+                if ($new_order_id) {
+                    $install_pay_query = "SELECT * FROM existing_product_installation_pay WHERE product_order_id='$new_order_id'";
+                    $insall_pay_result = $db->select($install_pay_query);
+                    $install_total_pay = 0;
+                    if ($insall_pay_result) { ?>
+                        <div class="table-responsive">
+                            <h4 class="text-danger">Installation Charage Pay</h4>
+                          <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Payment Method</th>
+                                  <th scope="col">Check No</th>
+                                  <th scope="col">Mobile banking Name</th>
+                                  <th scope="col">Received Phone Number</th>
+                                  <th scope="col">Tx ID</th>
+                                  <th scope="col">Pay Amount</th>
+                                  <th scope="col">Pay Date</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                        <?php
+                        $i = 0;
+                        while ( $install_pay_row = $insall_pay_result->fetch_assoc()) { 
+                            $i++;
+                            $install_total_pay +=  $install_pay_row['pay_amount'];
+                            ?>
+                            <tr>
+                                  <th scope="row"><?php echo $i; ?></th>
+                                  <td><?php echo $install_pay_row['payment_method']; ?></td>
+                                  <td><?php echo $install_pay_row['check_no']; ?></td>
+                                  <td><?php echo $install_pay_row['mobile_banking_name']; ?></td>
+                                  <td><?php echo $install_pay_row['received_phone_number']; ?></td>
+                                  <td><?php echo $install_pay_row['tx_id']; ?></td>
+                                  <td><?php echo $install_pay_row['pay_amount']; ?></td>
+                                  <td><?php echo date('Y-m-d', strtotime($install_pay_row['pay_date'])); ?></td>
+                                </tr>
+                     <?php  }  ?>
+                               <tr>
+                                  <th colspan="6" class="text-right" >Total :</th>
+                                  <th colspan="2" ><?php echo $install_total_pay; ?></th>
+                                </tr>
+                                 <?php } } ?>
+                              </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+                        
+            <?php 
+                if ($new_order_id) {
+                    $yeraly_install_pay_query = "SELECT * FROM existing_product_yearly_charge_pay WHERE new_product_order_id='$new_order_id'";
+                    $yeraly_insall_pay_result = $db->select($yeraly_install_pay_query);
+                        $yeraly_install_total_pay = 0;
+                    if ($yeraly_insall_pay_result) {
+                        ?>
+                        <div class="table-responsive">
+                            <h4 class="text-danger">Yerally Renew Charage Pay</h4>
+                          <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Payment Type</th>
+                                  <th scope="col">Check No</th>
+                                  <th scope="col">Mobile banking Name</th>
+                                  <th scope="col">Received Phone Number</th>
+                                  <th scope="col">Tx ID</th>
+                                  <th scope="col">Pay Amount</th>
+                                  <th scope="col">Pay Date</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                        <?php
+                        $i = 0;
+                        while ( $yeraly_install_pay_row = $yeraly_insall_pay_result->fetch_assoc()) { 
+                            $i++;
+                            if($yeraly_install_pay_row['pay_amount']){
+                                 $yeraly_install_total_pay +=  $yeraly_install_pay_row['pay_amount'];
+                            }
+                           
+                            ?>
+                            <tr>
+                                  <th scope="row"><?php echo $i; ?></th>
+                                  <td><?php echo $yeraly_install_pay_row['payment_type']; ?></td>
+                                  <td><?php echo $yeraly_install_pay_row['check_numer']; ?></td>
+                                  <td><?php echo $yeraly_install_pay_row['mobile_banking_name']; ?></td>
+                                  <td><?php echo $yeraly_install_pay_row['received_phone_number']; ?></td>
+                                  <td><?php echo $yeraly_install_pay_row['tx_id']; ?></td>
+                                  <td><?php echo $yeraly_install_pay_row['pay_amount']; ?></td>
+                                  <td><?php echo date('Y-m-d', strtotime($yeraly_install_pay_row['date'])); ?></td>
+                                  
+                                </tr>
+                     <?php  } ?>
+                               <tr>
+                                  <th colspan="6" class="text-right" >Total:</th>
+                                  <th colspan="2" ><?php echo $yeraly_install_total_pay; ?></th>
+                                </tr>
+                            <?php } } ?>
+                              </tbody>
+                            </table>
+                        </div>
+        
+        
         </div>
+       
+        <div class="col-sm-12">
+        <p class="h3 text-center text-info border border-info p-3">Total Pay: <?php 
+                $overall = $total_pay + $install_total_pay + $yeraly_install_total_pay;
+                echo $overall;
+         ?></p>
+         </div>
+         
     </div>
 </fieldset>
 <!-- /login form -->

@@ -311,7 +311,7 @@ $cancel_order = $count + $count1;
       </div>
 
 
-          <legend class="text-uppercase font-size-sm font-weight-bold text-center">Office Section </legend>
+<legend class="text-uppercase font-size-sm font-weight-bold text-center">Office Section </legend>
 
 <?php 
     $query = "SELECT * FROM agent_list WHERE status = 'Active' ";
@@ -462,21 +462,33 @@ $cancel_order = $count + $count1;
   <legend class="text-uppercase font-size-sm font-weight-bold">Notification </legend>
     <div class="row">
        <legend class="text-uppercase font-size-sm font-weight-bold text-center">All Notification</legend>
-
-       <div class="col-sm-12">
         <?php 
-          $date =  date('Y-m-d');
-          $prev_date = date('Y-m-d', strtotime($date .' -1 day'));
-          $next_date = date('Y-m-d', strtotime($date .' +1 day'));
-
+        $date =  date('Y-m-d');
+        $prev_date = date('Y-m-d', strtotime($date .' -1 day'));
+        $next_date = date('Y-m-d', strtotime($date .' +1 day'));
+        
           $query = "SELECT * FROM satt_next_contacted where (status = 0) AND (next_contact = '$next_date' or next_contact='$date' or next_contact='$prev_date')";
           $notices_result = $db->select($query);
+          if ($notices_result) {  
+            $overflow = 'scroll';
+            $height = '300px';
+            $display = 'block';
+
+          }else{
+            $overflow = 'hidden';
+            $height = '0px';
+            $display = 'none';
+          }
+        ?>
+       <div class="col-sm-12" style="display: <?php echo $display;?>">
+        <?php 
+
           if ($notices_result) {
             $notification = mysqli_num_rows($notices_result);
   
         ?>
         <legend class="text-uppercase font-size-sm  text-center">Customer Notification <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0"><?php echo $notification; ?></span> </legend> <?php } ?>
-        <div style="height: 300px; overflow: scroll;">
+        <div style="height: <?php echo $height;?>; overflow: <?php echo $overflow;?>">
         <?php
 
           $query = "SELECT cn.id, cn.admin_id, cn.customer_id, cn.next_contact, cn.note, c.name FROM satt_next_contacted cn inner join satt_customer_informations c on cn.customer_id = c.id where (cn.status = 0) AND (cn.next_contact = '$next_date' or cn.next_contact= '$date' or cn.next_contact='$prev_date')";
@@ -503,25 +515,41 @@ $cancel_order = $count + $count1;
      </div>
     </div>
 
+<?php 
 
 
-       <div class="col-sm-12 mt-3">
+ $query = "SELECT * FROM satt_order_products where (msg_status = 0) AND (expected_delevery_date  = '$next_date' or expected_delevery_date = '$date' or expected_delevery_date ='$prev_date')";
+          $notices_result = $db->select($query);
+
+ if ($notices_result) {
+            $overflow = 'scroll';
+            $height = '300px';
+            $display = 'block';
+
+          }else{
+            $overflow = 'hidden';
+            $height = '0px';
+            $display = 'none';
+          }
+
+ ?>
+
+       <div class="col-sm-12 mt-3" style="display: <?php echo $display; ?>">
         <?php 
           $date =  date('Y-m-d');
           $prev_date = date('Y-m-d', strtotime($date .' -1 day'));
           $next_date = date('Y-m-d', strtotime($date .' +1 day'));
 
-          $query = "SELECT * FROM satt_order_products where (msg_status = 0) AND (expected_delevery_date  = '$next_date' or expected_delevery_date = '$date' or expected_delevery_date ='$prev_date')";
-          $notices_result = $db->select($query);
+         
           if ($notices_result) {
             $notification = mysqli_num_rows($notices_result);
     
         ?>
         <legend class="text-uppercase font-size-sm  text-center">Existing Software Delivery<span class="badge badge-pill bg-warning-400 ml-auto ml-md-0"><?php echo $notification; ?></span> </legend> <?php } ?>
-        <div style="height: 300px; overflow: scroll;">
+        <div style="height: <?php echo $height; ?>; overflow: <?php echo $overflow; ?>;">
         <?php
 
-          $query = "SELECT cn.id, cn.customer_id, cn.expected_delevery_date, cn.product_name, c.name FROM satt_order_products cn inner join satt_customer_informations c on cn.customer_id = c.id where (cn.msg_status = 0) AND (cn.expected_delevery_date = '$next_date' or cn.expected_delevery_date= '$date' or cn.expected_delevery_date='$prev_date')";
+          $query = "SELECT cn.id, cn.customer_id, cn.expected_delevery_date, cn.product_name, c.name,c.number,c.email FROM satt_order_products cn inner join satt_customer_informations c on cn.customer_id = c.id where (cn.msg_status = 0) AND (cn.expected_delevery_date = '$next_date' or cn.expected_delevery_date= '$date' or cn.expected_delevery_date='$prev_date')";
           $delever_result = $db->select($query);
           if ($delever_result) {
           while ($delever_data = $delever_result->fetch_assoc()) {  ?>
@@ -534,7 +562,7 @@ $cancel_order = $count + $count1;
                 <p class="text-justify"><?php echo $delever_data['product_name']; ?></p>
 
                 <strong>
-                  <a href="" onclick="return confirm('Are You Sure Remove Notification');" class="del_notification" id="<?php echo $delever_data['id'];?>"  data-url="<?php echo ADMIN_URL; ?>/software_notification.php?soft_avaliable_id=<?php echo $delever_data['id']; ?>">Remove</a>
+                  <a href="" class="del_notification" id="<?php echo $delever_data['id'];?>"  data-url="<?php echo ADMIN_URL; ?>/software_notification.php?soft_avaliable_id=<?php echo $delever_data['id']; ?>">Remove</a>
                 </strong>
 
               </div>
@@ -545,20 +573,36 @@ $cancel_order = $count + $count1;
      </div>
     </div>
 
-       <div class="col-sm-12 mt-3">
+
+
+  <?php 
+    $query = "SELECT * FROM new_product_order where (msg_status = 0) AND (expected_delevery_date  = '$next_date' or expected_delevery_date = '$date' or expected_delevery_date ='$prev_date')";
+          $notices_result = $db->select($query);
+          if ($notices_result) {
+            $overflow = 'scroll';
+            $height = '300px';
+            $display = 'block';
+
+          }else{
+            $overflow = 'hidden';
+            $height = '0px';
+            $display = 'none';
+          }
+
+  ?>
+       <div class="col-sm-12 mt-3" style="display: <?php echo $display; ?>">
         <?php 
           $date =  date('Y-m-d');
           $prev_date = date('Y-m-d', strtotime($date .' -1 day'));
           $next_date = date('Y-m-d', strtotime($date .' +1 day'));
 
-          $query = "SELECT * FROM new_product_order where (msg_status = 0) AND (expected_delevery_date  = '$next_date' or expected_delevery_date = '$date' or expected_delevery_date ='$prev_date')";
-          $notices_result = $db->select($query);
+          
           if ($notices_result) {
             $notification = mysqli_num_rows($notices_result);
     
         ?>
         <legend class="text-uppercase font-size-sm  text-center"> New Software Delivery <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0"><?php echo $notification; ?></span> </legend> <?php } ?>
-        <div style="height: 300px; overflow: scroll;">
+        <div style="height: <?php echo $height; ?>; overflow: <?php echo $overflow; ?>;">
         <?php
 
           $new_del_query = "SELECT np.id, np.customer_id, np.expected_delevery_date, np.expected_name_software, c.name FROM new_product_order np inner join satt_customer_informations c on np.customer_id = c.id where (np.msg_status = 0) AND (np.expected_delevery_date = '$next_date' or np.expected_delevery_date= '$date' or np.expected_delevery_date='$prev_date')";
@@ -573,7 +617,7 @@ $cancel_order = $count + $count1;
                 <span class="text-muted"><?php echo $new_delever_data['expected_delevery_date']; ?></span>
                 <p class="text-justify"><?php echo $new_delever_data['expected_name_software']; ?></p>
                 <strong>
-                  <a href="" onclick="return confirm('Are You Sure Remove Notification');" class="update_notification" id="<?php echo $new_delever_data['id'];?>"  data-url="<?php echo ADMIN_URL; ?>/software_notification.php?soft_id=<?php echo $new_delever_data['id']; ?>">Remove</a>
+                  <a href=""  class="update_notification" id="<?php echo $new_delever_data['id'];?>"  data-url="<?php echo ADMIN_URL; ?>/software_notification.php?soft_id=<?php echo $new_delever_data['id']; ?>">Remove</a>
                 </strong>
               </div>
             </div>
@@ -597,6 +641,7 @@ $cancel_order = $count + $count1;
 
   $(document).on("click",".del_notification",function(e){
     e.preventDefault();
+    if (confirm("Are You Sure To Remove Notification?")) {
     var url = $(this).data('url');
     var id = '#del_'+$(this).attr('id');
     
@@ -608,11 +653,13 @@ $cancel_order = $count + $count1;
         $(id).remove();
       }
     });
+    }
     
   });
 
   $(document).on("click",".update_notification",function(e){
     e.preventDefault();
+    if (confirm("Are You Sure To Remove Notification?")) {
     var url = $(this).data('url');
     var id = '#update_'+$(this).attr('id');
     
@@ -624,6 +671,8 @@ $cancel_order = $count + $count1;
         $(id).remove();
       }
     });
+    }
+    
     
   });
 </script>
