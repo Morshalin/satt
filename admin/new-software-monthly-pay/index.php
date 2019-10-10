@@ -4,7 +4,7 @@
   $data = array();
   $data['page_title'] = 'New Software Monthly Pay';
   $data['element'] = ['modal' => 'lg'];
-  $data['page_index'] = 'new-software-monthly-pay';
+  $data['page_index'] = 'new-software-monthly-pay'; 
   $data['page_css'] = [];
   $data['page_js'] = ['assets/js/admin/new-software-monthly-pay'];
 ?>

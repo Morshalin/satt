@@ -42,6 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 
 		$total_price = $fm->validation($_POST['total_price']);
+		$yearly_renew_charge = $fm->validation($_POST['yearly_renew_charge']);
+		$installation_charge = $fm->validation($_POST['installation_charge']);
+
 		$seling_total_price = $fm->validation($_POST['seling_total_price']);
 		$pay_amount = $fm->validation($_POST['pay_amount']);
 		$due_amount = $fm->validation($_POST['due_amount']);
@@ -65,6 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		} else {
 			$query = "UPDATE satt_order_products SET 
 			status = '1',
+			yearly_renew_charge = '$yearly_renew_charge',
+			installation_charge = '$installation_charge',
 			seling_total_price = '$seling_total_price',
 			confirm_date = now()
 			 WHERE id = '$pending_order_id'";

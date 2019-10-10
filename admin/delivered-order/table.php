@@ -79,7 +79,6 @@ if ($agent_id) {
             </a>
             <div class="dropdown-menu dropdown-menu-right">
         		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/delivered-order/show.php?confirm_order_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
-              <span class="dropdown-item text-info" id="content_managment" data-url="' . ADMIN_URL . '/delivered-order/pay-order.php?pay_order_id=' . $row['id'] . '"><i class="icon-paypal2"></i> Pay</span>
             </div>
           </div>
         </div>
