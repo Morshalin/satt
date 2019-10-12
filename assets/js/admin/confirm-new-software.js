@@ -116,7 +116,7 @@ var DatatableButtonsHtml5 = function() {
                     _componentInputSwitchery();
                      _componentSelect2Modal();
                     _componentDatePicker();
-                    _modalFormValidation();
+                    _modalFormValidation(); 
 
                 })
                 .fail(function(data) {
