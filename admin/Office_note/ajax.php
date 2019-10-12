@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' and isset($_POST['contact']) and $_POST
 		http_response_code(500);
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
-		$query = "INSERT INTO satt_next_contacted (admin_id, customer_id,next_contact, note) VALUES ('$admin_id', '$customer_id','$next_contact','$note')";
+		$query = "INSERT INTO satt_exter_next_contacted (admin_id, customer_id,next_contact, note) VALUES ('$admin_id', '$customer_id','$next_contact','$note')";
 		$result = $db->insert($query);
 		if ($result != false) {
 			die(json_encode(['message' => 'Note Added Successfull']));

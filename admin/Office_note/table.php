@@ -26,14 +26,14 @@ if ($searchValue != '') {
 ## Total number of records without filtering
 =================================================================================*/
 
-$sel = $db->select("select count(*) as allcount from satt_customer_informations");
+$sel = $db->select("select count(*) as allcount from satt_extra_office_notes");
 $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['allcount'];
 
 /*==============================================================================
 ## Total number of record with filtering
 =================================================================================*/
-$sel = $db->select("select count(*) as allcount from satt_customer_informations WHERE 1 " . $searchQuery);
+$sel = $db->select("select count(*) as allcount from satt_extra_office_notes WHERE 1 " . $searchQuery);
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 

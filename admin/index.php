@@ -487,7 +487,60 @@ $cancel_order = $count + $count1;
             $notification = mysqli_num_rows($notices_result);
   
         ?>
-        <legend class="text-uppercase font-size-sm  text-center">Customer Notification <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0"><?php echo $notification; ?></span> </legend> <?php } ?>
+        <legend class="text-uppercase font-size-sm  text-center">Customer Existing<span class="badge badge-pill bg-warning-400 ml-auto ml-md-0"><?php echo $notification; ?></span> </legend> <?php } ?>
+        <div style="height: <?php echo $height;?>; overflow: <?php echo $overflow;?>">
+        <?php
+
+          $query = "SELECT cn.id, cn.admin_id, cn.customer_id, cn.next_contact, cn.note, c.name FROM satt_next_contacted cn inner join satt_customer_informations c on cn.customer_id = c.id where (cn.status = 0) AND (cn.next_contact = '$next_date' or cn.next_contact= '$date' or cn.next_contact='$prev_date')";
+          $result = $db->select($query);
+          if ($result) {
+          while ($notice_data = $result->fetch_assoc()) {  ?>
+        <div class="card" id="tr_<?php echo $notice_data['id']; ?>">
+          <div class="card-body">
+            <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+              <div>
+                <h6><?php echo $notice_data['name']; ?></h6>
+                <span class="text-muted"><?php echo $notice_data['next_contact']; ?></span>
+                <p class="text-justify"><?php echo $fm->textShorten($notice_data['note'], 70); ?>
+
+                <a href="" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/next_contacted.php?customerdetails_id=<?php echo $notice_data['id']; ?>">Show</a>
+
+
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+     <?php } } ?>
+     </div>
+    </div>
+
+        <?php 
+        $date =  date('Y-m-d');
+        $prev_date = date('Y-m-d', strtotime($date .' -1 day'));
+        $next_date = date('Y-m-d', strtotime($date .' +1 day'));
+        
+          $query = "SELECT * FROM satt_exter_next_contacted where (status = 0) AND (next_contact = '$next_date' or next_contact='$date' or next_contact='$prev_date')";
+          $notices_result = $db->select($query);
+          if ($notices_result) {  
+            $overflow = 'scroll';
+            $height = '300px';
+            $display = 'block';
+
+          }else{
+            $overflow = 'hidden';
+            $height = '0px';
+            $display = 'none';
+          }
+        ?>
+       <div class="col-sm-12" style="display: <?php echo $display;?>">
+        <?php 
+
+          if ($notices_result) {
+            $notification = mysqli_num_rows($notices_result);
+    
+        ?>
+        <legend class="text-uppercase font-size-sm  text-center">Customer IntroDuced<span class="badge badge-pill bg-warning-400 ml-auto ml-md-0"><?php echo $notification; ?></span> </legend> <?php } ?>
         <div style="height: <?php echo $height;?>; overflow: <?php echo $overflow;?>">
         <?php
 

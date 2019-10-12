@@ -53,7 +53,7 @@ ajax();
 
 <!-- Login form -->
 <form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/customerdetails/ajax.php" id="content_form" method="post">
-  <fieldset class="mb-3">
+<fieldset class="mb-3">
 
 <div  style="display: none" id="customer_form">
 <div class="row">
@@ -171,13 +171,12 @@ ajax();
               </select>
             </div>
         </div>
-<div class="col-lg-6">
-    <div class="form-group">
-        <label for="institute_type" class="col-form-label">Institute Category<span class="text-danger"></span></label>
-        <input type="text" name="institute_type" id="institute_type" class="form-control" placeholder="Institute Category" value="">
-
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="institute_type" class="col-form-label">Institute Category<span class="text-danger"></span></label>
+            <input type="text" name="institute_type" id="institute_type" class="form-control" placeholder="Institute Category" value="">
+        </div>
     </div>
-</div>
 </div>
 
 
@@ -196,7 +195,6 @@ ajax();
         </div>
     </div>
 </div>
-
 <div class="row">
     <div class="col-lg-6">
         <div class="form-group">
@@ -204,13 +202,13 @@ ajax();
               <select class="form-control select" id="institute_district" name="institute_district">
                 <option value="">Select One</option>
                 <?php 
-                $query = "SELECT * FROM satt_districts";
-                $result = $db->select($query);
-                if ($result) {
-                    while ($row = $result->fetch_assoc()) { ?>
-                    <option value="<?php echo $row['name'] ?>"><?php echo $row['name']; ?> </option>
+                $dis_query = "SELECT * FROM satt_districts";
+                $dis_result = $db->select($dis_query);
+                if ($dis_result) {
+                    while ($dis_row = $dis_result->fetch_assoc()) { ?>
+                    <option value="<?php echo $dis_row['name'] ?>"><?php echo $dis_row['name']; ?> </option>
                     <?php  }
-                    $row = $result->fetch_assoc();
+                    $dis_row = $dis_result->fetch_assoc();
                 } else {
                     http_response_code(500);
                     die(json_encode(['message' => 'Category  Not Found']));
@@ -219,27 +217,28 @@ ajax();
             </select>
         </div>
     </div>
+
     <div class="col-lg-6">
-            <div class="form-group">
-              <label for="software_category"></label>
-              <label for="interested_services">Select Software Category<span class="text-danger">*</span></label>
-              <select multiple="multiple" class="form-control select" id="software_category" name="software_category[]">
-                <?php 
-                     $query = "SELECT * FROM software_details where status = 1";
-                    $result = $db->select($query);
-                    if ($result) {
-                        while ($row = $result->fetch_assoc()) { ?>
-                           <option value="<?php echo $row['id'] ?>"><?php echo $row['software_name']; ?> </option>  
-                      <?php  }
-                        $row = $result->fetch_assoc();
-                    } else {
-                        http_response_code(500);
-                        die(json_encode(['message' => 'Category  Not Found']));
-                    }
-                ?>
-              </select>
-            </div>
+        <div class="form-group">
+          <!-- <label for="software_category"></label> -->
+          <label for="software_category">Select Software Category<span class="text-danger">*</span></label>
+          <select multiple="multiple" class="form-control select" id="software_category" name="software_category[]">
+            <?php 
+                 $cat_query = "SELECT * FROM software_details where status = 1";
+                $cat_result = $db->select($cat_query);
+                if ($cat_result) {
+                    while ($cat_row = $cat_result->fetch_assoc()) { ?>
+                       <option value="<?php echo $cat_row['id'] ?>"><?php echo $cat_row['software_name']; ?> </option>  
+                  <?php  }
+                    $cat_row = $cat_result->fetch_assoc();
+                } else {
+                    http_response_code(500);
+                    die(json_encode(['message' => 'Category  Not Found']));
+                }
+            ?>
+          </select>
         </div>
+    </div>
 </div>
 
 <div class="row">
