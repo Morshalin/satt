@@ -85,17 +85,18 @@
     </ul>
   </li>
 
-<?php } ?>
 
 
-
+<?php } if (permission_check('Collect_Software_Due')) { ?> 
 
 <?php $nav_items_section_26 = ['existing-software-monthly-pay','existing-software-yearly-pay','existing-software-onetime-sell-pay','existing-software-monthly-pay','existing-software-yearly-pay','new-software-one-time-sell-pay']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_26, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-coins"></i> <span>Collect Software Due </span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_26, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
-    
+   
+<?php if (permission_check('Existing_Software_Due')) { ?> 
+
       <li class="nav-item nav-item-submenu">
           <a  class="nav-link<?php active_page($data, 'existing-software-due'); ?>">Existing Software Due</a>
 									<ul class="nav nav-group-sub">
@@ -106,6 +107,9 @@
                   <a href="<?php echo ADMIN_URL; ?>/existing-software-onetime-sell-pay" class="nav-link<?php active_page($data, 'existing-software-onetime-sell-pay'); ?>">One Time Sell <span class="text-danger"> (Existing)</span></a>
 									</ul>
 				</li>
+
+  <?php } if (permission_check('New_Software_Due')) { ?> 
+
       <li class="nav-item nav-item-submenu">
             <a  class="nav-link<?php active_page($data, 'new-software-due'); ?>">New Software Due</a>
 									<ul class="nav nav-group-sub">
@@ -116,12 +120,15 @@
                   <a href="<?php echo ADMIN_URL; ?>/new-software-one-time-sell-pay" class="nav-link<?php active_page($data, 'new-software-one-time-sell-pay'); ?>">One Time Sell <span class="text-danger"> (New)</span></a>
 									</ul>
 				</li>
+
+    <?php } ?> 
+
     </ul>
   </li>
 
 
 
-<?php if (permission_check('Graphics_Details')) { ?>
+<?php } if (permission_check('Graphics_Details')) { ?>
 
   <?php $nav_items_section_15 = ['add-graphics-order', 'unpaid-delivered-graphics','pending-graphics-order','paid-delivered-graphics', 'cancel-graphics']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_15, $data['page_index']) ?>">
@@ -143,21 +150,22 @@
     </ul>
   </li>
 
-<?php } ?>
+<?php } if (permission_check('Office_Account')) { ?>
 
 <?php $nav_items_section_expense = ['office-expense','office-report']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_expense, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-coins"></i> <span>Office Account</span></a>
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_expense, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
-
+<?php if (permission_check('Convince_Bill')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/office-expense" class="nav-link<?php active_page($data, 'office-expense'); ?>">Convince Bill</a></li>
-      
+ <?php } if (permission_check('Report')) { ?>     
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/office-report" class="nav-link<?php active_page($data, 'office-report'); ?>">Report</a></li>
+<?php } ?>
     </ul>
   </li>
 
-
+<?php } if (permission_check('Reports')) { ?>
 
 
 <?php $nav_items_section_25 = ['convince_bill_report','graphics-report','existing-software-report','new-software-report','cash-balance-report']; ?>
@@ -166,19 +174,23 @@
 
     <ul class="nav nav-group-sub" data-submenu-title="Layouts" <?php echo nav_item_open($nav_items_section_25, $data['page_index']) ? 'style="display: block;"' : ''; ?>>
 
+<?php if (permission_check('Convince_Bill_Reports')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/convince_bill_report" class="nav-link<?php active_page($data, 'convince_bill_report'); ?>">Convince Bill Report</a></li>
-    
+<?php } if (permission_check('Graphics')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/graphics-report" class="nav-link<?php active_page($data, 'graphics-report'); ?>">Graphics</a></li>
-
+<?php } if (permission_check('Existing_Software')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/existing-software-report" class="nav-link<?php active_page($data, 'existing-software-report'); ?>">Existing Software</a></li>
+<?php } if (permission_check('New_Software')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/new-software-report" class="nav-link<?php active_page($data, 'new-software-report'); ?>">New Software</a></li>
+<?php } if (permission_check('Cash_Balance')) { ?>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/cash-balance-report" class="nav-link<?php active_page($data, 'cash-balance-report'); ?>">Cash balance</a></li>
+<?php } ?>
     </ul>
   </li>
 
 
 
-<?php if (permission_check('Customer')) { ?>
+<?php } if (permission_check('Customer')) { ?>
 
   <?php $nav_items_section_3 = ['customer-details','customer-type', 'progressive-state','interested-services','Office_note','leav_us']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_3, $data['page_index']) ?>">
@@ -238,7 +250,7 @@
 
 <?php } ?>
 
-<?php if (permission_check('System_Users')) { ?>
+<?php if (permission_check('System_User')) { ?>
   <li class="nav-item">
     <a href="<?php echo ADMIN_URL; ?>/add_users" class="nav-link<?php active_page($data, 'add_users'); ?>"><i  class="icon-users"></i> <span>System Users</span></a>
   </li>
