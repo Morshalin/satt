@@ -179,7 +179,114 @@ Session::checkSession('admin', ADMIN_URL . '/existing-software-report', 'existin
 		$cash_in_hand = $total_income - $total_expense; 
 
 
-die(json_encode($cash_in_hand));
+
+		
+		$data = '<div id="print_table"><div class="text-center pb-2">
+        <h2>Cash Balance</h2>
+
+        <h6 style="border-bottom: 2px dotted blue; padding-bottom: 10px;">'.$from_date_show.'<span class="text-danger px-2">To</span>'.$to_date_show.'</h6>
+    </div>
+
+    <div class="row text-center">
+    <div class="col-md-6">
+        <p class="py-2 text-light" style="background-color:#4CAF50;"> Income</p>
+        <br>
+        <div class="row border">
+        <div class="col-md-6 border-right">
+            <p class="m-0 py-2"> Software Payment </p>
+        </div>
+        <div class="col-md-6">
+            <p class="m-0 py-2"> '.$total_software_payment.' TK</p>
+        </div>
+        </div>
+        <div class="row border">
+        <div class="col-md-6 border-right">
+            <p class="m-0 py-2"> Software Yearly Renew Charge </p>
+        </div>
+        <div class="col-md-6">
+            <p class="m-0 py-2"> '.$total_yearly_renew_payment.' TK</p>
+        </div>
+        </div>
+        <div class="row border">
+        <div class="col-md-6 border-right">
+            <p class="m-0 py-2"> Software Installation Charge </p>
+        </div>
+        <div class="col-md-6">
+            <p class="m-0 py-2"> '.$total_installation_payment .' TK</p>
+        </div>
+        </div>
+        <div class="row border">
+        <div class="col-md-6 border-right">
+            <p class="m-0 py-2"> Graphics Payment </p>
+        </div>
+        <div class="col-md-6">
+            <p class="m-0 py-2">'.$total_graphics_payment.' TK</p>
+        </div>
+        </div>
+        <div class="row border">
+        <div class="col-md-6 border-right">
+            <p class="m-0 py-2"> Convince Bill </p>
+        </div>
+        <div class="col-md-6">
+            <p class="m-0 py-2"> '.$total_convince_bill_income.' TK</p>
+        </div>
+		</div>
+		<div class="row border text-danger">
+		<div class="col-md-6 border-right">
+		  <p class="m-0 py-2"> Total Income </p>
+		</div>
+		<div class="col-md-6">
+		  <p class="m-0 py-2"> '.$total_income.' TK</p>
+		</div>
+	  </div>
+    </div>
+  
+
+
+  <div class="col-md-6">
+    <p class="py-2 text-light" style="background-color:#4CAF50;"> Expense</p>
+
+    <br>
+    <div class="row border ">
+      <div class="col-md-6 border-right">
+        <p class="m-0 py-4"> Graphics </p>
+      </div>
+      <div class="col-md-6">
+        <p class="m-0 py-2"> '.$total_graphics_expense.' TK</p>
+      </div>
+    </div>
+    <div class="row border ">
+      <div class="col-md-6 border-right">
+        <p class="m-0 py-4"> Convince Bill </p>
+      </div>
+      <div class="col-md-6">
+        <p class="m-0 py-2"> '.$total_convince_bill_expense.' TK</p>
+      </div>
+    </div>
+    <div class="row border text-danger">
+      <div class="col-md-6 border-right">
+        <p class="m-0 py-2"> Total Expense </p>
+      </div>
+      <div class="col-md-6">
+        <p class="m-0 py-4"> '.$total_expense.' TK</p>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="row pt-3">
+    <div class="col-md-12 text-center border text-danger">
+      <p class="mb-0 py-2"> Cash In Hand : <span>'.$cash_in_hand.' TK</span></p>
+    </div>
+  </div>
+</div>';
+$print_table = 'print_table';
+$data .='<div class="mt-3">
+<a class=" text-light btn-success btn" onclick="printContent(\''.$print_table.'\')"><i class="icon-printer"></i> Print</span> </a>
+</div>';
+
+
+
+die(json_encode($data));
 
 
 } 
