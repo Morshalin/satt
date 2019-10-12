@@ -160,7 +160,7 @@
 
 
 
-<?php $nav_items_section_25 = ['convince_bill_report','graphics-report','existing-software-report','new-software-report']; ?>
+<?php $nav_items_section_25 = ['convince_bill_report','graphics-report','existing-software-report','new-software-report','cash-balance-report']; ?>
   <li class="nav-item nav-item-submenu<?php echo nav_item_open($nav_items_section_25, $data['page_index']) ?>">
     <a href="#" class="nav-link"><i class="icon-coins"></i> <span>Reports</span></a>
 
@@ -172,6 +172,7 @@
 
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/existing-software-report" class="nav-link<?php active_page($data, 'existing-software-report'); ?>">Existing Software</a></li>
       <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/new-software-report" class="nav-link<?php active_page($data, 'new-software-report'); ?>">New Software</a></li>
+      <li class="nav-item"><a href="<?php echo ADMIN_URL; ?>/cash-balance-report" class="nav-link<?php active_page($data, 'cash-balance-report'); ?>">Cash balance</a></li>
     </ul>
   </li>
 
