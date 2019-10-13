@@ -21,7 +21,7 @@
                         if( $result_check > 0 ){
                           while ($row = mysqli_fetch_assoc($result)) {
                               ?>
-                              <option value="<?php echo $row['software_name']; ?>"> <?php echo $row['software_name']; ?> </option>
+                              <option value="<?php echo $row['software_name']; ?>,<?php echo $row['id']; ?>"> <?php echo $row['software_name']; ?> </option>
                               <?php
                           }
                         }

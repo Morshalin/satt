@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 		else {
 			//inserting record
 			$query = "INSERT INTO
-			software_price_log(software_name, demo_url, installation_charge, monthly_charge, yearly_charge, direct_sell, total_price, agent_commission_one_time, agent_commission_monthly,agent_commission_yearly, discount_offer, yearly_renew_charge,editor_id,editor_name) VALUES ('$old_software_name','$old_demo_url','$old_installation_charge','$old_monthly_charge','$old_yearly_charge','$old_direct_sell','$old_total_price','$old_agent_commission_one_time','$old_agent_commission_monthly','$old_agent_commission_yearly','$old_discount_offer','$old_yearly_renew_charge','$editor_id','$editor_name');";
+			software_price_log(software_name, software_id, demo_url, installation_charge, monthly_charge, yearly_charge, direct_sell, total_price, agent_commission_one_time, agent_commission_monthly,agent_commission_yearly, discount_offer, yearly_renew_charge,editor_id,editor_name) VALUES ('$old_software_name', '$software_price_id', '$old_demo_url','$old_installation_charge','$old_monthly_charge','$old_yearly_charge','$old_direct_sell','$old_total_price','$old_agent_commission_one_time','$old_agent_commission_monthly','$old_agent_commission_yearly','$old_discount_offer','$old_yearly_renew_charge','$editor_id','$editor_name');";
 			$result = $db->insert($query);
 
 			$query = "UPDATE software_price SET
@@ -122,7 +122,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$error = array();
 
 	// software price details
-	$software_name = $fm->validation($_POST['software_name']);
+	$software = $_POST['software_name'];
+	$a = explode(",",$software);
+	$software_name = $a[0];
+	$software_id = $a[1];
+
 	$demo_url = $fm->validation($_POST['demo_url']);
 	$installation_charge = $fm->validation($_POST['installation_charge']);
 	$monthly_charge = $fm->validation($_POST['monthly_charge']);
@@ -172,13 +176,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$error['yearly_renew_charge'] = 'yearly renew charge Field required';
 	}
 
+
+	$query = "SELECT * FROM software_price where software_id = '$software_id'";
+	$result2 = $db->select($query);
+	if ($result2) {
+				$error['software_id'] = 'Software Price Already exits.Please Update Price.';
+			}
+
 	if ($error) {
 		http_response_code(500);
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
 		$query = "INSERT INTO software_price(
 			software_name,
-			-- software_id,
+			software_id,
 			demo_url,
 			installation_charge,
 			monthly_charge,
@@ -191,6 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			discount_offer,
 			yearly_renew_charge) VALUES (
 				'$software_name',
+				'$software_id',
 				'$demo_url',
 				'$installation_charge',
 				'$monthly_charge',
