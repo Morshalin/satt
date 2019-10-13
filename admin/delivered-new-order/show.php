@@ -26,21 +26,21 @@ if (isset($_GET['new_order_id'])) {
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
-    <legend class="text-uppercase text-center font-size-m font-weight-bold">Order Informantion </legend>
+    <legend class="text-uppercase text-center font-size-m font-weight-bold">Order Information </legend>
             <div class="row">
                     <b class="col-md-4">Product Name :</b>
                     <h6 class="col-md-8"><?php echo ucwords($row['expected_name_software']); ?></h6>
             </div>
             <div class="row">
                     <b class="col-md-4">Pay Type :</b>
-                    <h6 class="col-md-8"><?php echo $row['selling_method']; ?></h6>
+                    <h6 class="col-md-8"><?php echo ucwords(implode(' ',explode('_',$row['selling_method']))); ?></h6>
             </div>
             <div class="row">
                     <b class="col-md-4">Installation Charge :</b>
                     <h6 class="col-md-8"><?php echo $row['installation_charge']; ?></h6>
             </div>
             <div class="row">
-                    <b class="col-md-4">Pay Amount :</b>
+                    <b class="col-md-4">Sell Price :</b>
                     <h6 class="col-md-8"><?php echo $row['sell_price']; ?></h6>
             </div>
             <div class="row">

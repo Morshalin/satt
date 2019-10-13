@@ -10,6 +10,7 @@ Session::checkSession('admin', ADMIN_URL . '/new_orders', 'new_orders');
 			$error = array();
 
 			$customer_id = $_POST['customer_id'];
+			$agent_id = $_POST['agent_id'];
 			$query = "SELECT * FROM satt_customer_informations WHERE id = '$customer_id'";
 			$get_customer = $db->select($query);
 			if ($get_customer) {
@@ -51,20 +52,19 @@ Session::checkSession('admin', ADMIN_URL . '/new_orders', 'new_orders');
 				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 			} else {
 
-				$query = "SELECT * FROM agent_client WHERE client_id = '$customer_id'";
+			if ($agent_id != 0) {
+				$query = "SELECT * FROM agent_list where id = '$agent_id'";
 				$get_agent = $db->select($query);
 				if ($get_agent) {
 					$agent = $get_agent->fetch_assoc();
-					$agent_id = $agent['agent_id'];
-					$query = "SELECT * FROM agent_list WHERE id = '$agent_id'";
-					$get_agent_details = $db->select($query)->fetch_assoc();
-					$agent_name = $get_agent_details['name'];
-					$agent_phn = $get_agent_details['mobile_no'];
-				}else{
-					$agent_id = '';
-					$agent_name = '';
-					$agent_phn = '';
+					$agent_name = $agent['name'];
+					$agent_phn = $agent['mobile_no'];
 				}
+			}else{
+				$agent_id = '';
+				$agent_name = 'N/A';
+				$agent_phn = 'N/A';
+			}
 
 				$query = "INSERT INTO new_product_order(customer_id,customer_name,customer_phn,agent_id,agent_name,agent_phn,documentation_note,expected_name_software, order_date,expected_delevery_date) VALUES ('$customer_id','$customer_name','$customer_phn','$agent_id','$agent_name','$agent_phn','$documentation_note','$expected_name_software', now(),'$expected_delevery_date')";
 
@@ -84,7 +84,7 @@ Session::checkSession('admin', ADMIN_URL . '/new_orders', 'new_orders');
 
 				} else {
 					http_response_code(500);
-					die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+					die(json_encode(['errors' => $error, 'message' => 'Something Happened Wrong. Please Check Your Form']));
 				}
 	} //else end
 } 

@@ -56,6 +56,8 @@ if ($result) {
       $agent_phn = 'N/A';
 
     }
+
+    $order_date = explode(' ',$row['order_date'])[0];
    
     $data[] = array(
       "DT_RowIndex" => $i + 1,
@@ -65,7 +67,7 @@ if ($result) {
       "customer_phn" => '<strong>' . $row['customer_phn'] . '</strong>',
       "agent_name" => '<strong>' . $agent_name . '</strong>',
       "agent_phn" => '<strong>' .$agent_phn . '</strong>',
-      "order_date" => '<strong>' .$row['order_date'] . '</strong>',
+      "order_date" => '<strong>' .$order_date. '</strong>',
       "status" => '<strong class="bg-warning p-1">Pending</strong>',
       
       "action" => '

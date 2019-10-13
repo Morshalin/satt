@@ -27,10 +27,10 @@ if (isset($_GET['new_order_id'])) {
             $agent_up = $agent['interested_up'];
             $agent_dist = $agent['interested_dist'];
         }else{
-             $agent_name = '';
-             $agent_email = '';
-             $agent_up = '';
-             $agent_dist = '';
+             $agent_name = 'N/A';
+             $agent_email = 'N/A';
+             $agent_up = 'N/A';
+             $agent_dist = 'N/A';
         }
 
 
@@ -44,7 +44,7 @@ if (isset($_GET['new_order_id'])) {
 
 } else {
 	http_response_code(500);
-	die(json_encode(['message' => 'UnAthorized']));
+	die(json_encode(['message' => 'UnAuthorized']));
 }
 
 ?>
@@ -54,7 +54,7 @@ if (isset($_GET['new_order_id'])) {
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
-            <legend class="text-uppercase text-center font-size-m font-weight-bold">Software Basic Informantion </legend>
+            <legend class="text-uppercase text-center font-size-m font-weight-bold">Software Basic Information </legend>
             <div class="row">
                 <b class="col-md-4">Software Name :</b>
                 <h6 class="col-md-8"><?php echo ucwords($software_name); ?></h6>

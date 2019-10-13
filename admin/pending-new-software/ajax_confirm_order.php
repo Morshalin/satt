@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$error['mobile_banking_name'] = 'Mobile Baking Name Field required';
 		}elseif ($payment_type == 'mobile' && !$received_phone_number) {
 			$error['received_phone_number'] = 'Receive Phone No Field required';
-		}elseif ($payment_type == 'check' && !$check_no) {
+		}elseif ($payment_type == 'check' && !$check_numer) {
 			$error['check_no'] = 'Check No Field required';
 		}
 

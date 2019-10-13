@@ -253,3 +253,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT' AND isset($_GET['action']) AND $_GET['ac
 	die(json_encode(['message' => 'Something Happend Wrong. Please Try Again Later']));
 
 }
+if (isset($_GET['contactnotedelid'])) {
+	$delid = $_GET['contactnotedelid'];
+	if ($delid) {
+		$delquery = "DELETE FROM  satt_exter_next_contacted WHERE id ='$delid'";
+		$result = $db->delete($delquery);
+		if($result){
+			die(json_encode(['message' => 'Note Deleted Successfully']));
+		}else {
+			http_response_code(500);
+			die(json_encode(['message' => 'Note Not Found']));
+		}
+	}
+}

@@ -79,7 +79,7 @@ ajax();
 <?php 
 
 $notequery = "SELECT *, a.user_name, c.name, n.id, n.note, n.next_contact, n.create_date
-from satt_next_contacted  n
+from satt_exter_next_contacted  n
 join satt_admins  a on a.id = n.admin_id 
 join satt_extra_office_notes  c on c.id = n.customer_id 
 and n.customer_id = '$Office_note_id'";
@@ -93,7 +93,7 @@ and n.customer_id = '$Office_note_id'";
         <td><?php echo $notedata['note'];?></td>
         <td><?php echo $notedata['next_contact'];?></td>
         <td><?php echo $notedata['create_date'];?></td>
-        <td><button class="btn btn-danger btn-small delete_note" data-url="<?php echo ADMIN_URL ?>/customerdetails/ajax.php?contactnotedelid=<?php echo $notedata['id']; ?>" id="<?php echo $notedata['id']; ?>">Delete </button></td>
+        <td><button class="btn btn-danger btn-small delete_note" data-url="<?php echo ADMIN_URL ?>/office_note/ajax.php?contactnotedelid=<?php echo $notedata['id']; ?>" id="<?php echo $notedata['id']; ?>">Delete </button></td>
     </tr>
    <?php } } ?>
 

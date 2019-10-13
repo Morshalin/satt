@@ -53,7 +53,7 @@ $data['page_js'] = ['assets/js/admin/new_orders'];
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8">
                   <div class="form-group">
-                    <label for="name" class="col-form-label">Expected Name of Agent:<span class="text-danger">*</span></label>
+                    <label for="name" class="col-form-label">Select Agent:<span class="text-danger">*</span></label>
                         <select name="agent_id" id="agent_id" class="form-control select">
                           <option value="">Please Select One</option>
                            <option value="0">No Agent</option>
@@ -74,9 +74,9 @@ $data['page_js'] = ['assets/js/admin/new_orders'];
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8">
                   <div class="form-group">
-                    <label for="name" class="col-form-label">Expected Name of Customer: <span class="text-danger">*</span></label>
+                    <label for="name" class="col-form-label">Select Customer: <span class="text-danger">*</span></label>
                       <select name="customer_id" id="customer_id" class="form-control select">
-                        <option value="">Please Select Agent</option>
+                        <option value="">Please Select Agent First....</option>
                         </select>
                   </div>
                 </div>
@@ -87,7 +87,7 @@ $data['page_js'] = ['assets/js/admin/new_orders'];
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8">
                     <div class="form-group">
-                        <label for="pay_types" class="col-form-label"><strong>Select Pay Type </strong><span class="text-danger">*</span></label>
+                        <label for="pay_types" class="col-form-label">Select Pay Type <span class="text-danger">*</span></label>
 
                         <select class="select form-control" required="" name="pay_type" id="pay_type">
                           <option value="">Please Select one</option>
@@ -104,7 +104,7 @@ $data['page_js'] = ['assets/js/admin/new_orders'];
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8">
                     <div class="form-group">
-                        <label for="pay_types" class="col-form-label"><strong>Expected Delivery Date:</strong><span class="text-danger">*</span></label>
+                        <label for="pay_types" class="col-form-label">Expected Delivery Date:<span class="text-danger">*</span></label>
                         <input type="text" class="form-control date" required="" name="expected_delevery_date" id="expected_delevery_date">
                     </div>
                 </div>
@@ -115,7 +115,7 @@ $data['page_js'] = ['assets/js/admin/new_orders'];
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8">
                   <div class="form-group">
-                    <label for="name" class="col-form-label">Note For Software Feature: <span class="text-danger">*</span></label>
+                    <label for="name" class="col-form-label">Add Software Features: <span class="text-danger">*</span></label>
                     <textarea class="form-control" name="documentation_note" id="documentation_note" cols="30" rows="10" required=""></textarea>
                   </div>
                 </div>

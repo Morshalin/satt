@@ -33,14 +33,14 @@ if (isset($_GET['new_order_id'])) {
             </div>
             <div class="row">
                     <b class="col-md-4">Pay Type :</b>
-                    <h6 class="col-md-8"><?php echo $row['pay_type']; ?></h6>
+                    <h6 class="col-md-8"><?php echo ucwords(implode(' ',explode('_',$row['pay_type']))); ?></h6>
             </div>
             <div class="row">
                     <b class="col-md-4">Installation Charge :</b>
                     <h6 class="col-md-8"><?php echo $row['installation_charge']; ?></h6>
             </div>
             <div class="row">
-                    <b class="col-md-4">Pay Amount :</b>
+                    <b class="col-md-4">Sell Price :</b>
                     <h6 class="col-md-8"><?php echo $row['pay_amount']; ?></h6>
             </div>
             <div class="row">

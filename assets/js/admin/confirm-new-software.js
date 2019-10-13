@@ -65,7 +65,7 @@ var DatatableButtonsHtml5 = function() {
                 orderable: false,
                 targets: [7,8]
             }],
-            order: [1, 'asc'],
+            order: [0, 'desc'],
             processing: true,
             serverSide: true,
             ajax: $('.content_managment_table').data('url'),

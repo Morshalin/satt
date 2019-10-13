@@ -32,6 +32,10 @@ if (isset($_GET['office_stuff_id'])) {
         <div class="col-lg-8">
     <legend class="text-uppercase font-size-m font-weight-bold">Personal Information </legend>
             <div class="row">
+                    <b class="col-md-4">Stuff ID :</b>
+                    <h6 class="col-md-8"><?php echo $row['stuff_id']; ?></h6>
+            </div>
+            <div class="row">
                     <b class="col-md-4">Name :</b>
                     <h6 class="col-md-8"><?php echo $row['name']; ?></h6>
             </div>
