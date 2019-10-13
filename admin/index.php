@@ -556,7 +556,7 @@ $cancel_order = $count + $count1;
                 <span class="text-muted"><?php echo $notice_data['next_contact']; ?></span>
                 <p class="text-justify"><?php echo $fm->textShorten($notice_data['note'], 70); ?>
 
-                <a href="" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/next_contacted.php?customerdetails_id=<?php echo $notice_data['id']; ?>">Show</a>
+                <a href="" id="content_managment" data-url="<?php echo ADMIN_URL; ?>/next_contacted_introduce.php?customerdetails_id=<?php echo $notice_data['id']; ?>">Show</a>
 
 
                 </p>

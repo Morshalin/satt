@@ -53,9 +53,22 @@ if ($agent_id) {
 	$query1 = "SELECT * FROM agent_list WHERE id = '$agent_id' ";
 	$result1 = $db->select($query1);
 	if ($result1) {
-        $row1 = $result1->fetch_assoc();
+    $row1 = $result1->fetch_assoc();
 		$agent_name = $row1['name'];
+    }else{
+      $agent_name ="N/A";
     }
+}else{
+  $agent_name = 'N/A';
+}
+
+if ($row['pay_type']) {
+    $pay = explode("_", $row['pay_type']);
+    $pay_type = implode($pay, " ");
+}
+
+if ($row['order_date']) {
+    $date = explode(" ", $row['order_date']);
 }
 
 		$data[] = array(
@@ -65,8 +78,8 @@ if ($agent_id) {
       "customer_number" => '<strong>' . $row['customer_number'] . '</strong>',
       "agent_name" => '<strong>' . $agent_name . '</strong>',
       "product_name" => '<strong>' . $row['product_name'] . '</strong>',
-      "pay_type" => '<strong>' . $row['pay_type'] . '</strong>',
-      "order_date" => '<strong>' . $row['order_date'] . '</strong>',
+      "pay_type" => '<strong>' .  $pay_type . '</strong>',
+      "order_date" => '<strong>' . $date[0] . '</strong>',
 	    "status" => '<span class="badge badge-warning ">Pending</span>',
         "action" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
