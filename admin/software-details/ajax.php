@@ -84,6 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 			$result = $db->update($query);
 
 			if ($result) {
+				$query1 = "UPDATE software_price SET software_name = '$software_name' WHERE software_id='$software_details_id'";
+				$result1 = $db->update($query1);
 				// multi Language insert
 				$querylang = "DELETE FROM software_language_multi WHERE software_id = '$software_details_id'";
 				$resultlang = $db->delete($querylang);
@@ -103,6 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 							}
 					}
 					die(json_encode(['message' => 'Software Details Updated Successfull']));
+
 			}else {
 				http_response_code(500);
 				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
