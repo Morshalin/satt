@@ -118,113 +118,113 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 /*================================================================
 		Insert Data into Database
 ===================================================================*/
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$error = array();
+// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// 	$error = array();
 
-	// software price details
-	$software = $_POST['software_name'];
-	$a = explode(",",$software);
-	$software_name = $a[0];
-	$software_id = $a[1];
+// 	// software price details
+// 	$software = $_POST['software_name'];
+// 	$a = explode(",",$software);
+// 	$software_name = $a[0];
+// 	$software_id = $a[1];
 
-	$demo_url = $fm->validation($_POST['demo_url']);
-	$installation_charge = $fm->validation($_POST['installation_charge']);
-	$monthly_charge = $fm->validation($_POST['monthly_charge']);
-	$yearly_charge = $fm->validation($_POST['yearly_charge']);
-	$direct_sell = $fm->validation($_POST['direct_sell']);
-	$total_price = $fm->validation($_POST['total_price']);
-	$agent_commission_one_time = $fm->validation($_POST['agent_commission_one_time']);
-	$agent_commission_monthly = $fm->validation($_POST['agent_commission_monthly']);
-	$discount_offer = $fm->validation($_POST['discount_offer']);
-	$yearly_renew_charge = $fm->validation($_POST['yearly_renew_charge']);
-	$agent_commission_yearly = $fm->validation($_POST['agent_commission_yearly']);
+// 	$demo_url = $fm->validation($_POST['demo_url']);
+// 	$installation_charge = $fm->validation($_POST['installation_charge']);
+// 	$monthly_charge = $fm->validation($_POST['monthly_charge']);
+// 	$yearly_charge = $fm->validation($_POST['yearly_charge']);
+// 	$direct_sell = $fm->validation($_POST['direct_sell']);
+// 	$total_price = $fm->validation($_POST['total_price']);
+// 	$agent_commission_one_time = $fm->validation($_POST['agent_commission_one_time']);
+// 	$agent_commission_monthly = $fm->validation($_POST['agent_commission_monthly']);
+// 	$discount_offer = $fm->validation($_POST['discount_offer']);
+// 	$yearly_renew_charge = $fm->validation($_POST['yearly_renew_charge']);
+// 	$agent_commission_yearly = $fm->validation($_POST['agent_commission_yearly']);
 
-	if (!$software_name) {
-		$error['software_name'] = 'Software Name Field required';
-	}
-		if (!$demo_url) {
-		$error['demo_url'] = 'demo url Field required';
-	}
-		if (!$installation_charge) {
-		$error['installation_charge'] = 'installation charge Field required';
-	}
-		if (!$monthly_charge) {
-		$error['monthly_charge'] = 'monthly charge Field required';
-	}
-		if (!$yearly_charge) {
-		$error['yearly_charge'] = 'yearly charge Field required';
-	}
-		if (!$direct_sell) {
-		$error['direct_sell'] = 'direct sell Field required';
-	}
-		if (!$total_price) {
-		$error['total_price'] = 'total price Field required';
-	}
-		if (!$agent_commission_one_time) {
-		$error['agent_commission_one_time'] = 'agent commission one time Field required';
-	}
-		if (!$agent_commission_monthly) {
-		$error['agent_commission_monthly'] = 'agent commission monthly Field required';
-	}
-		if (!$agent_commission_yearly) {
-		$error['agent_commission_yearly'] = 'agent commission yearly Field required';
-	}
-		if (!$discount_offer) {
-		$error['discount_offer'] = 'discount offer Field required';
-	}
-		if (!$yearly_renew_charge) {
-		$error['yearly_renew_charge'] = 'yearly renew charge Field required';
-	}
+// 	if (!$software_name) {
+// 		$error['software_name'] = 'Software Name Field required';
+// 	}
+// 		if (!$demo_url) {
+// 		$error['demo_url'] = 'demo url Field required';
+// 	}
+// 		if (!$installation_charge) {
+// 		$error['installation_charge'] = 'installation charge Field required';
+// 	}
+// 		if (!$monthly_charge) {
+// 		$error['monthly_charge'] = 'monthly charge Field required';
+// 	}
+// 		if (!$yearly_charge) {
+// 		$error['yearly_charge'] = 'yearly charge Field required';
+// 	}
+// 		if (!$direct_sell) {
+// 		$error['direct_sell'] = 'direct sell Field required';
+// 	}
+// 		if (!$total_price) {
+// 		$error['total_price'] = 'total price Field required';
+// 	}
+// 		if (!$agent_commission_one_time) {
+// 		$error['agent_commission_one_time'] = 'agent commission one time Field required';
+// 	}
+// 		if (!$agent_commission_monthly) {
+// 		$error['agent_commission_monthly'] = 'agent commission monthly Field required';
+// 	}
+// 		if (!$agent_commission_yearly) {
+// 		$error['agent_commission_yearly'] = 'agent commission yearly Field required';
+// 	}
+// 		if (!$discount_offer) {
+// 		$error['discount_offer'] = 'discount offer Field required';
+// 	}
+// 		if (!$yearly_renew_charge) {
+// 		$error['yearly_renew_charge'] = 'yearly renew charge Field required';
+// 	}
 
 
-	$query = "SELECT * FROM software_price where software_id = '$software_id'";
-	$result2 = $db->select($query);
-	if ($result2) {
-				$error['software_id'] = 'Software Price Already exits.Please Update Price.';
-			}
+// 	$query = "SELECT * FROM software_price where software_id = '$software_id'";
+// 	$result2 = $db->select($query)->fetch_assoc();
+// 	if ($result2['installation_charge'] && $result2['total_price']) {
+// 				$error['software_id'] = 'Software Price Already exits.Please Update Price.';
+// 			}
 
-	if ($error) {
-		http_response_code(500);
-		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
-	} else {
-		$query = "INSERT INTO software_price(
-			software_name,
-			software_id,
-			demo_url,
-			installation_charge,
-			monthly_charge,
-			yearly_charge,
-			direct_sell,
-			total_price,
-			agent_commission_one_time,
-			agent_commission_monthly,
-			agent_commission_yearly,
-			discount_offer,
-			yearly_renew_charge) VALUES (
-				'$software_name',
-				'$software_id',
-				'$demo_url',
-				'$installation_charge',
-				'$monthly_charge',
-				'$yearly_charge',
-				'$direct_sell',
-				'$total_price',
-				'$agent_commission_one_time',
-				'$agent_commission_monthly',
-				'$agent_commission_yearly',
-				'$discount_offer',
-				'$yearly_renew_charge');";
+// 	if ($error) {
+// 		http_response_code(500);
+// 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+// 	} else {
+// 		$query = "INSERT INTO software_price(
+// 			software_name,
+// 			software_id,
+// 			demo_url,
+// 			installation_charge,
+// 			monthly_charge,
+// 			yearly_charge,
+// 			direct_sell,
+// 			total_price,
+// 			agent_commission_one_time,
+// 			agent_commission_monthly,
+// 			agent_commission_yearly,
+// 			discount_offer,
+// 			yearly_renew_charge) VALUES (
+// 				'$software_name',
+// 				'$software_id',
+// 				'$demo_url',
+// 				'$installation_charge',
+// 				'$monthly_charge',
+// 				'$yearly_charge',
+// 				'$direct_sell',
+// 				'$total_price',
+// 				'$agent_commission_one_time',
+// 				'$agent_commission_monthly',
+// 				'$agent_commission_yearly',
+// 				'$discount_offer',
+// 				'$yearly_renew_charge');";
 
-				$result = $db->insert($query);
+// 				$result = $db->insert($query);
 
-		if ($result != false) {
-			die(json_encode(['message' => 'Software price added Successfull']));
-		} else {
-			http_response_code(500);
-			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
-		}
-			}
-}
+// 		if ($result != false) {
+// 			die(json_encode(['message' => 'Software price added Successfull']));
+// 		} else {
+// 			http_response_code(500);
+// 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+// 		}
+// 			}
+// }
 
 /*================================================================
 		Delate  Data into Database
