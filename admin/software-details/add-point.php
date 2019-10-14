@@ -19,7 +19,6 @@ if (isset($_GET['software_details_id'])) {
 }
 
 ?>
-
 <!-- Login form -->
 <form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/software-details/ajax-selling.php?software_details_id=<?php echo $software_details_id; ?>&action=update" id="content_form" method="post">
   <fieldset class="mb-3">

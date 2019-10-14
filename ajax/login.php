@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST['login'])) {
 				// $db->insert($query);
 				$userRole = $user['role'];
 				$admin_id = $user['admin_id'];
+				$table_name = $user['from_table'];
 
 				$role = $user['system_user_role'];
 				$user_type = $user['user_type'];
@@ -62,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST['login'])) {
 				Session::set('role', $role);
 				Session::set('user_type', $user_type);
 				Session::set('systems_user_id', $systems_user_id);
+				Session::set('table_name', $table_name);
 
 				if (urldecode($goto) == 'default') {
 					$goto = BASE_URL . '/' . $userRole;

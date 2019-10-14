@@ -5,11 +5,8 @@
   $data['page_index'] = 'profile';
  include_once '../inc/header.php'; 
   $userid = $user['id'];
-  $query = "SELECT * FROM satt_admins WHERE id = '$userid'";
-  $result = $db->select($query);
-  if ($result) {
-    $row = $result->fetch_assoc();
-  }
+  $table = Session::get('table_name');
+
 ?>
 <!-- Page header -->
 <div class="page-header page-header-light">
@@ -42,9 +39,18 @@
   		</div>
   	</div>
     <div class="card-body">
-      <form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/profile/ajax.php?user_id=<?php echo $userid; ?>" id="content_form" method="post">
+      <form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/profile/ajax.php?user_id=<?php echo $userid; ?>&table=<?php echo $table; ?>" id="content_form" method="post">
 <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Update Your Profile <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
+<?php 
+
+if ($table == 'satt_admins') {
+  $query = "SELECT * FROM satt_admins WHERE id = '$userid'";
+  $result = $db->select($query);
+  if ($result) {
+    $row = $result->fetch_assoc();
+  }
+ ?>
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
@@ -108,6 +114,59 @@
             </div>
         </div>
     </div>
+<?php }elseif ($table == 'users') {
+  $query = "SELECT * FROM users WHERE id = '$userid'";
+  $result = $db->select($query);
+  if ($result) {
+    $row = $result->fetch_assoc();
+  }
+ ?>
+ <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="name" class="col-form-label"> Name <span class="text-danger">*</span></label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Type Your first name" required autofocus value="<?php echo $row['name']; ?>">
+                <input type="hidden" name="users_id" value="<?php echo $row['user_id']; ?>">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="user_name" class="col-form-label">User Name <span class="text-danger">*</span></label>
+                <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Type Your user name" required autofocus value="<?php echo $row['user_name']; ?>">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="email" class="col-form-label">Email <span class="text-danger">*</span></label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Type Your Email" required autofocus value="<?php echo $row['email']; ?>">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="mobile_no" class="col-form-label">Mobile No <span class="text-danger">*</span></label>
+                <input type="text" name="mobile_no" id="mobile_no" class="form-control" placeholder="Type Your Mobile No" required autofocus value="<?php echo $row['mobile_no']; ?>">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="image" class="col-form-label">Image </label>
+                <input type="file" name="image" id="image" class="form-control" placeholder="Enter Your Image" autofocus value="">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="old_pass" class="col-form-label">Old Password </label>
+                <input type="password" name="old_pass" id="old_pass" class="form-control" placeholder="Enter Your Old Password" autofocus >
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="new_pass" class="col-form-label">New Password </label>
+                <input type="password" name="new_pass" id="new_pass" class="form-control" placeholder="Enter Your New Password" autofocus >
+            </div>
+        </div>
+    </div>
+    <?php } ?>
     <div class="form-group row">
         <div class="col-lg-4 offset-lg-4">
             <button type="submit" name="create" class="btn btn-primary ml-31" id="submit">Submit</button>
