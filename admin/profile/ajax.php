@@ -2,6 +2,7 @@
 require_once '../../config/config.php';
 ajax();
 Session::checkSession('admin', ADMIN_URL . '/profile', 'Admin Profile');
+ $table = Session::get('table_name');
 if (isset($_GET['$user_id'])) {
 	$user_id = $_GET['$user_id'];
 	if ($user_id) {
@@ -17,7 +18,7 @@ if (isset($_GET['$user_id'])) {
 	Update data into database
 	===================================================================*/
 
-	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['table']) AND $_GET['table'] == 'satt_admins') {
 		$user_id = $_GET['user_id'];
 		if ($user_id) {
 
@@ -160,6 +161,151 @@ if (isset($_GET['$user_id'])) {
 							json_encode(['message' => 'Admin Profile Updated Successfull']);
 						}
 					die(json_encode(['message' => 'Admin Profile Updated Successfully']));
+					}else{
+						http_response_code(500);
+						die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+					}
+				}
+			}
+		}
+		http_response_code(500);
+		die(json_encode(['message' => 'Something Happend Wrong. Please Try Again Later']));
+	}
+
+// users profile Update
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['table']) AND $_GET['table'] == 'users') {
+		$user_id = $_GET['user_id'];
+		if ($user_id) {
+
+			$query = "SELECT * FROM users WHERE id = '$user_id' ";
+			$result = $db->select($query);
+			if ($result) {
+				$img = $result->fetch_assoc()['image'];
+			}
+
+			$error = array();
+			$users_id = $fm->validation($_POST['users_id']);
+			$user_query = "SELECT * FROM satt_users WHERE id = '$users_id'";
+			$user_result = $db->select($user_query);
+			if ($user_result) {
+				$password = $user_result->fetch_assoc()['password'];
+			}
+
+			$old_pass = $fm->validation(md5($_POST['old_pass']));
+			$new_pass = $_POST['new_pass'];
+			$new_pass2 = $fm->validation(md5($_POST['new_pass']));
+			$name = $fm->validation($_POST['name']);
+			$user_name = $fm->validation($_POST['user_name']);
+			$email = $fm->validation($_POST['email']);
+			$mobile_no = $fm->validation($_POST['mobile_no']);
+
+			$courseCheck = $fm->dublicateCheck('satt_users', 'user_name', $user_name);
+			$courseCheck = $fm->dublicateCheck('satt_users', 'email', $email);
+			$courseCheck = $fm->dublicateCheck('users', 'mobile_no', $mobile_no);
+
+			$image = $_FILES['image'];
+			$file_name = $image['name'];
+			$file_size = $image['size'];
+			$file_temp = $image['tmp_name'];
+			$div = explode(".", $file_name);
+			$file_extension = strtolower(end($div));
+			$unique_image = md5(time()); 
+			$unique_image= substr($unique_image, 0,10).'.'.$file_extension;
+			$uploaded_image = 'image/'.$unique_image;
+
+
+			$query = "SELECT * FROM satt_users WHERE id <> '$users_id'";
+			$get_user =$db->select($query);
+			$matched = true;
+			if ($get_user) {
+				while ($user_row = $get_user->fetch_assoc()) {
+					$user_name_old = $user_row['user_name'];
+
+					if ($user_name_old == $user_name) {
+						$matched = false;
+						break;
+					}
+
+				}
+			}
+
+			if (!$matched) {
+				$error['user_name'] = 'User Name Exists. Try another Name';
+			}
+
+			if (!$name) {
+				$error['name'] = 'Name Field required';
+			}elseif (strlen($name) > 255) {
+				$error['name'] = 'Name Can Not Be More Than 255 Charecters';
+			}
+
+			if (!$user_name) {
+				$error['user_name'] = 'User Name Field required';
+			}elseif (strlen($user_name) > 255) {
+				$error['user_name'] = 'User Name Can Not Be More Than 255 Charecters';
+			}
+
+			if (!$email) {
+				$error['email'] = 'Email Field required';
+			}elseif (strlen($email) > 255) {
+				$error['email'] = 'Email Can Not Be More Than 255 Charecters';
+			}
+
+			if (!$mobile_no) {
+				$error['mobile_no'] = 'Mobile Number Field required';
+			}elseif (strlen($mobile_no) > 255) {
+				$error['mobile_no'] = 'Mobile Number Can Not Be More Than 255 Charecters';
+			}
+
+
+			if ($new_pass && $password !== $old_pass ) {
+				$error['old_pass'] = "Old Password doesn't Match" ;
+			}
+
+
+			if ($error) {
+				http_response_code(500);
+				die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+			} else {
+				$query = "UPDATE users SET 
+				name = '$name',
+				user_name = '$user_name',
+				email = '$email',
+				mobile_no = '$mobile_no' WHERE id='$user_id'";
+				$result = $db->update($query);
+				$update = "";
+
+				if ($result) {
+
+					if ($new_pass) {
+						$user_query = "UPDATE satt_users SET user_name = '$user_name', email = '$email', password = '$new_pass2' where id = '$users_id'";
+						$user_update = $db->update($user_query);
+					}else{
+
+						$user_query = "UPDATE satt_users SET user_name = '$user_name'  where id = '$users_id'";
+						$user_update = $db->update($user_query);
+					}
+
+					if ($user_update) {
+
+						if ($file_name) {
+							if ($img) {
+								unlink($img);
+							}
+							if (move_uploaded_file($file_temp, $uploaded_image)) {
+								$query = "UPDATE users SET image = '$uploaded_image' where id = '$user_id'";
+								$update = $db->update($query);
+
+							}
+							if ($update) {
+								json_encode(['message' => 'Users Profile Updated & image uploaded Successfully']);
+							}
+
+						}else{
+							json_encode(['message' => 'Users Profile Updated Successfull']);
+						}
+					die(json_encode(['message' => 'Users Profile Updated Successfully']));
 					}else{
 						http_response_code(500);
 						die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
