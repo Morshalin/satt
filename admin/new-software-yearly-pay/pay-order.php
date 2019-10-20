@@ -85,7 +85,7 @@ if ($result) {
                 </div>
                 <div class="col-lg-9">
                     <div class="form-group">
-                        <input type="number" name="pay_amount" id="pay_amount" class="form-control" <?php if ($due > 0) {
+                        <input type="number" min="0" name="pay_amount" id="pay_amount" class="form-control" <?php if ($due > 0) {
                            echo 'required';
                         }?> >
                     </div>
@@ -127,7 +127,7 @@ if ($result) {
                 </div>
                 <div class="col-lg-10">
                     <div class="form-group">
-                        <input type="number" name="pay_renew" id="pay_renew" class="form-control" <?php if ($yearly_renew_charge > 0) {
+                        <input type="number" min="0" name="pay_renew" id="pay_renew" class="form-control" <?php if ($yearly_renew_charge > 0) {
                             echo 'required';
                         } ?>>
                     </div>
