@@ -180,43 +180,14 @@ if (isset($_GET['customerdetails_id'])) {
                 if ($result) {
                     while ($row = $result->fetch_assoc()) { ?>
                     <option value="<?php echo $row['name'] ?>"><?php echo $row['name']; ?> </option>
-                    <?php  }
-                    $row = $result->fetch_assoc();
-                } else {
-                    http_response_code(500);
-                    die(json_encode(['message' => 'Category  Not Found']));
-                }
-                ?>
+                    <?php  }  } ?>
             </select>
         </div>
     </div>
          <div class="col-lg-6">
             <div class="form-group">
               <label for="software_category">Select Software Category<span class="text-danger">*</span></label>
-
-
-              <select multiple="multiple" class="form-control select" id="software_category" name="software_category[]">
-                  <?php 
-                    $query_cus = "SELECT * FROM software_details where status=1";
-                    $resultcus = $db->select($query_cus);
-
-                   $query_soft= "SELECT * FROM sat_software_category WHERE cutomer_details_id = '$customerdetails_id'";
-                   $select= $db->select($query_soft);
-                   $software_id = [];
-                   if ($select) {
-                      $k=0;
-                      while ($row2 = $select->fetch_assoc()) {
-                       $software_id[$k] = $row2['software_id'];
-                       $k++;
-                   }
-               }
-               if ($resultcus) {
-                  while ($data1 = $resultcus->fetch_assoc()) {
-                    ?>
-                    <option value="<?php echo $data1['id']; ?>" <?php if(array_search($data1['id'], $software_id) !== false) {echo 'selected';} ?> ><?php echo $data1['software_name']; ?></option>
-
-                    <?php } }?>
-                </select>
+              <input type="text" value="<?php echo $row['software_category'] ?>"  name="software_category" id="software_category" class="form-control">
             </div>
         </div>
         
