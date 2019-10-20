@@ -386,6 +386,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$software_category = $_POST['software_category'];
 	$last_contacted_date = $_POST['last_contacted_date'];
 
+	$system_user_name = $_POST['user_name'];
+	$system_user_id = $_POST['user_id'];
+	$form_table = $_POST['form_table'];
+
 
 	$number_check = $fm->dublicateCheck('satt_customer_informations', 'number', $number);
 	$email_check = $fm->dublicateCheck('satt_customer_informations', 'email', $email);
@@ -468,9 +472,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	/*foreach ($$interested_services as  $value) {
 		die(json_encode(['errors' => print_r($value)]));
 	}*/
-	$query = "INSERT INTO satt_customer_informations (name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district,software_category, last_contacted_date, status)
 
-	VALUES ('$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$software_category','$last_contacted_date','$status')";
+	$query = "INSERT INTO satt_customer_informations (name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district, last_contacted_date, status, system_user_id, system_user_name, form_table)
+
+	VALUES ('$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$last_contacted_date','$status', '$system_user_id', '$system_user_name', '$form_table')";
 
 	$last_id = $db->custom_insert($query);
 	if ($last_id) {

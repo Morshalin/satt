@@ -1,6 +1,8 @@
 <?php
   require_once '../../config/config.php';
   ajax();
+    $user_id = $user['id'];
+    $user_name = $user['user_name'];
 ?>
 
 <!-- Login form -->
@@ -175,6 +177,15 @@
     </div>
 
 
+    <div class="row">
+        <div class="col-lg-12">
+             <div class="form-group">
+              <label for="user_name">Added By<span class="text-danger">*</span></label>
+              <input type="text" readonly name="user_name" id="user_name" class="form-control" value="<?php echo $user_name; ?>">
+              <input type="hidden" value="<?php echo $user_id; ?>" name="user_id" id="user_id" class="form-control">
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="form-check form-check-switchery form-check-inline form-check-right">
