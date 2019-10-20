@@ -249,7 +249,7 @@ $(document).ready(function(){
     })
 
     $(document).on('change','#select_customer', function(){
-        var cust_id = $(this).val();
+        var cust_id = $(this).val(); 
         if (cust_id!="") {
             $("#customer_form").show(500);
             $.ajax({
@@ -265,6 +265,9 @@ $(document).ready(function(){
                     $("#introduction_date").val(data.office_notes.introduction_date);
                     $("#last_contacted_date").val(data.office_notes.last_contacted_date);
                     $("#progressive_state").val(data.office_notes.progressive_state);
+                    $("#user_id").val(data.office_notes.user_id);
+                    $("#user_name").val(data.office_notes.user_name);
+                    $("#form_table").val(data.office_notes.form_table);
 
                     $("#institute_type").val(data.office_notes.institute_type);
                     $("#institute_name").val(data.office_notes.institute_name);

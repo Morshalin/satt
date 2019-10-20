@@ -737,36 +737,6 @@ if (isset($_GET['id'])) {
                               <?php
                             }
                           }
-
-                          $query = "SELECT * FROM `permission` LIMIT 35, 1";
-
-                          $get_permission = $db->select($query);
-
-                          if ($get_permission) {
-                            while ($row = $get_permission->fetch_assoc()) {
-                              $name = $row['permission_name'];
-                              $name1 = explode("_",$name);
-                              $final_name = implode(" ",$name1);
-                              ?>
-
-                              <div class="col-md-4">
-                                <div class="checkbox">
-                                  <label>
-                                    <input type="checkbox" class="developer_setup" value="<?php echo $row['serial_no'] ?>" <?php 
-                                    foreach($permission as $value){
-                                        if ($row['serial_no'] == $value) {
-                                          echo "checked";
-                                          break;
-                                        }
-                                      } ?> id="checkbox_<?php echo $row['serial_no'] ?>" name="permission[]"> <?php echo ucwords($final_name); ?>
-                                  </label>
-                                </div>
-                              </div>
-
-                              <?php
-                            }
-                          }
-
                           ?>
 
                         </div>
@@ -788,7 +758,7 @@ if (isset($_GET['id'])) {
                         <div class="row">
 
                           <?php 
-                          $query = "SELECT * FROM `permission` LIMIT 36, 5";
+                          $query = "SELECT * FROM `permission` LIMIT 35, 5";
 
                           $get_permission = $db->select($query);
 
@@ -837,7 +807,7 @@ if (isset($_GET['id'])) {
                         <div class="row">
 
                           <?php 
-                          $query = "SELECT * FROM `permission` LIMIT 41, 1";
+                          $query = "SELECT * FROM `permission` LIMIT 40, 1";
                           $get_permission = $db->select($query);
 
                           if ($get_permission) {

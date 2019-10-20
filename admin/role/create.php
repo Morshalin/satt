@@ -645,7 +645,7 @@
                         <div class="row">
 
                           <?php 
-                          $query = "SELECT * FROM `permission` LIMIT 36, 5";
+                          $query = "SELECT * FROM `permission` LIMIT 35, 5";
 
                           $get_permission = $db->select($query);
 
@@ -688,7 +688,7 @@
                         <div class="row">
 
                           <?php 
-                          $query = "SELECT * FROM `permission` LIMIT 41, 1";
+                          $query = "SELECT * FROM `permission` LIMIT 40, 1";
                           $get_permission = $db->select($query);
 
                           if ($get_permission) {

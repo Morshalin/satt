@@ -1,6 +1,10 @@
 <?php
 require_once '../../config/config.php';
+Session::checkSession('admin', ADMIN_URL.'/customerdetails', 'customerdetails');
 ajax();
+$user_id = $user['id'];
+$user_name = $user['user_name'];
+$form_table = Session::get('table_name');
 ?>
 
 
@@ -240,6 +244,17 @@ ajax();
         </div>
     </div>
 </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+             <div class="form-group">
+              <label for="user_name">Added By<span class="text-danger">*</span></label>
+              <input type="text" readonly name="user_name" id="user_name" class="form-control" value="<?php echo $user_name; ?>">
+              <input type="hidden" value="<?php echo $user_id; ?>" name="user_id" id="user_id" class="form-control">
+              <input type="hidden" value="<?php echo $form_table; ?>" name="form_table" id="form_table" class="form-control">
+            </div>
+        </div>
+    </div>
 
 <div class="row">
     <div class="col-lg-12">

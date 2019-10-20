@@ -2,6 +2,8 @@
 require_once '../../config/config.php';
 ajax();
 Session::checkSession('admin', ADMIN_URL . '/Office_note', 'Office_note');
+$table = Session::get('table_name');
+
 if (isset($_GET['Office_note_id'])) {
 	$Office_note_id = $_GET['Office_note_id'];
 	if ($Office_note_id) {
@@ -146,7 +148,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' and isset($_POST['contact']) and $_POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$error = array();
 
-	$name = $fm->validation($_POST['name']);
+	$user_id 			 = $fm->validation($_POST['user_id']);
+	$user_name 			 = $fm->validation($_POST['user_name']);
+	$name 				 = $fm->validation($_POST['name']);
 	$facebook_name       = $fm->validation($_POST['facebook_name']);
 	$number              = $fm->validation($_POST['number']);
 	$email               = $fm->validation($_POST['email']);
@@ -190,9 +194,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		http_response_code(500);
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
-			$query = "INSERT INTO satt_extra_office_notes (name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district, last_contacted_date, status)
+			$query = "INSERT INTO satt_extra_office_notes (user_id, user_name, form_table, name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district, last_contacted_date, status)
 
-		 VALUES ('$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$last_contacted_date','$status')";
+		 VALUES ('$user_id', '$user_name', '$table',  '$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$last_contacted_date','$status')";
 		 $last_id = $db->custom_insert($query);
 		if (isset($interested_services)) {
 			// multi interested Service
