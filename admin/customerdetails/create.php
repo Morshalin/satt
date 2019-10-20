@@ -207,13 +207,7 @@ ajax();
                 if ($dis_result) {
                     while ($dis_row = $dis_result->fetch_assoc()) { ?>
                     <option value="<?php echo $dis_row['name'] ?>"><?php echo $dis_row['name']; ?> </option>
-                    <?php  }
-                    $dis_row = $dis_result->fetch_assoc();
-                } else {
-                    http_response_code(500);
-                    die(json_encode(['message' => 'Category  Not Found']));
-                }
-                ?>
+                    <?php  } } ?>
             </select>
         </div>
     </div>
@@ -222,21 +216,7 @@ ajax();
         <div class="form-group">
           <!-- <label for="software_category"></label> -->
           <label for="software_category">Select Software Category<span class="text-danger">*</span></label>
-          <select multiple="multiple" class="form-control select" id="software_category" name="software_category[]">
-            <?php 
-                 $cat_query = "SELECT * FROM software_details where status = 1";
-                $cat_result = $db->select($cat_query);
-                if ($cat_result) {
-                    while ($cat_row = $cat_result->fetch_assoc()) { ?>
-                       <option value="<?php echo $cat_row['id'] ?>"><?php echo $cat_row['software_name']; ?> </option>  
-                  <?php  }
-                    $cat_row = $cat_result->fetch_assoc();
-                } else {
-                    http_response_code(500);
-                    die(json_encode(['message' => 'Category  Not Found']));
-                }
-            ?>
-          </select>
+          <input type="text"  name="software_category" id="software_category" class="form-control">
         </div>
     </div>
 </div>

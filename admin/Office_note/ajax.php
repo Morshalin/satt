@@ -69,7 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 					institute_type      ='$institute_type', 
 					institute_name      ='$institute_name', 
 					institute_address   ='$institute_address', 
-					institute_district  ='$institute_district', 
+					institute_district  ='$institute_district',
+					software_category   ='$software_category',
 					last_contacted_date ='$last_contacted_date', 
 					status='$status'
 					WHERE id= '$Office_note_id'";
@@ -85,16 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 					}
 				}
 
-				// multi Developer insert
-				$querydels ="DELETE FROM satt_extra__software_category WHERE cutomer_details_id='$Office_note_id'";
-				$resultdeltes = $db->delete($querydels);
-				if ($resultdeltes) {
-				for ($i = 0; $i < count($software_category); $i++) {
-						$sql2 = "INSERT INTO satt_extra__software_category(software_id,cutomer_details_id) VALUES('$software_category[$i]','$Office_note_id')";
-						$insertrow2 = $db->insert($sql2);
-					}
-				}
-			if ($insertrow2 != false) {
+				
+			if ($insertrow1 != false) {
 				die(json_encode(['message' => 'Customer Information Update Successfull']));
 			} else {
 				http_response_code(500);
@@ -190,20 +183,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		http_response_code(500);
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
-			$query = "INSERT INTO satt_extra_office_notes (name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district, last_contacted_date, status)
+			$query = "INSERT INTO satt_extra_office_notes (name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district,software_category, last_contacted_date, status)
 
-		 VALUES ('$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$last_contacted_date','$status')";
+		 VALUES ('$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$software_category','$last_contacted_date','$status')";
 		 $last_id = $db->custom_insert($query);
 		if (isset($interested_services)) {
 			// multi interested Service
 			for ($i = 0; $i < count($interested_services); $i++) {
 					$sql2 = "INSERT INTO satt_extra_interested_service(cutomer_details_id,interested_services_id) VALUES('$last_id','$interested_services[$i]')";
-					$insertrow1 = $db->insert($sql2);
-				}
-			}
-			if (isset($software_category)) {
-				for ($i = 0; $i < count($software_category); $i++) {
-					$sql2 = "INSERT INTO satt_extra__software_category(software_id,cutomer_details_id) VALUES('$software_category[$i]','$last_id')";
 					$insertrow1 = $db->insert($sql2);
 				}
 			}

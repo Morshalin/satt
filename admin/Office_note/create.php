@@ -16,7 +16,7 @@
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="facebook_name" class="col-form-label">Facebook Name<span class="text-danger"></span></label>
+                <label for="facebook_name" class="col-form-label">Facebook Link<span class="text-danger"></span></label>
                 <input type="text" name="facebook_name" id="facebook_name" class="form-control" placeholder="Facebook Name">
 
             </div>
@@ -90,7 +90,6 @@
                         while ($row = $result->fetch_assoc()) { ?>
                            <option value="<?php echo $row['progress_state'] ?>"><?php echo $row['progress_state']; ?> </option>  
                       <?php  }
-                        $row = $result->fetch_assoc();
                     } else {
                         http_response_code(500);
                         die(json_encode(['message' => 'Category  Not Found']));
@@ -162,11 +161,7 @@
                     while ($row = $result->fetch_assoc()) { ?>
                     <option value="<?php echo $row['name'] ?>"><?php echo $row['name']; ?> </option>
                     <?php  }
-                    $row = $result->fetch_assoc();
-                } else {
-                    http_response_code(500);
-                    die(json_encode(['message' => 'Category  Not Found']));
-                }
+                } 
                 ?>
             </select>
         </div>
@@ -174,21 +169,7 @@
          <div class="col-lg-6">
             <div class="form-group">
               <label for="software_category">Select Software Category<span class="text-danger">*</span></label>
-              <select multiple="multiple" class="form-control select" id="software_category" name="software_category[]">
-                <?php 
-                     $query = "SELECT * FROM software_details where status = 1";
-                    $result = $db->select($query);
-                    if ($result) {
-                        while ($row = $result->fetch_assoc()) { ?>
-                           <option value="<?php echo $row['id'] ?>"><?php echo $row['software_name']; ?> </option>  
-                      <?php  }
-                        $row = $result->fetch_assoc();
-                    } else {
-                        http_response_code(500);
-                        die(json_encode(['message' => 'Category  Not Found']));
-                    }
-                ?>
-              </select>
+              <input type="text" name="software_category" id="software_category" class="form-control">
             </div>
         </div>
     </div>

@@ -236,15 +236,12 @@ $(document).ready(function(){
             $("#customer_form").hide(500);
               $('#content_form')[0].reset();
               $("#interested_services").val(null).trigger('change');
-              $("#software_category").val(null).trigger('change');
         }else{
             $("#cust_select_div").hide(500);
             $("#select_customer").val('');
-
             $("#customer_form").show(500);
             $('#content_form')[0].reset();
             $("#interested_services").val(null).trigger('change');
-            $("#software_category").val(null).trigger('change');
         }
     })
 
@@ -271,7 +268,7 @@ $(document).ready(function(){
                     $("#institute_address").val(data.office_notes.institute_address);
                     $("#institute_district").val(data.office_notes.institute_district);
                     $("#interested_services").html(data.options);
-                    $("#software_category").html(data.option);
+                    $("#software_category").val(data.office_notes.software_category);
                 }
             });
         }else{
