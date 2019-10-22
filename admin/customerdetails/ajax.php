@@ -199,6 +199,7 @@ if (isset($_GET['customerdetails_id'])) {
 		$institute_address   = $fm->validation($_POST['institute_address']);
 		$institute_district  = $fm->validation($_POST['institute_district']);
 		$software_category   =$_POST['software_category'];
+		$domain_name   =$_POST['domain_name'];
 		$last_contacted_date = $_POST['last_contacted_date'];
 		
 
@@ -213,10 +214,6 @@ if (isset($_GET['customerdetails_id'])) {
 		}elseif (strlen($facebook_name) > 255) {
 			$error['facebook_name'] = 'Customer Name Can Not Be More Than 255 Charecters';
 		}
-
-
-
-
 		if (!$number) {
 			$error['number'] = 'Number  Field required';
 		}
@@ -256,7 +253,9 @@ if (isset($_GET['customerdetails_id'])) {
 				institute_type='$institute_type', 
 				institute_name='$institute_name', 
 				institute_address='$institute_address', 
-				institute_district='$institute_district', 
+				institute_district='$institute_district',
+				software_category = '$software_category',
+				domain_name     = '$domain_name',
 				last_contacted_date='$last_contacted_date', 
 				status='$status' WHERE id= '$customerdetails_id'";
 
@@ -271,15 +270,6 @@ if (isset($_GET['customerdetails_id'])) {
 						}
 					}
 
-				// multi Developer insert
-					$querydels ="DELETE FROM sat_software_category WHERE cutomer_details_id='$customerdetails_id'";
-					$resultdeltes = $db->delete($querydels);
-					if (isset($software_category)) {
-						for ($i = 0; $i < count($software_category); $i++) {
-							$sql2 = "INSERT INTO sat_software_category(software_id,cutomer_details_id) VALUES('$software_category[$i]','$customerdetails_id')";
-							$insertrow2 = $db->insert($sql2);
-						}
-					}
 					if ($result != false) {
 						die(json_encode(['message' => 'Customer Information Update Successfull']));
 					} else {
@@ -396,6 +386,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$institute_address   = $fm->validation($_POST['institute_address']);
 	$institute_district  = $fm->validation($_POST['institute_district']);
 	$software_category = $_POST['software_category'];
+	$domain_name = $_POST['domain_name'];
 	$last_contacted_date = $_POST['last_contacted_date'];
 
 
@@ -480,21 +471,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	/*foreach ($$interested_services as  $value) {
 		die(json_encode(['errors' => print_r($value)]));
 	}*/
-	$query = "INSERT INTO satt_customer_informations (name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district, last_contacted_date, status)
+	$query = "INSERT INTO satt_customer_informations (name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district,software_category,domain_name, last_contacted_date, status)
 
-	VALUES ('$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$last_contacted_date','$status')";
+	VALUES ('$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$software_category','$domain_name','$last_contacted_date','$status')";
 
 	$last_id = $db->custom_insert($query);
 	if ($last_id) {
 	// multi interested Service
 		for ($i = 0; $i < count($interested_services); $i++) {
 			$sql2 = "INSERT INTO satt_interested_services(cutomer_details_id,interested_services_id) VALUES('$last_id','$interested_services[$i]')";
-			$insertrow1 = $db->insert($sql2);
-		}
-
-	// multi Developer insert
-		for ($i = 0; $i < count($software_category); $i++) {
-			$sql2 = "INSERT INTO sat_software_category(software_id,cutomer_details_id) VALUES('$software_category[$i]','$last_id')";
 			$insertrow1 = $db->insert($sql2);
 		}
 		if ($insertrow1 != false) {
@@ -514,7 +499,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET['action'] == 'delete') {
 			$customerdetails_id = $_GET['customerdetails_id'];
 			if ($customerdetails_id) {
-		// $query = "DELETE  satt_customer_informations, sat_software_category, satt_interested_services from satt_customer_informations inner join sat_software_category ON satt_customer_informations.id = sat_software_category.cutomer_details_id inner join satt_interested_services on satt_customer_informations.id =satt_interested_services.cutomer_details_id WHERE satt_customer_informations.id = '$customerdetails_id'";
 				$query = "DELETE FROM  satt_customer_informations WHERE id = '$customerdetails_id'";
 				$result = $db->delete($query);
 				if ($result) {

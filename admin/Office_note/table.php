@@ -26,14 +26,14 @@ if ($searchValue != '') {
 ## Total number of records without filtering
 =================================================================================*/
 
-$sel = $db->select("select count(*) as allcount from satt_customer_informations");
+$sel = $db->select("select count(*) as allcount from satt_extra_office_notes");
 $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['allcount'];
 
 /*==============================================================================
 ## Total number of record with filtering
 =================================================================================*/
-$sel = $db->select("select count(*) as allcount from satt_customer_informations WHERE 1 " . $searchQuery);
+$sel = $db->select("select count(*) as allcount from satt_extra_office_notes WHERE 1 " . $searchQuery);
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
@@ -65,6 +65,8 @@ if ($result) {
           	</a>
           	<div class="dropdown-menu dropdown-menu-right">
 
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/cus_note.php?Office_note_id=' . $row['id'] . '"><i class="icon-eye"></i> Add Note</span>
+              
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/next_contacted.php?Office_note_id=' . $row['id'] . '"><i class="icon-eye"></i> Next Contacted</span>
 
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/show.php?Office_note_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>

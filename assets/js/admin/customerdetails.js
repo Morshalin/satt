@@ -102,7 +102,7 @@ var DatatableButtonsHtml5 = function() {
                 orderable: false,
                 targets: [6, 7]
             }],
-            order: [1, 'asc'],
+            order: [0, 'desc'],
             processing: true,
             serverSide: true,
             ajax: $('.content_managment_table').data('url'),
@@ -271,7 +271,8 @@ $(document).ready(function(){
                     $("#institute_address").val(data.office_notes.institute_address);
                     $("#institute_district").val(data.office_notes.institute_district);
                     $("#interested_services").html(data.options);
-                    $("#software_category").html(data.option);
+                    $("#software_category").val(data.office_notes.software_category);
+                    $("#domain_name").val(data.office_notes.domain_name);
                 }
             });
         }else{

@@ -27,8 +27,8 @@ if (isset($_GET['customerdetails_id'])) {
         <td><?php echo $row['name']?></td>
     </tr>
     <tr>
-        <td class="font-weight-bold">Facebookn Name </td>
-        <td><?php echo $row['facebook_name']?></td>
+        <td class="font-weight-bold">Facebookn link </td>
+        <td> <a href="<?php echo $row['facebook_name']?>" target="_blank"><?php echo $row['facebook_name']?></a> </td>
     </tr>
     <tr>
         <td class="font-weight-bold">Number</td>
@@ -85,17 +85,11 @@ if (isset($_GET['customerdetails_id'])) {
     </tr>
     <tr>
         <td class="font-weight-bold">Software Category</td>
-       <td>
-         <?php 
-             $sql = "SELECT software_details.software_name from  sat_software_category inner join  software_details on sat_software_category.software_id = software_details.id where sat_software_category.cutomer_details_id = '$customerdetails_id'";
-     
-             $result = $db->select($sql);
-             if ($result) {
-                 while ($data = $result->fetch_assoc()) { ?>
-                    <span class="badge badge-success mr-1"><?php echo $data['software_name']; ?></span>
-                 <?php } } ?>
-            
-         </td>
+         <td><?php echo $row['software_category']?></td>
+    </tr>
+    <tr>
+        <td class="font-weight-bold">Domain Name</td>
+         <td><?php echo $row['domain_name']?></td>
     </tr>
     <tr>
         <td class="font-weight-bold">Last Contact Date</td>

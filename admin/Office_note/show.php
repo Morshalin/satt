@@ -85,22 +85,55 @@ if (isset($_GET['Office_note_id'])) {
     </tr>
     <tr>
         <td class="font-weight-bold">Software Category</td>
-       <td>
-         <?php 
-             $sql = "SELECT software_details.software_name from  satt_extra__software_category inner join  software_details on satt_extra__software_category.software_id = software_details.id where satt_extra__software_category.cutomer_details_id = '$Office_note_id'";
-     
-             $result = $db->select($sql);
-             if ($result) {
-                 while ($data = $result->fetch_assoc()) { ?>
-                    <span class="badge badge-success mr-1"><?php echo $data['software_name']; ?></span>
-                 <?php } } ?>
-            
-         </td>
+        <td><?php echo $row['software_category']?></td>
+    </tr>
+    <tr>
+        <td class="font-weight-bold">Domain Name</td>
+        <td><?php echo $row['domain_name']?></td>
     </tr>
     <tr>
         <td class="font-weight-bold">Last Contact Date</td>
         <td><?php echo $fm->formatDate($row['last_contacted_date']); ?></td>
     </tr>
+<?php 
+$user_name = $row['user_name'];
+$user_id = $row['user_id'];
+$form_table = $row['form_table'];
+
+if ($user_id) {
+        if ($form_table == 'satt_admins') {
+          $query = "SELECT * FROM satt_admins WHERE id = '$user_id'";
+          $result = $db->select($query);
+          if ($result) {
+            $row = $result->fetch_assoc();
+            $f = $row['first_name'];
+            $l = $row['last_name'];
+            $name = $f . ' ' . $l;
+          }
+        }elseif($form_table == 'agent_list'){
+          $query = "SELECT * FROM agent_list WHERE id = '$user_id'";
+          $result = $db->select($query);
+          if ($result) {
+            $row = $result->fetch_assoc();
+            $name = $row['name'];
+          }
+        }else{
+          $query = "SELECT * FROM users WHERE id = '$user_id'";
+          $result = $db->select($query);
+          if ($result) {
+            $row = $result->fetch_assoc();
+            $name = $row['name'];
+          }
+        } ?>
+            
+            <tr>
+                <td class="font-weight-bold">Added By</td>
+                <td><?php echo $name; ?></td>
+            </tr>
+        <?php 
+    } 
+
+ ?>
 </table>
 <br >
 
