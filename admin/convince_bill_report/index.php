@@ -63,7 +63,7 @@ $customer_id =  $user['id'];
                 <div class="col-lg-4 offset-lg-4">
                     <button type="submit" name="submit" class="btn btn-primary" id="view">View Report</button>
                     
-                </div>
+                </div> 
             </div>
 
         </div>
