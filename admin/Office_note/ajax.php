@@ -33,7 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 		$institute_name      = $fm->validation($_POST['institute_name']);
 		$institute_address   = $fm->validation($_POST['institute_address']);
 		$institute_district  = $fm->validation($_POST['institute_district']);
-		$software_category   = $_POST['software_category'];
+		$software_category   = $fm->validation($_POST['software_category']);
+		$domain_name         = $fm->validation($_POST['domain_name']);
 		$last_contacted_date = $_POST['last_contacted_date'];
 		
 
@@ -73,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_GET['action']) AND $_GET['a
 					institute_address   ='$institute_address', 
 					institute_district  ='$institute_district',
 					software_category   ='$software_category',
+					domain_name         ='$domain_name',
 					last_contacted_date ='$last_contacted_date', 
 					status='$status'
 					WHERE id= '$Office_note_id'";
@@ -135,6 +137,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' and isset($_POST['contact']) and $_POST
 	}
 }
 
+
+/*================================================================
+		Add Note INto DAtabase
+===================================================================*/
+if ($_SERVER['REQUEST_METHOD'] == 'POST' and isset($_POST['all_note']) and $_POST['all_note']='add_note') {
+	$error = array();
+	$customer_id = $fm->validation($_POST['Office_note_id']);
+	$note = $fm->validation($_POST['note']);
+	
+
+	if (!$note) {
+		$error['note'] = 'Note  Field required';
+	}elseif (strlen($note) > 500) {
+		$error['note'] = 'Note Can Not Be More Than 500 Charecters';
+	}
+
+
+	if ($error) {
+		http_response_code(500);
+		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+	} else {
+		$query = "INSERT INTO satt_exter_notes(customer_id, note) VALUES ('$customer_id','$note')";
+		$result = $db->insert($query);
+		if ($result != false) {
+			die(json_encode(['message' => 'Note Added Successfull']));
+		} else {
+			http_response_code(500);
+			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
+		}
+	}
+}
+
 /*================================================================
 		Insert Data into Database
 ===================================================================*/
@@ -156,6 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$institute_address   = $fm->validation($_POST['institute_address']);
 	$institute_district  = $fm->validation($_POST['institute_district']);
 	$software_category   = $_POST['software_category'];
+	$domain_name   = $_POST['domain_name'];
 	$last_contacted_date = $_POST['last_contacted_date'];
 
 
@@ -187,11 +222,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		http_response_code(500);
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
+			$query = "INSERT INTO satt_extra_office_notes (user_id, user_name, form_table, name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district,software_category,domain_name, last_contacted_date, status)
 
-			$query = "INSERT INTO satt_extra_office_notes (user_id, user_name, form_table, name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district, last_contacted_date, status)
-
-		 VALUES ('$user_id', '$user_name', '$table',  '$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$last_contacted_date','$status')";
-
+		 VALUES ('$user_id', '$user_name', '$table',  '$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$software_category','$domain_name','$last_contacted_date','$status')";
 		 $last_id = $db->custom_insert($query);
 		if (isset($interested_services)) {
 			// multi interested Service
@@ -200,6 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					$insertrow1 = $db->insert($sql2);
 				}
 			}
+			
 		if ($last_id != false) {
 			die(json_encode(['message' => 'Note Added Successfull']));
 		} else {
@@ -249,7 +283,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT' AND isset($_GET['action']) AND $_GET['ac
 if (isset($_GET['contactnotedelid'])) {
 	$delid = $_GET['contactnotedelid'];
 	if ($delid) {
-		$delquery = "DELETE FROM  satt_exter_next_contacted WHERE id ='$delid'";
+		$delquery = "DELETE FROM satt_exter_next_contacted WHERE id ='$delid'";
+		$result = $db->delete($delquery);
+		if($result){
+			die(json_encode(['message' => 'Note Deleted Successfully']));
+		}else {
+			http_response_code(500);
+			die(json_encode(['message' => 'Note Not Found']));
+		}
+	}
+}
+
+if (isset($_GET['del_note_id'])) {
+	$delid = $_GET['del_note_id'];
+	if ($delid) {
+		$delquery = "DELETE FROM satt_exter_notes WHERE id ='$delid'";
 		$result = $db->delete($delquery);
 		if($result){
 			die(json_encode(['message' => 'Note Deleted Successfully']));

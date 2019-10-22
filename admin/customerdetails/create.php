@@ -55,7 +55,7 @@ $form_table = Session::get('table_name');
 
 
 
-<!-- Login form -->
+<!-- Submit form -->
 <form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/customerdetails/ajax.php" id="content_form" method="post">
 <fieldset class="mb-3">
 
@@ -69,7 +69,7 @@ $form_table = Session::get('table_name');
     </div>
     <div class="col-lg-6">
         <div class="form-group">
-            <label for="facebook_name" class="col-form-label">Facebook Name<span class="text-danger"></span></label>
+            <label for="facebook_name" class="col-form-label">Facebook Link<span class="text-danger"></span></label>
             <input type="text" name="facebook_name" id="facebook_name" class="form-control" placeholder="Facebook Name ">
 
         </div>
@@ -118,13 +118,12 @@ $form_table = Session::get('table_name');
             $query = "SELECT * FROM satt_customer_type where status=1";
             $result = $db->select($query);
             if ($result) {
-                while ($row = $result->fetch_assoc()) { ?>
-                <option value="<?php echo $row['type'] ?>"><?php echo $row['type']; ?> </option>  
+                while ($rows = $result->fetch_assoc()) { ?>
+                <option 
+                            <?=$row['customer_reference'] ==  $rows['type'] ? ' selected="selected"' : '';?>
+
+                           value="<?php echo $rows['type'] ?>"><?php echo $rows['type']; ?> </option>
                 <?php  }
-                $row = $result->fetch_assoc();
-            } else {
-                http_response_code(500);
-                die(json_encode(['message' => 'Category  Not Found']));
             }
             ?>
         </select>
@@ -139,8 +138,11 @@ $form_table = Session::get('table_name');
         $query = "SELECT * FROM satt_customer_progres where status=1";
         $result = $db->select($query);
         if ($result) {
-            while ($row = $result->fetch_assoc()) { ?>
-            <option value="<?php echo $row['progress_state'] ?>"><?php echo $row['progress_state']; ?> </option>  
+            while ($rows = $result->fetch_assoc()) { ?>
+            <option
+                <?=$row['progressive_state'] ==  $rows['progress_state'] ? ' selected="selected"' : '';?>
+                
+            value="<?php echo $rows['progress_state'] ?>"><?php echo $rows['progress_state']; ?> </option>  
             <?php  }
             $row = $result->fetch_assoc();
         } else {
@@ -218,9 +220,17 @@ $form_table = Session::get('table_name');
 
     <div class="col-lg-6">
         <div class="form-group">
-          <!-- <label for="software_category"></label> -->
           <label for="software_category">Select Software Category<span class="text-danger">*</span></label>
           <input type="text"  name="software_category" id="software_category" class="form-control">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group">
+          <label for="domain_name">Domain Name<span class="text-danger">*</span></label>
+          <input type="text"  name="domain_name" id="domain_name" class="form-control">
         </div>
     </div>
 </div>

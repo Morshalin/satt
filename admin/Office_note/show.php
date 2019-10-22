@@ -85,7 +85,11 @@ if (isset($_GET['Office_note_id'])) {
     </tr>
     <tr>
         <td class="font-weight-bold">Software Category</td>
-       <td><?php echo $row['software_category']?></td>
+        <td><?php echo $row['software_category']?></td>
+    </tr>
+    <tr>
+        <td class="font-weight-bold">Domain Name</td>
+        <td><?php echo $row['domain_name']?></td>
     </tr>
     <tr>
         <td class="font-weight-bold">Last Contact Date</td>

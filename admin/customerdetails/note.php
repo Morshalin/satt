@@ -37,10 +37,6 @@ ajax();
                         while ($row = $result->fetch_assoc()) { ?>
                            <option value="<?php echo $row['id'] ?>"><?php echo $row['name']; ?> </option>  
                       <?php  }
-                        $row = $result->fetch_assoc();
-                    } else {
-                        http_response_code(500);
-                        die(json_encode(['message' => 'Note Not Found']));
                     }
                 ?>
               </select>
@@ -66,15 +62,9 @@ ajax();
                         while ($row = $result->fetch_assoc()) { ?>
                            <option value="<?php echo $row['id'] ?>"><?php echo $row['reason']; ?> </option>  
                       <?php  }
-                        $row = $result->fetch_assoc();
-                    } else {
-                        http_response_code(500);
-                        die(json_encode(['message' => 'Reasion Not Found']));
                     }
                 ?>
               </select>
-
-                   
             </div>
         </div>
 
@@ -110,7 +100,6 @@ ajax();
 
 <table class="table">
   <tr>
-   <th>Admin Name</th>
    <th>Customer name</th>
    <th>Leave Reasion</th>
    <th>Customer Note</th>
@@ -119,9 +108,8 @@ ajax();
 </tr>
 <?php 
 
-$notequery = "SELECT *, a.user_name, c.name, n.id, n.note, n.creat_date, n.update_date
+$notequery = "SELECT *, c.name, n.id, n.note, n.creat_date, n.update_date
 from satt_official_notes  n
-join satt_admins  a on a.id = n.admin_id 
 join satt_customer_informations  c on c.id = n.customer_id 
 and n.customer_id = '$customerdetails_id'";
   $noteresult = $db->select($notequery);
@@ -129,7 +117,6 @@ and n.customer_id = '$customerdetails_id'";
     while ($notedata = $noteresult->fetch_assoc()) { 
       ?>
         <tr id="tr_<?php echo $notedata['id']; ?>">
-        <td><?php echo $notedata['user_name'];?></td>
         <td><?php echo $notedata['name'];?></td>
         <td>
           <?php

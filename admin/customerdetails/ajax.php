@@ -199,6 +199,7 @@ if (isset($_GET['customerdetails_id'])) {
 		$institute_address   = $fm->validation($_POST['institute_address']);
 		$institute_district  = $fm->validation($_POST['institute_district']);
 		$software_category   =$_POST['software_category'];
+		$domain_name   =$_POST['domain_name'];
 		$last_contacted_date = $_POST['last_contacted_date'];
 		
 
@@ -254,6 +255,10 @@ if (isset($_GET['customerdetails_id'])) {
 				institute_address='$institute_address', 
 				institute_district='$institute_district',
 				software_category = '$software_category',
+<<<<<<< HEAD
+=======
+				domain_name     = '$domain_name',
+>>>>>>> aabda1df1410fe6f546a6713b2dea7c83c32cbb9
 				last_contacted_date='$last_contacted_date', 
 				status='$status' WHERE id= '$customerdetails_id'";
 
@@ -384,6 +389,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$institute_address   = $fm->validation($_POST['institute_address']);
 	$institute_district  = $fm->validation($_POST['institute_district']);
 	$software_category = $_POST['software_category'];
+	$domain_name = $_POST['domain_name'];
 	$last_contacted_date = $_POST['last_contacted_date'];
 
 	$system_user_name = $_POST['user_name'];
@@ -473,9 +479,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		die(json_encode(['errors' => print_r($value)]));
 	}*/
 
-	$query = "INSERT INTO satt_customer_informations (name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district, last_contacted_date, status, system_user_id, system_user_name, form_table)
+	$query = "INSERT INTO satt_customer_informations (name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district,software_category,domain_name, last_contacted_date, status)
 
-	VALUES ('$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$last_contacted_date','$status', '$system_user_id', '$system_user_name', '$form_table')";
+	VALUES ('$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$software_category','$domain_name','$last_contacted_date','$status')";
 
 	$last_id = $db->custom_insert($query);
 	if ($last_id) {
@@ -501,7 +507,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET['action'] == 'delete') {
 			$customerdetails_id = $_GET['customerdetails_id'];
 			if ($customerdetails_id) {
-		// $query = "DELETE  satt_customer_informations, sat_software_category, satt_interested_services from satt_customer_informations inner join sat_software_category ON satt_customer_informations.id = sat_software_category.cutomer_details_id inner join satt_interested_services on satt_customer_informations.id =satt_interested_services.cutomer_details_id WHERE satt_customer_informations.id = '$customerdetails_id'";
 				$query = "DELETE FROM  satt_customer_informations WHERE id = '$customerdetails_id'";
 				$result = $db->delete($query);
 				if ($result) {

@@ -11,7 +11,7 @@ ajax();
   <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Create Notes <span class="text-danger">*</span> <small>  Fields Are Required </small></legend>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-6" style="display:none">
             <div class="form-group">
               <label for="Office_note_id">Select Customer Name</label>
               <select class="form-control" id="Office_note_id" name="Office_note_id">
@@ -31,15 +31,6 @@ ajax();
               </select>
             </div>
         </div>
-
-        <div class="col-lg-6">
-          <div class="form-group">
-              <label for="next_contact" class="col-form-label">Next Contacted Date<span class="text-danger">*</span></label>
-              <input type="text" name="next_contact" id="next_contact" class="form-control date"  required >
-          </div>
-      </div>
-    </div>
-    <div class="row">
         <div class="col-md-12">
             <div class="form-group">
                 <label for="course_description" class="col-form-label">Satt Notes</label>
@@ -55,7 +46,7 @@ ajax();
             </div>
         </div>
     </div>
-    <input type="hidden" name="contact" value="next_contact">
+    <input type="hidden" name="all_note" value="add_note">
     <div class="form-group row">
         <div class="col-lg-4 offset-lg-4">
             <button type="submit" name="create" class="btn btn-primary ml-31" id="submit">Submit</button>
@@ -71,14 +62,13 @@ ajax();
   <tr>
    <th>Customer name</th>
    <th>Customer Note</th>
-   <th>Next Contacted Date</th>
    <th>Create Date</th>
    <th>Action</th>
 </tr>
 <?php 
 
-$notequery ="SELECT *, c.name, n.id, n.note, n.next_contact, n.create_date
-from satt_exter_next_contacted n
+$notequery = "SELECT *, c.name, n.id, n.note
+from satt_exter_notes  n
 join satt_extra_office_notes c on c.id = n.customer_id 
 where n.customer_id = '$Office_note_id'";
   $noteresult = $db->select($notequery);
@@ -88,9 +78,8 @@ where n.customer_id = '$Office_note_id'";
         <tr id="tr_<?php echo $notedata['id']; ?>">
         <td><?php echo $notedata['name'];?></td>
         <td><?php echo $notedata['note'];?></td>
-        <td><?php echo $notedata['next_contact'];?></td>
-        <td><?php echo $notedata['create_date'];?></td>
-        <td><button class="btn btn-danger btn-small delete_note" data-url="<?php echo ADMIN_URL ?>/Office_note/ajax.php?contactnotedelid=<?php echo $notedata['id']; ?>" id="<?php echo $notedata['id']; ?>">Delete </button></td>
+        <td><?php echo $notedata['create_at'];?></td>
+        <td><button class="btn btn-danger btn-small delete_note" data-url="<?php echo ADMIN_URL ?>/Office_note/ajax.php?del_note_id=<?php echo $notedata['id']; ?>" id="<?php echo $notedata['id']; ?>">Delete </button></td>
     </tr>
    <?php } } ?>
 

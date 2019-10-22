@@ -175,6 +175,15 @@
             </div>
         </div>
     </div>
+    
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+              <label for="domain_name">Domain Name</label>
+              <input type="text" name="domain_name" id="domain_name" class="form-control">
+            </div>
+        </div>
+    </div>
 
 
     <div class="row">
@@ -182,7 +191,7 @@
              <div class="form-group">
               <label for="user_name">Added By<span class="text-danger">*</span></label>
               <input type="text" readonly name="user_name" id="user_name" class="form-control" value="<?php echo $user_name; ?>">
-              <input type="hidden" value="<?php echo $user_id; ?>" name="user_id" id="user_id" class="form-control">
+              <input type="text" value="<?php echo $user_id; ?>" name="user_id" id="user_id" class="form-control">
             </div>
         </div>
     </div>

@@ -33,7 +33,7 @@ if (isset($_GET['Office_note_id'])) {
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="facebook_name" class="col-form-label">Facebook Name<span class="text-danger"></span></label>
+                <label for="facebook_name" class="col-form-label">Facebook Link<span class="text-danger"></span></label>
                 <input type="text" name="facebook_name" id="facebook_name" class="form-control" value="<?php echo $row['facebook_name']; ?>">
 
             </div>
@@ -179,8 +179,11 @@ if (isset($_GET['Office_note_id'])) {
                     $query = "SELECT * FROM satt_districts";
                     $result = $db->select($query);
                     if ($result) {
-                        while ($row = $result->fetch_assoc()) { ?>
-                        <option value="<?php echo $row['name'] ?>"><?php echo $row['name']; ?> </option>
+                        while ($rows = $result->fetch_assoc()) { ?>
+                        <option 
+                            <?=$row['institute_district'] ==  $rows['name'] ? ' selected="selected"' : '';?>
+
+                           value="<?php echo $rows['name'] ?>"><?php echo $rows['name']; ?> </option>
                         <?php  }
                     }
                     ?>
@@ -194,6 +197,14 @@ if (isset($_GET['Office_note_id'])) {
             </div>
         </div>
         
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+              <label for="domain_name">Domain Name</label>
+              <input type="text" name="domain_name" id="domain_name" class="form-control" value="<?php echo $row['domain_name']; ?>">
+            </div>
+        </div>
     </div>
 
     <div class="row">

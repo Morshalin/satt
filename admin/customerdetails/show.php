@@ -27,8 +27,8 @@ if (isset($_GET['customerdetails_id'])) {
         <td><?php echo $row['name']?></td>
     </tr>
     <tr>
-        <td class="font-weight-bold">Facebookn Name </td>
-        <td><?php echo $row['facebook_name']?></td>
+        <td class="font-weight-bold">Facebookn link </td>
+        <td> <a href="<?php echo $row['facebook_name']?>" target="_blank"><?php echo $row['facebook_name']?></a> </td>
     </tr>
     <tr>
         <td class="font-weight-bold">Number</td>
@@ -86,6 +86,10 @@ if (isset($_GET['customerdetails_id'])) {
     <tr>
         <td class="font-weight-bold">Software Category</td>
          <td><?php echo $row['software_category']?></td>
+    </tr>
+    <tr>
+        <td class="font-weight-bold">Domain Name</td>
+         <td><?php echo $row['domain_name']?></td>
     </tr>
     <tr>
         <td class="font-weight-bold">Last Contact Date</td>
