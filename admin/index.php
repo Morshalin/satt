@@ -1,6 +1,5 @@
 <?php
   require_once '../config/config.php';
-  //ajax();
   Session::checkSession('admin', ADMIN_URL);
   $goto = '';
   if (isset($_GET['goto'])) {
@@ -679,13 +678,11 @@ $cancel_order = $count + $count1;
      <?php } } ?>
      </div>
     </div>
-
-
-
-
     </div>
   </div>
 </div>
+
+
 
 <!-- /content area -->
 <?php include_once 'inc/footer.php'; ?>

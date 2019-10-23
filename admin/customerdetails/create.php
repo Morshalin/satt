@@ -58,6 +58,18 @@ $form_table = Session::get('table_name');
 <!-- Submit form -->
 <form class="form-validate-jquery" action="<?php echo ADMIN_URL; ?>/customerdetails/ajax.php" id="content_form" method="post">
 <fieldset class="mb-3">
+    <?php 
+        $query = "SELECT * FROM satt_extra_office_notes";
+        $get_customer = $db->select($query);
+        if ($get_customer) {
+            while ($row = $get_customer->fetch_assoc()) {
+                ?>
+                <input type="hidden" value="<?php echo $row['id'] ?>" name="contaced_cus_id">
+                <?php
+            }
+        }
+
+     ?>
 
 <div  style="display: none" id="customer_form">
 <div class="row">
