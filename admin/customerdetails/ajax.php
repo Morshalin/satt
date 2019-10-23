@@ -238,9 +238,6 @@ if (isset($_GET['customerdetails_id'])) {
 			http_response_code(500);
 			die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 		} else {
-				/*foreach ($$interested_services as  $value) {
-					die(json_encode(['errors' => print_r($value)]));
-				}*/
 				$query = "UPDATE  satt_customer_informations 
 				SET 
 				name='$name', 
@@ -255,10 +252,7 @@ if (isset($_GET['customerdetails_id'])) {
 				institute_address='$institute_address', 
 				institute_district='$institute_district',
 				software_category = '$software_category',
-<<<<<<< HEAD
-=======
 				domain_name     = '$domain_name',
->>>>>>> aabda1df1410fe6f546a6713b2dea7c83c32cbb9
 				last_contacted_date='$last_contacted_date', 
 				status='$status' WHERE id= '$customerdetails_id'";
 
@@ -391,7 +385,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$software_category = $_POST['software_category'];
 	$domain_name = $_POST['domain_name'];
 	$last_contacted_date = $_POST['last_contacted_date'];
-
+	$contaced_cus_id = $_POST['contaced_cus_id'];
 	$system_user_name = $_POST['user_name'];
 	$system_user_id = $_POST['user_id'];
 	$form_table = $_POST['form_table'];
@@ -475,9 +469,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		http_response_code(500);
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
-	/*foreach ($$interested_services as  $value) {
-		die(json_encode(['errors' => print_r($value)]));
-	}*/
 
 	$query = "INSERT INTO satt_customer_informations (name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district,software_category,domain_name, last_contacted_date, status)
 
@@ -491,6 +482,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$insertrow1 = $db->insert($sql2);
 		}
 		if ($insertrow1 != false) {
+			/*================================================================
+					Insert Contacted Data into database
+			===================================================================*/
+			if ($contaced_cus_id) {
+				$id = $contaced_cus_id;
+
+				$con_query = "SELECT * FROM satt_exter_next_contacted where customer_id = '$id'";
+				$con_result = $db->select($con_query);
+				if ($con_result) {
+					while ($data = $con_result->fetch_assoc()) {
+						$admin_id = $data['admin_id'];
+						$customer_id =$last_id;
+						$note = $data['note'];
+						$next_contact = $data['next_contact'];
+						 if($customer_id){
+							$query = "INSERT INTO satt_next_contacted (admin_id, customer_id,next_contact, note) VALUES ('$admin_id', '$customer_id','$next_contact','$note')";
+							$result = $db->insert($query);
+						}
+					}
+				}
+
+				$note_query = "SELECT * FROM satt_exter_notes where customer_id = '$id'";
+				$note_result = $db->select($note_query);
+				if ($note_result) {
+					while ($note_data = $note_result->fetch_assoc()) {
+						$customer_id =$last_id;
+						$note = $note_data['note'];
+						$query = "INSERT INTO satt_official_notes (customer_id, note) VALUES ('$customer_id','$note')";
+					$del_result = $db->insert($query);
+						if ($del_result) {
+							$del_quer="DELETE FROM satt_extra_office_notes WHERE id='$id'";
+							$db->delete($del_quer);
+						}
+					}
+				}
+
+			}
+
 			die(json_encode(['message' => 'Customer Added Successfull']));
 		} else {
 			http_response_code(500);
@@ -502,7 +531,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 /*================================================================
 		Delate  Data into Database
-		===================================================================*/
+===================================================================*/
 // $error['course_name'] = 'Course Name Required';
 		if ($_SERVER['REQUEST_METHOD'] == 'DELETE' AND isset($_GET['action']) AND $_GET['action'] == 'delete') {
 			$customerdetails_id = $_GET['customerdetails_id'];
@@ -522,7 +551,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 /*================================================================
 		Delate  note into Database
-		===================================================================*/
+===================================================================*/
 		if (isset($_GET['delid'])) {
 			$delid = $_GET['delid'];
 			if ($delid) {
@@ -569,7 +598,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 /*================================================================
 		Update Status  note into Database
-		===================================================================*/
+===================================================================*/
 		if ($_SERVER['REQUEST_METHOD'] == 'PUT' AND isset($_GET['action']) AND $_GET['action'] == 'status') {
 			$status_id = $_GET['status_id'];
 			$status = $_GET['status'];
