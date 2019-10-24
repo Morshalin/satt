@@ -84,7 +84,6 @@ ajax();
 
 <table class="table">
   <tr>
-   <th>Admin Name</th>
    <th>Customer name</th>
    <th>Customer Note</th>
    <th>Next Contacted Date</th>
@@ -93,17 +92,15 @@ ajax();
 </tr>
 <?php 
 
-$notequery = "SELECT *, a.user_name, c.name, n.id, n.note, n.next_contact, n.create_date
-from satt_next_contacted  n
-join satt_admins  a on a.id = n.admin_id 
+$notequery = "SELECT *, c.name, n.id, n.note, n.next_contact, n.create_date
+from satt_next_contacted  n 
 join satt_customer_informations  c on c.id = n.customer_id 
-and n.customer_id = '$customerdetails_id'";
+where n.customer_id = '$customerdetails_id'";
   $noteresult = $db->select($notequery);
   if ($noteresult) {
     while ($notedata = $noteresult->fetch_assoc()) { 
       ?>
         <tr id="tr_<?php echo $notedata['id']; ?>">
-        <td><?php echo $notedata['user_name'];?></td>
         <td><?php echo $notedata['name'];?></td>
         <td><?php echo $notedata['note'];?></td>
         <td><?php echo $notedata['next_contact'];?></td>

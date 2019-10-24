@@ -261,6 +261,7 @@ $(document).ready(function(){
                     $("#email").val(data.office_notes.email);
                     $("#introduction_date").val(data.office_notes.introduction_date);
                     $("#last_contacted_date").val(data.office_notes.last_contacted_date);
+                    $("#customer_reference").val(data.office_notes.customer_reference);
                     $("#progressive_state").val(data.office_notes.progressive_state);
                     $("#user_id").val(data.office_notes.user_id);
                     $("#user_name").val(data.office_notes.user_name);

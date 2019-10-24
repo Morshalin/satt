@@ -10,20 +10,15 @@ ajax();
 <table class="table">
 <?php 
 
-$notequery = "SELECT  a.user_name, c.name, c.number, c.email, n.id, n.note, n.next_contact, n.create_date
-from satt_next_contacted  n
-join satt_admins  a on  n.admin_id  = a.id 
-join satt_customer_informations  c on n.customer_id  = c.id
+$notequery = "SELECT c.name, c.number, c.email, n.id, n.note, n.next_contact, n.create_date
+from satt_exter_next_contacted  n
+join satt_extra_office_notes  c on n.customer_id  = c.id
 and n.id = '$customerdetails_id'";
   $noteresult = $db->select($notequery);
   if ($noteresult) {
     while ($notedata = $noteresult->fetch_assoc()) { 
       ?>
       <div id="tr_<?php echo $notedata['id']; ?>">
-      <tr>
-        <td>Admin Name</td>
-        <td><?php echo $notedata['user_name'];?></td>
-      </tr>
       <tr>
         <td>Customer name</td>
         <td><?php echo $notedata['name'];?></td>

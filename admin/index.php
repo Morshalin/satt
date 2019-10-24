@@ -544,7 +544,7 @@ $cancel_order = $count + $count1;
         <div style="height: <?php echo $height;?>; overflow: <?php echo $overflow;?>">
         <?php
 
-          $query = "SELECT cn.id, cn.admin_id, cn.customer_id, cn.next_contact, cn.note, c.name FROM satt_next_contacted cn inner join satt_customer_informations c on cn.customer_id = c.id where (cn.status = 0) AND (cn.next_contact = '$next_date' or cn.next_contact= '$date' or cn.next_contact='$prev_date')";
+          $query = "SELECT *, cn.id, cn.customer_id, cn.next_contact, cn.note,  c.name FROM satt_exter_next_contacted cn inner join satt_extra_office_notes c on cn.customer_id = c.id where (cn.status = 0) AND (cn.next_contact = '$next_date' or cn.next_contact= '$date' or cn.next_contact='$prev_date')";
           $result = $db->select($query);
           if ($result) {
           while ($notice_data = $result->fetch_assoc()) {  ?>
