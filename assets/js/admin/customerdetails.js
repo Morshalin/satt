@@ -299,28 +299,4 @@ $(document).on("keyup","#content_form", function(){
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
