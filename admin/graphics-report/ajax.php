@@ -34,6 +34,8 @@ Session::checkSession('admin', ADMIN_URL . '/graphics-report', 'graphics-report'
 							<thead style="background:#4CAF50; color:white;" >
 								<tr>
 									<th scope="col">Serial No</th>
+									<th scope="col">Date</th>
+									<th scope="col">Delivery Date</th>
 									<th scope="col">Client Name</th>
 									<th scope="col">Product Name</th>
 									<th scope="col">Qty</th>
@@ -75,8 +77,18 @@ Session::checkSession('admin', ADMIN_URL . '/graphics-report', 'graphics-report'
 								}
 							}
 							$due = (int)$row['price'] - $paid ;
+							$date = $row['order_date'];
+                            $new_date = date("d-M-Y", strtotime($date));
+                            $d_date = $row['delivery_date'];
+                            if ($d_date) {
+                            	$d_new_date = date("d-M-Y", strtotime($d_date));
+                            }else{
+                            	$d_new_date = "Not Deliverd";
+                            }
 							$data .='  <tr style="color:black" align="left">
 											<td>'.$i++.'</td>
+											<td>'.$new_date.'</td>
+											<td>'.$d_new_date.'</td>
 											<td>'.$row['client_name'].'</td>
 											<td>'.$row['product_name'].'</td>
 											<td>'.$row['qty'].'</td>

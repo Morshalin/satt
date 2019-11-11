@@ -2,6 +2,7 @@
 require_once '../../config/config.php';
 ajax();
 Session::checkSession('admin', ADMIN_URL . '/Office_note');
+$user_id = $user['id'];
 ## Read value
 $draw = $_GET['draw'];
 $row = $_GET['start'];
@@ -11,7 +12,7 @@ $columnName = $_GET['columns'][$columnIndex]['data']; // Column name
 $columnSortOrder = $_GET['order'][0]['dir']; // asc or desc
 $searchValue = $_GET['search']['value']; // Search value
 if ($columnName == 'DT_RowIndex') {
-	$columnName = 'id';
+  $columnName = 'id';
 }
 
 /*==============================================================================
@@ -20,7 +21,7 @@ if ($columnName == 'DT_RowIndex') {
 $searchQuery = " ";
 if ($searchValue != '') {
   $searchQuery = " and (id like '%" . $searchValue . "%' or name like '%" . $searchValue . "%' or
-        number like '%" . $searchValue . "%' or email like'%" . $searchValue . "%' or introduction_date like'%" . $searchValue . "%' or last_contacted_date like'%" . $searchValue . "%') ";
+        number like '%" . $searchValue . "%' or email like'%" . $searchValue . "%' or introduction_date like'%" . $searchValue . "%' or last_contacted_date like'%" . $searchValue . "%' or next_contact like'%" . $searchValue . "%') ";
 }
 /*==============================================================================
 ## Total number of records without filtering
@@ -41,29 +42,39 @@ $totalRecordwithFilter = $records['allcount'];
 /*==============================================================================
 ## Fetch records
 =================================================================================*/
-$query = "select * from satt_extra_office_notes WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+
+if($user_id == '1'){
+  $query = "SELECT * FROM satt_extra_office_notes  WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+}else{
+  $query = "SELECT * FROM satt_extra_office_notes  WHERE user_id='$user_id' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+}
+
 $result = $db->select($query);
 $data = array();
 $i = 0;
 if ($result) {
-	while ($row = mysqli_fetch_assoc($result)) {
-    
-      
-		$data[] = array(
-			"DT_RowIndex" => $i + 1,
-			"id" => $row['id'],
-			"name" => '<strong>'. $row['name'] . '</strong>',
-			"number" => $row['number'],
+  while ($row = mysqli_fetch_assoc($result)) {
+if ($row['next_contact']) {
+  $next_contact = $row['next_contact'];
+}else{
+  $next_contact = 'N/A';
+}
+    $data[] = array(
+      "DT_RowIndex" => $i + 1,
+      "id" => $row['id'],
+      "name" => '<strong>'. $row['name'] . '</strong>',
+      "number" => $row['number'],
       "introduction_date" => $fm->formatDate($row['introduction_date']),
       "last_contacted_date" => $fm->formatDate($row['last_contacted_date']),
-			"action" => '
+      "next_contacted_date" => $next_contact,
+      "action" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="delete_loading_' . $row['id'] . '" style="display: none;">
         <div class="list-icons" id="action_menu_' . $row['id'] . '">
           <div class="dropdown">
-          	<a href="#" class="list-icons-item" data-toggle="dropdown">
-          		<i class="icon-menu9"></i>
-          	</a>
-          	<div class="dropdown-menu dropdown-menu-right">
+            <a href="#" class="list-icons-item" data-toggle="dropdown">
+              <i class="icon-menu9"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
 
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/cus_note.php?Office_note_id=' . $row['id'] . '"><i class="icon-eye"></i> Add Note</span>
               
@@ -71,20 +82,20 @@ if ($result) {
 
               <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/show.php?Office_note_id=' . $row['id'] . '"><i class="icon-eye"></i> View</span>
 
-          		<span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/edit.php?Office_note_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
+              <span class="dropdown-item" id="content_managment" data-url="' . ADMIN_URL . '/Office_note/edit.php?Office_note_id=' . $row['id'] . '"><i class="icon-pencil7"></i> Edit</span>
 
-          		<span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/Office_note/ajax.php?Office_note_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
-          	</div>
+              <span class="dropdown-item" id="delete_item" data-id="' . $row['id'] . '" data-url="' . ADMIN_URL . '/Office_note/ajax.php?Office_note_id=' . $row['id'] . '&action=delete"><i class="icon-trash"></i>Delete </button></span>
+            </div>
           </div>
         </div>
         ',
-			"status" => '
+      "status" => '
         <img src="' . BASE_URL . '/assets/ajaxloader.gif" id="status_loading_' . $row['id'] . '"  style="display: none">
         <label class="form-check-label" id="status_' . $row['id'] . '" title="' . ($row['status'] == 1 ? 'Active' : 'InActive') . '" data-popup="tooltip-custom" data-placement="bottom">
         <input type="checkbox" class="form-check-status-switchery" id="change_status" data-id="' . $row['id'] . '" data-status="' . $row['status'] . '" data-url="' . ADMIN_URL . '/Office_note/ajax.php?status_id=' . $row['id'] . '&action=status&status=' . $row['status'] . '"' . ($row['status'] == 1 ? 'checked' : '') . ' data-fouc >
         </label>
-        	',
-		);
+          ',
+    );
 $i++;
 }
 }
@@ -92,10 +103,10 @@ $i++;
 ## Response
 =============================================================*/
 $response = array(
-	"draw" => intval($draw),
-	"iTotalRecords" => $totalRecordwithFilter,
-	"iTotalDisplayRecords" => $totalRecords,
-	"aaData" => $data,
+  "draw" => intval($draw),
+  "iTotalRecords" => $totalRecordwithFilter,
+  "iTotalDisplayRecords" => $totalRecords,
+  "aaData" => $data,
 );
 
 echo json_encode($response);

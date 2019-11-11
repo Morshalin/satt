@@ -2,6 +2,7 @@
 require_once '../../config/config.php';
 ajax();
 Session::checkSession('admin', ADMIN_URL . '/customerdetails');
+$user_id = $user['id'];
 ## Read value
 $draw = $_GET['draw'];
 $row = $_GET['start'];
@@ -11,7 +12,7 @@ $columnName = $_GET['columns'][$columnIndex]['data']; // Column name
 $columnSortOrder = $_GET['order'][0]['dir']; // asc or desc
 $searchValue = $_GET['search']['value']; // Search value
 if ($columnName == 'DT_RowIndex') {
-	$columnName = 'id';
+	$columnName = 'id'; 
 }
 
 /*==============================================================================
@@ -41,7 +42,13 @@ $totalRecordwithFilter = $records['allcount'];
 /*==============================================================================
 ## Fetch records
 =================================================================================*/
-$query = "select * from satt_customer_informations WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+if($user_id == '1'){
+  $query = "SELECT * FROM satt_customer_informations  WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+}else{
+  $query = "SELECT * FROM satt_customer_informations  WHERE system_user_id='$user_id' " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+}
+
+
 $result = $db->select($query);
 $data = array();
 $i = 0;

@@ -470,9 +470,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		die(json_encode(['errors' => $error, 'message' => 'Something Happend Wrong. Please Check Your Form']));
 	} else {
 
-	$query = "INSERT INTO satt_customer_informations (name, facebook_name, number, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district,software_category,domain_name, last_contacted_date, status)
+	$query = "INSERT INTO satt_customer_informations (name, facebook_name, `number`, email, introduction_date, customer_reference, progressive_state, institute_type, institute_name, institute_address, institute_district,software_category,domain_name, last_contacted_date, status, system_user_name, system_user_id ,form_table)
 
-	VALUES ('$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$software_category','$domain_name','$last_contacted_date','$status')";
+	VALUES ('$name','$facebook_name','$number','$email','$introduction_date','$customer_reference','$progressive_state','$institute_type','$institute_name','$institute_address','$institute_district','$software_category','$domain_name','$last_contacted_date','$status', '$system_user_name', '$system_user_id', '$form_table' )";
 
 	$last_id = $db->custom_insert($query);
 	if ($last_id) {

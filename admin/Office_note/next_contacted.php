@@ -90,7 +90,7 @@ where n.customer_id = '$Office_note_id'";
         <td><?php echo $notedata['note'];?></td>
         <td><?php echo $notedata['next_contact'];?></td>
         <td><?php echo $notedata['create_date'];?></td>
-        <td><button class="btn btn-danger btn-small delete_note" data-url="<?php echo ADMIN_URL ?>/Office_note/ajax.php?contactnotedelid=<?php echo $notedata['id']; ?>" id="<?php echo $notedata['id']; ?>">Delete </button></td>
+        <td><button class="btn btn-danger btn-small delete_note" data-url="<?php echo ADMIN_URL ?>/Office_note/ajax.php?contactnotedelid=<?php echo $notedata['id']; ?>,<?php echo $notedata['next_contact']; ?>,<?php echo $notedata['customer_id']; ?>" id="<?php echo $notedata['id']; ?>">Delete </button></td>
     </tr>
    <?php } } ?>
 

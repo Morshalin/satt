@@ -53,6 +53,7 @@
               <th>Customer Number</th>
   						<th>introduction Date</th>
               <th>Last Contacted Date</th>
+              <th>Next Contacted Date</th>
               <th>Status</th>
   						<th>Action</th>
   					</tr>

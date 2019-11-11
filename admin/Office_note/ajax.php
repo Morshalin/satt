@@ -129,6 +129,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' and isset($_POST['contact']) and $_POST
 		$query = "INSERT INTO satt_exter_next_contacted (admin_id, customer_id,next_contact, note) VALUES ('$admin_id', '$customer_id','$next_contact','$note')";
 		$result = $db->insert($query);
 		if ($result != false) {
+			$query1 = "UPDATE  satt_extra_office_notes SET next_contact='$next_contact' WHERE id= '$customer_id'";
+			 $result1 = $db->update($query1);
 			die(json_encode(['message' => 'Note Added Successfull']));
 		} else {
 			http_response_code(500);
@@ -281,8 +283,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT' AND isset($_GET['action']) AND $_GET['ac
 
 }
 if (isset($_GET['contactnotedelid'])) {
-	$delid = $_GET['contactnotedelid'];
+	$delid1 = $_GET['contactnotedelid'];
+	$res = explode(",",$delid1);
+	$delid = $res[0];
+	$next_contact = $res[1];
+	$customer_id = $res[2];
 	if ($delid) {
+		$query = "SELECT * FROM satt_extra_office_notes  WHERE id = '$customer_id' ";
+		$result = $db->select($query);
+		if ($result) {
+			$row = mysqli_fetch_assoc($result);
+			if($row['next_contact'] == $next_contact){
+			$query1 = "UPDATE  satt_extra_office_notes SET next_contact = '' WHERE id= '$customer_id'";
+			$result1 = $db->update($query1);
+		}
+	}
+
 		$delquery = "DELETE FROM satt_exter_next_contacted WHERE id ='$delid'";
 		$result = $db->delete($delquery);
 		if($result){
