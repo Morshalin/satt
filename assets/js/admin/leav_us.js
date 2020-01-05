@@ -16,7 +16,7 @@ var DatatableButtonsHtml5 = function() {
             cardBlock();
         });
         $(document).on('change', 'order.dt', function(e, settings) {
-            cardBlock()
+            cardBlock();
         });
         $(document).on('change', 'preInit.dt', function(e, settings) {
             cardBlock();

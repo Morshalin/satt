@@ -128,7 +128,7 @@ var _formValidation = function() {
             type: 'POST',
             data: formData,
             contentType: false, // The content type used when sending data to the server.
-            cache: false, // To unable request pages to be cached
+            // cache: false, // To unable request pages to be cached
             processData: false,
             dataType: 'JSON',
             success: function(data) {
